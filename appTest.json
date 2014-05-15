@@ -1,0 +1,41 @@
+{
+  "application": {
+    "name" : {
+      "first" : "Will",
+      "last" : "Kent-Daggett"
+    },
+    "year" : "3",
+    "phone" : "5039565794",
+    "email" : "wkentdag@macalester.edu",
+    "id" : "001029606",
+    "iclass" : "xxxxxxx",
+    "password" : "xxxxxxxx",
+    "proposal" : {
+      "title" : "foood",
+      "description" : "Your weekly dose of R&B with a new theme each week."
+    },
+    "availability" : {
+      "monday" : {
+    
+      },
+      "tuesday" : {
+  
+      },
+      "wednesday" : {
+   
+      },
+      "thursday" : {
+
+      },
+      "friday" : {
+
+      },
+      "saturday" : {
+
+      },
+      "sunday" : {
+
+      }
+    }
+  }
+}
