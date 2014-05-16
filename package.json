@@ -1,0 +1,25 @@
+{
+  "name": "wmcn",
+  "version": "0.0.0",
+  "description": "wmcn: macalester college community radio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmcn-fm/wmcn.git"
+  },
+  "keywords": [
+    "wmcn",
+    "radio",
+    "archive",
+    "mongodb"
+  ],
+  "author": "will kent-daggett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wmcn-fm/wmcn/issues"
+  },
+  "homepage": "https://github.com/wmcn-fm/wmcn"
+}
