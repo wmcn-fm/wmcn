@@ -6,16 +6,38 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'WMCN: Macalester College Radio' });
 });
 
-module.exports = router;
-
 /* GET dj app page. */
 router.get('/dj-application', function(req, res) {
   res.render('djApp', { title: 'Apply to Be a DJ!'});
 });
 
-module.exports = router;
-
 /* GET staff app page. */
 router.get('/staff-application', function(req, res) {
   res.render('staffApp', { title: 'Apply for a WMCN Staff Position' })
 });
+
+/* GET archive page. */
+router.get('/archive', function(req, res) {
+	res.render('archive', {title: "Show Archive" })
+});
+
+/* GET playlist creator. */
+router.get('/post/playlist', function(req, res) {
+	res.render('createPlaylist', {title: "Create a Playlist" })
+});
+
+/* GET post creator. */
+router.get('/post/other', function(req, res) {
+	res.render('createPost', {title: "Create a post" })
+});
+
+/* GET admin manager. */
+router.get('/admin', function(req, res) {
+	res.render('adminLanding', {title: "Manage useres" })
+});
+
+
+
+
+
+module.exports = router;
