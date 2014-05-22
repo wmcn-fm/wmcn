@@ -36,6 +36,11 @@ router.get('/admin', function(req, res) {
 	res.render('adminLanding', {title: "Manage useres" })
 });
 
+/* GET scheduler . */
+router.get('admin/scheduler', function(req, res) {
+	res.render('scheduler', {title: "Create a schedule"})
+});
+
 
 
 
