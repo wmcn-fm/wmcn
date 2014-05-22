@@ -3,3 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  h1.
+  	user list
+  ul
+  	each user, i in userlist
+  		li
+  			a(href="mailto:#{user.email}") = user.username

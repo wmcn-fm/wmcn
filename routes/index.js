@@ -38,7 +38,14 @@ router.get('/admin', function(req, res) {
 
 /* GET scheduler . */
 router.get('admin/scheduler', function(req, res) {
-	res.render('scheduler', {title: "Create a schedule"})
+	//res.render('scheduler', {title: "Create a schedule"
+	var db = req.db;
+	var collection = db.get('usercollection');
+	collection.find({},{}, function(e, docs) {
+		res.render('scheduler', {
+			"userlist": docs
+		});
+	})
 });
 
 
