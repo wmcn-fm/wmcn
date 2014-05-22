@@ -37,10 +37,10 @@ router.get('/admin', function(req, res) {
 });
 
 /* GET scheduler . */
-router.get('admin/scheduler', function(req, res) {
+router.get('/admin/scheduler', function(req, res) {
 	//res.render('scheduler', {title: "Create a schedule"
 	var db = req.db;
-	var collection = db.get('usercollection');
+	var collection = db.collection('usercollection');
 	collection.find({},{}, function(e, docs) {
 		res.render('scheduler', {
 			"userlist": docs

@@ -5,9 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var mongo = require('mongodb');
+var mongo = require('mongoskin');
 var monk = require('monk');
-var db = monk('localhost:27017/wmcntest');
+var db = mongo.db("mongodb://localhost:27017/wmcn", {native_parser:true});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
