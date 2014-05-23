@@ -36,16 +36,23 @@ router.get('/admin', function(req, res) {
 	res.render('adminLanding', {title: "Manage useres" })
 });
 
-/* GET scheduler . */
+// /* GET scheduler . */
+// router.get('/admin/scheduler', function(req, res) {
+// 	//res.render('scheduler', {title: "Create a schedule"
+// 	var db = req.db;
+// 	var collection = db.collection('usercollection');
+// 	collection.find({},{}, function(e, docs) {
+// 		res.render('scheduler', {
+// 			"userlist": docs
+// 		});
+// 	})
+// });
+
 router.get('/admin/scheduler', function(req, res) {
-	//res.render('scheduler', {title: "Create a schedule"
-	var db = req.db;
-	var collection = db.collection('usercollection');
-	collection.find({},{}, function(e, docs) {
-		res.render('scheduler', {
-			"userlist": docs
-		});
-	})
+    var db = req.db;
+    db.collection('userlist').find().toArray(function (err, items) {
+        res.json(items);
+    });
 });
 
 

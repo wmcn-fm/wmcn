@@ -6,11 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongo = require('mongoskin');
-var monk = require('monk');
-var db = mongo.db("mongodb://localhost:27017/wmcn", {native_parser:true});
+var db = mongo.db("mongodb://localhost:27017/wmcntest2", {native_parser:true});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -36,8 +36,7 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/dj-application', routes);
-app.use('/staff-application', routes);
+app.use('/admin', admin);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
