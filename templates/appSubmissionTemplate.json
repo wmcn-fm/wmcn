@@ -1,5 +1,6 @@
 {
 	"application" : {
+		"returning": false,
 		"user" : {
 			"uniqueID": 0,
 			"access" : 0,

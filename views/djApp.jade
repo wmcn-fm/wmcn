@@ -1,6 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p hello i'm in the dj app!
+	h1= title
+	p Welcome to #{title}
+
+	form(role='form', method='post', action='/dj-application')
+		.radio
+			label im a new dj
+				input#newDj(type='radio', name='djReturning', value='newDj')
+		.radio
+			label im a returning dj
+				input#oldDj(type='radio', name='djReturning', value='returningDj')
+		button.btn.btn-default(type='submit') Submit
