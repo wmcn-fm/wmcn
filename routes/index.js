@@ -46,7 +46,7 @@ router.get('/post/other', function(req, res) {
 
 // POST dj app
 router.post('/dj-application', function(req, res) {
-	res.send('You submitted: ' + req)
+	res.send('You submitted: ' + req.body.firstName)
 });
 
 

@@ -1,14 +1,87 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
+	.container-fluid
+		h1= title
 
-	form(role='form', method='post', action='/dj-application')
-		.radio
-			label im a new dj
-				input#newDj(type='radio', name='djReturning', value='newDj')
-		.radio
-			label im a returning dj
-				input#oldDj(type='radio', name='djReturning', value='returningDj')
-		button.btn.btn-default(type='submit') Submit
+	form(role='form', method='post', action='/dj-application', id='djAppSubmission')
+		.container-fluid
+			.row
+				.col-xs-2
+					.form-group
+						label(for='djStatus') are you a new or returning dj?
+						.radio
+							label new
+							input#newDj(type='radio', name='djStatus', value='new')
+						.radio
+							label returning
+							input#returningDj(type='radio', name='djStatus', value='returning')
+		.container-fluid
+			.row
+				.col-xs-2
+					.form-group
+						label(for='firstName') first name
+						input#firstName.form-control(type='text', placeholder='john', name='firstName')
+				.col-xs-2
+					.form-group
+						label(for='lastName') last name
+						input#lastName.form-control(type='text', placeholder='smith', name='lastName')
+		.container-fluid
+			.row
+				.col-xs-4
+					.form-group
+						label(for='email') email address
+						input#email.form-control(type='email', placeholder='myname@macalester.edu', name='email')
+				.col-xs-3
+					.form-group
+						label(for='phone') phone number
+						input#phone.form-control(type='tel', placeholder='1234567890', name='tel')
+		.container-fluid
+			.row
+				.col-xs-2
+						label(for='studentStatus') are you a current student?
+						.radio
+							//label yes
+							input#isStudent.form-control(type='radio', name='studentStatus', value='yes')
+						.radio
+							//label no
+							input#isNotStudent.form-control(type='radio', name='studentStatus', value='no')
+				.col-xs-2
+						label(for='gradYear') whats your grad year?
+						select.form-control
+							option 2015
+							option 2016
+							option 2017
+							option 2018
+				.col-xs-2
+					label(for='grad') enter your grad year
+					.input-group
+						.input-group-addon
+							input(type='radio')
+						input.form-control(type='text', name='grad')
+
+		.container-fluid
+			.row
+				.col-xs-2
+					.form-group
+						label(for='idNum') macalester id number
+						input#idNum.form-control(type='number', name='idNum', placeholder="012345678")
+				.col-xs-2
+					.form-group
+						label(for='iclass') 5-digit iclass number
+						input#iclass.form-control(type='number', name='iclass', placeholder="12345")
+				
+		.container-fluid
+			.row
+				.col-xs-2
+					.form-group
+					label(for='show title') show title
+					input#title.form-control(type='text', placeholder='my show', name='show')
+					
+		.container-fluid
+			.row
+				.col-xs-2
+					button.btn.btn-primary(type='submit') Submit
+
+
+
