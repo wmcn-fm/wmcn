@@ -77,7 +77,33 @@ block content
 					.form-group
 					label(for='show title') show title
 					input#title.form-control(type='text', placeholder='my show', name='show')
-					
+
+		.container-fluid
+			.row
+				.col-xs-2
+					.form-group
+						label(for='gradYear') enter your grad year
+						.radio
+							label 2015
+							input(type='radio', name='gradYear', value='12015')
+						.radio
+							label 2016
+							input(type='radio', name='gradYear', value='2016')
+						.radio
+							label 2017
+							input(type='radio', name='gradYear', value='2017')
+						.radio
+							label 2018
+							input(type='radio', name='gradYear', value='2018')
+						.radio
+							label not a student
+							input(type='radio', name='gradYear', value='0')
+						.radio
+							.input-group
+								.input-group-addon
+									input(type='radio')
+								input.form-control(type='text', name='grad')
+
 		.container-fluid
 			.row
 				.col-xs-2
