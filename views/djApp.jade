@@ -7,7 +7,7 @@ block content
 	form(role='form', method='post', action='/dj-application', id='djAppSubmission')
 		.container-fluid
 			.row
-				.col-xs-2
+				.col-xs-4
 					.form-group
 						label(for='djStatus') are you a new or returning dj?
 						.radio
@@ -28,11 +28,11 @@ block content
 						input#lastName.form-control(type='text', placeholder='smith', name='lastName')
 		.container-fluid
 			.row
-				.col-xs-4
+				.col-xs-2
 					.form-group
 						label(for='email') email address
 						input#email.form-control(type='email', placeholder='myname@macalester.edu', name='email')
-				.col-xs-3
+				.col-xs-2
 					.form-group
 						label(for='phone') phone number
 						input#phone.form-control(type='tel', placeholder='1234567890', name='tel')
@@ -46,19 +46,6 @@ block content
 						.radio
 							//label no
 							input#isNotStudent.form-control(type='radio', name='studentStatus', value='no')
-				.col-xs-2
-						label(for='gradYear') whats your grad year?
-						select.form-control
-							option 2015
-							option 2016
-							option 2017
-							option 2018
-				.col-xs-2
-					label(for='grad') enter your grad year
-					.input-group
-						.input-group-addon
-							input(type='radio')
-						input.form-control(type='text', name='grad')
 
 		.container-fluid
 			.row
@@ -71,13 +58,6 @@ block content
 						label(for='iclass') 5-digit iclass number
 						input#iclass.form-control(type='number', name='iclass', placeholder="12345")
 				
-		.container-fluid
-			.row
-				.col-xs-2
-					.form-group
-					label(for='show title') show title
-					input#title.form-control(type='text', placeholder='my show', name='show')
-
 		.container-fluid
 			.row
 				.col-xs-2
@@ -103,6 +83,278 @@ block content
 								.input-group-addon
 									input(type='radio')
 								input.form-control(type='text', name='grad')
+
+		.container-fluid
+			.row
+				.col-xs-2
+					.form-group
+						label(for='show title') show title
+						input#title.form-control(type='text', placeholder='my show', name='show')
+				
+
+				.col-xs-2
+					.form-group
+						label(for='blurb') program guide blurb
+						textarea.form-control(rows='2', name='blurb')
+						p.help-block a short 2-3 sentence show description for the program guide.
+
+		.container-fluid
+			.row
+				.col-xs-8
+					label select your availability on mondays
+					.form-group
+						label.checkbox-inline 10
+							input(type='checkbox', id='0')
+						label.checkbox-inline 11
+							input(type='checkbox', id='1')
+						label.checkbox-inline 12
+							input(type='checkbox', id='2')
+						label.checkbox-inline 1
+							input(type='checkbox', id='3')
+						label.checkbox-inline 2
+							input(type='checkbox', id='4')
+						label.checkbox-inline 3
+							input(type='checkbox', id='5')
+						label.checkbox-inline 4
+							input(type='checkbox', id='6')
+						label.checkbox-inline 5
+							input(type='checkbox', id='7')
+						label.checkbox-inline 6
+							input(type='checkbox', id='8')
+						label.checkbox-inline 7
+							input(type='checkbox', id='9')
+						label.checkbox-inline 8
+							input(type='checkbox', id='10')
+						label.checkbox-inline 9
+							input(type='checkbox', id='11')
+						label.checkbox-inline 10
+							input(type='checkbox', id='12')
+						label.checkbox-inline 11
+							input(type='checkbox', id='13')
+						label.checkbox-inline 12
+							input(type='checkbox', id='14')
+						label.checkbox-inline 1
+							input(type='checkbox', id='15')
+			.row
+				.col-xs-8
+					label select your availability on tuesdays
+					.form-group
+						label.checkbox-inline 10
+							input(type='checkbox', id='0')
+						label.checkbox-inline 11
+							input(type='checkbox', id='1')
+						label.checkbox-inline 12
+							input(type='checkbox', id='2')
+						label.checkbox-inline 1
+							input(type='checkbox', id='3')
+						label.checkbox-inline 2
+							input(type='checkbox', id='4')
+						label.checkbox-inline 3
+							input(type='checkbox', id='5')
+						label.checkbox-inline 4
+							input(type='checkbox', id='6')
+						label.checkbox-inline 5
+							input(type='checkbox', id='7')
+						label.checkbox-inline 6
+							input(type='checkbox', id='8')
+						label.checkbox-inline 7
+							input(type='checkbox', id='9')
+						label.checkbox-inline 8
+							input(type='checkbox', id='10')
+						label.checkbox-inline 9
+							input(type='checkbox', id='11')
+						label.checkbox-inline 10
+							input(type='checkbox', id='12')
+						label.checkbox-inline 11
+							input(type='checkbox', id='13')
+						label.checkbox-inline 12
+							input(type='checkbox', id='14')
+						label.checkbox-inline 1
+							input(type='checkbox', id='15')
+
+			.row
+				.col-xs-8
+					label select your availability on wednesdays
+					.form-group
+						label.checkbox-inline 10
+							input(type='checkbox', id='0')
+						label.checkbox-inline 11
+							input(type='checkbox', id='1')
+						label.checkbox-inline 12
+							input(type='checkbox', id='2')
+						label.checkbox-inline 1
+							input(type='checkbox', id='3')
+						label.checkbox-inline 2
+							input(type='checkbox', id='4')
+						label.checkbox-inline 3
+							input(type='checkbox', id='5')
+						label.checkbox-inline 4
+							input(type='checkbox', id='6')
+						label.checkbox-inline 5
+							input(type='checkbox', id='7')
+						label.checkbox-inline 6
+							input(type='checkbox', id='8')
+						label.checkbox-inline 7
+							input(type='checkbox', id='9')
+						label.checkbox-inline 8
+							input(type='checkbox', id='10')
+						label.checkbox-inline 9
+							input(type='checkbox', id='11')
+						label.checkbox-inline 10
+							input(type='checkbox', id='12')
+						label.checkbox-inline 11
+							input(type='checkbox', id='13')
+						label.checkbox-inline 12
+							input(type='checkbox', id='14')
+						label.checkbox-inline 1
+							input(type='checkbox', id='15')
+			.row
+				.col-xs-8
+					label select your availability on thursdays
+					.form-group
+						label.checkbox-inline 10
+							input(type='checkbox', id='0')
+						label.checkbox-inline 11
+							input(type='checkbox', id='1')
+						label.checkbox-inline 12
+							input(type='checkbox', id='2')
+						label.checkbox-inline 1
+							input(type='checkbox', id='3')
+						label.checkbox-inline 2
+							input(type='checkbox', id='4')
+						label.checkbox-inline 3
+							input(type='checkbox', id='5')
+						label.checkbox-inline 4
+							input(type='checkbox', id='6')
+						label.checkbox-inline 5
+							input(type='checkbox', id='7')
+						label.checkbox-inline 6
+							input(type='checkbox', id='8')
+						label.checkbox-inline 7
+							input(type='checkbox', id='9')
+						label.checkbox-inline 8
+							input(type='checkbox', id='10')
+						label.checkbox-inline 9
+							input(type='checkbox', id='11')
+						label.checkbox-inline 10
+							input(type='checkbox', id='12')
+						label.checkbox-inline 11
+							input(type='checkbox', id='13')
+						label.checkbox-inline 12
+							input(type='checkbox', id='14')
+						label.checkbox-inline 1
+							input(type='checkbox', id='15')
+			.row
+				.col-xs-8
+					label select your availability on fridays
+					.form-group
+						label.checkbox-inline 10
+							input(type='checkbox', id='0')
+						label.checkbox-inline 11
+							input(type='checkbox', id='1')
+						label.checkbox-inline 12
+							input(type='checkbox', id='2')
+						label.checkbox-inline 1
+							input(type='checkbox', id='3')
+						label.checkbox-inline 2
+							input(type='checkbox', id='4')
+						label.checkbox-inline 3
+							input(type='checkbox', id='5')
+						label.checkbox-inline 4
+							input(type='checkbox', id='6')
+						label.checkbox-inline 5
+							input(type='checkbox', id='7')
+						label.checkbox-inline 6
+							input(type='checkbox', id='8')
+						label.checkbox-inline 7
+							input(type='checkbox', id='9')
+						label.checkbox-inline 8
+							input(type='checkbox', id='10')
+						label.checkbox-inline 9
+							input(type='checkbox', id='11')
+						label.checkbox-inline 10
+							input(type='checkbox', id='12')
+						label.checkbox-inline 11
+							input(type='checkbox', id='13')
+						label.checkbox-inline 12
+							input(type='checkbox', id='14')
+						label.checkbox-inline 1
+							input(type='checkbox', id='15')
+
+
+			.row
+				.col-xs-8
+					label select your availability on saturdays
+					.form-group
+						label.checkbox-inline 10
+							input(type='checkbox', id='0')
+						label.checkbox-inline 11
+							input(type='checkbox', id='1')
+						label.checkbox-inline 12
+							input(type='checkbox', id='2')
+						label.checkbox-inline 1
+							input(type='checkbox', id='3')
+						label.checkbox-inline 2
+							input(type='checkbox', id='4')
+						label.checkbox-inline 3
+							input(type='checkbox', id='5')
+						label.checkbox-inline 4
+							input(type='checkbox', id='6')
+						label.checkbox-inline 5
+							input(type='checkbox', id='7')
+						label.checkbox-inline 6
+							input(type='checkbox', id='8')
+						label.checkbox-inline 7
+							input(type='checkbox', id='9')
+						label.checkbox-inline 8
+							input(type='checkbox', id='10')
+						label.checkbox-inline 9
+							input(type='checkbox', id='11')
+						label.checkbox-inline 10
+							input(type='checkbox', id='12')
+						label.checkbox-inline 11
+							input(type='checkbox', id='13')
+						label.checkbox-inline 12
+							input(type='checkbox', id='14')
+						label.checkbox-inline 1
+							input(type='checkbox', id='15')
+			.row
+				.col-xs-8
+					label select your availability on sundays
+					.form-group
+						label.checkbox-inline 10
+							input(type='checkbox', id='0')
+						label.checkbox-inline 11
+							input(type='checkbox', id='1')
+						label.checkbox-inline 12
+							input(type='checkbox', id='2')
+						label.checkbox-inline 1
+							input(type='checkbox', id='3')
+						label.checkbox-inline 2
+							input(type='checkbox', id='4')
+						label.checkbox-inline 3
+							input(type='checkbox', id='5')
+						label.checkbox-inline 4
+							input(type='checkbox', id='6')
+						label.checkbox-inline 5
+							input(type='checkbox', id='7')
+						label.checkbox-inline 6
+							input(type='checkbox', id='8')
+						label.checkbox-inline 7
+							input(type='checkbox', id='9')
+						label.checkbox-inline 8
+							input(type='checkbox', id='10')
+						label.checkbox-inline 9
+							input(type='checkbox', id='11')
+						label.checkbox-inline 10
+							input(type='checkbox', id='12')
+						label.checkbox-inline 11
+							input(type='checkbox', id='13')
+						label.checkbox-inline 12
+							input(type='checkbox', id='14')
+						label.checkbox-inline 1
+							input(type='checkbox', id='15')
+
 
 		.container-fluid
 			.row

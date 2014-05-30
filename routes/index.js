@@ -15,9 +15,24 @@ router.get('/archive', function(req, res) {
 	res.render('archive', {title: "Show Archive" })
 });
 
-/* GET admin manager. */
+// /* GET admin manager. */
+// router.get('/admin', function(req, res) {
+// 	res.render('adminLanding', {title: "Manage useres" })
+// });
+
+router.get('/admin/*', function(req, res,next) {
+	res.set('private content');
+	next();
+})
+
 router.get('/admin', function(req, res) {
-	res.render('adminLanding', {title: "Manage useres" })
+    var db = req.db;
+    var collection = db.collection('usercollection');
+    collection.find({},{},function(e,docs){
+        res.render('adminLanding', {
+            "userlist" : docs
+        });
+    });
 });
 
 /* GET dj app page. */
@@ -54,16 +69,14 @@ router.post('/dj-application', function(req, res) {
 *	admin login credentialing
 **/
 
-// router.get('/admin/*', function(req, res) {
-// 	res.render('login', { title: "Login"});
-// })
 
-// router.get('/admin/scheduler', function(req, res) {
-//     var db = req.db;
-//     db.collection('userlist').find().toArray(function (err, items) {
-//         res.json(items);
-//     });
-// });
+
+router.get('/admin/scheduler', function(req, res) {
+    var db = req.db;
+    db.collection('usercollection').find().toArray(function (err, items) {
+        res.json(items);
+    });
+});
 
 
 
