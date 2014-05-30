@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var mongo = require('mongoskin');
 var db = mongo.db("mongodb://localhost:27017/wmcntest", {native_parser:true});
+var collection = db.collection('usercollection');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res,next){
     req.db = db;
+    req.collection = collection
     next();
 });
 

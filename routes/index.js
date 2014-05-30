@@ -27,7 +27,7 @@ router.get('/admin/*', function(req, res, next) {
 
 router.get('/admin', function(req, res) {
     var db = req.db;
-    var collection = db.collection('usercollection');
+    var collection = req.collection;
     // collection.find({},{},function(e,docs){
     //     res.render('adminLanding', {
     //         "userlist" : docs
@@ -64,9 +64,48 @@ router.get('/post/other', function(req, res) {
 **/
 
 // POST dj app
-router.post('/dj-application', function(req, res) {
-	res.send('You submitted: ' + req.body.firstName)
-});
+	router.post('/dj-application', function(req, res) {
+		var db = req.db;
+		var collection = req.collection;
+
+		var djStatus = req.body.djStatus;
+		//var user = _id;
+		var firstName = req.body.firstName;
+		var lastName = req.body.lastName;
+		var email = req.body.email;
+		var phone = req.body.phone;
+		var studentStatus = req.body.studentStatus;
+		var macIdNum = req.body.macIdNum;
+		var iclass = req.body.iclass;
+		var gradYear = req.body.gradYear;
+		var show = req.body.show;
+		var blurb = req.body.blurb;
+
+		console.log('submitting' + firstName + lastName);
+		collection.insert({
+			"returning": djStatus,
+			//"user": _id,
+			"user.access": 0,
+			"user.name.first": firstName,
+			"user.name.last": lastName,
+			"user.contact.email": email,
+			"user.contact.phone": phone,
+			"user.student.status": studentStatus,
+			"user.student.macIdNum": macIdNum,
+			"user.student.iclass": iclass,
+			"user.student.year": gradYear,
+			"show.title": show,
+			"show.blurb": blurb
+			//"availability": {};
+		}, function(err, doc) {
+			if (err)  {
+				res.send("u fucked up");
+			} else {
+				res.location('admin');
+				res.redirect('admin');
+			}
+		});
+	});
 
 
 /**

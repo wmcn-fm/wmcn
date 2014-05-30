@@ -12,10 +12,10 @@ block content
 						label(for='djStatus') are you a new or returning dj?
 						.radio
 							label new
-							input#newDj(type='radio', name='djStatus', value='new')
+							input#newDj(type='radio', name='djStatus', value=true)
 						.radio
 							label returning
-							input#returningDj(type='radio', name='djStatus', value='returning')
+							input#returningDj(type='radio', name='djStatus', value=false)
 		.container-fluid
 			.row
 				.col-xs-2
@@ -35,28 +35,28 @@ block content
 				.col-xs-2
 					.form-group
 						label(for='phone') phone number
-						input#phone.form-control(type='tel', placeholder='1234567890', name='tel')
+						input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
 		.container-fluid
 			.row
 				.col-xs-2
 						label(for='studentStatus') are you a current student?
 						.radio
 							//label yes
-							input#isStudent.form-control(type='radio', name='studentStatus', value='yes')
+							input#isStudent.form-control(type='radio', name='studentStatus', value=true)
 						.radio
 							//label no
-							input#isNotStudent.form-control(type='radio', name='studentStatus', value='no')
+							input#isNotStudent.form-control(type='radio', name='studentStatus', value=false)
 
 		.container-fluid
 			.row
 				.col-xs-2
 					.form-group
-						label(for='idNum') macalester id number
-						input#idNum.form-control(type='number', name='idNum', placeholder="012345678")
+						label(for='macIdNum') macalester id number
+						input#idNum.form-control(type='number', name='macIdNum', placeholder=012345678)
 				.col-xs-2
 					.form-group
 						label(for='iclass') 5-digit iclass number
-						input#iclass.form-control(type='number', name='iclass', placeholder="12345")
+						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
 				
 		.container-fluid
 			.row
@@ -65,24 +65,24 @@ block content
 						label(for='gradYear') enter your grad year
 						.radio
 							label 2015
-							input(type='radio', name='gradYear', value='12015')
+							input(type='radio', name='gradYear', value=2015)
 						.radio
 							label 2016
-							input(type='radio', name='gradYear', value='2016')
+							input(type='radio', name='gradYear', value=2016)
 						.radio
 							label 2017
-							input(type='radio', name='gradYear', value='2017')
+							input(type='radio', name='gradYear', value=2017)
 						.radio
 							label 2018
-							input(type='radio', name='gradYear', value='2018')
+							input(type='radio', name='gradYear', value=2018)
 						.radio
 							label not a student
-							input(type='radio', name='gradYear', value='0')
+							input(type='radio', name='gradYear', value=0)
 						.radio
 							.input-group
 								.input-group-addon
-									input(type='radio')
-								input.form-control(type='text', name='grad')
+									input(type='radio', name='gradYear')
+								input.form-control(type='number', name='gradYearOther', placeholder=1984)
 
 		.container-fluid
 			.row

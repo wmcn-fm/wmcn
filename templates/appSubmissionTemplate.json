@@ -2,7 +2,7 @@
 	"application" : {
 		"returning": false,
 		"user" : {
-			"uniqueID": 0,
+			"user": 0,	//use mongo _id param
 			"access" : 0,
 			"name" : {
 				"first" : '',
