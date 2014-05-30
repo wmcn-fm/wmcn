@@ -20,7 +20,7 @@ router.get('/archive', function(req, res) {
 // 	res.render('adminLanding', {title: "Manage useres" })
 // });
 
-router.get('/admin/*', function(req, res,next) {
+router.get('/admin/*', function(req, res, next) {
 	res.set('private content');
 	next();
 })
@@ -28,10 +28,14 @@ router.get('/admin/*', function(req, res,next) {
 router.get('/admin', function(req, res) {
     var db = req.db;
     var collection = db.collection('usercollection');
-    collection.find({},{},function(e,docs){
-        res.render('adminLanding', {
-            "userlist" : docs
-        });
+    // collection.find({},{},function(e,docs){
+    //     res.render('adminLanding', {
+    //         "userlist" : docs
+    //     });
+    // });
+
+    collection.find().toArray(function (err, items) {
+        res.json(items);
     });
 });
 
