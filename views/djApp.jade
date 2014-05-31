@@ -12,10 +12,10 @@ block content
 						label(for='djStatus') are you a new or returning dj?
 						.radio
 							label new
-							input#newDj(type='radio', name='djStatus', value=true)
+							input#newDj(type='radio', name='djStatus', value='true')
 						.radio
 							label returning
-							input#returningDj(type='radio', name='djStatus', value=false)
+							input#returningDj(type='radio', name='djStatus', value='false')
 		.container-fluid
 			.row
 				.col-xs-2
@@ -42,10 +42,10 @@ block content
 						label(for='studentStatus') are you a current student?
 						.radio
 							//label yes
-							input#isStudent.form-control(type='radio', name='studentStatus', value=true)
+							input#isStudent.form-control(type='radio', name='studentStatus', value='true')
 						.radio
 							//label no
-							input#isNotStudent.form-control(type='radio', name='studentStatus', value=false)
+							input#isNotStudent.form-control(type='radio', name='studentStatus', value='false')
 
 		.container-fluid
 			.row
