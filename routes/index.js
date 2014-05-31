@@ -26,7 +26,7 @@ router.get('/admin/*', function(req, res, next) {
 	next();
 })
 
-router.get('/admin', function(req, res) {
+router.get('/admin/users', function(req, res) {
     var db = req.db;
     var collection = req.collection;
     // collection.find({},{},function(e,docs){
@@ -36,7 +36,10 @@ router.get('/admin', function(req, res) {
     // });
 
     collection.find().toArray(function (err, items) {
-        res.json(items);
+        //res.json(items);
+        res.render('manageUsers', {
+        	"userlist" : items
+        });
     });
 });
 
@@ -64,100 +67,56 @@ router.get('/post/other', function(req, res) {
 *	POST
 **/
 
-// // POST dj app
-// 	router.post('/dj-application', function(req, res) {
-// 		var db = req.db;
-// 		var collection = req.collection;
+router.post('/dj-application', function(req, res) {
 
-// 		var djStatus = req.body.djStatus;
-// 		//var user = _id;
-// 		var firstName = req.body.firstName;
-// 		var lastName = req.body.lastName;
-// 		var email = req.body.email;
-// 		var phone = req.body.phone;
-// 		var studentStatus = req.body.studentStatus;
-// 		var macIdNum = req.body.macIdNum;
-// 		var iclass = req.body.iclass;
-// 		var gradYear = req.body.gradYear;
-// 		var show = req.body.show;
-// 		var blurb = req.body.blurb;
+    // Set our internal DB variable
+    var db = req.db;
 
-// 		console.log('submitting' + firstName + lastName);
-// 		db.collection('usercollection').insert({
-// 			"returning": djStatus,
-// 			//"user": _id,
-// 			"user.access": 0,
-// 			"user.name.first": firstName,
-// 			"user.name.last": lastName,
-// 			"user.contact.email": email,
-// 			"user.contact.phone": phone,
-// 			"user.student.status": studentStatus,
-// 			"user.student.macIdNum": macIdNum,
-// 			"user.student.iclass": iclass,
-// 			"user.student.year": gradYear,
-// 			"show.title": show,
-// 			"show.blurb": blurb
-// 			//"availability": {};
-// 		}, function(err, doc) {
-// 			if (err)  {
-// 				res.send("u fucked up");
-// 			} else {
-// 				res.location('admin');
-// 				res.redirect('admin');
-// 			}
-// 		});
-// 	});
+    // Get our form values. These rely on the "name" attributes
 
-	router.post('/dj-application', function(req, res) {
+    var djStatus = req.body.djStatus;
+	//var user = _id;
+	var firstName = req.body.firstName;
+	var lastName = req.body.lastName;
+	var email = req.body.email;
+	var phone = req.body.phone;
+	var studentStatus = req.body.studentStatus;
+	var macIdNum = req.body.macIdNum;
+	var iclass = req.body.iclass;
+	var gradYear = req.body.gradYear;
+	var show = req.body.show;
+	var blurb = req.body.blurb;
 
-	    // Set our internal DB variable
-	    var db = req.db;
+    // Set our collection
+    var collection = req.collection;
 
-	    // Get our form values. These rely on the "name" attributes
+    // Submit to the DB
+    collection.insert({
+    	"djStatus": djStatus,
+        "firstName" : firstName,
+        "lastName" : lastName,
+        "email" : email,
+        "phone" : phone,
+        "studentStatus" : studentStatus,
+        "macIdNum" : macIdNum,
+        "iclass" : iclass,
+        "gradYear" : gradYear,
+        "show" : show,
+        "blurb" : blurb
 
-	    var djStatus = req.body.djStatus;
-		//var user = _id;
-		var firstName = req.body.firstName;
-		var lastName = req.body.lastName;
-		var email = req.body.email;
-		var phone = req.body.phone;
-		var studentStatus = req.body.studentStatus;
-		var macIdNum = req.body.macIdNum;
-		var iclass = req.body.iclass;
-		var gradYear = req.body.gradYear;
-		var show = req.body.show;
-		var blurb = req.body.blurb;
-
-	    // Set our collection
-	    var collection = req.collection;
-
-	    // Submit to the DB
-	    collection.insert({
-	    	"djStatus": djStatus,
-	        "firstName" : firstName,
-	        "lastName" : lastName,
-	        "email" : email,
-	        "phone" : phone,
-	        "studentStatus" : studentStatus,
-	        "macIdNum" : macIdNum,
-	        "iclass" : iclass,
-	        "gradYear" : gradYear,
-	        "show" : show,
-	        "blurb" : blurb
-
-	    }, function (err, doc) {
-	        if (err) {
-	            // If it failed, return error
-	            res.send("There was a problem adding the information to the database.");
-	        }
-	        else {
-	            // If it worked, set the header so the address bar doesn't still say /adduser
-	            res.location("admin");
-	            // And forward to success page
-	            res.redirect("admin");
-	        }
-	    });
-	});
+    }, function (err, doc) {
+        if (err) {
+            // If it failed, return error
+            res.send("There was a problem adding the information to the database.");
+        }
+        else {
+            // If it worked, set the header so the address bar doesn't still say /adduser
+            res.location("admin/users");
+            // And forward to success page
+            res.redirect("admin/users");
+        }
+    });
+});
 
 
 /**

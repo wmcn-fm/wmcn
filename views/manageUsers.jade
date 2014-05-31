@@ -1,0 +1,42 @@
+extends layout
+block content
+	h1= title
+	p Welcome to #{title}
+
+	h1.
+		User List
+	ul
+		each user, i in userlist
+			li
+				a(href="mailto:#{user.email}")= user.firstName
+
+	.container-fluid		
+		table
+			tr
+				th user
+				th djStatus
+				th firstName
+				th lastName
+				th email
+				th phone
+				th studentStatus
+				th mac id
+				th mac iclass
+				th grad year
+				th show
+				th blurb
+
+			each user, i in userlist
+				tr
+					td= user._id
+					td= user.djStatus
+					td= user.firstName
+					td= user.lastName
+					td= user.email
+					td= user.phone
+					td= user.studentStatus
+					td= user.macIdNum
+					td= user.iclass
+					td= user.gradYear
+					td= user.show
+					td= user.blurb
