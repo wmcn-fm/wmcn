@@ -1,25 +1,36 @@
 extends layout
 block content
-	h1= title
-	p Welcome to #{title}
+	.container-fluid
+		.row
+			.col-xs-4
+				h1= title
+		.row
+			.col-xs-4
+				p Welcome to #{title}
+		.row
+			.col-xs-4
+				button#edit.btn.btn-primary() edit
 
-	h1.
-		User List
-	ul
-		each user, i in userlist
-			li
-				a(href="mailto:#{user.email}")= user.firstName
+
+
+
+		
+	//- ul
+	//- 	each user, i in userlist
+	//- 		li
+	//- 			a(href="mailto:#{user.email}")= user.firstName
 
 	.container-fluid		
-		table
+		table.table-striped.table.table-bordered.table-hover
 			tr
 				th user
-				th djStatus
-				th firstName
-				th lastName
+				th dj Status
+				th access
+				th first Name
+				th last Name
 				th email
 				th phone
-				th studentStatus
+				th student Status
 				th mac id
 				th mac iclass
 				th grad year
@@ -30,13 +41,15 @@ block content
 				tr
 					td= user._id
 					td= user.djStatus
-					td= user.firstName
-					td= user.lastName
-					td= user.email
-					td= user.phone
-					td= user.studentStatus
-					td= user.macIdNum
-					td= user.iclass
-					td= user.gradYear
-					td= user.show
-					td= user.blurb
+					td.editable= user.access
+					td.editable= user.firstName
+					td.editable= user.lastName
+					td.editable= user.email
+					td.editable= user.phone
+					td.editable= user.studentStatus
+					td.editable= user.macIdNum
+					td.editable= user.iclass
+					td.editable= user.gradYear
+					td.editable= user.show
+					td.editable= user.blurb
+

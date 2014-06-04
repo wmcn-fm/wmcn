@@ -37,9 +37,11 @@ router.get('/admin/users', function(req, res) {
 
     collection.find().toArray(function (err, items) {
         //res.json(items);
+        console.log(items)
         res.render('manageUsers', {
         	"userlist" : items
         });
+	    res.end('testing data');
     });
 });
 
@@ -93,6 +95,7 @@ router.post('/dj-application', function(req, res) {
     // Submit to the DB
     collection.insert({
     	"djStatus": djStatus,
+        "access": 0,
         "firstName" : firstName,
         "lastName" : lastName,
         "email" : email,
