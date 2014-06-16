@@ -1,3 +1,7 @@
 .live {
 	background-color: yellow;
 }
+
+.live:hover {
+	cursor: pointer;
+}
