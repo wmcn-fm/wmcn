@@ -1,30 +1,32 @@
 $(document).ready(function() {
 
 	$('#edit').on('click', function() {
-		//console.log('shit is popping!');
 		$('.editable').toggleClass('live');
-
+		$('#userTable').toggleClass('live');
+		toggleInputs();
 	});
-
-/*
-	$('td').on('hover', function() {
-		if ($(this).hasClass('live')) {
-			$(this).css('background-color', 'yellow');
-		};
-	});
-*/
-
-	$('td').on('click', function() {
-		if ($(this).hasClass('live')) {
-			var cellData = $(this).text();
-		  	//console.log(cellData);
-		  	//console.log('clicked!');
-		  	$(this).replaceWith(createInput(cellData));
-		}	
-	});
-
-});
+});	//end ready
 
 function createInput(placeholder) {
 	return "<input type='text' class='form-control' type='text' placeholder='" + placeholder + "'>";
+}
+
+function toggleInputs() {
+	if ($('#userTable').hasClass('live')) {
+
+		// replace each td with an input
+		$('td.live').each(function(index, element) {
+			var cellData = $(element).text();
+			console.log(cellData);
+			$(this).text('').append(createInput(cellData));
+		});
+
+	} else {
+		//find any <input> fields
+		$('td.editable > input').each(function(index, element) {
+			var placeholder = $(element).attr('placeholder');
+			console.log('placeholder' + placeholder);
+			$(this).parent().text('').append(placeholder);
+		});
+	}
 }
