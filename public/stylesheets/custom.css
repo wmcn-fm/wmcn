@@ -5,3 +5,12 @@
 td.live:hover {
 	cursor: pointer;
 }
+
+.pinned {
+	position: fixed;
+	top: 0px;
+}
+
+.legend {
+	
+}
