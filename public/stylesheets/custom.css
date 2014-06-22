@@ -1,7 +1,7 @@
 .live {
+	background-color: yellow !important;
 }
 
 td.live:hover {
 	cursor: pointer;
-	background-color: yellow !important;
 }
