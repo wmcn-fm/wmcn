@@ -39,11 +39,20 @@ router.get('/admin/users', function(req, res) {
         //res.json(items);
         console.log(items)
         res.render('manageUsers', {
-        	"userlist" : items
+        	"userlist" : items,
+            title: 'View Database'
         });
 	    res.end('testing data');
     });
 });
+
+router.get('/admin/user/:id', function(req, res) {
+    res.render('editUser', {
+        "userId": req.params.id,
+        title: 'Edit Account'
+    });
+})
+
 
 /* GET dj app page. */
 router.get('/dj-application', function(req, res) {
@@ -120,6 +129,7 @@ router.post('/dj-application', function(req, res) {
         }
     });
 });
+
 
 
 /**

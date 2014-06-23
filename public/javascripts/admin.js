@@ -1,28 +1,12 @@
 $(document).ready(function() {
 
-	$('#edit').on('click', function() {
-		$('.editable').toggleClass('live');
-		$('td').each(function (i) {
-			if ($(this).hasClass('live')) {
-				replaceInput($(this));
-			}
-		});
+	$('.userId').each(function (i) {
+		var text = $(this).text();
+		var link = "<a href='/admin/user/" + text + "'>" + text + "</a/";
+		$(this).text('').append(link);
+
 	});
 
-	$('td').dblclick(function() {
-//		console.log('toggle');
-		if ($(this).hasClass('live')) {
-//			console.log('hasclass live');
-			addInput($(this));
-		} else {
-//			console.log('else');
-			replaceInput($(this));
-		}
-	});
-
-	$('input').focus(function() {
-		showButton($(this));
-	});
 });	//end ready
 
 function createInput(placeholder) {
