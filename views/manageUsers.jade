@@ -22,35 +22,35 @@ block content
 
 	.container-fluid		
 		table#userTable.table-striped.table.table-bordered.table-hover
-			//thead
-			tr.legend
-				th user
-				th dj Status
-				th access
-				th first Name
-				th last Name
-				th email
-				th phone
-				th student Status
-				th mac id
-				th mac iclass
-				th grad year
-				th show
-				th blurb
-
-			each user, i in userlist
+			thead
 				tr
-					td= user._id
-					td= user.djStatus
-					td.editable= user.access
-					td.editable= user.firstName
-					td.editable= user.lastName
-					td.editable= user.email
-					td.editable= user.phone
-					td.editable= user.studentStatus
-					td.editable= user.macIdNum
-					td.editable= user.iclass
-					td.editable= user.gradYear
-					td.editable= user.show
-					td.editable= user.blurb
+					th user
+					th dj Status
+					th access
+					th first Name
+					th last Name
+					th email
+					th phone
+					th student Status
+					th mac id
+					th mac iclass
+					th grad year
+					th show
+					th blurb
+			tbody
+				each user, i in userlist
+					tr
+						td.userId= user._id
+						td= user.djStatus
+						td.editable= user.access
+						td.editable= user.firstName
+						td.editable= user.lastName
+						td.editable= user.email
+						td.editable= user.phone
+						td.editable= user.studentStatus
+						td.editable= user.macIdNum
+						td.editable= user.iclass
+						td.editable= user.gradYear
+						td.editable= user.show
+						td.editable= user.blurb
 

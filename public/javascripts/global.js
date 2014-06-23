@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $('table').floatThead();
 
     $(window).scroll(function() {
         var table = $('table');
