@@ -1,0 +1,19 @@
+{
+  "name": "wmcn",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wmcn-fm/wmcn",
+  "authors": [
+    "Will Kent-Daggett <willkentdaggett@gmail.com>"
+  ],
+  "description": "macalester.edu/wmcn",
+  "main": "app.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

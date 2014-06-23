@@ -46,11 +46,33 @@ router.get('/admin/users', function(req, res) {
     });
 });
 
+/* GET edit user */
 router.get('/admin/user/:id', function(req, res) {
-    res.render('editUser', {
-        "userId": req.params.id,
-        title: 'Edit Account'
+    var id = req.params.id;
+    var db = req.db;
+    var collection = req.collection;
+    console.log('hey hey' + id);
+    collection.findOne({_id: id}, function (err, result) {
+        if (err) {
+            console.log('error bitch');
+        } else {
+            console.log('result '+ result);
+            res.render('editUser', {
+                title: 'Edit Account',
+                "userInfo": result
+            });
+        }
     });
+    // collection.findById(id, function (err, items) {
+    //     console.log(id);
+    //     console.log(items);
+    //     res.render('editUser', {
+    //     "userId": req.params.id,
+    //     title: 'Edit Account',
+    //     "userInfo": items
+    //     });
+    // });
+    
 })
 
 

@@ -1,3 +1,24 @@
 extends layout
 
 block content
+	.container-fluid		
+		table#userTable.table-striped.table.table-bordered.table-hover
+			thead
+				tr
+					th user
+					th dj Status
+					th access
+					th first Name
+					th last Name
+					th email
+					th phone
+					th student Status
+					th mac id
+					th mac iclass
+					th grad year
+					th show
+					th blurb
+			tbody
+				//each user, i in userlist
+				tr
+					td=userInfo
