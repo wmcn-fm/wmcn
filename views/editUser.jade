@@ -1,24 +1,43 @@
 extends layout
-
 block content
-	.container-fluid		
-		table#userTable.table-striped.table.table-bordered.table-hover
+	.container-fluid
+		.row
+			.col-xs-4
+				h1= title
+		.row
+			.col-xs-4
+				p Welcome to #{title}
+	.container-fluid
+		table
 			thead
 				tr
-					th user
-					th dj Status
-					th access
-					th first Name
-					th last Name
-					th email
-					th phone
-					th student Status
-					th mac id
-					th mac iclass
-					th grad year
-					th show
-					th blurb
+					th hey
 			tbody
-				//each user, i in userlist
 				tr
-					td=userInfo
+					each field, i in userInfo
+
+						td= field.firstName
+						td= field._id
+						td= field.lastName
+						//- td.userId= user._id
+						//- td= user.djStatus
+						//- td.editable= user.access
+						//- td.editable= user.firstName
+						//- td.editable= user.lastName
+						//- td.editable= user.email
+						//- td.editable= user.phone
+						//- td.editable= user.studentStatus
+						//- td.editable= user.macIdNum
+						//- td.editable= user.iclass
+						//- td.editable= user.gradYear
+						//- td.editable= user.show
+						//- td.editable= user.blurb
+
+		form(role='form', method='post', action='/updateUser', id='updateUserSubmit')
+			.container-fluid
+				.row
+					.col-xs-4
+						fieldset(disabled='disabled')
+							.form-group
+								label(for='userId') user id
+								input.form-control(type='number', name='userId', placeholder= userInfo.firstName)

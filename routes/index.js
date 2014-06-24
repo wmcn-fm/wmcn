@@ -52,7 +52,7 @@ router.get('/admin/user/:id', function(req, res) {
     var db = req.db;
     var collection = req.collection;
     console.log('hey hey' + id);
-    collection.findOne({_id: id}, function (err, result) {
+    collection.find({firstName: 'will'}).toArray(function (err, result) {
         if (err) {
             console.log('error bitch');
         } else {

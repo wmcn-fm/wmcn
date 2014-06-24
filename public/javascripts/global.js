@@ -1,28 +1,25 @@
 $(document).ready(function() {
-    $('table').floatThead();
+    if ($('table'.length)) {
+        $('table').floatThead();
 
-    $(window).scroll(function() {
-        var table = $('table');
-        var windowOffset = table.offset().top - $(window).scrollTop();
+        $(window).scroll(function() {
+            var table = $('table');
+            var windowOffset = table.offset().top - $(window).scrollTop();
 
-        if (table.isOnScreen()) {
-            if (windowOffset < 1) {
-                console.log('if');
-                $('.legend').addClass('pinned');
-            } else {
-                console.log('else');
-                if ($('.legend').hasClass('pinned')) {
-                    $('.legend').removeClass('pinned');
+            if (table.isOnScreen()) {
+                if (windowOffset < 1) {
+                    console.log('if');
+                    $('.legend').addClass('pinned');
+                } else {
+                    console.log('else');
+                    if ($('.legend').hasClass('pinned')) {
+                        $('.legend').removeClass('pinned');
+                    }
                 }
             }
-        }
-    });
-
+        });
+    }
 });
-
-function pinTable() {
-
-}
 
 $.fn.isOnScreen = function(){
     
