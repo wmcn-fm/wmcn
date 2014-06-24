@@ -14,3 +14,7 @@ td.live:hover {
 .userId {
 	
 }
+
+.updateButton {
+	display: none;
+}

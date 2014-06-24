@@ -10,91 +10,61 @@ block content
 	.container-fluid
 		form(role='form', method='post', action='/updateUser', id='updateUserSubmit')
 			.container-fluid
-				each field, i in userInfo
-					.row
-						.col-xs-4
-							.form-group
-								label(for='userId') user id
-								input.form-control(readonly='readonly', type='number', name='userId', placeholder= field._id)
-						.col-xs-4
-							.form-group
-								label(for='access') access level
-								input.form-control(readonly='readonly', type='number', name='access', placeholder= field.access)
-					.row
-						.col-xs-4
-							.form-group
-								label(for='firstName') first name
-								input.form-control(type='text', name='firstName', placeholder=field.firstName)
-						.col-xs-4
-							.form-group
-								label(for='lastName') last name
-								input.form-control(type='text', name='lastName', placeholder=field.lastName)
-					.row
-						.col-xs-4
-							.form-group
-								label(for='email') email
-								input.form-control(type='email', name='email', placeholder=field.email)
-						.col-xs-4
-							.form-group
-								label(for='phone') phone
-								input.form-control(type='tel', name='phone', placeholder=field.phone)
-					.row
-						.col-xs-4
-							.form-group
-								label(for='studentStatus') student status
-								input.form-control(name='studentStatus', placeholder=field.studentStatus)
-						.col-xs-4
-							.form-group
-								label(for='gradYear') grad year
-								input.form-control(name='gradYear', type='number', placeholder=field.gradYear)
-					.row
-						.col-xs-4
-							.form-group
-								label(for='macIdNum') mac id number
-								input.form-control(name='macIdNum', type='number', placeholder=field.macIdNum)
-						.col-xs-4
-							.form-group
-								label(for='iclass') iclass
-								input.form-control(name='iclass', type='number', placeholderfield.iclass)
-					.row
-						.col-xs-4
-							.form-group
-								label(for='show') show title
-								input.form-control(name='show', type='text', placeholder=field.show)
-						.col-xs-4
-							.form-group
-								label(for='blurb') show description
-								textarea.form-control(rows='2', name='blurb', placeholder=field.blurb)
-		//- table
-		//- 	thead
-		//- 		tr
-		//- 			th hey
-		//- 	tbody
-		//- 		tr
-		//- 			each field, i in userInfo
-
-		//- 				td= field.firstName
-		//- 				td= field._id
-		//- 				td= field.lastName
-		//- 				//- td.userId= user._id
-		//- 				//- td= user.djStatus
-		//- 				//- td.editable= user.access
-		//- 				//- td.editable= user.firstName
-		//- 				//- td.editable= user.lastName
-		//- 				//- td.editable= user.email
-		//- 				//- td.editable= user.phone
-		//- 				//- td.editable= user.studentStatus
-		//- 				//- td.editable= user.macIdNum
-		//- 				//- td.editable= user.iclass
-		//- 				//- td.editable= user.gradYear
-		//- 				//- td.editable= user.show
-		//- 				//- td.editable= user.blurb
-
-		//- form(role='form', method='post', action='/updateUser', id='updateUserSubmit')
-		//- 	.container-fluid
-		//- 		.row
-		//- 			.col-xs-4
-		//- 				fieldset(disabled='disabled')
-		//- 					.form-group
-		//- 						label(for='userId') user id
-		//- 						input.form-control(type='number', name='userId', placeholder= userInfo.firstName)
+				.row
+					.col-xs-4
+						.form-group
+							label(for='userId') user id
+							input.form-control(readonly='readonly', type='number', name='userId', placeholder= userInfo._id)
+					.col-xs-4
+						.form-group
+							label(for='access') access level
+							input.form-control(readonly='readonly', type='number', name='access', placeholder= userInfo.access)
+				.row
+					.col-xs-4
+						.form-group
+							label(for='firstName') first name
+							input.form-control(type='text', name='firstName', placeholder=userInfo.firstName)
+					.col-xs-4
+						.form-group
+							label(for='lastName') last name
+							input.form-control(type='text', name='lastName', placeholder=userInfo.lastName)
+				.row
+					.col-xs-4
+						.form-group
+							label(for='email') email
+							input.form-control(type='email', name='email', placeholder=userInfo.email)
+					.col-xs-4
+						.form-group
+							label(for='phone') phone
+							input.form-control(type='tel', name='phone', placeholder=userInfo.phone)
+				.row
+					.col-xs-4
+						.form-group
+							label(for='studentStatus') student status
+							input.form-control(name='studentStatus', placeholder=userInfo.studentStatus)
+					.col-xs-4
+						.form-group
+							label(for='gradYear') grad year
+							input.form-control(name='gradYear', type='number', placeholder=userInfo.gradYear)
+				.row
+					.col-xs-4
+						.form-group
+							label(for='macIdNum') mac id number
+							input.form-control(name='macIdNum', type='number', placeholder=userInfo.macIdNum)
+					.col-xs-4
+						.form-group
+							label(for='iclass') iclass
+							input.form-control(name='iclass', type='number', placeholder=userInfo.iclass)
+				.row
+					.col-xs-4
+						.form-group
+							label(for='show') show title
+							input.form-control(name='show', type='text', placeholder=userInfo.show)
+					.col-xs-4
+						.form-group
+							label(for='blurb') show description
+							textarea.form-control(rows='2', name='blurb', placeholder=userInfo.blurb)
+			.container-fluid
+				.row
+					button.btn.btn-primary(type='submit') Update User
+					button.deleteUser.btn.btn-danger() Delete user

@@ -52,7 +52,7 @@ router.get('/admin/user/:id', function(req, res) {
     var db = req.db;
     var collection = req.collection;
     console.log('hey hey' + id);
-    collection.find({firstName: 'will'}).toArray(function (err, result) {
+    collection.findById(id, function (err, result) {
         if (err) {
             console.log('error bitch');
         } else {
@@ -63,17 +63,7 @@ router.get('/admin/user/:id', function(req, res) {
             });
         }
     });
-    // collection.findById(id, function (err, items) {
-    //     console.log(id);
-    //     console.log(items);
-    //     res.render('editUser', {
-    //     "userId": req.params.id,
-    //     title: 'Edit Account',
-    //     "userInfo": items
-    //     });
-    // });
-    
-})
+});
 
 
 /* GET dj app page. */
@@ -99,6 +89,42 @@ router.get('/post/other', function(req, res) {
 /**
 *	POST
 **/
+
+router.post('/updateUser', function(req, res) {
+    var db = req.db;
+    var collection = req.collection;
+
+    var userId = req.body.userId;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var macIdNum = req.body.macIdNum;
+    var iclass = req.body.iclass;
+    var gradYear = req.body.gradYear;
+    var show = req.body.show;
+    var blurb = req.body.blurb;
+
+    collection.update({
+        _id: userId,
+        "firstName": firstName,
+        "lastName" : lastName,
+        "email" : email,
+        "phone" : phone,
+        "macIdNum" : macIdNum,
+        "iclass" : iclass,
+        "gradYear" : gradYear,
+        "show" : show,
+        "blurb" : blurb
+    }, function (err, doc) {
+        if (err) {
+            res.send('there was a problem updating');
+        } else {
+        res.location('admin/users');
+        res.redirect('admin/users');
+        }
+    });    
+});
 
 router.post('/dj-application', function(req, res) {
 
