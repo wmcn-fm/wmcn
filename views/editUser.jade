@@ -65,7 +65,7 @@ block content
 					.col-xs-4
 						.form-group
 							label(for='blurb') show description
-							textarea.form-control(rows='2', name='blurb', value=userInfo.blurb)
+							textarea.form-control(rows='2', name='blurb')=userInfo.blurb
 			.container-fluid
 				.row
 					button.updateButton.btn.btn-primary(type='submit') Update User

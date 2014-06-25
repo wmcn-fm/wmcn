@@ -108,7 +108,7 @@ router.post('/updateUser', function(req, res) {
     collection.save(
     {
         _id: userId,
-        firstName: 'i have a first name!!',
+        firstName: firstName,
         lastName: lastName,
         email: email,
         phone: phone,

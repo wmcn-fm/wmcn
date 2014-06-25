@@ -18,3 +18,7 @@ td.live:hover {
 .updateButton {
 	display: none;
 }
+
+thead {
+	background-color: #ffffff !important;
+}
