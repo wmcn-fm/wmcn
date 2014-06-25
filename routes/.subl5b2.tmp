@@ -36,6 +36,8 @@ router.get('/admin/users', function(req, res) {
     // });
 
     collection.find().toArray(function (err, items) {
+        //res.json(items);
+        console.log(items)
         res.render('manageUsers', {
         	"userlist" : items,
             title: 'View Database'
@@ -103,26 +105,23 @@ router.post('/updateUser', function(req, res) {
     var show = req.body.show;
     var blurb = req.body.blurb;
 
-    console.log(userId + ', ' + firstName + ', ' + lastName);
-
-    collection.update({_id:'537f97e0184b5716ddc6a88f'}, {
-        //'$pull' : 
-        firstName: 'i have a first name!!',
-        lastName: lastName,
-        email: email,
-        phone: phone,
-        macIdNum: macIdNum,
-        iclass: iclass,
-        gradYear: gradYear,
-        show: show,
-        blurb: blurb
+    collection.updateById(userId, {
+        '$pull' : ----????
+        "firstName": firstName,
+        "lastName" : lastName,
+        "email" : email,
+        "phone" : phone,
+        "macIdNum" : macIdNum,
+        "iclass" : iclass,
+        "gradYear" : gradYear,
+        "show" : show,
+        "blurb" : blurb
     }, function (err, doc) {
         if (err) {
             res.send('there was a problem updating');
         } else {
-            console.log(doc + ' doc');
-            res.location('admin/users');
-            res.redirect('admin/users');
+        res.location('admin/users');
+        res.redirect('admin/users');
         }
     });    
 });
@@ -176,15 +175,6 @@ router.post('/dj-application', function(req, res) {
             // And forward to success page
             res.redirect("admin/users");
         }
-    });
-});
-
-router.delete('/admin/deleteuser/:id', function(req, res) {
-    var db = req.db;
-    var collection = req.collection;
-    var userToDelete = req.params.id;
-    collection.removeById(userToDelete, function(err, result) {
-        res.send((result === 1) ? {msg : ''} : {msg:'error: ' + err});
     });
 });
 
