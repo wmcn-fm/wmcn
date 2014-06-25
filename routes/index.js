@@ -105,8 +105,9 @@ router.post('/updateUser', function(req, res) {
 
     console.log(userId + ', ' + firstName + ', ' + lastName);
 
-    collection.update({_id:'537f97e0184b5716ddc6a88f'}, {
-        //'$pull' : 
+    collection.save(
+    {
+        _id: userId,
         firstName: 'i have a first name!!',
         lastName: lastName,
         email: email,
