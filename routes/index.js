@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
+ObjectID = require('mongoskin').ObjectID
+
 /**
 *	GET for basic urls
 **/
@@ -91,41 +93,75 @@ router.get('/post/other', function(req, res) {
 router.post('/updateUser', function(req, res) {
     var db = req.db;
     var collection = req.collection;
-    var userId = req.body.userId;
 
+    var userId =  mongo.helper.toObjectID(req.body.userId);
+    var djStatus = req.body.djStatus;
+    var access = req.body.access;
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
     var email = req.body.email;
     var phone = req.body.phone;
+    var studentStatus = req.body.studentStatus;
     var macIdNum = req.body.macIdNum;
     var iclass = req.body.iclass;
     var gradYear = req.body.gradYear;
     var show = req.body.show;
     var blurb = req.body.blurb;
 
-    console.log(userId + ', ' + firstName + ', ' + lastName);
-
-    collection.save(
+    collection.update(
     {
-        _id: userId,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phone: phone,
-        macIdNum: macIdNum,
-        iclass: iclass,
-        gradYear: gradYear,
-        show: show,
-        blurb: blurb
+        _id: userId},
+        {'$set':
+            {djStatus: djStatus},
+            // access: access,
+            // firstName: firstName,
+            // lastName: lastName,
+            // email: email,
+            // phone: phone,
+            // studentStatus: studentStatus,
+            // macIdNum: macIdNum,
+            // iclass: iclass,
+            // gradYear: gradYear,
+            // show: show,
+            // blurb: blurb
+           
     }, function (err, doc) {
         if (err) {
-            res.send('there was a problem updating');
+            res.send('there was a problem updating' + err);
         } else {
             console.log(doc + ' doc');
             res.location('admin/users');
             res.redirect('admin/users');
         }
-    });    
+    }); 
+
+
+    // collection.updateById({_id: userId}, 
+    //     {$set:
+    //         {
+    //             djStatus: djStatus,
+    //             access: access,
+    //             firstName: firstName,
+    //             lastName: lastName,
+    //             email: email,
+    //             phone: phone,
+    //             studentStatus: studentStatus,
+    //             macIdNum: macIdNum,
+    //             iclass: iclass,
+    //             gradYear: gradYear,
+    //             show: show,
+    //             blurb: blurb  
+    //         }
+    //     }, {w:1}, function(err) {
+    //         if (err) {
+    //             console.log(err.message);
+    //         } else {
+    //             console.log('update success!');
+    //             res.location('admin/users');
+    //             res.redirect('admin/users')
+    //         }
+    //     }
+    // );   
 });
 
 router.post('/dj-application', function(req, res) {

@@ -13,6 +13,11 @@ block content
 				.row
 					.col-xs-4
 						.form-group
+							input.form-control(type='hidden', name='djStatus', value=userInfo.djStatus)
+							input.form-control(type='hidden', name='studentStatus', value=userInfo.studentStatus)
+				.row
+					.col-xs-4
+						.form-group
 							label(for='userId') user id
 							input.form-control(type='hidden', name='userId', value=userInfo._id)
 							input.form-control(disabled='disabled', type='number', name='userId', placeholder=userInfo._id)
