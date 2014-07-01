@@ -109,59 +109,31 @@ router.post('/updateUser', function(req, res) {
     var blurb = req.body.blurb;
 
     collection.update(
-    {
-        _id: userId},
+        {_id: userId},
         {'$set':
-            {djStatus: djStatus},
-            // access: access,
-            // firstName: firstName,
-            // lastName: lastName,
-            // email: email,
-            // phone: phone,
-            // studentStatus: studentStatus,
-            // macIdNum: macIdNum,
-            // iclass: iclass,
-            // gradYear: gradYear,
-            // show: show,
-            // blurb: blurb
-           
-    }, function (err, doc) {
-        if (err) {
-            res.send('there was a problem updating' + err);
-        } else {
-            console.log(doc + ' doc');
-            res.location('admin/users');
-            res.redirect('admin/users');
-        }
-    }); 
-
-
-    // collection.updateById({_id: userId}, 
-    //     {$set:
-    //         {
-    //             djStatus: djStatus,
-    //             access: access,
-    //             firstName: firstName,
-    //             lastName: lastName,
-    //             email: email,
-    //             phone: phone,
-    //             studentStatus: studentStatus,
-    //             macIdNum: macIdNum,
-    //             iclass: iclass,
-    //             gradYear: gradYear,
-    //             show: show,
-    //             blurb: blurb  
-    //         }
-    //     }, {w:1}, function(err) {
-    //         if (err) {
-    //             console.log(err.message);
-    //         } else {
-    //             console.log('update success!');
-    //             res.location('admin/users');
-    //             res.redirect('admin/users')
-    //         }
-    //     }
-    // );   
+            {
+                djStatus: djStatus,
+                access: access,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                studentStatus: studentStatus,
+                macIdNum: macIdNum,
+                iclass: iclass,
+                gradYear: gradYear,
+                show: show,
+                blurb: blurb
+            }
+        }, function (err, doc) {
+            if (err) {
+                res.send('there was a problem updating' + err);
+            } else {
+                console.log(doc + ' doc');
+                res.location('admin/users');
+                res.redirect('admin/users');
+            }
+        }); 
 });
 
 router.post('/dj-application', function(req, res) {
