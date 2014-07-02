@@ -25,6 +25,6 @@
 	|------------ /login	[log in page - or make it a popup?]
 	|------------ /user 	[edit user info: name, id#, etc]
 	|------------ /master	[view or edit users or shows]
-	|------ /admin		 	[select actions: create playlist or blog/news post, staff application, edit user,log out, manage]
+	|------ /admin		 	
 	|------------ /site 	[edit semester, broadcast schedule, application text, turn on link to application...]
 	
