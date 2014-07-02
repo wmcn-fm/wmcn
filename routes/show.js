@@ -9,7 +9,7 @@ var mongo = require('mongoskin');
 */
 
 //  GET
-router.get('/show/:id', function(req, res) {
+router.get('/:id', function(req, res) {
     var id = req.params.id;
     res.render('show/viewShow', {title: "dj home: " + id })
 });

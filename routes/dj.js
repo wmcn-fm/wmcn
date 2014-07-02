@@ -9,7 +9,7 @@ var mongo = require('mongoskin');
 */
 
 //  GET
-router.get('/dj', function(req, res) {
+router.get('', function(req, res) {
     res.render('dj/main', {title: "dj home" })
 });
 
@@ -20,7 +20,7 @@ router.get('/dj', function(req, res) {
 */
 
 //  GET
-router.get('/dj/login', function(req, res) {
+router.get('/login', function(req, res) {
     res.render('dj/login', {title: "dj login" })
 });
 
@@ -30,7 +30,7 @@ router.get('/dj/login', function(req, res) {
 */
 
 //  GET
-router.get('/dj/user', function(req, res) {
+router.get('/user', function(req, res) {
     res.render('dj/user', {title: "edit user" })
 });
 
@@ -41,7 +41,7 @@ router.get('/dj/user', function(req, res) {
 */
 
 //  GET
-router.get('/dj/post', function(req, res) {
+router.get('/post', function(req, res) {
     res.render('dj/post', {title: "make a post" })
 });
 

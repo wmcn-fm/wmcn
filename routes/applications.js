@@ -9,16 +9,16 @@ var mongo = require('mongoskin');
 
 
 //  GET
-router.get('/applications/dj', function(req, res) {
+router.get('/dj', function(req, res) {
   res.render('applications/dj', { title: 'Apply to Be a DJ!'});
 });
 
-router.get('/applications/staff', function(req, res) {
+router.get('/staff', function(req, res) {
   res.render('applications/staff', { title: 'Apply for a WMCN Staff Position' })
 });
 
 //  POST
-router.post('/applications/dj', function(req, res) {
+router.post('/dj', function(req, res) {
 
     // Set our internal DB variable
     var db = req.db;
