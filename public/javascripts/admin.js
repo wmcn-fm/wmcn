@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	$('.userId').each(function (i) {
 		var text = $(this).text();
-		var link = "<a href='/admin/user/" + text + "'>" + text + "</a>";
+		var link = "<a href='/admin/users/" + text + "'>" + text + "</a>";
 		$(this).text('').append(link);
 
 	});

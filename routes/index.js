@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
-ObjectID = require('mongoskin').ObjectID
-
 /**
 *	GET for basic urls
 **/
@@ -38,7 +36,7 @@ router.get('/admin/users', function(req, res) {
     // });
 
     collection.find().toArray(function (err, items) {
-        res.render('manageUsers', {
+        res.render('admin/users/manageUsers', {
         	"userlist" : items,
             title: 'View Database'
         });
@@ -47,7 +45,7 @@ router.get('/admin/users', function(req, res) {
 });
 
 /* GET edit user */
-router.get('/admin/user/:id', function(req, res) {
+router.get('/admin/users/:id', function(req, res) {
     var id = req.params.id;
     var db = req.db;
     var collection = req.collection;
@@ -57,7 +55,7 @@ router.get('/admin/user/:id', function(req, res) {
             console.log('error bitch');
         } else {
             console.log('result '+ result);
-            res.render('editUser', {
+            res.render('admin/users/editUser', {
                 title: 'Edit Account',
                 "userInfo": result
             });
@@ -68,12 +66,12 @@ router.get('/admin/user/:id', function(req, res) {
 
 /* GET dj app page. */
 router.get('/dj-application', function(req, res) {
-  res.render('djApp', { title: 'Apply to Be a DJ!'});
+  res.render('applications/dj', { title: 'Apply to Be a DJ!'});
 });
 
 /* GET staff app page. */
 router.get('/staff-application', function(req, res) {
-  res.render('staffApp', { title: 'Apply for a WMCN Staff Position' })
+  res.render('applications/staff', { title: 'Apply for a WMCN Staff Position' })
 });
 
 /* GET playlist creator. */
