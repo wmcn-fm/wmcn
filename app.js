@@ -11,6 +11,11 @@ var collection = db.collection('usercollection');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+var admin = require('./routes/admin');
+var applications = require('./routes/applications')
+var dj = require('./routes/dj');
+var show = require('./routes/show');
 //var admin = require('./routes/admin');
 
 var app = express();
@@ -38,6 +43,10 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/admin', admin);
+app.use('/applications', applications);
+app.use('/dj', dj);
+app.use('/show', show);
 //app.use('/admin', admin);
 
 /// catch 404 and forward to error handler
