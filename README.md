@@ -13,18 +13,19 @@
 
 
 ## url layout:
-	|- /					[info, schedule, contacts, news, reviews + giveaways, playlists]
-	|------ /archive 		[select dj's, shows, date range, songs, artists]
+	|- /						[info, schedule, contacts, news, reviews + giveaways, playlists]
+	|------ /archive 			[select dj's, shows, date range, songs, artists]
 	|------ /application
 	|------------ /dj
 	|------------ /staff
 	|------ /show
-	|------------ /showId	[show/link all hosts and episodes]
+	|------------ /{showId}		[show/link all hosts and episodes]
 	|------ /dj
-	|------------ /main		[select actions: create playlist post, staff application, edit user, log out]
-	|------------ /login	[log in page - or make it a popup?]
-	|------------ /user 	[edit user info: name, id#, etc]
-	|------------ /master	[view or edit users or shows]
+	|------------ /main			[select actions: create playlist post, staff application, edit user, log out]
+	|------------ /login		[log in page - or make it a popup?]
+	|------------ /user 		[edit user info: name, id#, etc]
 	|------ /admin		 	
-	|------------ /site 	[edit semester, broadcast schedule, application text, turn on link to application...]
+	|------------ /site 		[edit semester, broadcast schedule, application text, turn on link to application...]
+	|------------ /users		[view all users]
+	|---------------- /{userId}	[edit or delete a user]
 	
