@@ -1,0 +1,7 @@
+{
+	"_id" : ObjectID,
+	"show_title" : String,
+	"host_id" : {ObjectID},
+	"timeslot" : integer,	// 1000 if inactive
+	"blurb" : String
+}

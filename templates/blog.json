@@ -1,0 +1,10 @@
+{
+	"_id" : ObjectID,
+	"author_id" : ObjectID,
+	"date" : Integer,
+	"tumblr_url" : String,
+	"artist_id" : ObjectID,	// 0 if none
+	"title" : String,
+	"body" : String
+
+}

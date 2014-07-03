@@ -1,0 +1,4 @@
+{
+	"_id" : ObjectID,
+	"artist_id" : ObjectID
+}
