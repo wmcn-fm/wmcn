@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+
+	//- each item, i in appItems
+	//- 	p= item.name
+	p= appItems.length
+
+	each item, i in appItems
+		p= item._id
+		p= item.user.first_name

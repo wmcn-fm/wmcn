@@ -1,0 +1,22 @@
+{
+	"user" : [
+		{
+			"access" : 0,
+			"first_name" : "array",
+			"last_name" : "kd",
+			"email" : "wkd@wkd.com",
+			"phone" : 1231231234,
+			"grad_year" : 1234,
+			"mac_id" : 123123123,
+			"iclass" : 12345,
+		}
+	],
+	"show" : {
+		"show_title" : "hey jy show",
+		"blurb" : "hey hey hey hey hey ",
+	},
+	"app_only" : {
+		"availability" : [0, 1, 2, 5, 12],
+		"top_slot" : 2
+	}
+}
