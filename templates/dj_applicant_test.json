@@ -17,6 +17,6 @@
 	},
 	"app_only" : {
 		"availability" : [0, 1, 2, 5, 12],
-		"top_slot" : 2
+		"top_slot" : 3
 	}
 }

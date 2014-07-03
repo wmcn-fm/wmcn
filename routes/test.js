@@ -20,6 +20,7 @@ router.get('/', function(req, res) {
 					{
 						title: 'testing!! fun!!',
 						'appItems' : items
+						//hey!!
 					}
 				);
 				console.log(items);
