@@ -8,5 +8,14 @@
 	"grad_year" : Integer,
 	"mac_id" : Integer,
 	"iclass" : iclass,
-	"show_id" : {ObjectID}
+	"show_id" : [{ObjectID}],
+	"blog_entries" : [
+		{
+			"date" : Integer,
+			"tumblr_url" : String,
+			"artist_id" : ObjectID,		// 0 if none(blog post w/o review)
+			"title" : String,
+			"body" : String
+		}
+	]
 }

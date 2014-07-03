@@ -1,0 +1,24 @@
+{
+	"user" : [
+		{
+			"_id" : ObjectID,
+			"access" : Integer,
+			"first_name" : String,
+			"last_name" : String,
+			"email" : String,
+			"phone" : Integer,
+			"grad_year" : Integer,
+			"mac_id" : Integer,
+			"iclass" : iclass,
+		}
+	],
+	"show" : {
+		"show_id" : ObjectID,
+		"show_title" : String,
+		"blurb" : String,
+	},
+	"app_only" : {
+		"availability" : [Integer],
+		"top_slot" : Integer
+	}
+}

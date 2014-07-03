@@ -1,7 +1,19 @@
 {
 	"_id" : ObjectID,
 	"show_title" : String,
-	"host_id" : {ObjectID},
-	"timeslot" : integer,	// 1000 if inactive
-	"blurb" : String
+	"host_id" : [{ObjectID}],
+	"timeslot" : Integer,	// 1000 if inactive
+	"blurb" : String,
+	"playlists" : [
+		{
+			"date" : Integer,
+			"tumblr_url" : String,
+			"artist_id" : [
+				{ObjectID}
+			],
+			"song_id" : [
+				String
+			]
+		}
+	]
 }

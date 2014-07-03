@@ -1,8 +1,0 @@
-{
-	"_id" : ObjectID,
-	"show_id" : ObjectID,
-	"date" : integer,
-	"tumblr_url" : String,
-	"artist_id" : {ObjectID},
-	"song_id" : {ObjectID}
-}

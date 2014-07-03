@@ -1,4 +1,9 @@
 {
 	"_id" : ObjectID,
-	"name" : String
+	"name" : String,
+	"songs" : [
+		{
+			"name" : String
+		}
+	]
 }
