@@ -40,4 +40,25 @@
 		|------ /show
 					|------ /{showId}				[show/link all hosts and episodes]
 			
+
+
+## db collection schema:
+- [users](https://github.com/wmcn-fm/wmcn/blob/master/templates/user.json)
+	- master collection, contains all current and former users
+	- [blogs](https://github.com/wmcn-fm/wmcn/blob/master/templates/user.json)
+		- 1-M embedded subdocument for user blog/review entries
+		- M-1 references to [artist](https://github.com/wmcn-fm/wmcn/blob/master/templates/artist.json) objects
+- [shows](https://github.com/wmcn-fm/wmcn/blob/master/templates/show.json)
+	- contains all former and current shows
+	- [playlists](https://github.com/wmcn-fm/wmcn/blob/master/templates/show.json)
+		- 1-M embedded subdocument for the show's playlists
+		- M-1 references to [artist](https://github.com/wmcn-fm/wmcn/blob/master/templates/artist.json) objects
+- [artists](https://github.com/wmcn-fm/wmcn/blob/master/templates/artist.json)
+	- contain embedded [song](https://github.com/wmcn-fm/wmcn/blob/master/templates/artist.json) subdocuments, created by reference through plyalist or blog collections
+- djapps
+	- temporary collection for dj applications before they are either flushed or added to the database
+- staffapps
+	- temporary collection for staff applications before they are flushed or approved
+
+
 	
