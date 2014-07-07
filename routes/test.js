@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
-var db = mongo.db("mongodb://localhost:27017/test", {native_parser:true});
+var dbUrl = require('./modulus.js');
+var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
 var djApp_coll = db.collection('djApps');
 var user_coll = db.collection('users');
 var show_coll = db.collection('shows');
@@ -20,6 +21,54 @@ router.get('/', function(req, res) {
 					{
 						title: 'testing!! fun!!',
 						'appItems' : items
+						//hey!!
+					}
+				);
+				console.log(items);
+			}
+	});
+
+	user_coll.find().toArray(function (err, items) {
+			if (err) {
+				console.log('error: ' + err)
+			} else {
+				//res.json(items)
+				res.render('test/test', 
+					{
+						title: 'testing!! fun!!',
+						'userItems' : items
+						//hey!!
+					}
+				);
+				console.log(items);
+			}
+	});
+
+	show_coll.find().toArray(function (err, items) {
+			if (err) {
+				console.log('error: ' + err)
+			} else {
+				//res.json(items)
+				res.render('test/test', 
+					{
+						title: 'testing!! fun!!',
+						'showItems' : items
+						//hey!!
+					}
+				);
+				console.log(items);
+			}
+	});
+
+	artists_coll.find().toArray(function (err, items) {
+			if (err) {
+				console.log('error: ' + err)
+			} else {
+				//res.json(items)
+				res.render('test/test', 
+					{
+						title: 'testing!! fun!!',
+						'artistItems' : items
 						//hey!!
 					}
 				);

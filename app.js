@@ -6,7 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/wmcntest", {native_parser:true});
+
+var dbUrl = require('./modulus.js');
+
+var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+
 var collection = db.collection('usercollection');
 
 var routes = require('./routes/index');
