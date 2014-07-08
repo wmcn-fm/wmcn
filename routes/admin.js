@@ -114,8 +114,8 @@ router.post('/updateUser', function(req, res) {
                 res.send('there was a problem updating' + err);
             } else {
                 console.log(doc + ' doc');
-                res.location('admin/users');
-                res.redirect('admin/users');
+                res.location('users');
+                res.redirect('users');
             }
         }); 
 });

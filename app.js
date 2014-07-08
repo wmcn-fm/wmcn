@@ -8,9 +8,7 @@ var bodyParser = require('body-parser');
 var mongo = require('mongoskin');
 
 var dbUrl = require('./modulus.js');
-
 var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
-
 var collection = db.collection('usercollection');
 
 var routes = require('./routes/index');

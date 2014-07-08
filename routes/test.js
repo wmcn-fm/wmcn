@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
-var dbUrl = require('./modulus.js');
+var dbUrl = require('../modulus.js');
 var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
 var djApp_coll = db.collection('djApps');
 var user_coll = db.collection('users');
@@ -60,7 +60,7 @@ router.get('/', function(req, res) {
 			}
 	});
 
-	artists_coll.find().toArray(function (err, items) {
+	artist_coll.find().toArray(function (err, items) {
 			if (err) {
 				console.log('error: ' + err)
 			} else {
