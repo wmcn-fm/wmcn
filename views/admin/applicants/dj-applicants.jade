@@ -13,11 +13,8 @@ block content
 				tr
 					th user
 					th dj Status
-					th access
 					th first Name
 					th last Name
-					th email
-					th phone
 					th student Status
 					th mac id
 					th mac iclass
@@ -29,14 +26,9 @@ block content
 					tr
 						td.userId= user._id
 						td= user.djStatus
-						td.editable= user.access
-						td.editable= user.firstName
-						td.editable= user.lastName
-						td.editable= user.email
-						td.editable= user.phone
-						td.editable= user.studentStatus
-						td.editable= user.macIdNum
-						td.editable= user.iclass
-						td.editable= user.gradYear
-						td.editable= user.show
-						td.editable= user.blurb
+						td= user.firstName
+						td= user.lastName
+						td= user.studentStatus
+						td= user.gradYear
+						td= user.show
+						td= user.blurb

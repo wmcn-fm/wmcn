@@ -1,24 +1,15 @@
 .live {
-	background-color: yellow !important;
-}
+  background-color: yellow !important; }
 
 td.live:hover {
-	cursor: pointer;
-}
+  cursor: pointer; }
 
 .pinned {
-	position: fixed;
-	top: 0px;
-}
-
-.userId {
-	
-}
+  position: fixed;
+  top: 0px; }
 
 .updateButton {
-	display: none;
-}
+  display: none; }
 
 thead {
-	background-color: #ffffff !important;
-}
+  background-color: #ffffff !important; }

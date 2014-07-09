@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var sass = require('node-sass');
+
 var mongo = require('mongoskin');
 
 var dbUrl = require('./modulus.js');
@@ -33,7 +35,11 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use(sass.middleware({
+    src: path.join(__dirname, 'public/sass'),
+    dest: path.join(__dirname, 'public'),
+    debug: true
+}));
 
 // app.use(function(req,res,next){
 //     req.db = db;
