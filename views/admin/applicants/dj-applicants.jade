@@ -1,5 +1,42 @@
 extends ../../layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+	.container-fluid
+		.row
+			.col-xs-4
+				h1= title
+		.row
+			.col-xs-4
+				p Welcome to #{title} 
+	.container-fluid		
+		table#userTable.table-striped.table.table-bordered.table-hover
+			thead
+				tr
+					th user
+					th dj Status
+					th access
+					th first Name
+					th last Name
+					th email
+					th phone
+					th student Status
+					th mac id
+					th mac iclass
+					th grad year
+					th show
+					th blurb
+			tbody
+				each user, i in applicants
+					tr
+						td.userId= user._id
+						td= user.djStatus
+						td.editable= user.access
+						td.editable= user.firstName
+						td.editable= user.lastName
+						td.editable= user.email
+						td.editable= user.phone
+						td.editable= user.studentStatus
+						td.editable= user.macIdNum
+						td.editable= user.iclass
+						td.editable= user.gradYear
+						td.editable= user.show
+						td.editable= user.blurb

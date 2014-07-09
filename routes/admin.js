@@ -23,8 +23,20 @@ router.get('/*', function(req, res, next) {
 */
 
 //  GET
-router.get('/applicants/dj', function(req, res, next) {
-    res.render('admin/applicants/dj-applicants', {title: "Dj Applications" })
+router.get('/applicants/dj', function(req, res) {
+    
+    var collection = db.collection('djapps');
+
+    collection.find().toArray(function (err, items) {
+        if (err) {
+            res.send('error: ' + err)
+        } else {
+            res.render('admin/applicants/dj-applicants', {
+                "applicants" : items,
+                title: 'dj applications'
+            });
+        }
+    });
 });
 
 router.get('/applicants/staff', function(req, res, next) {
@@ -124,8 +136,7 @@ router.post('/updateUser', function(req, res) {
 
 //  DELETE
 router.delete('/deleteuser/:id', function(req, res) {
-    var db = req.db;
-    var collection = req.collection;
+    var collection = db.collection('usercollection');
     var userToDelete = req.params.id;
     collection.removeById(userToDelete, function(err, result) {
         //res.send((result === 1) ? {msg : ''} : {msg:'error: ' + err});
@@ -140,9 +151,7 @@ router.delete('/deleteuser/:id', function(req, res) {
 });
 
 
-router.get('/applicants/dj', function(req, res) {
-    res.render('admin/applicants/dj', {title: 'dj applications'})
-});
+
 
 
 /**
