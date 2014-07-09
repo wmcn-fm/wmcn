@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
+var dbUrl = require('../modulus.js');
+var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+
 /** 
 *   ====================================================================
 *   '/applications'
@@ -21,7 +24,6 @@ router.get('/staff', function(req, res) {
 router.post('/dj', function(req, res) {
 
     // Set our internal DB variable
-    var db = req.db;
 
     // Get our form values. These rely on the "name" attributes
 
@@ -39,7 +41,7 @@ router.post('/dj', function(req, res) {
     var blurb = req.body.blurb;
 
     // Set our collection
-    var collection = req.collection;
+    var collection = db.collection('djapps');
 
     // Submit to the DB
     collection.insert({

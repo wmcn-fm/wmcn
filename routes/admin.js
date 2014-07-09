@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
+var dbUrl = require('../modulus.js');
+var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+
 /** 
 *   ====================================================================
 *   '/admin'
@@ -36,8 +39,7 @@ router.get('/applicants/staff', function(req, res, next) {
 
 //  GET
 router.get('/users', function(req, res) {
-    var db = req.db;
-    var collection = req.collection;
+    var collection = db.collection('usercollection');
 
     collection.find().toArray(function (err, items) {
         res.render('admin/users/manageUsers', {
@@ -138,6 +140,9 @@ router.delete('/deleteuser/:id', function(req, res) {
 });
 
 
+router.get('/applicants/dj', function(req, res) {
+    res.render('admin/applicants/dj', {title: 'dj applications'})
+});
 
 
 /**

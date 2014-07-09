@@ -4,6 +4,8 @@ var mongo = require('mongoskin');
 
 var dbUrl = require('../modulus.js');
 var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+var collection = db.collection('test');
+
 var djApp_coll = db.collection('djApps');
 var user_coll = db.collection('users');
 var show_coll = db.collection('shows');
