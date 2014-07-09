@@ -13,22 +13,18 @@ block content
 				tr
 					th user
 					th dj Status
-					th first Name
-					th last Name
 					th student Status
-					th mac id
-					th mac iclass
 					th grad year
 					th show
 					th blurb
+					th approve
 			tbody
 				each user, i in applicants
 					tr
 						td.userId= user._id
 						td= user.djStatus
-						td= user.firstName
-						td= user.lastName
 						td= user.studentStatus
 						td= user.gradYear
 						td= user.show
 						td= user.blurb
+						td.appApproval
