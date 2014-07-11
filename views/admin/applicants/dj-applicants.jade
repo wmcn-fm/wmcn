@@ -4,6 +4,8 @@ block content
 		.row
 			.col-xs-4
 				h1= title
+			.col-xs-2
+				button.btn.btn-primary.updateButton(type='submit') Submit
 		.row
 			.col-xs-4
 				p Welcome to #{title} 
@@ -27,4 +29,4 @@ block content
 						td= user.gradYear
 						td= user.show
 						td= user.blurb
-						td.appApproval
+						td.appApproval.triggerUpdate

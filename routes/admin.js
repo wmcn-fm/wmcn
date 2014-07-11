@@ -39,6 +39,16 @@ router.get('/applicants/dj', function(req, res) {
     });
 });
 
+router.post('/applicants/dj', function(req, res) {
+    var appColl = db.collection('djapps');
+    var userCol = db.collection('users');
+    console.log(req.body.data[0]);
+
+    
+    
+
+})
+
 router.get('/applicants/staff', function(req, res, next) {
     res.render('admin/applicants/staff-applicants', {title: "staff Applications" })
 });

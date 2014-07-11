@@ -4,10 +4,13 @@ $(document).ready(function() {
 		var text = $(this).text();
 		var link = "<a href='/admin/users/" + text + "'>" + text + "</a>";
 		$(this).text('').append(link);
-
 	});
 
 	$('input, textarea').change(function() {
+		$('.updateButton').css('display', 'inline');
+	});
+
+	$('.triggerUpdate').on('click', function() {
 		$('.updateButton').css('display', 'inline');
 	});
 
@@ -17,19 +20,33 @@ $(document).ready(function() {
 
 	});
 
-	
-
 	$('.approveApp').on('click', function() {
 		if ($(this).is(':checked')) {
 			var userId = $(this).parent().siblings('.userId').text();
-			approveApplicant(userId);
+			successApps.push(userId);
 		};
 	})
 
+	$('.updateButton').on('click', function(e) {
+		e.preventDefault();
+		console.log('updateButton clicked');
+		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps})
+		// $.ajax('http://localhost:3000/admin/applicants/dj', 
+		// 	{
+		// 		type: 'POST',
+		// 		data: JSON.stringify(successApps),
+		// 		contentType: 'application/JSON',
+		// 		success: function() 
+		// 		{
+		// 			console.log('success');
+		// 		},
+		// 		error: function() {
+		// 			console.log('error');
+		// 		}	
+		// 	}
+		// );
+	});
+
 });	//end ready
 
-
-function approveApplicant(id) {
-	console.log('checked!' + id);
-	
-}
+var successApps = [];
