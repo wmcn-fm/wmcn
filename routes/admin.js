@@ -39,15 +39,46 @@ router.get('/applicants/dj', function(req, res) {
     });
 });
 
+//  POST
 router.post('/applicants/dj', function(req, res) {
     var appColl = db.collection('djapps');
-    var userCol = db.collection('users');
-    console.log(req.body.data[0]);
+    var userColl = db.collection('usercollection');
+    var approvedApps = req.body.data;
 
-    
-    
+    for (var i=0; i<approvedApps.length; i++) {
+        var applicant = approvedApps[i];
+        console.log(applicant);
+        appColl.findById(applicant, function (err, doc) {
+            if (err) {
+                console.log('error on' + applicant + 'i: ' + i);
+            }
+            else {
+                console.log('doc ' + doc._id);
 
-})
+                userColl.insert({
+                    "djStatus": doc.djStatus,
+                    "access": 1,
+                    "firstName" : doc.firstName,
+                    "lastName" : doc.lastName,
+                    "email" : doc.email,
+                    "phone" : doc.phone,
+                    "studentStatus" : doc.studentStatus,
+                    "macIdNum" : doc.macIdNum,
+                    "iclass" : doc.iclass,
+                    "gradYear" : doc.gradYear,
+                    "show" : doc.show,
+                    "blurb" : doc.blurb
+                }, function (err, doc) {
+                    if (err) {
+                        console.log('insert error ' + err);
+                    } else {
+                        console.log('chill');
+                    }
+                });
+            }   // else
+        }); // appColl.findById
+    }   // for
+}); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
     res.render('admin/applicants/staff-applicants', {title: "staff Applications" })

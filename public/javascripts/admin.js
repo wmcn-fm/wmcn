@@ -30,21 +30,7 @@ $(document).ready(function() {
 	$('.updateButton').on('click', function(e) {
 		e.preventDefault();
 		console.log('updateButton clicked');
-		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps})
-		// $.ajax('http://localhost:3000/admin/applicants/dj', 
-		// 	{
-		// 		type: 'POST',
-		// 		data: JSON.stringify(successApps),
-		// 		contentType: 'application/JSON',
-		// 		success: function() 
-		// 		{
-		// 			console.log('success');
-		// 		},
-		// 		error: function() {
-		// 			console.log('error');
-		// 		}	
-		// 	}
-		// );
+		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps});
 	});
 
 });	//end ready
