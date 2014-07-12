@@ -41,54 +41,63 @@ router.get('/applicants/dj', function(req, res) {
 
 //  POST
 router.post('/applicants/dj', function(req, res) {
-    function addToUsers(obj) {
-        userColl.insert({
-            "djStatus": obj.djStatus,
-            "access": 1,
-            "firstName" : obj.firstName,
-            "lastName" : obj.lastName,
-            "email" : obj.email,
-            "phone" : obj.phone,
-            "studentStatus" : obj.studentStatus,
-            "macIdNum" : obj.macIdNum,
-            "iclass" : obj.iclass,
-            "gradYear" : obj.gradYear,
-            "show" : obj.show,
-            "blurb" : obj.blurb
-        }, function (err, newUser) {
-            if (err) {
-                console.log(err + ' addToUsers error');
-                return false;
-            } else {
-                console.log(newUser);
-                return true;
-            }   
-        });
+
+    function insertAndRemove(obj, oldColl, newColl) {
+        console.log('insertremove');
+        console.log(obj + ' o');
+        for (var key in obj) {
+            var attrName = key;
+            var attrVal = obj[key]
+            console.log(attrName + ': ' + attrValue);
+        }
+        // newColl.insert({
+        //     "djStatus": obj.djStatus,
+        //     "access": 1,
+        //     "firstName" : obj.firstName,
+        //     "lastName" : obj.lastName,
+        //     "email" : obj.email,
+        //     "phone" : obj.phone,
+        //     "studentStatus" : obj.studentStatus,
+        //     "macIdNum" : obj.macIdNum,
+        //     "iclass" : obj.iclass,
+        //     "gradYear" : obj.gradYear,
+        //     "show" : obj.show,
+        //     "blurb" : obj.blurb
+        // }, function (err, newUser) {
+        //     if (err) {
+        //         console.log(err + ' addToUsers error');
+        //         return false;
+        //     } else {
+        //         console.log(newUser);
+        //         return true;
+        //     }   
+        // });
     }
 
-    function getApps(appArray) {
-        var newUsers = [];
-        for (var i=0; i<appArray.length; i++) {
-            var applicant = appArray[i];
-            appColl.findById(applicant, function (err, person) {
-                if (err) {
-                    console.log(err + ' getApps error');
-                } else {
-                    newUsers.push(person);
-                    console.log(JSON.stringify(person) + 'pushed!!!');
-                }
-            });
-        }
-        console.log(newUsers + 'nu');
-        return newUsers;
+    function getAppDoc(id) {    //  returns doc
+        var applicant;
+        appColl.findById(id, function (err, doc) {
+            if (err) {
+                return err + ' getApps error';
+            } else {
+                return doc;
+            }
+        });
     }
 
     var appColl = db.collection('djapps');
     var userColl = db.collection('usercollection');
-    var approved = req.body.data;
+    var approved = req.body.data;   //  array of _id strings
 
-    var apps2move = getApps(approved);
-    console.log(approved + 'approved');
+    //  for each item in the array
+    for (var i=0; i<approved.length; i++) {
+        //  find the document associated with the id
+        insertAndRemove(getAppDoc(approved[i]), appColl, userColl);
+    }
+
+
+    // var apps2move = getApps(approved);
+    // console.log(approved + 'approved');
 
 
 /*
