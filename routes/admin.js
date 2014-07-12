@@ -41,20 +41,64 @@ router.get('/applicants/dj', function(req, res) {
 
 //  POST
 router.post('/applicants/dj', function(req, res) {
+    function addToUsers(obj) {
+        userColl.insert({
+            "djStatus": obj.djStatus,
+            "access": 1,
+            "firstName" : obj.firstName,
+            "lastName" : obj.lastName,
+            "email" : obj.email,
+            "phone" : obj.phone,
+            "studentStatus" : obj.studentStatus,
+            "macIdNum" : obj.macIdNum,
+            "iclass" : obj.iclass,
+            "gradYear" : obj.gradYear,
+            "show" : obj.show,
+            "blurb" : obj.blurb
+        }, function (err, newUser) {
+            if (err) {
+                console.log(err + ' addToUsers error');
+                return false;
+            } else {
+                console.log(newUser);
+                return true;
+            }   
+        });
+    }
+
+    function getApps(appArray) {
+        var newUsers = [];
+        for (var i=0; i<appArray.length; i++) {
+            var applicant = appArray[i];
+            appColl.findById(applicant, function (err, person) {
+                if (err) {
+                    console.log(err + ' getApps error');
+                } else {
+                    console.log(person);
+                    newUsers.push(person);
+                }
+            });
+        }
+    }
+
     var appColl = db.collection('djapps');
     var userColl = db.collection('usercollection');
     var approvedApps = req.body.data;
 
+
+
+    //  iterate over each application in the array
     for (var i=0; i<approvedApps.length; i++) {
         var applicant = approvedApps[i];
-        console.log(applicant);
+
+        //  find the application in the apps coll
         appColl.findById(applicant, function (err, doc) {
             if (err) {
                 console.log('error on' + applicant + 'i: ' + i);
             }
             else {
-                console.log('doc ' + doc._id);
-
+                //console.log('doc ' + doc._id);  //app collection _id
+                //console.log('doc ' + doc.firstName);
                 userColl.insert({
                     "djStatus": doc.djStatus,
                     "access": 1,
@@ -68,11 +112,24 @@ router.post('/applicants/dj', function(req, res) {
                     "gradYear" : doc.gradYear,
                     "show" : doc.show,
                     "blurb" : doc.blurb
-                }, function (err, doc) {
+                }, function (err, newUser) {
                     if (err) {
                         console.log('insert error ' + err);
                     } else {
-                        console.log('chill');
+
+                        deleteApps(userArray)
+                        //console.log(JSON.stringify(newUser));
+                        console.log(newUser[0]._id);
+                        for (var i=0; i<newUser.length; i++ ) {
+                            var user = newUser[i];
+                            appColl.removeById(user._id, function (err, result) {
+                                if (err) {
+                                    console.log('error ' + err);
+                                } else {
+                                    console.log(result + ' result');
+                                }
+                            });
+                        } 
                     }
                 });
             }   // else
