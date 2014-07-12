@@ -74,19 +74,24 @@ router.post('/applicants/dj', function(req, res) {
                 if (err) {
                     console.log(err + ' getApps error');
                 } else {
-                    console.log(person);
                     newUsers.push(person);
+                    console.log(JSON.stringify(person) + 'pushed!!!');
                 }
             });
         }
+        console.log(newUsers + 'nu');
+        return newUsers;
     }
 
     var appColl = db.collection('djapps');
     var userColl = db.collection('usercollection');
-    var approvedApps = req.body.data;
+    var approved = req.body.data;
+
+    var apps2move = getApps(approved);
+    console.log(approved + 'approved');
 
 
-
+/*
     //  iterate over each application in the array
     for (var i=0; i<approvedApps.length; i++) {
         var applicant = approvedApps[i];
@@ -135,6 +140,7 @@ router.post('/applicants/dj', function(req, res) {
             }   // else
         }); // appColl.findById
     }   // for
+*/
 }); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
