@@ -41,7 +41,50 @@ router.get('/applicants/dj', function(req, res) {
 
 //  POST
 router.post('/applicants/dj', function(req, res) {
+    var appColl = db.collection('djapps');
+    var userColl = db.collection('usercollection');
+    var approved = req.body.data;   //  array of _id strings
 
+    //  iterate over each item in the array
+    for (var i=0; i<approved.length; i++) {
+        var idString = approved[i];
+
+        //  find app doc
+        appColl.findById(idString, function (err, doc) {
+            if (err) {console.log(err + ' error');} else {
+                var appId = doc._id;
+
+                userColl.insert({
+                    "djStatus": doc.djStatus,
+                    "access": 1,
+                    "firstName" : doc.firstName,
+                    "lastName" : doc.lastName,
+                    "email" : doc.email,
+                    "phone" : doc.phone,
+                    "studentStatus" : doc.studentStatus,
+                    "macIdNum" : doc.macIdNum,
+                    "iclass" : doc.iclass,
+                    "gradYear" : doc.gradYear,
+                    "show" : doc.show,
+                    "blurb" : doc.blurb
+                }, function (err, newUser) {
+                    if (err) {console.log(err + ' userInsert error');} else {
+                        var userId = newUser._id;
+                        console.log(JSON.stringify(newUser) + ' nu');
+
+                        appColl.removeById(appId, function (err, result) {
+                            if (err) {console.log(err + ' error removeById');} else {
+                                console.log(result + ' remove success!');
+                            }
+                        })
+                    }   //  usercoll insert callback else
+                }); //  userColl.insert
+                
+            }   //  appcoll insert callback else
+        }); //appColl.findById
+    }   // for
+
+/*
     function insertAndRemove(obj, oldColl, newColl) {
         console.log('insertremove');
         console.log(obj + ' o');
@@ -89,24 +132,8 @@ router.post('/applicants/dj', function(req, res) {
         });
     }
 
-    var appColl = db.collection('djapps');
-    var userColl = db.collection('usercollection');
-    var approved = req.body.data;   //  array of _id strings
-
-    //  for each item in the array
-    for (var i=0; i<approved.length; i++) {
-        var idString = approved[i];
-
-        //  find the document associated with the id
-        var app = getAppDoc(idString);
-        console.log(app + ' app');
-        //insertAndRemove(getAppDoc(approved[i]), appColl, userColl);
-    }
-
-
-    // var apps2move = getApps(approved);
-    // console.log(approved + 'approved');
-
+    
+*/
 
 /*
     //  iterate over each application in the array
