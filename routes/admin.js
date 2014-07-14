@@ -50,37 +50,41 @@ router.post('/applicants/dj', function(req, res) {
             var attrVal = obj[key]
             console.log(attrName + ': ' + attrValue);
         }
-        // newColl.insert({
-        //     "djStatus": obj.djStatus,
-        //     "access": 1,
-        //     "firstName" : obj.firstName,
-        //     "lastName" : obj.lastName,
-        //     "email" : obj.email,
-        //     "phone" : obj.phone,
-        //     "studentStatus" : obj.studentStatus,
-        //     "macIdNum" : obj.macIdNum,
-        //     "iclass" : obj.iclass,
-        //     "gradYear" : obj.gradYear,
-        //     "show" : obj.show,
-        //     "blurb" : obj.blurb
-        // }, function (err, newUser) {
-        //     if (err) {
-        //         console.log(err + ' addToUsers error');
-        //         return false;
-        //     } else {
-        //         console.log(newUser);
-        //         return true;
-        //     }   
-        // });
+        newColl.insert({
+            "djStatus": obj.djStatus,
+            "access": 1,
+            "firstName" : obj.firstName,
+            "lastName" : obj.lastName,
+            "email" : obj.email,
+            "phone" : obj.phone,
+            "studentStatus" : obj.studentStatus,
+            "macIdNum" : obj.macIdNum,
+            "iclass" : obj.iclass,
+            "gradYear" : obj.gradYear,
+            "show" : obj.show,
+            "blurb" : obj.blurb
+        }, function (err, newUser) {
+            if (err) {
+                console.log(err + ' addToUsers error');
+                return false;
+            } else {
+                console.log(newUser);
+                return true;
+            }   
+        });
     }
 
-    function getAppDoc(id) {    //  returns doc
-        var applicant;
+    function getAppDoc(id) {    //  returns application doc
         appColl.findById(id, function (err, doc) {
             if (err) {
-                return err + ' getApps error';
+                return err + ' error';
             } else {
-                return doc;
+                console.log(doc + ' doc');  //prints '[Object object] doc'
+                var appEntry = JSON.stringify(doc);
+                console.log(appEntry);  //{"djStatus":"true","access":0,"firstName":"hey","lastName":"world","email":"hey@world.com",
+                                        //"phone":"1231231234","studentStatus":"true","macIdNum":"123123123","iclass":"12345","gradYear":"2016",
+                                        //"show":"hey","blurb":"this os my show","_id":"53c3fe456607b19c0f88604c"}
+                return appEntry;
             }
         });
     }
@@ -91,8 +95,12 @@ router.post('/applicants/dj', function(req, res) {
 
     //  for each item in the array
     for (var i=0; i<approved.length; i++) {
+        var idString = approved[i];
+
         //  find the document associated with the id
-        insertAndRemove(getAppDoc(approved[i]), appColl, userColl);
+        var app = getAppDoc(idString);
+        console.log(app + ' app');
+        //insertAndRemove(getAppDoc(approved[i]), appColl, userColl);
     }
 
 
