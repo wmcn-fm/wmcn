@@ -39,25 +39,32 @@ router.post('/dj', function(req, res) {
     var gradYear = req.body.gradYear;
     var show = req.body.show;
     var blurb = req.body.blurb;
+    var testArray = [0, 1, 5];
 
     // Set our collection
     var collection = db.collection('djapps');
 
     // Submit to the DB
     collection.insert({
-        "djStatus": djStatus,
-        "access": 0,
-        "firstName" : firstName,
-        "lastName" : lastName,
-        "email" : email,
-        "phone" : phone,
-        "studentStatus" : studentStatus,
-        "macIdNum" : macIdNum,
-        "iclass" : iclass,
-        "gradYear" : gradYear,
-        "show" : show,
-        "blurb" : blurb
-
+        "user" : {
+            "access": 0,
+            "firstName" : firstName,
+            "lastName" : lastName,
+            "email" : email,
+            "phone" : phone,
+            "studentStatus" : studentStatus,
+            "macIdNum" : macIdNum,
+            "iclass" : iclass,
+            "gradYear" : gradYear
+        },
+        "show": {
+            "showTitle" : show,
+            "blurb" : blurb
+        },
+        "app" : {
+            "djStatus" : djStatus,
+            "availability" : testArray
+        }
     }, function (err, doc) {
         if (err) {
             // If it failed, return error

@@ -4,6 +4,9 @@ var mongo = require('mongoskin');
 
 var dbUrl = require('../modulus.js');
 var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+var appColl = db.collection('djapps');
+var userColl = db.collection('usercollection');
+var showColl = db.collection('shows');
 
 /** 
 *   ====================================================================
@@ -41,8 +44,6 @@ router.get('/applicants/dj', function(req, res) {
 
 //  POST
 router.post('/applicants/dj', function(req, res) {
-    var appColl = db.collection('djapps');
-    var userColl = db.collection('usercollection');
     var approved = req.body.data;   //  array of _id strings
 
     //  iterate over each item in the array
@@ -51,140 +52,67 @@ router.post('/applicants/dj', function(req, res) {
 
         //  find app doc
         appColl.findById(idString, function (err, doc) {
+
             if (err) {console.log(err + ' error');} else {
                 var appId = doc._id;
+                var newShowTitle = doc.show.showTitle;
+                var newShowBlurb = doc.show.blurb;
 
+                //  copy all but _id fields to main database
                 userColl.insert({
-                    "djStatus": doc.djStatus,
                     "access": 1,
-                    "firstName" : doc.firstName,
-                    "lastName" : doc.lastName,
-                    "email" : doc.email,
-                    "phone" : doc.phone,
-                    "studentStatus" : doc.studentStatus,
-                    "macIdNum" : doc.macIdNum,
-                    "iclass" : doc.iclass,
-                    "gradYear" : doc.gradYear,
-                    "show" : doc.show,
-                    "blurb" : doc.blurb
+                    "firstName" : doc.user.firstName,
+                    "lastName" : doc.user.lastName,
+                    "email" : doc.user.email,
+                    "phone" : doc.user.phone,
+                    "studentStatus" : doc.user.studentStatus,
+                    "macIdNum" : doc.user.macIdNum,
+                    "iclass" : doc.user.iclass,
+                    "gradYear" : doc.user.gradYear
                 }, function (err, newUser) {
-                    if (err) {console.log(err + ' userInsert error');} else {
-                        var userId = newUser._id;
-                        console.log(JSON.stringify(newUser) + ' nu');
 
-                        appColl.removeById(appId, function (err, result) {
-                            if (err) {console.log(err + ' error removeById');} else {
-                                console.log(result + ' remove success!');
-                            }
-                        })
+                    if (err) {console.log(err + ' userInsert error');} else {
+                        var newUserId = newUser[0]._id;
+
+                        //  create a new show document with a reference to host
+                        showColl.insert({
+                            "showTitle" : newShowTitle,
+                            "blurb" : newShowBlurb,
+                            "hostId" : newUserId
+                        }, function (err, newShow) {
+
+                            if (err) {console.log(err + ' : insert show error');} else {
+                                var newShowId = newShow[0]._id;
+
+                                //  update the new user doc with a reference to the new show
+                                userColl.update({_id:mongo.helper.toObjectID(newUserId)}, 
+                                {'$set':
+                                    {
+                                        showId: newShowId
+                                    }
+                                }, function (err, updatedUser) {
+
+                                    if (err) {console.log(err + ': updatew/showID err');} else {
+
+                                        //  delete the old appColl entry
+                                        appColl.removeById(appId, function (err, result) {
+                                            if (err) {console.log(err + ' error removeById');} else {
+
+                                            }
+                                        }); //  removeById
+                                    }
+                                }); //  update usercoll
+                     
+                            }   // showColl.
+                        })  //  showColl.insert
+                        
                     }   //  usercoll insert callback else
                 }); //  userColl.insert
                 
             }   //  appcoll insert callback else
         }); //appColl.findById
     }   // for
-
-/*
-    function insertAndRemove(obj, oldColl, newColl) {
-        console.log('insertremove');
-        console.log(obj + ' o');
-        for (var key in obj) {
-            var attrName = key;
-            var attrVal = obj[key]
-            console.log(attrName + ': ' + attrValue);
-        }
-        newColl.insert({
-            "djStatus": obj.djStatus,
-            "access": 1,
-            "firstName" : obj.firstName,
-            "lastName" : obj.lastName,
-            "email" : obj.email,
-            "phone" : obj.phone,
-            "studentStatus" : obj.studentStatus,
-            "macIdNum" : obj.macIdNum,
-            "iclass" : obj.iclass,
-            "gradYear" : obj.gradYear,
-            "show" : obj.show,
-            "blurb" : obj.blurb
-        }, function (err, newUser) {
-            if (err) {
-                console.log(err + ' addToUsers error');
-                return false;
-            } else {
-                console.log(newUser);
-                return true;
-            }   
-        });
-    }
-
-    function getAppDoc(id) {    //  returns application doc
-        appColl.findById(id, function (err, doc) {
-            if (err) {
-                return err + ' error';
-            } else {
-                console.log(doc + ' doc');  //prints '[Object object] doc'
-                var appEntry = JSON.stringify(doc);
-                console.log(appEntry);  //{"djStatus":"true","access":0,"firstName":"hey","lastName":"world","email":"hey@world.com",
-                                        //"phone":"1231231234","studentStatus":"true","macIdNum":"123123123","iclass":"12345","gradYear":"2016",
-                                        //"show":"hey","blurb":"this os my show","_id":"53c3fe456607b19c0f88604c"}
-                return appEntry;
-            }
-        });
-    }
-
-    
-*/
-
-/*
-    //  iterate over each application in the array
-    for (var i=0; i<approvedApps.length; i++) {
-        var applicant = approvedApps[i];
-
-        //  find the application in the apps coll
-        appColl.findById(applicant, function (err, doc) {
-            if (err) {
-                console.log('error on' + applicant + 'i: ' + i);
-            }
-            else {
-                //console.log('doc ' + doc._id);  //app collection _id
-                //console.log('doc ' + doc.firstName);
-                userColl.insert({
-                    "djStatus": doc.djStatus,
-                    "access": 1,
-                    "firstName" : doc.firstName,
-                    "lastName" : doc.lastName,
-                    "email" : doc.email,
-                    "phone" : doc.phone,
-                    "studentStatus" : doc.studentStatus,
-                    "macIdNum" : doc.macIdNum,
-                    "iclass" : doc.iclass,
-                    "gradYear" : doc.gradYear,
-                    "show" : doc.show,
-                    "blurb" : doc.blurb
-                }, function (err, newUser) {
-                    if (err) {
-                        console.log('insert error ' + err);
-                    } else {
-
-                        deleteApps(userArray)
-                        //console.log(JSON.stringify(newUser));
-                        console.log(newUser[0]._id);
-                        for (var i=0; i<newUser.length; i++ ) {
-                            var user = newUser[i];
-                            appColl.removeById(user._id, function (err, result) {
-                                if (err) {
-                                    console.log('error ' + err);
-                                } else {
-                                    console.log(result + ' result');
-                                }
-                            });
-                        } 
-                    }
-                });
-            }   // else
-        }); // appColl.findById
-    }   // for
-*/
+    res.redirect('/admin/users');
 }); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
@@ -199,14 +127,11 @@ router.get('/applicants/staff', function(req, res, next) {
 
 //  GET
 router.get('/users', function(req, res) {
-    var collection = db.collection('usercollection');
-
-    collection.find().toArray(function (err, items) {
+    userColl.find().toArray(function (err, items) {
         res.render('admin/users/manageUsers', {
         	"userlist" : items,
             title: 'View Database'
         });
-	    res.end('testing data');
     });
 });
 
@@ -219,10 +144,8 @@ router.get('/users', function(req, res) {
 //  GET
 router.get('/users/:id', function(req, res) {
     var id = req.params.id;
-    var db = req.db;
-    var collection = req.collection;
-    console.log('hey hey' + id);
-    collection.findById(id, function (err, result) {
+
+    userColl.findById(id, function (err, result) {
         if (err) {
             console.log('error bitch');
         } else {
@@ -237,8 +160,6 @@ router.get('/users/:id', function(req, res) {
 
 //  POST
 router.post('/updateUser', function(req, res) {
-    var db = req.db;
-    var collection = req.collection;
 
     var userId =  mongo.helper.toObjectID(req.body.userId);
     var djStatus = req.body.djStatus;
@@ -254,7 +175,7 @@ router.post('/updateUser', function(req, res) {
     var show = req.body.show;
     var blurb = req.body.blurb;
 
-    collection.update(
+    userColl.update(
         {_id: userId},
         {'$set':
             {
@@ -284,9 +205,9 @@ router.post('/updateUser', function(req, res) {
 
 //  DELETE
 router.delete('/deleteuser/:id', function(req, res) {
-    var collection = db.collection('usercollection');
     var userToDelete = req.params.id;
-    collection.removeById(userToDelete, function(err, result) {
+
+    userColl.removeById(userToDelete, function(err, result) {
         //res.send((result === 1) ? {msg : ''} : {msg:'error: ' + err});
         if (err) {
             res.send('error: ' + err)

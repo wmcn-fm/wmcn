@@ -8,7 +8,7 @@ td.live:hover {
   position: fixed;
   top: 0px; }
 
-.updateButton {
+.updateButton, .app-updateButton {
   display: none; }
 
 thead {

@@ -11,7 +11,7 @@ $(document).ready(function() {
 	});
 
 	$('.triggerUpdate').on('click', function() {
-		$('.updateButton').css('display', 'inline');
+		$('.updateButton, .app-updateButton').css('display', 'inline');
 	});
 
 	$('.appApproval').each(function (i) {
@@ -27,10 +27,12 @@ $(document).ready(function() {
 		};
 	})
 
-	$('.updateButton').on('click', function(e) {
+	$('.app-updateButton').on('click', function(e) {
 		e.preventDefault();
 		console.log('updateButton clicked');
-		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps});
+		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
+			console.log(response.redirect);
+		});
 	});
 
 });	//end ready
