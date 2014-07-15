@@ -60,5 +60,16 @@
 - staffapps
 	- temporary collection for staff applications before they are flushed or approved
 
+## schedule:
+
+| date | will                  | jenweil                 |
+|------|-----------------------|-------------------------|
+| 8/1  | - set up colls, post  | auth login, email setup |
+| 9/3  | - frontend 		   | assist with frontend 	 |
+|	   | - tumblr redirect	   | app banner 			 |
+|	   | - site setup		   | archive page 			 |
+| ...  | -site config    	   |	                     |		
+|      | - staff apps 		   |						 |
+|	   | - code cleanup 	   | 						 |
 
 	
