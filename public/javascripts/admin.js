@@ -6,6 +6,11 @@ $(document).ready(function() {
 		$(this).text('').append(link);
 	});
 
+	// $('td.show').each(function (i) {
+	// 	$(this).text('').append('hey there');
+
+	// });
+
 	$('input, textarea').change(function() {
 		$('.updateButton').css('display', 'inline');
 	});
@@ -29,8 +34,19 @@ $(document).ready(function() {
 
 	$('.app-updateButton').on('click', function(e) {
 		e.preventDefault();
-		console.log('updateButton clicked');
+
+		// $.ajax({
+  //           type: 'POST',
+  //           url: '/admin/applicants/dj'
+  //       }).done(function( response ) {
+  //       	console.log(response.redirect);
+  //           // if (response.msg !== '') {
+  //           //     alert('error: ' + reponse.msg);
+  //           // } 
+  //       });
+	
 		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
+			window.location.href = response.redirect;
 			console.log(response.redirect);
 		});
 	});

@@ -112,7 +112,7 @@ router.post('/applicants/dj', function(req, res) {
             }   //  appcoll insert callback else
         }); //appColl.findById
     }   // for
-    res.redirect('/admin/users');
+    res.redirect('http://localhost:3000/admin/users');
 }); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
@@ -127,12 +127,43 @@ router.get('/applicants/staff', function(req, res, next) {
 
 //  GET
 router.get('/users', function(req, res) {
+var userlist = [];
     userColl.find().toArray(function (err, items) {
-        res.render('admin/users/manageUsers', {
-        	"userlist" : items,
-            title: 'View Database'
-        });
+
+        if (err) {console.log(err + ': err');} else {
+            items.forEach(function (dj) {
+
+                showColl.find({hostId: dj._id}).toArray(function (err, shows) {
+                    if (err) {console.log('showFind error: ' + err);} else {
+
+                        shows.forEach( function (show) {
+                            //console.log(show._id + ' id' + dj._id);
+                            userlist.push(
+                                {
+                                   _id: dj._id,
+                                   access: dj.access,
+                                   firstName: dj.firstName,
+                                   lastName: dj.lastName,
+                                   gradYear: dj.gradYear,
+                                   shows: show.showTitle,
+                                   show_id: show._id
+                                }
+                            );
+                        }); //  shows each
+
+                    }
+                    console.log(JSON.stringify(userlist) + ' ul');
+                    res.render('admin/users/manageUsers', {
+                        "userlist" : userlist,
+                        title: 'view users'
+                    }); 
+                });
+            });
+        }
+        console.log(JSON.stringify(userlist + 'heeey'));
+        
     });
+    
 });
 
 
