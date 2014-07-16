@@ -1,5 +1,32 @@
 extends ../../layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+	.container-fluid
+		.row
+			.col-xs-4
+				h1= title
+			.col-xs-2
+				button.btn.btn-primary.app-updateButton(type='submit') Submit
+		.row
+			.col-xs-4
+				p Welcome to #{title} 
+	.container-fluid		
+		table#userTable.table-striped.table.table-bordered.table-hover
+			thead
+				tr
+					th application id
+					th dj Status
+					th student Status
+					th grad year
+					th show
+					th blurb
+					th approve
+			tbody
+				each application, i in applicants
+					tr
+						td.userId= application._id
+						td= application.app.djStatus
+						td= application.user.studentStatus
+						td= application.user.gradYear
+						td= application.show.showTitle
+						td= application.show.blurb
+						td.appApproval.triggerUpdate

@@ -5,8 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var sass = require('node-sass');
+
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/wmcntest", {native_parser:true});
+
+var dbUrl = require('./modulus.js');
+var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
 var collection = db.collection('usercollection');
 
 var routes = require('./routes/index');
@@ -31,20 +35,24 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(sass.middleware({
+    src: path.join(__dirname, 'public/sass'),
+    dest: path.join(__dirname, 'public'),
+    debug: true
+}));
 
-
-app.use(function(req,res,next){
-    req.db = db;
-    req.collection = collection
-    next();
-});
+// app.use(function(req,res,next){
+//     req.db = db;
+//     req.collection = collection
+//     next();
+// });
 
 
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
-app.use('/applications', applications);
+app.use('/apply', applications);
 app.use('/dj', dj);
 app.use('/show', show);
 app.use('/test', test);
