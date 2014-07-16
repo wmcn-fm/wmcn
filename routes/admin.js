@@ -127,17 +127,17 @@ router.get('/applicants/staff', function(req, res, next) {
 
 //  GET
 router.get('/users', function(req, res) {
-var userlist = [];
     userColl.find().toArray(function (err, items) {
 
         if (err) {console.log(err + ': err');} else {
+            var userlist = [];
+
             items.forEach(function (dj) {
 
                 showColl.find({hostId: dj._id}).toArray(function (err, shows) {
                     if (err) {console.log('showFind error: ' + err);} else {
 
                         shows.forEach( function (show) {
-                            //console.log(show._id + ' id' + dj._id);
                             userlist.push(
                                 {
                                    _id: dj._id,
@@ -149,21 +149,24 @@ var userlist = [];
                                    show_id: show._id
                                 }
                             );
-                        }); //  shows each
-
+                            //  SPOT #2
+                        }); //  end shows loop
                     }
-                    console.log(JSON.stringify(userlist) + ' ul');
-                    res.render('admin/users/manageUsers', {
-                        "userlist" : userlist,
-                        title: 'view users'
-                    }); 
+                }); // end showColl.find
+            }); //  end items.forEach
+            if (userlist.length === items.length) {
+                console.log(userlist.length + ': ul ' + items.length + ': il');
+
+                console.log(JSON.stringify(userlist) + ' ul');
+                res.render('admin/users/manageUsers', {
+                    "userlist" : userlist,
+                    title: 'view users'
                 });
-            });
-        }
-        console.log(JSON.stringify(userlist + 'heeey'));
-        
-    });
-    
+            }
+
+            
+        }   // end if/else      
+    }); // end userColl.find callback   
 });
 
 

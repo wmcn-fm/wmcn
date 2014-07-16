@@ -52,7 +52,7 @@ app.use(sass.middleware({
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
-app.use('/applications', applications);
+app.use('/apply', applications);
 app.use('/dj', dj);
 app.use('/show', show);
 app.use('/test', test);
