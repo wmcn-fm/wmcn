@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
+var async = require('async');
 
 var dbUrl = require('../modulus.js');
 var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
@@ -126,49 +127,94 @@ router.get('/applicants/staff', function(req, res, next) {
 */
 
 //  GET
+
+// router.get('/users', function(req, res) {
+//     userColl.find().toArray(function (err, items) {
+//         if (err) {console.log(err + ': err');} else {
+//             var userlist = [];
+
+//             items.forEach(function (dj) {
+
+//                 showColl.find({hostId: dj._id}).toArray(function (err, shows) {
+//                     if (err) {console.log('showFind error: ' + err);} else {uyi
+
+//                         shows.forEach( function (show) {
+//                             userlist.push(
+//                                 {
+//                                    _id: dj._id,
+//                                    access: dj.access,
+//                                    firstName: dj.firstName,
+//                                    lastName: dj.lastName,
+//                                    gradYear: dj.gradYear,
+//                                    shows: show.showTitle,
+//                                    show_id: show._id
+//                                 }  
+//                             );
+//                             console.log(JSON.stringify(userlist) + ' ul');
+//                             res.render('admin/users/manageUsers', {
+//                                 "userlist" : userlist,
+//                                 title: 'view users'
+//                             });
+//                             //  SPOT #2
+//                         }); //  end shows loop
+//                     }
+//                 }); // end showColl.find
+//             }); //  end items.forEach
+
+//         }   // end if/else      
+//     }); // end userColl.find callback   
+// });
+
+
 router.get('/users', function(req, res) {
     userColl.find().toArray(function (err, items) {
+        if (err) {console.log(err);} else {
+            makeJSON(items);
+        }
+    });
 
-        if (err) {console.log(err + ': err');} else {
-            var userlist = [];
-
-            items.forEach(function (dj) {
-
-                showColl.find({hostId: dj._id}).toArray(function (err, shows) {
-                    if (err) {console.log('showFind error: ' + err);} else {
-
-                        shows.forEach( function (show) {
-                            userlist.push(
-                                {
-                                   _id: dj._id,
-                                   access: dj.access,
-                                   firstName: dj.firstName,
-                                   lastName: dj.lastName,
-                                   gradYear: dj.gradYear,
-                                   shows: show.showTitle,
-                                   show_id: show._id
-                                }
-                            );
-                            //  SPOT #2
-                        }); //  end shows loop
-                    }
-                }); // end showColl.find
-            }); //  end items.forEach
-            if (userlist.length === items.length) {
-                console.log(userlist.length + ': ul ' + items.length + ': il');
-
-                console.log(JSON.stringify(userlist) + ' ul');
-                res.render('admin/users/manageUsers', {
-                    "userlist" : userlist,
-                    title: 'view users'
+    function makeJSON(array) {
+        var userlist = [];
+        async.eachSeries(array, function (dj, callback) {
+          console.log(dj._id);
+          var showId;
+          showColl.find({hostID: dj._id}).toArray(function (err, shows) {
+            shows.forEach( function (show) {
+                userlist.push({
+                    _id: dj._id,
+                   access: dj.access,
+                   firstName: dj.firstName,
+                   lastName: dj.lastName,
+                   gradYear: dj.gradYear,
+                   shows: show.showTitle,
+                   show_id: show._id
                 });
-            }
+            });
+          });
+          callback();
+        }, function (err, callback) {
+          if (err) { throw err; }
+          console.log('Well done :-)!');
 
-            
-        }   // end if/else      
-    }); // end userColl.find callback   
+          res.render('admin/users/manageUsers', {
+            "userlist" : userlist
+          });
+        });
+    }
+
+    // async.eachSeries([ 2, 3, 5, 7, 11 ], function (prime, callback) {
+    //   console.log(prime);
+    //   callback(); // Alternatively: callback(new Error());
+    // }, function (err) {
+    //   if (err) { throw err; }
+    //   console.log('Well done :-)!');
+    //   res.render('admin/users/manageUsers', {
+    //     "title": 'hey'
+    //   })
+    // });
+    
+    
 });
-
 
 
 /**
