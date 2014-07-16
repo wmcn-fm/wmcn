@@ -1,3 +1,4 @@
-mydb
 node_modules
 data
+modulus.js
+*.log
