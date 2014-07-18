@@ -33,21 +33,19 @@ $(document).ready(function() {
 	})
 
 	$('.app-updateButton').on('click', function(e) {
-		e.preventDefault();
-
-		// $.ajax({
-  //           type: 'POST',
-  //           url: '/admin/applicants/dj'
-  //       }).done(function( response ) {
-  //       	console.log(response.redirect);
-  //           // if (response.msg !== '') {
-  //           //     alert('error: ' + reponse.msg);
-  //           // } 
-  //       });
+		//e.preventDefault();
 	
-		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
-			window.location.href = response.redirect;
-			console.log(response.redirect);
+		// $.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
+		// 	//window.location.href = response.redirect;
+		// 	console.log(response + ' response');
+		// });
+
+		$.ajax({
+			type: 'POST',
+			data: successApps,
+			url: 'http://localhost:3000/admin/applicants/dj'
+		}).done(function (response) {
+			console.log(response + ' res');
 		});
 	});
 

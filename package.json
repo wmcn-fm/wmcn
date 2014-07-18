@@ -16,6 +16,6 @@
     "mongodb": "*",
     "mongoskin": "*",
     "node-sass": "*",
-    "async": "*"
+    "forEachAsync": "*"
   }
 }

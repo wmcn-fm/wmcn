@@ -9,6 +9,8 @@ var appColl = db.collection('djapps');
 var userColl = db.collection('usercollection');
 var showColl = db.collection('shows');
 
+var forEachAsync = require('forEachAsync').forEachAsync;
+
 /** 
 *   ====================================================================
 *   '/admin'
@@ -101,6 +103,8 @@ router.post('/applicants/dj', function(req, res) {
 
                                             }
                                         }); //  removeById
+                                        // res.redirect('http://localhost:3000/admin/users');
+                                        res.send('../users');
                                     }
                                 }); //  update usercoll
                      
@@ -113,7 +117,6 @@ router.post('/applicants/dj', function(req, res) {
             }   //  appcoll insert callback else
         }); //appColl.findById
     }   // for
-    res.redirect('http://localhost:3000/admin/users');
 }); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
@@ -127,94 +130,63 @@ router.get('/applicants/staff', function(req, res, next) {
 */
 
 //  GET
-
-// router.get('/users', function(req, res) {
-//     userColl.find().toArray(function (err, items) {
-//         if (err) {console.log(err + ': err');} else {
-//             var userlist = [];
-
-//             items.forEach(function (dj) {
-
-//                 showColl.find({hostId: dj._id}).toArray(function (err, shows) {
-//                     if (err) {console.log('showFind error: ' + err);} else {uyi
-
-//                         shows.forEach( function (show) {
-//                             userlist.push(
-//                                 {
-//                                    _id: dj._id,
-//                                    access: dj.access,
-//                                    firstName: dj.firstName,
-//                                    lastName: dj.lastName,
-//                                    gradYear: dj.gradYear,
-//                                    shows: show.showTitle,
-//                                    show_id: show._id
-//                                 }  
-//                             );
-//                             console.log(JSON.stringify(userlist) + ' ul');
-//                             res.render('admin/users/manageUsers', {
-//                                 "userlist" : userlist,
-//                                 title: 'view users'
-//                             });
-//                             //  SPOT #2
-//                         }); //  end shows loop
-//                     }
-//                 }); // end showColl.find
-//             }); //  end items.forEach
-
-//         }   // end if/else      
-//     }); // end userColl.find callback   
-// });
-
-
 router.get('/users', function(req, res) {
     userColl.find().toArray(function (err, items) {
-        if (err) {console.log(err);} else {
-        		console.log(items);
-            makeJSON(items);
-        }
-    });
 
-    function makeJSON(array) {
-        var userlist = [];
-        async.each(array, function (dj, callback) {
-          //console.log(dj._id);
-          var showId;
-          showColl.find({hostID: dj._id}).toArray(function (err, shows) {
-            shows.forEach( function (show) {
-                userlist.push({
-                    _id: dj._id,
-                   access: dj.access,
-                   firstName: dj.firstName,
-                   lastName: dj.lastName,
-                   gradYear: dj.gradYear,
-                   shows: show.showTitle,
-                   show_id: show._id
+        if (err) { 
+          console.log(err + ': err');
+        } 
+
+        else {
+            var userlist = [];
+
+            forEachAsync(items, function (next1, dj, index, array) {
+              
+              showColl.find({hostId: dj._id}).toArray(function (err, shows) {
+                    if (err) {console.log('showFind error: ' + err);} else {
+
+                        forEachAsync(shows, function (next2, show, index, array) {
+                            userlist.push(
+                                {
+                                   _id: dj._id,
+                                   access: dj.access,
+                                   firstName: dj.firstName,
+                                   lastName: dj.lastName,
+                                   gradYear: dj.gradYear,
+                                   shows: show.showTitle,
+                                   show_id: show._id
+                                }
+                            );
+                            // console.log("I pushed an item!")
+                            // console.log("THis is the dj after push: ", dj);
+
+                            next2();
+                        }).then(function () {
+                            console.log("Why can't I break out of this loop????????????????????");
+                            next1();
+                        }); // end shows loop
+                       
+                    }
+                    
+                }); // end showColl.find
+              
+            }).then( function() {
+                console.log('Everything is done now!');
+                // res.send(userlist);
+                if (userlist.length !== items.length) {
+                    console.log('length discrepancy');
+                }
+
+                console.log(userlist.length + ': ul ' + items.length + ': il');
+                res.render('admin/users/manageUsers', {
+                    "userlist" : userlist,
+                    title: 'view users'
                 });
-            });
-            callback();
-          });
-          
-        }, function (err) {
-          if (err) { throw err; }
-          console.log('Well done :-)!');
-
-          res.send({ "userlist" : userlist });
-        });
-    }
-
-    // async.eachSeries([ 2, 3, 5, 7, 11 ], function (prime, callback) {
-    // console.log(prime);
-    // callback(); // Alternatively: callback(new Error());
-    // }, function (err) {
-    // if (err) { throw err; }
-    // console.log('Well done :-)!');
-    // res.render('admin/users/manageUsers', {
-    // "title": 'hey'
-    // })
-    // });
-    
-    
+            }); // end for TOP LEVEL Each Async
+        } // end if/else
+    }); // end userColl.find callback
 });
+
 
 
 /**

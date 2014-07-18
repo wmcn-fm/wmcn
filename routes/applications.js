@@ -72,9 +72,9 @@ router.post('/dj', function(req, res) {
         }
         else {
             // If it worked, set the header so the address bar doesn't still say /adduser
-            res.location("../admin/users");
+            res.location("../admin/applicants/dj");
             // And forward to success page
-            res.redirect("../admin/users");
+            res.redirect("../admin/applicants/dj");
         }
     });
 });
