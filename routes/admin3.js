@@ -58,7 +58,7 @@ router.get('/users', function(req, res) {
             }).then( function() {
               console.log('Everything is done now!');
               // res.send(userlist);
-              if (userlist.length === items.length-10) {
+              if (userlist.length === items.length) {
                 console.log(userlist.length + ': ul ' + items.length + ': il');
 
                 console.log(JSON.stringify(userlist) + ' ul');
@@ -66,7 +66,7 @@ router.get('/users', function(req, res) {
                     "userlist" : userlist,
                     title: 'view users'
                 });
-                //forEachAsync(array, function(next3, itemInArray) { console.log(itemInArray);})
+                // forEachAsync(array, function(next3, itemInArray) { console.log(itemInArray);})
             }
             }); // end for TOP LEVEL Each Async
 
