@@ -44,6 +44,27 @@ router.get('/applicants/dj', function(req, res) {
         }
     });
 });
+            //  alternate async layout
+//  POST
+/*
+router.post('/applicants/dj', function(req, res) {
+    var approved = req.body.data;
+
+    forEachAsync(approved, function (next, user, index, array) {
+        console.log(user);
+        appColl.findById(user, function (err, doc) {
+            if (err) {console.log(err + ' error');} else {
+                console.log(doc._id + ' id');
+                next();
+            }
+        });
+    }).then(function () {
+        console.log('all done');
+        res.send('http://localhost:3000/admin/users');
+    });
+
+});
+*/
 
 //  POST
 router.post('/applicants/dj', function(req, res) {
@@ -104,7 +125,6 @@ router.post('/applicants/dj', function(req, res) {
                                             }
                                         }); //  removeById
                                         // res.redirect('http://localhost:3000/admin/users');
-                                        res.send('../users');
                                     }
                                 }); //  update usercoll
                      
@@ -117,6 +137,7 @@ router.post('/applicants/dj', function(req, res) {
             }   //  appcoll insert callback else
         }); //appColl.findById
     }   // for
+    res.send('http://localhost:3000/admin/users');
 }); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
