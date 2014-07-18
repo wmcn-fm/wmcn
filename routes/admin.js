@@ -169,14 +169,15 @@ router.get('/applicants/staff', function(req, res, next) {
 router.get('/users', function(req, res) {
     userColl.find().toArray(function (err, items) {
         if (err) {console.log(err);} else {
+        		console.log(items);
             makeJSON(items);
         }
     });
 
     function makeJSON(array) {
         var userlist = [];
-        async.eachSeries(array, function (dj, callback) {
-          console.log(dj._id);
+        async.each(array, function (dj, callback) {
+          //console.log(dj._id);
           var showId;
           showColl.find({hostID: dj._id}).toArray(function (err, shows) {
             shows.forEach( function (show) {
@@ -190,27 +191,26 @@ router.get('/users', function(req, res) {
                    show_id: show._id
                 });
             });
+            callback();
           });
-          callback();
-        }, function (err, callback) {
+          
+        }, function (err) {
           if (err) { throw err; }
           console.log('Well done :-)!');
 
-          res.render('admin/users/manageUsers', {
-            "userlist" : userlist
-          });
+          res.send({ "userlist" : userlist });
         });
     }
 
     // async.eachSeries([ 2, 3, 5, 7, 11 ], function (prime, callback) {
-    //   console.log(prime);
-    //   callback(); // Alternatively: callback(new Error());
+    // console.log(prime);
+    // callback(); // Alternatively: callback(new Error());
     // }, function (err) {
-    //   if (err) { throw err; }
-    //   console.log('Well done :-)!');
-    //   res.render('admin/users/manageUsers', {
-    //     "title": 'hey'
-    //   })
+    // if (err) { throw err; }
+    // console.log('Well done :-)!');
+    // res.render('admin/users/manageUsers', {
+    // "title": 'hey'
+    // })
     // });
     
     
