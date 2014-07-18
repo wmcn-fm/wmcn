@@ -16,7 +16,7 @@ var collection = db.collection('usercollection');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var admin = require('./routes/admin3');
+var admin = require('./routes/admin');
 var applications = require('./routes/applications')
 var dj = require('./routes/dj');
 var show = require('./routes/show');
