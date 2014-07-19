@@ -77,7 +77,9 @@ router.post('/applicants/dj', function(req, res) {
         //  find app doc
         appColl.findById(idString, function (err, doc) {
 
-            if (err) {console.log(err + ' error');} else {
+            if (err) { 
+                console.log(err + ' error');
+            } else {
                 var appId = doc._id;
                 var newShowTitle = doc.show.showTitle;
                 var newShowBlurb = doc.show.blurb;
@@ -95,7 +97,9 @@ router.post('/applicants/dj', function(req, res) {
                     "gradYear" : doc.user.gradYear
                 }, function (err, newUser) {
 
-                    if (err) {console.log(err + ' userInsert error');} else {
+                    if (err) { 
+                        console.log(err + ' userInsert error');
+                    } else {
                         var newUserId = newUser[0]._id;
 
                         //  create a new show document with a reference to host
@@ -124,18 +128,19 @@ router.post('/applicants/dj', function(req, res) {
 
                                             }
                                         }); //  removeById
-                                        // res.redirect('http://localhost:3000/admin/users');
+                                        res.send('http://localhost:3000/admin/users');
                                     }
                                 }); //  update usercoll
                      
                             }   // showColl.
-                        })  //  showColl.insert
+                        });  //  showColl.insert
                         
                     }   //  usercoll insert callback else
                 }); //  userColl.insert
                 
             }   //  appcoll insert callback else
         }); //appColl.findById
+    } // end for loop
 }); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
