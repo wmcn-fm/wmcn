@@ -48,7 +48,7 @@ router.get('/applicants/dj', function(req, res) {
 //  POST
 router.post('/applicants/dj', function(req, res) {
     var approved = req.body.data;   //  array of _id strings
-
+    console.log(approved);
     //  iterate over each item in the array
     for (var i=0; i<approved.length; i++) {
         var idString = approved[i];
@@ -104,7 +104,8 @@ router.post('/applicants/dj', function(req, res) {
                                             }
                                         }); //  removeById
                                         // res.redirect('http://localhost:3000/admin/users');
-                                        res.send('../users');
+                                        // console.log(res);
+                                        // res.send("Hi");
                                     }
                                 }); //  update usercoll
                      
@@ -116,7 +117,11 @@ router.post('/applicants/dj', function(req, res) {
                 
             }   //  appcoll insert callback else
         }); //appColl.findById
-    }   // for
+    } // for
+    
+    console.log("after for loop");
+}, function (req, res) {
+  res.send('http://localhost:3000/admin/users');    
 }); // post 
 
 router.get('/applicants/staff', function(req, res, next) {
