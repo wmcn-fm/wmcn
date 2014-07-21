@@ -33,11 +33,11 @@ $(document).ready(function() {
 	})
 
 	$('.app-updateButton').on('click', function(e) {
-		//e.preventDefault();
+		e.preventDefault();
 	
 		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
 			window.location.href = response;
-			// console.log(response + ' response');
+			console.log(response + ' response');
 		});
 
 		// $.ajax({

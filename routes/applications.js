@@ -67,6 +67,7 @@ router.post('/dj', function(req, res) {
         }
     }, function (err, doc) {
         if (err) {
+            console.log("This is error!: ", err);
             // If it failed, return error
             res.send("There was a problem adding the information to the database.");
         }
