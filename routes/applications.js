@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
-var dbUrl = require('../modulus.js');
-var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+var dbUrl = require('../dbLogin.js');
+var db = mongo.db(dbUrl, {native_parser:true});
 
 /** 
 *   ====================================================================

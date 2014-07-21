@@ -9,8 +9,8 @@ var sass = require('node-sass');
 
 var mongo = require('mongoskin');
 
-var dbUrl = require('./modulus.js');
-var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+var dbUrl = require('./dbLogin.js');
+var db = mongo.db(dbUrl, {native_parser:true});
 var collection = db.collection('usercollection');
 
 var routes = require('./routes/index');

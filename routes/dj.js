@@ -37,7 +37,7 @@ router.get('/user', function(req, res) {
 
 
 /*
-*   '/dj/post'
+*   '/dj/playlist'
 */
 
 //  GET

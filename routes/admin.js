@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
-var async = require('async');
 
-var dbUrl = require('../modulus.js');
-var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+var dbUrl = require('../dbLogin.js');
+var db = mongo.db(dbUrl, {native_parser:true});
 var appColl = db.collection('djapps');
 var userColl = db.collection('usercollection');
 var showColl = db.collection('shows');
