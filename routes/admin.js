@@ -46,7 +46,7 @@ router.get('/applicants/dj', function(req, res) {
 });
             //  alternate async layout
 //  POST
-/*
+
 router.post('/applicants/dj', function(req, res) {
     var approved = req.body.data;
 
@@ -64,10 +64,10 @@ router.post('/applicants/dj', function(req, res) {
     });
 
 });
-*/
+
 
 //  POST
-router.post('/applicants/dj', function(req, res) {
+router.post('/applicants/djx', function(req, res) {
     var approved = req.body.data;   //  array of _id strings
 
     //  iterate over each item in the array
