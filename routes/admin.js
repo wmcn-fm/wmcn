@@ -51,18 +51,62 @@ router.post('/applicants/dj', function(req, res) {
     var approved = req.body.data;
 
     forEachAsync(approved, function (next, user, index, array) {
-        console.log(user);
+
+        // find the application document (doc)
         appColl.findById(user, function (err, doc) {
             if (err) {console.log(err + ' error');} else {
-                console.log(doc._id + ' id');
-                next();
+
+                var appId = doc._id;
+                var newShowTitle = doc.show.showTitle;
+                var newShowBlurb = doc.show.blurb;
+
+                //  create a new dj doc with app credentials (newUser)
+                userColl.insert({
+                    "access" : 1,
+                    "firstName" : doc.user.firstName,
+                    "lastName" : doc.user.lastName,
+                    "email" : doc.user.email,
+                    "phone" : doc.user.phone,
+                    "macIdNum" : doc.user.macIdNum,
+                    "iclass" : doc.user.iclass,
+                    "gradYear" : doc.user.gradYear
+                }, function (err, newUser) {
+                    if (err) {console.log(err + ' userColl insert err')} else {
+                        var newUserId = newUser[0]._id;
+
+                        //  create a new show doc with a reference to newUser
+                        showColl.insert({
+                            "showTitle" : newShowTitle,
+                            "blurb" : newShowBlurb,
+                            "hostId" : newUserId
+                        }, function (err, newShow) {
+                            if (err) {console.log(err + ' showColl insert error')} else {
+                                var newShowId = newShow[0]._id;
+
+                                //  tack the new show id to the new user
+                                userColl.update({_id:mongo.helper.toObjectID(newUserId)},
+                                    {'$set': {showId: newShowId}},
+                                    function (err, updatedUser) {
+                                        if (err) {console.log(err + ' updateuser error')} else {
+
+                                            appColl.removeById(appId, function (err, result) {
+                                                if (err) {console.log(err + ' removeApp err')} else {               
+                                                    next();
+                                                }
+                                            }); //  end appColl.removeByID
+                                        }
+                                    }
+                                );  //  end userColl.update
+                            }
+                        }); //  end showColl.insert
+                    }   
+                }); //  end userColl.insert;
             }
-        });
+        }); //  end appColl.findById;
     }).then(function () {
         console.log('all done');
         res.send('http://localhost:3000/admin/users');
     });
-
 });
 
 
@@ -186,7 +230,7 @@ router.get('/users', function(req, res) {
 
                             next2();
                         }).then(function () {
-                            console.log("Why can't I break out of this loop????????????????????");
+                            //console.log("Why can't I break out of this loop????????????????????");
                             next1();
                         }); // end shows loop
                        

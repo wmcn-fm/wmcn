@@ -37,7 +37,6 @@ $(document).ready(function() {
 	
 		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
 			window.location.href = response;
-			console.log(response + ' response');
 		});
 
 		// $.ajax({
