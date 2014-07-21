@@ -1,0 +1,31 @@
+extends ./layout-dj
+
+block content
+	h1= title
+	p Welcome to #{title}
+
+	.container-fluid
+			.row
+				.menu-action.host.col-md-4
+					h4 user name
+				.menu-action.show.col-md-4
+					h4 show name
+				.menu-action.date.col-md-4
+					h4 July 21, 2014
+			.row.form-container
+				.form(role='form', method='post', action='dj/publishPlaylist', id='makePlaylist')
+					- var songCount = 0
+					while songCount < 10
+						.row.saPair
+							.col-md-1
+								p=songCount++
+							.col-md-4
+								.form-group
+									label(for='artistInput') artist
+									input#artistInput.form-control(type='text', placeholder='outkast', name='artistInput + #{songCount}')
+							.col-md-6
+								.form-group
+									label(for='songInput') song
+									input#songInput.form-control(type='text', placeholder='hey ya', name='songInput#{songCount}')
+										
+					button.btn.btn-primary(type='submit') Submit

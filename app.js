@@ -33,13 +33,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(sass.middleware({
-    src: path.join(__dirname, 'public/sass'),
-    dest: path.join(__dirname, 'public'),
+    src: path.join(__dirname + '/sass'),
+    dest: path.join(__dirname),
     debug: true
 }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // app.use(function(req,res,next){
 //     req.db = db;

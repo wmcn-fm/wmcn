@@ -9,7 +9,7 @@ var mongo = require('mongoskin');
 */
 
 //  GET
-router.get('', function(req, res) {
+router.get('/', function(req, res) {
     res.render('dj/main', {title: "dj home" })
 });
 
@@ -41,8 +41,16 @@ router.get('/user', function(req, res) {
 */
 
 //  GET
-router.get('/post', function(req, res) {
-    res.render('dj/post', {title: "make a post" })
+router.get('/playlist', function(req, res) {
+    res.render('dj/playlist', {title: "make a playlist" })
+});
+
+router.get('/review', function(req, res) {
+    res.render('dj/review', {title: "write a review" })
+});
+
+router.get('/blog', function(req, res) {
+    res.render('dj/blog', {title: "write a blog post" })
 });
 
 module.exports = router;

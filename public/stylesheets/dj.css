@@ -1,0 +1,24 @@
+.dj-action {
+  border-color: red;
+  border-style: dotted;
+  border-width: 1px;
+}
+
+.menu-action {
+  text-align: center;
+  border-color: red;
+  border-style: dotted;
+  border-width: 1px;
+}
+
+.form-container {
+	border-color: red;
+	border-style: dotted;
+	border-width: 1px;
+}
+
+.saPair {
+	border-color: green;
+	border-style: dotted;
+	border-width: 1px;
+}
