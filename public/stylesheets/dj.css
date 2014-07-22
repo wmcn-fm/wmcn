@@ -17,8 +17,20 @@
 	border-width: 1px;
 }
 
-.saPair {
+/*.saPair {
 	border-color: green;
 	border-style: dotted;
 	border-width: 1px;
+  text-align: center;
+  /*margin: 0 auto;*/
+}*/
+
+.submit {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.number {
+  text-align: center;
+  vertical-align: center;
 }

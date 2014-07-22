@@ -12,20 +12,23 @@ block content
 					h4 show name
 				.menu-action.date.col-md-4
 					h4 July 21, 2014
-			.row.form-container
-				.form(role='form', method='post', action='dj/publishPlaylist', id='makePlaylist')
-					- var songCount = 0
-					while songCount < 10
-						.row.saPair
-							.col-md-1
-								p=songCount++
-							.col-md-4
-								.form-group
-									label(for='artistInput') artist
-									input#artistInput.form-control(type='text', placeholder='outkast', name='artistInput + #{songCount}')
-							.col-md-6
-								.form-group
-									label(for='songInput') song
-									input#songInput.form-control(type='text', placeholder='hey ya', name='songInput#{songCount}')
-										
-					button.btn.btn-primary(type='submit') Submit
+			.row
+				form(role='form', method='post', action='/dj/publishPlaylist', id='makePlaylist')
+					.form-group
+							input.form-control(type='hidden', name='dj_id', value='53cd88a833e824df184b4557')
+							input.form-control(type='hidden', name='show_id', value='53cd88a833e824df184b4558')
+					- var songCount = 1
+					while songCount < 11
+						.row
+							.saPair
+								.col-md-1
+									h4.number=songCount
+								.col-md-4
+									.form-group
+										label(for='artistInput') artist
+										input#artistInput.form-control(type='text', placeholder='outkast', name='artistInput#{songCount}')
+								.col-md-4
+									.form-group
+										label(for='songInput') song
+										input#songInput.form-control(type='text', placeholder='hey ya', name='songInput#{songCount++}')
+					button.btn.btn-primary.submit(type='submit') Submit
