@@ -13,7 +13,7 @@ block content
 				.menu-action.date.col-md-4
 					h4 July 21, 2014
 			.row
-				form(role='form', method='post', action='/dj/publishPlaylist', id='makePlaylist')
+				form(role='form', method='post', action='/dj/playlist', id='makePlaylist')
 					.form-group
 							input.form-control(type='hidden', name='dj_id', value='53cd88a833e824df184b4557')
 							input.form-control(type='hidden', name='show_id', value='53cd88a833e824df184b4558')
@@ -26,9 +26,10 @@ block content
 								.col-md-4
 									.form-group
 										label(for='artistInput') artist
-										input#artistInput.form-control(type='text', placeholder='outkast', name='artistInput#{songCount}')
+										input#artistInput.form-control(type='text', placeholder='outkast', name='artistInput')
 								.col-md-4
 									.form-group
 										label(for='songInput') song
-										input#songInput.form-control(type='text', placeholder='hey ya', name='songInput#{songCount++}')
+										input#songInput.form-control(type='text', placeholder='hey ya', name='songInput')
+						- songCount++
 					button.btn.btn-primary.submit(type='submit') Submit

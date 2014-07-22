@@ -51,35 +51,39 @@ router.get('/playlist', function(req, res) {
 });
 
 //	POST
-router.post('/publishPlaylist', function (req, res) {
+router.post('/playlist', function (req, res) {
 
-	var formData = req.body;
 	var djId = req.body.dj_id;
 	var showId = req.body.show_id;
+	var artists = req.body.artistInput;
+	var songs = req.body.songInput;
+	
+	// console.log(djId, showId, artists, songs);
 
-	var parsedData = [];
-	var counter = 0;
-	for (var key in formData) {
-		var val = formData[key];
-		if (counter > 1) {
-			parsedData.push(formData[key]);
-		}
-		counter++;
-	}
+	//	loop over each artist 
+	forEachAsync(artists, function (next, artist, index, array) {
+		if (artist != '') {
+			artistColl.find({name: artist}).toArray(function (err, result) {
+				console.log(index + '===========');
 
-	forEachAsync(parsedData, function (next, item, index, array) {
-		if (index % 2 == 0) {
-			console.log('artist ' + index + ': ' + item);
-			artistColl.find({name: item}).toArray(function (err, artist) {
-				if (err) {console.log(err + ' artist er');} else {
-					console.log(artist + '!');
+				//	 if there is a result....
+				if (result.length != 0) {
+					console.log('0000');
+				} else {
+					artistColl.insert({
+						"name" : artist
+					}, function (err, newArtist) {
+						if (err) {console.log(err + ' newArtist')} else {
+							console.log(newArtist);
+						}
+					});
 				}
+				next();
 			});
 		} else {
-			console.log('song ' + index + ': ' + item);
+			next();
 		}
-		next();
-	}).then(function () {
+	}).then( function () {
 		console.log('all done');
 	});
 });
