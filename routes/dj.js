@@ -61,24 +61,50 @@ router.post('/playlist', function (req, res) {
 	// console.log(djId, showId, artists, songs);
 
 	//	loop over each artist 
-	forEachAsync(artists, function (next, artist, index, array) {
+	forEachAsync(artists, function (next, artist, i, array) {
+		//	skip null entries
 		if (artist != '') {
+			//	query the artist name
 			artistColl.find({name: artist}).toArray(function (err, result) {
-				console.log(index + '===========');
+				if (err) {console.log(err);} else {
+					var thisSong = songs[i];
+					//	1 if a match
+					if (result.length != 0) {
+						var result = result[0]
+						var playedSongs = result.songs;
+						var songExists = false;
 
-				//	 if there is a result....
-				if (result.length != 0) {
-					console.log('0000');
-				} else {
-					artistColl.insert({
-						"name" : artist
-					}, function (err, newArtist) {
-						if (err) {console.log(err + ' newArtist')} else {
-							console.log(newArtist);
+						//	check if the song already exists
+						for (var song in playedSongs) {
+							if (thisSong === playedSongs[song]) {
+								songExists = true;
+							}
+							if (songExists) break;	//	if it matches then we're done
 						}
-					});
+						if (!songExists) {	//	if not add that shit
+							artistColl.update({_id:mongo.helper.toObjectID(result._id)},
+								{$push: {songs: {title: thisSong} }},
+								function (err, updatedArtist) {
+									if (err) {console.log(err);} else {
+										// console.log(updatedArtist, thisSong);
+									}
+								}
+							);
+						}
+						next();
+
+					} else {	//	if no result, add to the coll
+						artistColl.insert({
+							"name" : artist,
+							"songs" : [{title: thisSong}]
+						}, function (err, newArtist) {
+							if (err) {console.log(err);} else {
+								// console.log(newArtist);
+							}
+						});
+						next();
+					}
 				}
-				next();
 			});
 		} else {
 			next();
