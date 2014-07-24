@@ -16,6 +16,11 @@
     "mongodb": "*",
     "mongoskin": "*",
     "node-sass": "*",
-    "forEachAsync": "*"
+    "forEachAsync": "*",
+    "passport" : "0.2.0",
+    "passport-local" : "*",
+    "bcrypt-nodejs" : "latest",
+    "connect-flash" : "*",
+    "express-session" : "*"
   }
 }
