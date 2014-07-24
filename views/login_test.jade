@@ -7,6 +7,10 @@ block content
 			padding-right: 50px; 
 		}
 
+	p a div will appear right under me with a flash message depending on if the user
+		| logged in/signed up correctly or not.
+	div #{message}
+
 	p This form is for testing the LOG IN!
 	form(action='/login', method='post')
 		.form-group
