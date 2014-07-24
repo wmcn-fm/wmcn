@@ -42,7 +42,28 @@ router.post('/login', passport.authenticate('local-login',
 		failureFlash : true })
 );
 
+router.get('/logout', function (req, res) {
+		req.logout();
+		res.redirect('/');
+});
 
+router.get('/profile', isLoggedIn, function (req, res) {
+		res.render('profile', {
+			user : JSON.stringify(req.user) // get the user out of session and pass to template
+		});
+});
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+	// if user is authenticated in the session, carry on 
+	if (req.isAuthenticated()) {
+		return next();
+	}
+
+	// if they aren't redirect them to the login page
+	res.redirect('/login');
+}
 
 
 
