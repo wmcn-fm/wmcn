@@ -1,19 +1,24 @@
 {
   "name": "wmcn",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "homepage": "https://github.com/wmcn-fm/wmcn",
   "authors": [
     "Will Kent-Daggett <willkentdaggett@gmail.com>"
   ],
-  "description": "macalester.edu/wmcn",
   "main": "app.js",
+  "keywords": [
+    "wmcn"
+  ],
   "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "public/javascripts",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "Faker.js": "https://github.com/FotoVerite/Faker.js.git#~0.6.1"
+  }
 }
