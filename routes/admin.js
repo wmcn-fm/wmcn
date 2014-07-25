@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
 
+var nodemailer = require('nodemailer');
+var mailingCredentials = require('../nodemailerConfig.js'); 
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: mailingCredentials
+});
+
+
 var dbUrl = require('../dbLogin.js');
 var db = mongo.db(dbUrl, {native_parser:true});
 var appColl = db.collection('djapps');
@@ -58,6 +66,24 @@ router.post('/applicants/dj', function(req, res) {
                 var appId = doc._id;
                 var newShowTitle = doc.show.showTitle;
                 var newShowBlurb = doc.show.blurb;
+
+                // PUT NODEMAILER STUFF HERE AND SEND TO ADDRESS doc.user.email
+                var mailOptions = {
+                    from: 'WMCN <foo@blurdybloop.com>', // sender address
+                    to: doc.user.email, // list of receivers
+                    subject: 'You have been approved!', // Subject line
+                    // text: 'Hello world ✔', // plaintext body
+                    html: '<b>This is a WMCN test email</b>' // html body
+                }
+
+                // send mail with defined transport object
+                transporter.sendMail(mailOptions, function (error, info){
+                    if(error){
+                        console.log(error);
+                    }else{
+                        console.log('Message sent: ' + info.response);
+                    }
+                });
 
                 //  create a new dj doc with app credentials (newUser)
                 userColl.insert({

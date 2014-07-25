@@ -22,6 +22,7 @@
     "bcrypt-nodejs" : "latest",
     "connect-flash" : "*",
     "express-session" : "*",
-    "tumblr.js": "*"
+    "tumblr.js": "*",
+    "nodemailer": "1.0.4"
   }
 }

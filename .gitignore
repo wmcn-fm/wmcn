@@ -4,4 +4,5 @@ modulus.js
 dbLogin.js
 tumblr.js
 *.log
+nodemailerConfig.js
 public/javascripts/bower_components
