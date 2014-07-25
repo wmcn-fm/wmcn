@@ -63,7 +63,7 @@ router.get('/playlist', function(req, res) {
 		var date = new Date();
 		var showTitle;
 
-		if (err) {djName = ':('} else {
+		if (err) {djName = ' :(' } else {
 			djName = dj.firstName + ' ' + dj.lastName
 		}
 
