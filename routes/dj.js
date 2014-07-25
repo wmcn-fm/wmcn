@@ -1,11 +1,17 @@
 var express = require('express');
 var router = express.Router();
+
 var mongo = require('mongoskin');
 var dbUrl = require('../dbLogin.js');
 var db = mongo.db(dbUrl, {native_parser:true});
+var artistColl = db.collection('artists');
+var userColl = db.collection('usercollection');
+var showColl = db.collection('shows');
+
+var client = require('../tumblr.js');
+
 var forEachAsync = require('forEachAsync').forEachAsync;
 
-var artistColl = db.collection('artists');
 
 
 /** 
@@ -47,7 +53,36 @@ router.get('/user', function(req, res) {
 
 //  GET
 router.get('/playlist', function(req, res) {
-    res.render('dj/playlist', {title: "make a playlist" })
+
+	// var user = req.body.userId;	//	once login is setup
+	var testUser = '53cd88a833e824df184b4557';
+	var testShow = '53cd88a833e824df184b4558';
+
+	userColl.findById(testUser, function (err, dj) {
+		var djName;
+		var date = new Date();
+		var showTitle;
+
+		if (err) {djName = ':('} else {
+			djName = dj.firstName + ' ' + dj.lastName
+		}
+
+		showColl.findById(testShow, function (err, show) {
+
+			if (err) {showTitle: ':('} else {
+				showTitle = show.hostId;
+			}
+			res.render('dj/playlist', 
+		    	{
+		    		title: "make a playlist",
+		    		djName: djName,
+		    		date: date,
+		    		show: showTitle
+	    	});
+		})
+
+		
+	});
 });
 
 //	POST
@@ -59,13 +94,29 @@ router.post('/playlist', function (req, res) {
 	var songs = req.body.songInput;
 
 	var date = new Date();
-	
+
+	var host = getHostName(djId, function (name) {
+		console.log('host inside' + host)
+		return name;
+	});
+	console.log(host + ': hOST');
 	// addToArists(artists, songs);
 
-	var tURL = createTumblrURL(djId, showId, artists, songs);
+	var tURL = createTumblrURL(client, djId, showId, artists, songs);
 
-	archivePlaylist(showId, date, tURL, artists, songs);
-	
+	// archivePlaylist(showId, date, tURL, artists, songs);
+	function getHostName(id, cb) {
+		var reply;
+		userColl.findById(id, function (err, dj) {
+			if (err) {
+				reply = "db error";
+			} else {
+				reply = dj.firstName + ' ' + dj.lastName;
+			}
+			console.log(reply + ' reply');
+			cb(reply);
+		});
+	}
 
 	function addToArists(artists, songs) {
 		forEachAsync(artists, function (next, artist, i, array) {
@@ -120,9 +171,31 @@ router.post('/playlist', function (req, res) {
 			console.log('all done');
 		});
 	}
-	function createTumblrURL(dj, show, artists, songs) {
-		var url = 'tmblr.om';
-		return url;
+
+	function createTumblrURL(client, djName, showTitle, artists, songs) {
+		var content = '<p>With: ' + djName + '</p>';
+		for (var i=0; i<artists.length; i++) {
+			var line = '<p>' + artists[i] + ': ' + songs[i] + '</p>';
+			content += line;
+		} 
+		console.log()
+		// console.log(content);
+		var options = {
+			title: showTitle,
+			body: content,
+			tags: 'playlist'
+		}
+
+		client.text('wmcn-dev', options, function (err, post_id) {
+			if (err) {
+				url = 'wmcn.fm'
+			} else {
+				url = 'wmcn-dev.tumblr.com/post/' + post_id.id;
+			}
+			console.log('url: ' + url);
+			return url;
+		});
+		
 	}
 
 	function archivePlaylist(show, date, tumblrURL, artists, songs) {

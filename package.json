@@ -21,6 +21,7 @@
     "passport-local" : "*",
     "bcrypt-nodejs" : "latest",
     "connect-flash" : "*",
-    "express-session" : "*"
+    "express-session" : "*",
+    "tumblr.js": "*"
   }
 }
