@@ -6,6 +6,7 @@ var dbUrl = require('../dbLogin.js');
 var db = mongo.db(dbUrl, {native_parser:true});
 var artistColl = db.collection('artists');
 var userColl = db.collection('usercollection');
+var showColl = db.collection('shows');
 
 var client = require('../tumblr.js');
 
@@ -52,7 +53,36 @@ router.get('/user', function(req, res) {
 
 //  GET
 router.get('/playlist', function(req, res) {
-    res.render('dj/playlist', {title: "make a playlist" })
+
+	// var user = req.body.userId;	//	once login is setup
+	var testUser = '53cd88a833e824df184b4557';
+	var testShow = '53cd88a833e824df184b4558';
+
+	userColl.findById(testUser, function (err, dj) {
+		var djName;
+		var date = new Date();
+		var showTitle;
+
+		if (err) {djName = ':('} else {
+			djName = dj.firstName + ' ' + dj.lastName
+		}
+
+		showColl.findById(testShow, function (err, show) {
+
+			if (err) {showTitle: ':('} else {
+				showTitle = show.hostId;
+			}
+			res.render('dj/playlist', 
+		    	{
+		    		title: "make a playlist",
+		    		djName: djName,
+		    		date: date,
+		    		show: showTitle
+	    	});
+		})
+
+		
+	});
 });
 
 //	POST
