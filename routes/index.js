@@ -32,6 +32,22 @@ router.get('/archive', function(req, res) {
 *   Login testing grounds
 */
 
+// might use router.param for bigUrl
+
+router.param('bigUrl', function (req, res, next, id) {
+	//look into database at userColl to find the bigURL, and confirmation code
+	// this will let us identify the user
+	// if confirmation code and bigUrl are from the same record, activate their privileges
+	req.bigUrl = id;
+	next();
+})
+
+
+router.get('/signup/:bigUrl', function (req, res) {
+	console.log(req.bigUrl);
+	res.render('confirmation', {djName: "hardcoded dj name"})
+});
+
 router.post('/signup', passport.authenticate('local-signup', {
 		successRedirect : '/profile', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
