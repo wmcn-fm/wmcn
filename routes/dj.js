@@ -95,25 +95,27 @@ router.post('/playlist', function (req, res) {
 
 	var date = new Date();
 
-	var host = '';
-	host =	getHostName(djId);
+	var host = getHostName(djId, function (name) {
+		console.log('host inside' + host)
+		return name;
+	});
 	console.log(host + ': hOST');
 	// addToArists(artists, songs);
 
 	var tURL = createTumblrURL(client, djId, showId, artists, songs);
 
 	// archivePlaylist(showId, date, tURL, artists, songs);
-	function getHostName(id) {
+	function getHostName(id, cb) {
+		var reply;
 		userColl.findById(id, function (err, dj) {
 			if (err) {
-				return "couldn't find hostname";
+				reply = "db error";
 			} else {
-				console.log(dj);
-				var name = dj.firstName + dj.lastName
-				console.log(name + 'name');
-				return name;
+				reply = dj.firstName + ' ' + dj.lastName;
 			}
-		})
+			console.log(reply + ' reply');
+			cb(reply);
+		});
 	}
 
 	function addToArists(artists, songs) {
