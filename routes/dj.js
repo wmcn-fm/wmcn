@@ -95,14 +95,15 @@ router.post('/playlist', function (req, res) {
 
 	var date = new Date();
 
-	var host = getHostName(djId, function (name) {
-		console.log('host inside' + host)
-		return name;
-	});
-	console.log(host + ': hOST');
-	// addToArists(artists, songs);
+	// var host;
+	// getHostName(djId, function (name) {
+	// 	console.log(name + ' name');
+	// 	host += name;
+	// });
+	// console.log(host + ': hOST');
+	addToArists(artists, songs);
 
-	var tURL = createTumblrURL(client, djId, showId, artists, songs);
+	// var tURL = createTumblrURL(client, djId, showId, artists, songs);
 
 	// archivePlaylist(showId, date, tURL, artists, songs);
 	function getHostName(id, cb) {
@@ -137,11 +138,20 @@ router.post('/playlist', function (req, res) {
 								if (thisSong === playedSongs[song]) {
 									songExists = true;
 								}
-								if (songExists) break;	//	if it matches then we're done
+								if (songExists) {	// add 1 to the playcount
+									artistColl.findAndModify({
+										query: {_id:mongo.helper.toObjectID(result._id)},
+										update: { $inc: {'songs.thisSong': 1} }
+									}, function (err, updatedArtist) {
+										if (err) {console.log(err);} else {
+											console.log(updatedArtist);
+										}
+									});
+								}
 							}
 							if (!songExists) {	//	if not add that shit
 								artistColl.update({_id:mongo.helper.toObjectID(result._id)},
-									{$push: {songs: {title: thisSong} }},
+									{$inc: {'songs.thisSong': 1} },
 									function (err, updatedArtist) {
 										if (err) {console.log(err);} else {
 											// console.log(updatedArtist, thisSong);
@@ -154,8 +164,11 @@ router.post('/playlist', function (req, res) {
 						} else {	//	if no result, add to the coll
 							artistColl.insert({
 								"name" : artist,
-								"songs" : [{title: thisSong}]
-							}, function (err, newArtist) {
+								"songs" : {
+									thisSong: 1
+								}
+							}, 
+							function (err, newArtist) {
 								if (err) {console.log(err);} else {
 									// console.log(newArtist);
 								}
