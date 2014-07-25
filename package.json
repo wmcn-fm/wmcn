@@ -16,6 +16,7 @@
     "mongodb": "*",
     "mongoskin": "*",
     "node-sass": "*",
-    "forEachAsync": "*"
+    "forEachAsync": "*",
+    "tumblr.js": "*"
   }
 }
