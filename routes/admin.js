@@ -70,7 +70,7 @@ router.post('/applicants/dj', function(req, res) {
                 // PUT NODEMAILER STUFF HERE AND SEND TO ADDRESS doc.user.email
                 var mailOptions = {
                     from: 'WMCN <foo@blurdybloop.com>', // sender address
-                    to: doc.user.email, // list of receivers
+                    to: 'jyang4@macalester.edu, wkentdag@macalester.edu', // list of receivers
                     subject: 'You have been approved!', // Subject line
                     // text: 'Hello world ✔', // plaintext body
                     html: '<b>This is a WMCN test email</b>' // html body
