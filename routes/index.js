@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
+var dbUrl = require('../dbLogin.js');
+var db = mongo.db(dbUrl, {native_parser:true});
+var playlistColl = db.collection('playlists');
+
 var passport = require('passport');
 
 /** 
@@ -25,7 +29,24 @@ router.get('/archive', function(req, res) {
 
 //  POST
 // just js buttons?
+/** 
+*   ====================================================================
+*   '/playlist'
+*/
 
+router.get('/playlist/:year/:month/:date/:hour', function(req, res) {
+	// var contentType = req.params.contentType;
+	var year = req.params.year;
+	var month = req.params.month;
+	var date = req.params.date;
+	var hour = req.params.hour;
+
+	var perma = 'x';
+
+	res.render('index', {
+		title: 'redirect me'
+	});
+});
 
 /** 
 *   ====================================================================
