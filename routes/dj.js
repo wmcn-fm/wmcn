@@ -121,50 +121,59 @@ router.post('/playlist', function (req, res) {
 
 	function addToArists(artists, songs) {
 		forEachAsync(artists, function (next, artist, i, array) {
+			var count = i;
+
 			//	skip null entries
 			if (artist != '') {
 				//	query the artist name
 				artistColl.find({name: artist}).toArray(function (err, result) {
 					if (err) {console.log(err);} else {
-						var thisSong = songs[i];
 						//	1 if a match
+						var thisSong = songs[count];
 						if (result.length != 0) {
-							var result = result[0]
+							var result = result[0];
 							var playedSongs = result.songs;
 							var songExists = false;
+							// console.log(playedSongs);
 
 							//	check if the song already exists
-							for (var song in playedSongs) {
-								if (thisSong === playedSongs[song]) {
+							for (var i=0; i<playedSongs.length; i++) {
+								console.log('==-======= for loop:');
+								console.log(playedSongs[i].title, ', ', thisSong);
+								// console.log('psi', playedSongs[i].title);
+								if (thisSong === playedSongs[i].title) {
+									console.log('true!!!');
+									console.log(thisSong + ' = ' + playedSongs[i].title);
 									songExists = true;
 								}
-								if (songExists) {	// add 1 to the playcount
-									artistColl.findAndModify({
-										query: {_id:mongo.helper.toObjectID(result._id), 'songs.title': thisSong},
-										update: { $inc: {'songs.$.playcount': 1} }
-									}, function (err, updatedArtist) {
+							}
+							if (songExists) {	// add 1 to the playcount
+								artistColl.update({_id:mongo.helper.toObjectID(result._id), 'songs.title': thisSong},
+									{ $inc: {'songs.$.playcount': 1} },
+									function (err, updatedArtist) {
 										if (err) {console.log(err);} else {
 											console.log(updatedArtist);
+											next();
 										}
-									});
-								}
+									}
+								);
+							}
 
-								if (!songExists) {	//	add that shit
-									artistColl.update({_id:mongo.helper.toObjectID(result._id)},
-										{'$addToSet': 
-											{'songs': {
-												'title': thisSong,
-												'playcount' : 1
-											}} 
-										},
-										function (err, updatedArtist) {
-											if (err) {console.log(err);} else {
-												console.log(updatedArtist, thisSong);
-												next();
-											}
+							if (!songExists) {	//	add that shit
+								artistColl.update({_id:mongo.helper.toObjectID(result._id)},
+									{'$addToSet': 
+										{'songs': {
+											'title': thisSong,
+											'playcount' : 1
+										}} 
+									},
+									function (err, updatedArtist) {
+										if (err) {console.log(err);} else {
+											// console.log(updatedArtist, thisSong);
+											next();
 										}
-									);
-								}
+									}
+								);
 							}
 							
 						} else {	//	if no result, add to the coll
@@ -177,6 +186,7 @@ router.post('/playlist', function (req, res) {
 							}, 
 							function (err, newArtist) {
 								if (err) {console.log(err);} else {
+									console.log('new artist created:');
 									console.log(newArtist);
 									next();
 								}
