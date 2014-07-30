@@ -128,8 +128,9 @@ router.post('/playlist', function (req, res) {
 				//	query the artist name
 				artistColl.find({name: artist}).toArray(function (err, result) {
 					if (err) {console.log(err);} else {
-						//	1 if a match
 						var thisSong = songs[count];
+						
+						//	1 if a match
 						if (result.length != 0) {
 							var result = result[0];
 							var playedSongs = result.songs;
