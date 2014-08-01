@@ -1,6 +1,16 @@
 extends layout
 
 block content
+	- if (alertInfo)
+		.alert.alert-success.alert-dismissible(role='alert')
+			button.close(type='button' data-dismiss='alert')
+				span(aria-hidden='true') !{'&times;'}
+				span.sr-only Close
+
+			strong Your playlist posted successfully! 
+			span Reblog it on 
+				a(href=alertInfo).alert-link Tumblr !{'>>'}
+
 	h1
 		a(href=perma)= title
 	h2= dj

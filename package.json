@@ -25,5 +25,9 @@
     "tumblr.js": "*",
     "nodemailer": "1.0.4",
     "nodemailer-wellknown" : "0.1.2"
+  },
+  
+  "devDependencies": {
+    "nodemon" : "*"
   }
 }

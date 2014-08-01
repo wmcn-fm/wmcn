@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var flash = require('connect-flash');
 
 var mongo = require('mongoskin');
 var dbUrl = require('../dbLogin.js');
@@ -95,31 +96,9 @@ router.post('/playlist', function (req, res) {
 
 	var date = new Date();
 
-
-
-	// var host;
-	// getHostName(djId, function (name) {
-	// 	console.log(name + ' name');
-	// 	host += name;
-	// });
-	// console.log(host + ': hOST');
 	archivePlaylist(showId, djId, pairArrays(artists, songs, 'p'));
 
-	// var tURL = createTumblrURL(client, djId, showId, artists, songs);
-
-	// archivePlaylist(showId, date, tURL, artists, songs);
-	// function getHostName(id, cb) {
-	// 	var reply;
-	// 	userColl.findById(id, function (err, dj) {
-	// 		if (err) {
-	// 			reply = "db error";
-	// 		} else {
-	// 			reply = dj.firstName + ' ' + dj.lastName;
-	// 		}
-	// 		console.log(reply + ' reply');
-	// 		cb(reply);
-	// 	});
-	// }
+	// var tURL = postToTumblr(client, djId, showId, artists, songs);
 
 	function addToArists(artists, songs) {
 		var artistIds = [];
@@ -203,10 +182,8 @@ router.post('/playlist', function (req, res) {
 			} else {
 				next();
 			}
-		}).then( function (artistIds) {
+		}).then( function () {
 			console.log('all done');
-			// console.log(artistIds);
-			// return artistIds;
 		});
 	}
 
@@ -221,17 +198,15 @@ router.post('/playlist', function (req, res) {
 		return content;
 	}
 
-	function createTumblrURL(client, djName, showTitle, artists, songs) {
-		var content = '<p>With: ' + djName + '</p>';
-		for (var i=0; i<artists.length; i++) {
-			var line = '<p>' + artists[i] + ': ' + songs[i] + '</p>';
-			content += line;
-		} 
-		console.log()
-		// console.log(content);
+	function postToTumblr(client, showTitle, djName, date, content, urlPath) {
+		var host = 'localhost:3000';
+		// var host = 'wmcn.fm';
+		var wmcnLink = "<p><a href='" + host + urlPath + "'>" + "View this post on the WMCN website!" + "</a></p>";
+		var body = '<p>With ' + djName + '</p>' + content + wmcnLink;
+
 		var options = {
-			title: showTitle,
-			body: content,
+			title: showTitle + ' ' + date,
+			body: body,
 			tags: 'playlist'
 		}
 
@@ -243,8 +218,7 @@ router.post('/playlist', function (req, res) {
 			}
 			console.log('url: ' + url);
 			return url;
-		});
-		
+		});	
 	}
 
 	function archivePlaylist(showId, djId, bodyContent) {
@@ -288,14 +262,17 @@ router.post('/playlist', function (req, res) {
 					var playlist = newPl[0];
 					var id = playlist._id;
 					var perma = playlist.perma;
+					var mdy = playlist.date.month + '/' + playlist.date.date + '/' + playlist.date.year;
+					var tUrl = postToTumblr(client, playlist.showName, playlist.hostName, mdy, playlist.content, playlist.perma);
+					console.log(tUrl);
+					req.flash('tumblrURL' , tUrl);
 					res.redirect(perma);
 
-				});
-				
+				});	
 			});
 		});
-		
 	}
+
 });
 
 router.get('/review', function(req, res) {

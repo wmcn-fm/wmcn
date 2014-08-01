@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var flash = require('connect-flash');
 
 var mongo = require('mongoskin');
 var dbUrl = require('../dbLogin.js');
@@ -44,15 +45,36 @@ router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
 			var perma = pl.perma;
 			var fullDate = pl.date;
 			var content = pl.content;
+			var alertInfo;
 
+			if (req.flash('tumblrURL').length) {
+				alertInfo = req.flash('tumblrURL');
+				console.log('if!!');
+				renderWithInfo();
+			} else {
+				console.log('else!! - no info');
+				alertInfo = req.flash('tumblrURL');
+				// res.render('playlist-layout', {
+				// 	title: title,
+				// 	dj: dj,
+				// 	perma: perma,
+				// 	date: fullDate,
+				// 	content: content
+				// });
+				renderWithInfo();
+			}
 
-			res.render('playlist-layout', {
-				title: title,
-				dj: dj,
-				perma: perma,
-				date: fullDate,
-				content: content
-			});
+			function renderWithInfo() {
+				console.log('renderWithInfo!!!!');
+				res.render('playlist-layout', {
+					title: title,
+					dj: dj,
+					perma: perma,
+					date: fullDate,
+					content: content,
+					alertInfo: alertInfo
+				});
+			}
 		}
 	});
 });
