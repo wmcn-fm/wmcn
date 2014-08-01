@@ -94,11 +94,8 @@ router.post('/playlist', function (req, res) {
 	var artists = req.body.artistInput;
 	var songs = req.body.songInput;
 
-	var date = new Date();
-
+	addToArists(artists, songs);
 	archivePlaylist(showId, djId, pairArrays(artists, songs, 'p'));
-
-	// var tURL = postToTumblr(client, djId, showId, artists, songs);
 
 	function addToArists(artists, songs) {
 		var artistIds = [];

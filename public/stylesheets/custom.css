@@ -73,3 +73,15 @@ input[type="checkbox"]:checked:after {
   text-align: center;
 }
 
+.page-header {
+  text-align: center;
+}
+
+h1 small {
+  display: block;
+}
+
+.post-date {
+  font-size: 50%;
+  font-style: italic;
+}
