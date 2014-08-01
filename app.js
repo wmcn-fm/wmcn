@@ -38,11 +38,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
-app.use(sass.middleware({
-    src: path.join(__dirname + '/sass'),
-    dest: path.join(__dirname),
-    debug: true
-}));
+// app.use(sass.middleware({
+//     src: path.join(__dirname + '/sass'),
+//     dest: path.join(__dirname),
+//     debug: true
+// }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
