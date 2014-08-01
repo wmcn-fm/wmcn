@@ -85,3 +85,19 @@ h1 small {
   font-size: 50%;
   font-style: italic;
 }
+
+.thumbnail h4 {
+  text-align: center;
+}
+
+.thumbnail {
+  margin: auto;
+}
+
+.relatedContent {
+  text-align: center;
+}
+
+.relatedContent .thumbnail {
+  margin: auto;
+}

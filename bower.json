@@ -20,5 +20,9 @@
   ],
   "dependencies": {
     "Faker.js": "https://github.com/FotoVerite/Faker.js.git#~0.6.1"
+  },
+  "devDependencies": {
+    "fixie": "https://github.com/ryhan/fixie.git",
+    "holderjs": "~2.3.2"
   }
 }

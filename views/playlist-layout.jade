@@ -1,19 +1,38 @@
 extends layout
 
 block content
-	- if (alertInfo)
-		.alert.alert-success.alert-dismissible(role='alert')
-			button.close(type='button' data-dismiss='alert')
-				span(aria-hidden='true') !{'&times;'}
-				span.sr-only Close
+	.container-fluid
+		- if (alertInfo)
+			.row
+				.col-md-12
+					.alert.alert-success.alert-dismissible(role='alert')
+						button.close(type='button' data-dismiss='alert')
+							span(aria-hidden='true') !{'&times;'}
+							span.sr-only Close
 
-			strong Your playlist posted successfully! 
-			span Reblog it on 
-				a(href=alertInfo).alert-link Tumblr !{'>>'}
-	.page-header
-		h1
-			a(href=perma)= title
-			small.post-author= dj
-			small.post-date= date.day + ', ' + date.month + ' ' + date.date + ' ' + date.year + ', ' + date.hour
-	.post-content.playlist-content
-		!{content}
+						strong Your playlist posted successfully! 
+						span Reblog it on 
+							a(href=alertInfo).alert-link Tumblr !{'>>'}
+		.row
+			.col-md-12
+				.page-header
+					img(src='holder.js/500x500')
+					h1
+						a(href=perma)= title
+						small.post-author= dj
+						small.post-date= date.day + ', ' + date.month + ' ' + date.date + ' ' + date.year + ', ' + date.hour
+		.row
+			.col-md-12
+				.post-content.playlist-content
+					!{content}
+		.row.relatedContent
+			h3 Related content: 
+			- var i=0
+			while i < 6
+				.col-md-2
+					.thumbnail
+						a(href='#')
+							img(data-src='holder.js/200x200')
+							.caption
+								h4.fixie
+				- i++
