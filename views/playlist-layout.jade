@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	h1
+		a(href=perma)= title
+	h2= dj
+	h3= date.day + ', ' + date.month + ' ' + date.date + ' ' + date.year + ', ' + date.hour
+	.post-content.playlist-content
+		!{content}

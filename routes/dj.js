@@ -267,6 +267,8 @@ router.post('/playlist', function (req, res) {
 				if (err) {showTitle: ':('} else {
 					showName = show.showTitle;
 				}
+				var perma = '/playlist/' + showName + '/' + year + '/' + month + '/' + date + '/' + hour + '/';
+				 
 				playistColl.insert({
 					"showId": showId,
 					"hostId" : djId,
@@ -283,10 +285,10 @@ router.post('/playlist', function (req, res) {
 					"perma" : perma,
 					"content": bodyContent
 				}, function (err, newPl) {
-					console.log(newPl);
-					var link = newPl[0].perma;
-					console.log(perma);
-					res.render(perma);
+					var playlist = newPl[0];
+					var id = playlist._id;
+					var perma = playlist.perma;
+					res.redirect(perma);
 
 				});
 				

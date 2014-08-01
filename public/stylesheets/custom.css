@@ -1,11 +1,3 @@
-.live {
-  background-color: yellow !important;
-}
-
-td.live:hover {
-  cursor: pointer;
-}
-
 .pinned {
   position: fixed;
   top: 0px;
@@ -75,5 +67,9 @@ input[type="checkbox"]:checked:after {
 
 .pace-inactive {
   display: none;
+}
+
+.playlist-content {
+  text-align: center;
 }
 

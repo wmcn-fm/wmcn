@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 var mongo = require('mongoskin');
 var dbUrl = require('../dbLogin.js');
 var db = mongo.db(dbUrl, {native_parser:true});
@@ -34,17 +35,25 @@ router.get('/archive', function(req, res) {
 *   '/playlist'
 */
 
-router.get('/playlist/:year/:month/:date/:hour', function(req, res) {
-	// var contentType = req.params.contentType;
-	var year = req.params.year;
-	var month = req.params.month;
-	var date = req.params.date;
-	var hour = req.params.hour;
+router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
+	playlistColl.find({showName: req.params.showName, perma: req.url}).toArray(function (err, result) {
+		if (err) { res.render('error') } else {
+			var pl = result[0];
+			var title = pl.showName + ' ' + pl.date.month + '/' + pl.date.date;
+			var dj = pl.hostName;
+			var perma = pl.perma;
+			var fullDate = pl.date;
+			var content = pl.content;
 
-	var perma = 'x';
 
-	res.render('index', {
-		title: 'redirect me'
+			res.render('playlist-layout', {
+				title: title,
+				dj: dj,
+				perma: perma,
+				date: fullDate,
+				content: content
+			});
+		}
 	});
 });
 
