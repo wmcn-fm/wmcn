@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+	var editor = new wysihtml5.Editor('wysihtml5-textarea', {
+		toolbar: 'wysihtml5-toolbar',
+		parserRules: wysihtml5ParserRules
+	});
+
 	$('.userId').each(function (i) {
 		var text = $(this).text();
 		var link = "<a href='/admin/users/" + text + "'>" + text + "</a>";
@@ -30,7 +35,7 @@ $(document).ready(function() {
 			var userId = $(this).parent().siblings('.userId').text();
 			successApps.push(userId);
 		};
-	})
+	});
 
 	$('.app-updateButton').on('click', function(e) {
 		e.preventDefault();

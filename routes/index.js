@@ -6,8 +6,11 @@ var mongo = require('mongoskin');
 var dbUrl = require('../dbLogin.js');
 var db = mongo.db(dbUrl, {native_parser:true});
 var playlistColl = db.collection('playlists');
+var reviewColl = db.collection('reviews');
 
 var passport = require('passport');
+
+var navCats = ['archive', 'schedule', 'reviews', 'news', 'info'];
 
 /** 
 *   ====================================================================
@@ -16,7 +19,11 @@ var passport = require('passport');
 
 //  GET
 router.get('/', function(req, res) {
-  res.render('index', { title: 'WMCN: Macalester College Radio' });
+  res.render('index', { 
+  	title: 'WMCN: Macalester College Radio',
+  	navCategories: navCats
+
+  });
 });
 
 /** 
@@ -26,8 +33,12 @@ router.get('/', function(req, res) {
 
 //  GET
 router.get('/archive', function(req, res) {
-	res.render('archive', {title: "Show Archive" })
+	res.render('archive', {
+		title: "Show Archive",
+	  	navCategories: navCats
+	});
 });
+
 
 //  POST
 // just js buttons?
@@ -50,7 +61,8 @@ router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
 			if (req.flash('tumblrURL').length) {
 				alertInfo = req.flash('tumblrURL');
 				console.log('if!!');
-				renderWithInfo();
+				var currentShow = 'foood';				
+				renderWithInfo(currentShow);
 			} else {
 				console.log('else!! - no info');
 				alertInfo = req.flash('tumblrURL');
@@ -61,10 +73,11 @@ router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
 				// 	date: fullDate,
 				// 	content: content
 				// });
-				renderWithInfo();
+				var currentShow = 'foood';
+				renderWithInfo(currentShow);
 			}
 
-			function renderWithInfo() {
+			function renderWithInfo(currentShow) {
 				console.log('renderWithInfo!!!!');
 				res.render('playlist-layout', {
 					title: title,
@@ -72,7 +85,60 @@ router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
 					perma: perma,
 					date: fullDate,
 					content: content,
-					alertInfo: alertInfo
+					alertInfo: alertInfo,
+					currentShow: currentShow
+				});
+			}
+		}
+	});
+});
+
+/** 
+*   ====================================================================
+*   '/review'
+*/
+
+router.get('/review/:artist/:year/:month/:date/:hour', function(req, res) {
+	reviewColl.find({perma: req.url}).toArray(function (err, result) {
+		if (err) { res.render('error') } else {
+			console.log(result);
+			var review = result[0];
+			var title = review.artistName + ': ' + review.albumName;
+			var dj = review.djName;
+			var perma = review.perma;
+			var fullDate = review.date;
+			var content = review.content;
+			var alertInfo;
+
+			if (req.flash('tumblrURL').length) {
+				alertInfo = req.flash('tumblrURL');
+				console.log('if!!');
+				var currentShow = 'foood';				
+				renderWithInfo(currentShow);
+			} else {
+				console.log('else!! - no info');
+				alertInfo = req.flash('tumblrURL');
+				// res.render('playlist-layout', {
+				// 	title: title,
+				// 	dj: dj,
+				// 	perma: perma,
+				// 	date: fullDate,
+				// 	content: content
+				// });
+				var currentShow = 'foood';
+				renderWithInfo(currentShow);
+			}
+
+			function renderWithInfo(currentShow) {
+				console.log('renderWithInfo!!!!');
+				res.render('playlist-layout', {
+					title: title,
+					dj: dj,
+					perma: perma,
+					date: fullDate,
+					content: content,
+					alertInfo: alertInfo,
+					currentShow: currentShow
 				});
 			}
 		}

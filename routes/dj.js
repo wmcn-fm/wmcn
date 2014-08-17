@@ -9,6 +9,7 @@ var artistColl = db.collection('artists');
 var userColl = db.collection('usercollection');
 var showColl = db.collection('shows');
 var playistColl = db.collection('playlists');
+var reviewColl = db.collection('reviews');
 
 var client = require('../tumblr.js');
 
@@ -273,7 +274,82 @@ router.post('/playlist', function (req, res) {
 });
 
 router.get('/review', function(req, res) {
-    res.render('dj/review', {title: "write a review" })
+
+	// var user = req.body.userId;	//	once login is setup
+	var testUser = '53cd88a833e824df184b4557';
+	var testShow = '53cd88a833e824df184b4558';
+
+	userColl.findById(testUser, function (err, dj) {
+		var djName;
+		var date = new Date();
+		var showTitle;
+
+		if (err) {djName = ' :( ' } else {
+			djName = dj.firstName + ' ' + dj.lastName;
+		}
+
+		showColl.findById(testShow, function (err, show) {
+
+			if (err) {showTitle: ':('} else {
+				console.log(show);
+				showTitle = show.showTitle;
+			}
+			res.render('dj/review', 
+		    	{
+		    		title: "write a review",
+		    		djName: djName,
+		    		date: date,
+		    		show: showTitle
+	    	});
+		});
+	});
+});
+
+router.post('/review', function(req, res) {
+	var djId = req.body.dj_id;
+	var djName = 'will kent-daggett';
+	var artistName = req.body.artistName;
+	var album = req.body.albumName;
+	var content = req.body.content;
+	var d = new Date();
+	var	year = d.getFullYear();
+	var	month = d.getMonth();
+	var	date = d.getDate();
+	var	hour = d.getHours();
+	var	min = d.getMinutes();
+	var	day = d.getDay();
+	var	perma = 'review/' + artistName + '/' + year + '/' + month + '/' + date + '/' + hour + '/';
+	artistColl.find({name: artistName}).toArray(function (err, result) {
+		console.log(result);
+		var artistId = result[0]._id;
+		reviewColl.insert({
+			'artistId': artistId,
+			'artistName' : artistName,
+			'djId' : djId,
+			'djName' : djName,
+			"album" : album,
+			"content" : content,
+			"date" : {
+				"year" : year,
+				"month" : month,
+				"date" : date,
+				"hour" : hour,
+				"min" : min,
+				"day" : day
+			},
+			"perma" : perma
+		}, function (err, newReview) {
+			console.log(newReview);
+			var reviewId = newReview[0]._id;
+			var newURL = newReview[0].perma;
+			artistColl.update({_id:mongo.helper.toObjectID(artistId)},
+			{
+				$set: {reviews: {id: reviewId}}
+			}, function (err, updatedArtist) {
+				res.redirect(newURL);
+			});
+		});
+	});	
 });
 
 router.get('/blog', function(req, res) {

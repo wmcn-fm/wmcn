@@ -19,7 +19,8 @@
     "tests"
   ],
   "dependencies": {
-    "Faker.js": "https://github.com/FotoVerite/Faker.js.git#~0.6.1"
+    "Faker.js": "https://github.com/FotoVerite/Faker.js.git#~0.6.1",
+    "wysihtml5": "~0.3.0"
   },
   "devDependencies": {
     "fixie": "https://github.com/ryhan/fixie.git",

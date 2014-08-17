@@ -1,5 +1,34 @@
-extends ../layout
+extends ./layout-dj
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
+
+	.container-fluid
+			.row
+				.menu-action.host.col-md-4
+					h4 #{djName}
+				.menu-action.show.col-md-4
+					h4 #{show}
+				.menu-action.date.col-md-4
+					h4 #{date}
+			.row
+				div(style="display: none;" id="wysihtml5-toolbar")
+					a(data-wysihtml5-command='bold') bold
+					a(data-wysihtml5-command='italic') italic
+			.row
+				.wysi
+					form(role='form', method='post', action='/dj/review', id='makeReview')
+						input.form-control(type='hidden', name='dj_id', value='53cd88a833e824df184b4557')
+						input.form-control(type='hidden', name='show_id', value='53cd88a833e824df184b4558')
+						.col-md-4
+							.form-group
+								label(for='artistName') artist
+								input.form-control(type='text', placeholder='outkast', name='artistName')
+						.col-md-4
+							.form-group
+								label(for='albumName') album
+								input.form-control(type='text', placeholder='speakerboxx', name='albumName')
+						textarea.col-md-8(name='content' id='wysihtml5-textarea' placeholder='your review...' autofocus)
+						button.btn.btn-primary.submit(type='submit') Publish your review
+
