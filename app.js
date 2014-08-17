@@ -9,9 +9,13 @@ var sass = require('node-sass');
 
 var mongo = require('mongoskin');
 
-var dbUrl = require('./modulus.js');
-var db = mongo.db(dbUrl.modulusConnection, {native_parser:true});
+var dbUrl = require('./dbLogin.js');
+var db = mongo.db(dbUrl, {native_parser:true});
 var collection = db.collection('usercollection');
+
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -33,13 +37,22 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+
+// app.use(sass.middleware({
+//     src: path.join(__dirname + '/sass'),
+//     dest: path.join(__dirname),
+//     debug: true
+// }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(sass.middleware({
-    src: path.join(__dirname, 'public/sass'),
-    dest: path.join(__dirname, 'public'),
-    debug: true
-}));
+app.use(session({ 
+    secret: 'Should definitely change this and store somewhere Will.', // session secret
+    saveUninitialized: true,
+    resave: true })); 
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 // app.use(function(req,res,next){
 //     req.db = db;
@@ -47,7 +60,9 @@ app.use(sass.middleware({
 //     next();
 // });
 
-
+//this configures passport so all the routes can use it
+//we export config_passport as an function that takes the passport obj as argument
+require('./config_passport.js')(passport)
 
 app.use('/', routes);
 app.use('/users', users);

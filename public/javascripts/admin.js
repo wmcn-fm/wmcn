@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+	var editor = new wysihtml5.Editor('wysihtml5-textarea', {
+		toolbar: 'wysihtml5-toolbar',
+		parserRules: wysihtml5ParserRules
+	});
+
 	$('.userId').each(function (i) {
 		var text = $(this).text();
 		var link = "<a href='/admin/users/" + text + "'>" + text + "</a>";
@@ -30,25 +35,22 @@ $(document).ready(function() {
 			var userId = $(this).parent().siblings('.userId').text();
 			successApps.push(userId);
 		};
-	})
+	});
 
 	$('.app-updateButton').on('click', function(e) {
 		e.preventDefault();
-
-		// $.ajax({
-  //           type: 'POST',
-  //           url: '/admin/applicants/dj'
-  //       }).done(function( response ) {
-  //       	console.log(response.redirect);
-  //           // if (response.msg !== '') {
-  //           //     alert('error: ' + reponse.msg);
-  //           // } 
-  //       });
 	
 		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
-			window.location.href = response.redirect;
-			console.log(response.redirect);
+			window.location.href = response;
 		});
+
+		// $.ajax({
+		// 	type: 'POST',
+		// 	data: successApps,
+		// 	url: 'http://localhost:3000/admin/applicants/dj'
+		// }).done(function (response) {
+		// 	console.log(response + ' res');
+		// });
 	});
 
 });	//end ready

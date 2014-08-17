@@ -1,5 +1,25 @@
-extends ../layout
+extends layout-dj
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
+
+	.container-fluid
+		.row
+			.dj-action.col-md-6
+				a(href='/dj/playlist')
+					h2.menu-action playlist
+
+			.dj-action.col-md-6
+				a(href='/dj/blog')
+					h2.menu-action blog
+		.row
+			.dj-action.col-md-6
+				a(href='/dj/review')
+					h2.menu-action review
+
+			.dj-action.col-md-6
+				a(href='/dj/user')
+					h2.menu-action user
+
+

@@ -1,16 +1,10 @@
 # [wmcn](http://wmcn.tumblr.com)
 
-##to do:
-* node.js // mongoDB backend integration to support true archiving and dynamic querying
-
-* bootstrapped-frontend w/ touch integration
-
-* tumblr api will keep tumblr blog up-to-date
-
-* custom application form
-
-* custom admin interface
-
+    cd wmcn
+    bower install
+    npm install
+    npm start
+    server listening on port 3000
 
 ## url layout:
 	|-- /											[info, schedule, contacts, news, reviews + giveaways, playlists]

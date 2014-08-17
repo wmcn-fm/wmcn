@@ -1,5 +1,66 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	.container-fluid
+		.row
+			.col-md-12.col-lg-6
+				section.content-quad
+					h1.category-title latest shows:
+					div#playlist-carousel.carousel.slide(data-ride='carousel')
+						ol.carousel-indicators
+							li(data-target='playlist-carousel' data-slide-to='0').active
+							li(data-target='playlist-carousel' data-slide-to='1')
+						.carousel-inner
+							.item.active
+								h1.category-headline.fixie
+							.item
+								h1.category-headline.fixie
+						a.left.carousel-control(href='#playlist-carousel' role='button' data-slide='prev')
+							span.glyphicon.glyphicon-chevron-left
+						a.right.carousel-control(href='#playlist-carousel' role='button' data-slide='next')
+							span.glyphicon.glyphicon-chevron-right
+			.col-md-12.col-lg-6
+				section.content-quad
+					h1.category-title new reviews:
+					div#review-carousel.carousel.slide(data-ride='carousel')
+						ol.carousel-indicators
+							li(data-target='review-carousel' data-slide-to='0').active
+							li(data-target='review-carousel' data-slide-to='1')
+						.carousel-inner
+							.item.active
+								h1.category-headline.fixie
+								img.fixie
+							.item
+								img.fixie
+						a.left.carousel-control(href='#review-carousel' role='button' data-slide='prev')
+							span.glyphicon.glyphicon-chevron-left
+						a.right.carousel-control(href='#review-carousel' role='button' data-slide='next')
+							span.glyphicon.glyphicon-chevron-right
+		.row
+			.col-md-12.col-lg-6
+				section.content-quad
+					div#pinned1
+						h1.fixie.category-headline
+						img(src='holder.js/610x400')
+			.col-md-12.col-lg-6
+				section.content-quad
+					div#pinned2
+						h1.fixie.category-headline
+						img(src='holder.js/610x400')
+		.row
+			section.col-xs-12#schedule
+				h1 show schedule: 
+				table.table.table-hover
+					thead
+						- var headers = ['time', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+						- each item, i in headers
+							th= item
+					tbody
+						- for (var i=0; i < 25; i++)
+							tr
+								td= i
+								- for (var j=0; j < 7; j++)
+									td.fixie
+
+
+		//- include footer

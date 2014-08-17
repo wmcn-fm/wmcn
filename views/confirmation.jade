@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	div hello #{djName}!
+	div please enter your confirmation code below
+	div note, I think they should be posting to action='/signup/:bigURL'
+	form(action='/signup', method='post')
+		.form-group
+			label Email
+			input.form-control(type='text', name='email')
+		.form-group
+			label Password
+			input.form-control(type='password', name='password')
+		button.btn.btn-warning.btn-lg(type='submit') Sign in

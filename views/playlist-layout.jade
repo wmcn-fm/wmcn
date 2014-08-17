@@ -1,0 +1,49 @@
+extends layout
+
+block content
+	.container-fluid
+		//- - if (alertInfo)
+		//- 	.row
+		//- 		.col-md-12
+		//- 			.alert.alert-success.alert-dismissible(role='alert')
+		//- 				button.close(type='button' data-dismiss='alert')
+		//- 					span(aria-hidden='true') !{'&times;'}
+		//- 					span.sr-only Close
+
+		//- 				strong Your playlist posted successfully! 
+		//- 				span Reblog it on 
+		//- 					a(href=alertInfo).alert-link Tumblr !{'>>'}
+		.row
+			.wmcn
+				a(href='/')
+					img(src='/images/favicon.png').icon
+				p.currentShow
+					span now playing: 
+					span.currentShow= currentShow
+			.nav-spacer
+		.row
+			.col-md-12.post-header
+				.left-block
+					h1.post-title
+						a(href=perma)= title
+						small.post-author= dj
+						small.post-date= date.day + ', ' + date.month + ' ' + date.date + ' ' + date.year + ', ' + date.hour
+		.row
+			.col-md-12
+				.left-block
+					img(src='holder.js/500x500')
+				.right-block
+					.post-content.playlist-content
+						!{content}
+			.col-md-2
+				h3 Related content: 
+				- var i=0
+				while i < 6
+					.col-md-2
+						.thumbnail
+							a(href='#')
+								img(data-src='holder.js/200x200')
+								.caption
+									h4.fixie
+					- i++
+		include footer
