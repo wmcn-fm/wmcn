@@ -73,7 +73,10 @@ router.post('/applicants/dj', function(req, res) {
                     to: 'jyang4@macalester.edu, wkentdag@macalester.edu', // list of receivers
                     subject: 'You have been approved!', // Subject line
                     // text: 'Hello world ✔', // plaintext body
-                    html: '<b>This is a WMCN test email</b>' // html body
+                    html: '<b>This is a WMCN test email</b>' +
+                          '<p> Please use this confirmation code when you signup ' + doc.user.confiCode + '</p>' +
+                          '<p> Please click on this link to signup: localhost:3000/signup/' + doc.user.bigURL + '</p>'
+
                 }
 
                 // send mail with defined transport object
@@ -94,7 +97,9 @@ router.post('/applicants/dj', function(req, res) {
                     "phone" : doc.user.phone,
                     "macIdNum" : doc.user.macIdNum,
                     "iclass" : doc.user.iclass,
-                    "gradYear" : doc.user.gradYear
+                    "gradYear" : doc.user.gradYear,
+                    bigURL : doc.user.bigURL,
+                    confiCode : doc.user.confiCode
                 }, function (err, newUser) {
                     if (err) {console.log(err + ' userColl insert err')} else {
                         var newUserId = newUser[0]._id;
