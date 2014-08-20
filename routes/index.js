@@ -178,14 +178,22 @@ router.post('/signup/:bigUrl', function (req, res) {
 	
 	// to Array is probably not necessary, but easiest way to get a callback without building my own async function
 	userColl.find({"user.bigUrl": req.bigUrl}, {user: 1}).limit(1).toArray(function (err, user) {
+		if (err) {
+			console.log("Error ", err);
+			res.redirect('/signup/:bigUrl');
+		}
+
 		user = user[0];
-		console.log("This is the user: ", user);
-		console.log("User typed in this confiCode: ", req.body.confiCode);
-		console.log("This is the stored confiCode: ", user.user.confiCode);
-		if (user.user.confiCode === req.body.confiCode) {
+		// console.log("This is the user: ", user);
+		// console.log("User typed in this confiCode: ", req.body.confiCode);if 
+		// console.log("This is the stored confiCode: ", user.user.confiCode);
+
+		// user must exist and the confirmation code needs to match
+		if (user && (user.user.confiCode === req.body.confiCode)) {
+			// set up an AJAX call
 			res.send("Confirmation code matched up! Set your password!")
 		} else {
-			res.send("boo you failed");
+			res.redirect('/signup/' + req.bigUrl.toString());
 		}
 	}); // end toArray
 	
