@@ -12,9 +12,17 @@ block content
 							li(data-target='playlist-carousel' data-slide-to='1')
 						.carousel-inner
 							.item.active
-								h1.category-headline.fixie
+								.playlist
+									h1.category-headline.fixie
 							.item
-								h1.category-headline.fixie
+								.playlist
+									h1.category-headline.fixie
+							.item
+								.playlist
+									h1.category-headline.fixie
+							.item
+								.playlist
+									h1.category-headline.fixie
 						a.left.carousel-control(href='#playlist-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
 						a.right.carousel-control(href='#playlist-carousel' role='button' data-slide='next')
@@ -29,9 +37,9 @@ block content
 						.carousel-inner
 							.item.active
 								h1.category-headline.fixie
-								img.fixie
+								img(src='http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg')
 							.item
-								img.fixie
+								img(src='http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg')
 						a.left.carousel-control(href='#review-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
 						a.right.carousel-control(href='#review-carousel' role='button' data-slide='next')
@@ -60,7 +68,8 @@ block content
 							tr
 								td= i
 								- for (var j=0; j < 7; j++)
-									td.fixie
+									td
+										button.btn.btn-default.popover-dismiss(type='button' data-toggle='popover' data-container='body' title='xxx' data-content='yyyy') test
 
 
 		//- include footer

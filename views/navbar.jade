@@ -8,13 +8,19 @@ nav.navbar.navbar-default.center(role='navigation')
 		.navbar-brand
 			a(href='/')
 				img.icon(src='/images/favicon.png')
-			.currentShow-container
+			//- .currentShow-container
 				ul.nav.navbar-nav
 					li
 						span now playing: 
 						span.currentShow= currentShow
 	div#nav-main.collapse.navbar-collapse
 		ul.nav.navbar-nav
+			li.currentShow
+				- var urlStem = '/shows/' + currentShow
+				a(href=urlStem)
+					span.glyphicon.glyphicon-volume-up 
+					span  currentShow 
+					span.glyphicon.glyphicon-music  
 			li
 				a(href = '/archive')
 					button.btn.btn-default.navbar-btn archive

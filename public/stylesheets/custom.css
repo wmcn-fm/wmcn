@@ -163,15 +163,15 @@ h1, h2, h3, h4, h5, h6, input  {
   font-family: 'Slabo 13px', serif !important;
 }*/
 
-div.logo-main {
+.logo-main table {
   margin: auto;
   font-family: futura;
   max-width: 500px;
   text-transform: uppercase;
 }
 
-.logo-main > h1 {
-  font-size: 1000%;
+.logo-main h1 {
+  font-size: 1500%;
   text-align: center;
 }
 
@@ -187,14 +187,14 @@ div.logo-main {
   z-index: 100;
   position: fixed;
   margin-top: 0;
-  background-color: #424242;
+  background-color: #282828;
 }
 
 .nav-spacer {
   width: 100%;
   height: 50px;
   z-index: 100;
-  background-color: #424242;
+  background-color: #282828;
 }
 
 .icon-container {
@@ -209,17 +209,8 @@ img.icon {
   max-height: 50px;
 }
 
-.currentShow-container {
-  display: inline !important;
-  width: 15%;
-  height: 100%;
-  float: left;
-  text-align: left;
-  font-size: 0.8em;
-}
-
 .currentShow {
-  display: block;
+  float: left;
 }
 
 .nav-categories {
@@ -242,6 +233,7 @@ img.icon {
 
 .navbar {
   font-family: futura !important;
+  background-color: #282828;
 }
 
 .navbar.center {
@@ -253,6 +245,10 @@ img.icon {
   float: none;
 }
 
+.navbar button {
+  text-transform: uppercase;
+}
+
 .nav-category > * {
   vertical-align: center;
   text-transform: uppercase;
@@ -262,6 +258,10 @@ img.icon {
 .nav-category > * > a {
   color: white !important;
   text-decoration: none !important;
+}
+
+.logo-main table:hover {
+   cursor: crosshair;
 }
 
 
@@ -286,6 +286,36 @@ h1.category-title {
 }
 .item > img {
   height: 100%;
+  max-height: 100%;
+  max-width: 100%;
   width: 100%;
   z-index: 50;
+}
+
+a > button {
+}
+
+a {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+li {
+  float: left;
+}
+
+.grey {
+  color: #bdbdbd;
+}
+
+.yellow {
+  color: #ff8900;
+}
+
+.blue {
+  color: #086fa1;
+}
+
+.red {
+  color: #a31010;
 }
