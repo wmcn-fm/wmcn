@@ -56,7 +56,7 @@ router.post('/dj', function(req, res) {
             "macIdNum" : macIdNum,
             "iclass" : iclass,
             "gradYear" : gradYear,
-            bigURL : randomString(32, alphanumeric) + iterator,
+            bigUrl : randomString(32, alphanumeric) + iterator,
             confiCode : randomString(6, alphanumeric)
         },
         "show": {
@@ -74,6 +74,8 @@ router.post('/dj', function(req, res) {
             res.send("There was a problem adding the information to the database.");
         }
         else {
+            console.log("This is the iterator", iterator);
+            iterator += 1;
             // If it worked, set the header so the address bar doesn't still say /adduser
             res.location("../admin/applicants/dj");
             // And forward to success page
@@ -92,4 +94,4 @@ function randomString(length, chars) {
 }
 //var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 var alphanumeric = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var iterator; // iterator makes the bigURL string unique
+var iterator = 0; // iterator makes the bigURL string unique

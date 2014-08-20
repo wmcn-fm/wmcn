@@ -75,7 +75,7 @@ router.post('/applicants/dj', function(req, res) {
                     // text: 'Hello world ✔', // plaintext body
                     html: '<b>This is a WMCN test email</b>' +
                           '<p> Please use this confirmation code when you signup ' + doc.user.confiCode + '</p>' +
-                          '<p> Please click on this link to signup: localhost:3000/signup/' + doc.user.bigURL + '</p>'
+                          '<p> Please click on this link to signup: localhost:3000/signup/' + doc.user.bigUrl + '</p>'
 
                 }
 

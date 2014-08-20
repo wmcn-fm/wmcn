@@ -12,6 +12,9 @@ var passport = require('passport');
 
 var navCats = ['archive', 'schedule', 'reviews', 'news', 'info'];
 
+
+var userColl = db.collection('usercollection'); // for login testing
+
 /** 
 *   ====================================================================
 *   '/'
@@ -150,10 +153,9 @@ router.get('/review/:artist/:year/:month/:date/:hour', function(req, res) {
 *   Login testing grounds
 */
 
-// might use router.param for bigUrl
-
+// remember that the callback function can be passed the 'id', which is the bigUrl in this case
 router.param('bigUrl', function (req, res, next, id) {
-	//look into database at userColl to find the bigURL, and confirmation code
+	//look into database at userColl to find the bigUrl, and confirmation code
 	// this will let us identify the user
 	// if confirmation code and bigUrl are from the same record, activate their privileges
 	req.bigUrl = id;
@@ -163,7 +165,25 @@ router.param('bigUrl', function (req, res, next, id) {
 
 router.get('/signup/:bigUrl', function (req, res) {
 	console.log(req.bigUrl);
-	res.render('confirmation', {djName: "hardcoded dj name"})
+	res.render('confirmation', {djName: "hardcoded dj name", bigUrl: req.bigUrl})
+});
+
+// need to change how I access the value when the approve slider works again
+// find the user with the unique bigUrl,
+	//compare the inputted confirmation code with the confirmation code stored in the user
+	// if they match, send a response that allows the user to pick out their password
+	// then log them in
+router.post('/signup/:bigUrl', function (req, res) {
+	console.log("This is the bigUrL on signup/:bigUrl POST: ", req.bigUrl);
+	userColl.findOne({user: {bigUrl: req.bigUrl}}, function (err, user) {
+		console.log("This is the user: ", user);
+		if (user.confiCode === req.body.confiCode) {
+			res.send("Confirmation code matched up! Set your password!")
+		} else {
+			res.send("boo you failed");
+		}
+	}); // end findOne
+	
 });
 
 router.post('/signup', passport.authenticate('local-signup', {
