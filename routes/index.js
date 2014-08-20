@@ -190,7 +190,8 @@ router.post('/signup/:bigUrl', function (req, res) {
 
 		// user must exist and the confirmation code needs to match
 		if (user && (user.user.confiCode === req.body.confiCode)) {
-			// set up an AJAX call
+			// also add a password field to confirmation.jade and accept the password here,
+			// and do passporty stuff.
 			res.send("Confirmation code matched up! Set your password!")
 		} else {
 			res.redirect('/signup/' + req.bigUrl.toString());
