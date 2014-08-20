@@ -175,14 +175,19 @@ router.get('/signup/:bigUrl', function (req, res) {
 	// then log them in
 router.post('/signup/:bigUrl', function (req, res) {
 	console.log("This is the bigUrL on signup/:bigUrl POST: ", req.bigUrl);
-	userColl.findOne({user: {bigUrl: req.bigUrl}}, function (err, user) {
+	
+	// to Array is probably not necessary, but easiest way to get a callback without building my own async function
+	userColl.find({"user.bigUrl": req.bigUrl}, {user: 1}).limit(1).toArray(function (err, user) {
+		user = user[0];
 		console.log("This is the user: ", user);
-		if (user.confiCode === req.body.confiCode) {
+		console.log("User typed in this confiCode: ", req.body.confiCode);
+		console.log("This is the stored confiCode: ", user.user.confiCode);
+		if (user.user.confiCode === req.body.confiCode) {
 			res.send("Confirmation code matched up! Set your password!")
 		} else {
 			res.send("boo you failed");
 		}
-	}); // end findOne
+	}); // end toArray
 	
 });
 
