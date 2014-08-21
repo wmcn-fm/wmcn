@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-	var editor = new wysihtml5.Editor('wysihtml5-textarea', {
-		toolbar: 'wysihtml5-toolbar',
-		parserRules: wysihtml5ParserRules
-	});
+	// var editor = new wysihtml5.Editor('wysihtml5-textarea', {
+	// 	toolbar: 'wysihtml5-toolbar',
+	// 	parserRules: wysihtml5ParserRules
+	// });
 
 	$('.userId').each(function (i) {
 		var text = $(this).text();
@@ -37,16 +37,19 @@ $(document).ready(function() {
 		};
 	});
 
-	$('.app-updateButton').on('click', function (e) {
-		console.log('clicked!');
+	// $('.app-updateButton').on('click', function (e) {
+	// 	console.log('clicked!');
+	// });
+
+	$('.app-updateButton').click(function(e) {
+		e.preventDefault();
+		console.log('clikced!!');
+		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
+			window.location.href = response;
+		});
 	});
 
-	// $('.app-updateButton').on('click', function(e) {
-	// 	e.preventDefault();
-	// 	console.log('clikced!!');
-	// 	$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
-	// 		window.location.href = response;
-	// 	});
+	
 
 	// 	// $.ajax({
 	// 	// 	type: 'POST',

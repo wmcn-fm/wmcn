@@ -12,9 +12,9 @@ $(document).ready(function() {
     });
     $('#updateUserSubmit').on('click', 'a.deleteUser', deleteUser);
 
-    if ($('table'.length)) {
-        $('table').floatThead();
-    }
+    // if ($('table'.length)) {
+    //     $('table').floatThead();
+    // }
 
 });
 

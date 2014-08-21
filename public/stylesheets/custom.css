@@ -6,7 +6,7 @@ thead {
   background-color: #ffffff !important;
 }
 
-/*input[type="checkbox"] {
+input[type="checkbox"] {
   appearance: none;
   background-color: #fafafa;
   border: 1px solid lightgray;
@@ -45,7 +45,7 @@ input[type="checkbox"]:checked:after {
   right: 0;
   transition: border .25s, left .15s .25s, right .25s .175s;
 }
-*/
+
 .pace .pace-progress {
   background: #29d;
   position: fixed;
