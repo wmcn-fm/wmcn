@@ -65,7 +65,7 @@ router.post('/dj', function(req, res) {
         },
         "app" : {
             "djStatus" : djStatus,
-            "availability" : testArray
+            "availability" : availability
         }
     }, function (err, doc) {
         if (err) {
