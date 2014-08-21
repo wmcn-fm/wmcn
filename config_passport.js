@@ -28,7 +28,7 @@ module.exports = function(passport) {
 
   // destorys database session, is called when the session is done.
 	passport.serializeUser( function (user, done) {
-    console.log("this is the user.id: ", user._id)
+    console.log("this is the user.id serialization: ", user._id)
 	  done(null, user._id);
 	});
 
@@ -39,61 +39,10 @@ module.exports = function(passport) {
 				console.log("deserializing....this is the id: ", id);
 				// the user object gets attached to the request (as req.user) if this works correctly
 				// can be named something other than user if you want to set a var
+        user['hash'] = undefined; //so that hash doesn't get sent over
         done(err, user); 
     });
   }); // end passport.deserializeUser
-
-	// =========================================================================
-  // LOCAL SIGNUP ============================================================
-  // =========================================================================
-  // we are using named strategies since we have one for login and one for signup
-	// by default, if there was no name, it would just be called 'local'
-
-	passport.use('local-signup', new LocalStrategy({
-			// by default, local strategy uses username and password, we will override with email
-      usernameField : 'email',
-      passwordField : 'password',
-      passReqToCallback : true // allows us to pass back the entire request to the callback
-	}, function (req, email, password, done) {
-
-			// asynchronous
-      // User.findOne wont fire unless data is sent back
-      process.nextTick( function() {
-      	// find a user whose email is the same as the forms email
-				// we are checking to see if the user trying to login already exists
-        userColl.findOne({ 'email' :  email }, function(err, user) {
-            // if there are any errors, return the error
-            if (err) {
-            	return done(err);
-	          }
-
-            // check to see if theres already a user with that email
-            if (user) {
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-            } else {
-
-
-            	// ALL THIS NEEDS TO BE INSIDE A BCRYPT CALLBACK
-
-				// // if there is no user with that email
-    //             // create the user
-    //             var newUser            = new User();
-
-    //             // set the user's local credentials
-    //             newUser.local.email    = email;
-    //             newUser.local.password = newUser.generateHash(password);
-
-				// // save the user
-    //             newUser.save(function(err) {
-    //                 if (err)
-    //                     throw err;
-    //                 return done(null, newUser);
-    //             }); // end newUser.save
-            } // end if/else
-        }); 
-      }); // end process.nextTick
-	}) // end LocalStrategy & callback
-	); // end LOCAL-SIGNUP
 
 	// =========================================================================
   // LOCAL LOGIN =============================================================
@@ -132,7 +81,61 @@ module.exports = function(passport) {
             }
 
           }); // end bcrypt.compare          
-      });
+      }); // end findOne (note that we can probably get a performance boost with find and limit(1))
 
-  }));
-} // end module.exports 
+  })); // end Local Strategy
+} // end module.exports
+
+// discarded local signup strategy, no longer needed since we pass out temp passwords
+
+  // // =========================================================================
+ //  // LOCAL SIGNUP ============================================================
+ //  // =========================================================================
+ //  // we are using named strategies since we have one for login and one for signup
+  // // by default, if there was no name, it would just be called 'local'
+
+  // passport.use('local-signup', new LocalStrategy({
+  //    // by default, local strategy uses username and password, we will override with email
+ //      usernameField : 'email',
+ //      passwordField : 'password',
+ //      passReqToCallback : true // allows us to pass back the entire request to the callback
+  // }, function (req, email, password, done) {
+
+  //    // asynchronous
+ //      // User.findOne wont fire unless data is sent back
+ //      process.nextTick( function() {
+ //       // find a user whose email is the same as the forms email
+  //      // we are checking to see if the user trying to login already exists
+ //        userColl.findOne({ 'email' :  email }, function(err, user) {
+ //            // if there are any errors, return the error
+ //            if (err) {
+ //             return done(err);
+  //           }
+
+ //            // check to see if theres already a user with that email
+ //            if (user) {
+ //                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+ //            } else {
+
+
+ //             // ALL THIS NEEDS TO BE INSIDE A BCRYPT CALLBACK
+
+  //      // // if there is no user with that email
+ //    //             // create the user
+ //    //             var newUser            = new User();
+
+ //    //             // set the user's local credentials
+ //    //             newUser.local.email    = email;
+ //    //             newUser.local.password = newUser.generateHash(password);
+
+  //      // // save the user
+ //    //             newUser.save(function(err) {
+ //    //                 if (err)
+ //    //                     throw err;
+ //    //                 return done(null, newUser);
+ //    //             }); // end newUser.save
+ //            } // end if/else
+ //        }); 
+ //      }); // end process.nextTick
+  // }) // end LocalStrategy & callback
+  // ); // end LOCAL-SIGNUP
