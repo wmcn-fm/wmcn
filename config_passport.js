@@ -28,8 +28,8 @@ module.exports = function(passport) {
 
   // destorys database session, is called when the session is done.
 	passport.serializeUser( function (user, done) {
-    console.log("this is the user.id: ", user.id)
-	  done(null, user.id);
+    console.log("this is the user.id: ", user._id)
+	  done(null, user._id);
 	});
 
   // takes data from database, id has been SERIALIZED by passport.serializeUser
@@ -118,15 +118,20 @@ module.exports = function(passport) {
 
           // if no user is found, return the message
           if (!user)
-              return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+              return done(null, false, req.flash('loginMessage', 'Email and password combination not found.')); // req.flash is the way to set flashdata using connect-flash
+					
+          bcrypt.compare(password, user.hash, function (err, result) {
+            if (err) { console.error("bcrypt err in password comparison") }
+            // user is found but the password is wrong
+            if (!result) {
+              // create the loginMessage and save it to session as flashdata
+              return done(null, false, req.flash('loginMessage', 'Email and password combination not found.'));
+            } else {
+              // all is well, return successful user
+              return done(null, user);
+            }
 
-     //      ALL THIS NEEDS TO BE INSIDE A BCRYPT CALLBACK
-					// // if the user is found but the password is wrong
-     //      if (!user.validPassword(password))
-     //          return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-
-     //      // all is well, return successful user
-     //      return done(null, user);
+          }); // end bcrypt.compare          
       });
 
   }));
