@@ -24,11 +24,11 @@ $(document).ready(function() {
 		$('.updateButton, .app-updateButton').css('display', 'inline');
 	});
 
-	$('.appApproval').each(function (i) {
-		var toggle = "<input class='approveApp' type='checkbox'>"
-		$(this).text('').append(toggle);
+	// $('.appApproval').each(function (i) {
+	// 	var toggle = "<input class='approveApp' type='checkbox'>"
+	// 	$(this).text('').append(toggle);
 
-	});
+	// });
 
 	$('.approveApp').on('click', function() {
 		if ($(this).is(':checked')) {
@@ -37,21 +37,25 @@ $(document).ready(function() {
 		};
 	});
 
-	$('.app-updateButton').on('click', function(e) {
-		e.preventDefault();
-	
-		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
-			window.location.href = response;
-		});
-
-		// $.ajax({
-		// 	type: 'POST',
-		// 	data: successApps,
-		// 	url: 'http://localhost:3000/admin/applicants/dj'
-		// }).done(function (response) {
-		// 	console.log(response + ' res');
-		// });
+	$('.app-updateButton').on('click', function (e) {
+		console.log('clicked!');
 	});
+
+	// $('.app-updateButton').on('click', function(e) {
+	// 	e.preventDefault();
+	// 	console.log('clikced!!');
+	// 	$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
+	// 		window.location.href = response;
+	// 	});
+
+	// 	// $.ajax({
+	// 	// 	type: 'POST',
+	// 	// 	data: successApps,
+	// 	// 	url: 'http://localhost:3000/admin/applicants/dj'
+	// 	// }).done(function (response) {
+	// 	// 	console.log(response + ' res');
+	// 	// });
+	// });
 
 });	//end ready
 
