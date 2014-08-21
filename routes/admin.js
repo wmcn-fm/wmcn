@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongoskin');
+var bcrypt = require('bcrypt-nodejs');
 
 var nodemailer = require('nodemailer');
 var mailingCredentials = require('../nodemailerConfig.js'); 
@@ -67,6 +68,7 @@ router.post('/applicants/dj', function(req, res) {
                 var newShowTitle = doc.show.showTitle;
                 var newShowBlurb = doc.show.blurb;
 
+                var pass = randomString(10, alphanumeric);
                 // PUT NODEMAILER STUFF HERE AND SEND TO ADDRESS doc.user.email
                 var mailOptions = {
                     from: 'WMCN <foo@blurdybloop.com>', // sender address
@@ -74,9 +76,7 @@ router.post('/applicants/dj', function(req, res) {
                     subject: 'You have been approved!', // Subject line
                     // text: 'Hello world ✔', // plaintext body
                     html: '<b>This is a WMCN test email</b>' +
-                          '<p> Please use this confirmation code when you signup ' + doc.user.confiCode + '</p>' +
-                          '<p> Please click on this link to signup: localhost:3000/signup/' + doc.user.bigUrl + '</p>'
-
+                          '<p> This is your temporary password: ' + pass + '</p>'
                 }
 
                 // send mail with defined transport object
@@ -98,8 +98,7 @@ router.post('/applicants/dj', function(req, res) {
                     "macIdNum" : doc.user.macIdNum,
                     "iclass" : doc.user.iclass,
                     "gradYear" : doc.user.gradYear,
-                    bigURL : doc.user.bigURL,
-                    confiCode : doc.user.confiCode
+                    hash : hashGen(pass)
                 }, function (err, newUser) {
                     if (err) {console.log(err + ' userColl insert err')} else {
                         var newUserId = newUser[0]._id;
@@ -316,3 +315,24 @@ router.get('/site', function(req, res) {
 });
 
 module.exports = router;
+
+// random string generator found on stack overflow
+function randomString(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+    return result;
+}
+//var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+var alphanumeric = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+randomString(10, alphanumeric);
+
+function hashGen(pass) {
+    bcrypt.hash(pass, null, null, function (err, hash) {
+        if (err) {
+            console.log("Bcrypt error: ", err);
+            return err;
+        }
+
+        return hash;
+    })
+}
