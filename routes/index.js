@@ -12,6 +12,9 @@ var passport = require('passport');
 
 var navCats = ['archive', 'schedule', 'reviews', 'news', 'info'];
 
+
+var userColl = db.collection('usercollection'); // for login testing
+
 /** 
 *   ====================================================================
 *   '/'
@@ -150,10 +153,9 @@ router.get('/review/:artist/:year/:month/:date/:hour', function(req, res) {
 *   Login testing grounds
 */
 
-// might use router.param for bigUrl
-
+// remember that the callback function can be passed the 'id', which is the bigUrl in this case
 router.param('bigUrl', function (req, res, next, id) {
-	//look into database at userColl to find the bigURL, and confirmation code
+	//look into database at userColl to find the bigUrl, and confirmation code
 	// this will let us identify the user
 	// if confirmation code and bigUrl are from the same record, activate their privileges
 	req.bigUrl = id;
@@ -163,7 +165,39 @@ router.param('bigUrl', function (req, res, next, id) {
 
 router.get('/signup/:bigUrl', function (req, res) {
 	console.log(req.bigUrl);
-	res.render('confirmation', {djName: "hardcoded dj name"})
+	res.render('confirmation', {djName: "hardcoded dj name", bigUrl: req.bigUrl})
+});
+
+// need to change how I access the value when the approve slider works again
+// find the user with the unique bigUrl,
+	//compare the inputted confirmation code with the confirmation code stored in the user
+	// if they match, send a response that allows the user to pick out their password
+	// then log them in
+router.post('/signup/:bigUrl', function (req, res) {
+	console.log("This is the bigUrL on signup/:bigUrl POST: ", req.bigUrl);
+	
+	// to Array is probably not necessary, but easiest way to get a callback without building my own async function
+	userColl.find({"user.bigUrl": req.bigUrl}, {user: 1}).limit(1).toArray(function (err, user) {
+		if (err) {
+			console.log("Error ", err);
+			res.redirect('/signup/:bigUrl');
+		}
+
+		user = user[0];
+		// console.log("This is the user: ", user);
+		// console.log("User typed in this confiCode: ", req.body.confiCode);if 
+		// console.log("This is the stored confiCode: ", user.user.confiCode);
+
+		// user must exist and the confirmation code needs to match
+		if (user && (user.user.confiCode === req.body.confiCode)) {
+			// also add a password field to confirmation.jade and accept the password here,
+			// and do passporty stuff.
+			res.send("Confirmation code matched up! Set your password!")
+		} else {
+			res.redirect('/signup/' + req.bigUrl.toString());
+		}
+	}); // end toArray
+	
 });
 
 router.post('/signup', passport.authenticate('local-signup', {
