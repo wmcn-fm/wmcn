@@ -16,7 +16,29 @@ $(document).ready(function() {
     //     $('table').floatThead();
     // }
 
+    $('.timeslotSelector').each(function (i) {
+        $(this).attr('id', i);
+    });
+
+    $('.timeslotSelector').click(function() {
+        var timeId = $(this).attr('id');
+        console.log(timeId);
+        if ($(this).is(':checked')) {
+            availableSlots.push(timeId);
+            console.log(availableSlots);
+        } else {
+            var index = availableSlots.indexOf(timeId);
+            console.log(index);
+            if (index > -1) {
+                availableSlots.splice(index, 1);
+            }
+            console.log(availableSlots);
+        }
+    });
+
 });
+
+var availableSlots = [];
 
 function deleteUser(event) {
     event.preventDefault();
