@@ -62,8 +62,8 @@ router.post('/dj', function(req, res) {
             "blurb" : blurb
         },
         "app" : {
-            "djStatus" : djStatus,
-            "availability" : availability
+            "djStatus" : djStatus
+            // "availability" : availability
         }
     }, function (err, doc) {
         if (err) {

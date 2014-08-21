@@ -89,47 +89,49 @@ router.post('/applicants/dj', function(req, res) {
                 });
 
                 //  create a new dj doc with app credentials (newUser)
-                userColl.insert({
-                    "access" : 1,
-                    "firstName" : doc.user.firstName,
-                    "lastName" : doc.user.lastName,
-                    "email" : doc.user.email,
-                    "phone" : doc.user.phone,
-                    "macIdNum" : doc.user.macIdNum,
-                    "iclass" : doc.user.iclass,
-                    "gradYear" : doc.user.gradYear,
-                    hash : hashGen(pass)
-                }, function (err, newUser) {
-                    if (err) {console.log(err + ' userColl insert err')} else {
-                        var newUserId = newUser[0]._id;
+                bcrypt.hash(pass, null, null, function (err, hash) {
+                    userColl.insert({
+                        "access" : 1,
+                        "firstName" : doc.user.firstName,
+                        "lastName" : doc.user.lastName,
+                        "email" : doc.user.email,
+                        "phone" : doc.user.phone,
+                        "macIdNum" : doc.user.macIdNum,
+                        "iclass" : doc.user.iclass,
+                        "gradYear" : doc.user.gradYear,
+                        hash : hash
+                    }, function (err, newUser) {
+                        if (err) {console.log(err + ' userColl insert err')} else {
+                            var newUserId = newUser[0]._id;
 
-                        //  create a new show doc with a reference to newUser
-                        showColl.insert({
-                            "showTitle" : newShowTitle,
-                            "blurb" : newShowBlurb,
-                            "hostId" : newUserId
-                        }, function (err, newShow) {
-                            if (err) {console.log(err + ' showColl insert error')} else {
-                                var newShowId = newShow[0]._id;
+                            //  create a new show doc with a reference to newUser
+                            showColl.insert({
+                                "showTitle" : newShowTitle,
+                                "blurb" : newShowBlurb,
+                                "hostId" : newUserId
+                            }, function (err, newShow) {
+                                if (err) {console.log(err + ' showColl insert error')} else {
+                                    var newShowId = newShow[0]._id;
 
-                                //  tack the new show id to the new user
-                                userColl.update({_id:mongo.helper.toObjectID(newUserId)},
-                                    {'$set': {showId: newShowId}},
-                                    function (err, updatedUser) {
-                                        if (err) {console.log(err + ' updateuser error')} else {
+                                    //  tack the new show id to the new user
+                                    userColl.update({_id:mongo.helper.toObjectID(newUserId)},
+                                        {'$set': {showId: newShowId}},
+                                        function (err, updatedUser) {
+                                            if (err) {console.log(err + ' updateuser error')} else {
 
-                                            appColl.removeById(appId, function (err, result) {
-                                                if (err) {console.log(err + ' removeApp err')} else {               
-                                                    next();
-                                                }
-                                            }); //  end appColl.removeByID
+                                                appColl.removeById(appId, function (err, result) {
+                                                    if (err) {console.log(err + ' removeApp err')} else {               
+                                                        next();
+                                                    }
+                                                }); //  end appColl.removeByID
+                                            }
                                         }
-                                    }
-                                );  //  end userColl.update
-                            }
-                        }); //  end showColl.insert
-                    }   
-                }); //  end userColl.insert;
+                                    );  //  end userColl.update
+                                }
+                            }); //  end showColl.insert
+                        }   
+                    }); //  end userColl.insert;
+                }); //   end bcrypt hash
             }
         }); //  end appColl.findById;
     }).then(function () {
@@ -324,15 +326,3 @@ function randomString(length, chars) {
 }
 //var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 var alphanumeric = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-randomString(10, alphanumeric);
-
-function hashGen(pass) {
-    bcrypt.hash(pass, null, null, function (err, hash) {
-        if (err) {
-            console.log("Bcrypt error: ", err);
-            return err;
-        }
-
-        return hash;
-    })
-}
