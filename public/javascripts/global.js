@@ -12,6 +12,13 @@ $(document).ready(function() {
     });
     $('#updateUserSubmit').on('click', 'a.deleteUser', deleteUser);
 
+    $('.main-content').each(function(i) {
+        var w = $(this).width();
+        $(this).css({
+            'min-height': w + 'px'
+        });
+    });
+
     // if ($('table'.length)) {
     //     $('table').floatThead();
     // }

@@ -42,7 +42,7 @@ h1.category-headline {
   text-align: center;
 }
 
-.content-quad {
+.main-content {
   width: 100%;
   height: 500px;
 }
@@ -74,4 +74,8 @@ h1.category-headline {
   .helper-text {
     font-family: $font-helper;
   }
+}
+
+.slider-size {
+  height: 400px;
 }
