@@ -9,6 +9,7 @@ var playlistColl = db.collection('playlists');
 var reviewColl = db.collection('reviews');
 
 var passport = require('passport');
+var login = require('./login.js');
 
 var navCats = ['archive', 'schedule', 'reviews', 'news', 'info'];
 
@@ -175,33 +176,10 @@ router.get('/logout', function (req, res) {
 // This is the route that gives the template the user object
 // This is given by deserialize user in the passport configuration
 // passport attaches the user object to the req.
-router.get('/profile', isLoggedIn, accessClearance(1), function (req, res) {
+router.get('/profile', login.isLoggedIn, login.accessClearance(1), function (req, res) {
 	res.render('profile', {
 		user : JSON.stringify(req.user) // get the user out of session and pass to template
 	});
 });
 
 module.exports = router;
-
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-console.log("here is the user: ", req.user)
-	// if user is authenticated in the session, carry on 
-	if (req.isAuthenticated()) {
-		return next();
-	}
-
-	// if they aren't redirect them to the login page
-	res.redirect('/login');
-}
-
-// custom middleware for providing accesslevel restrictions to certain pages
-function accessClearance (accessLevel) {
-	return function (req, res, next) {
-	if (req.user.access >= accessLevel) {
-		return next();
-	}
-
-	return res.send('access level insufficient')
-	}
-}
