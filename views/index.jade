@@ -10,19 +10,37 @@ block content
 						ol.carousel-indicators
 							li(data-target='playlist-carousel' data-slide-to='0').active
 							li(data-target='playlist-carousel' data-slide-to='1')
+							li(data-target='playlist-carousel' data-slide-to='2')
+							li(data-target='playlist-carousel' data-slide-to='3')
 						.carousel-inner
 							.item.active
-								.playlist
-									h1.category-headline.fixie
+								.playlist1
+									h1.category-headline
+										a.playlist1-show(href='#') foood 8/7
+									span.helper-text 
+										p with 
+										p.hosts Will Kent-Daggett, David Clingman, and Miles Margulies
 							.item
-								.playlist
-									h1.category-headline.fixie
+								.playlist2
+									h1.category-headline
+										a.playlist2-show(href='#') datpiff 8/7
+									span.helper-text 
+										p with 
+										p.hosts Will Kent-Daggett and Sam Landsberg
 							.item
-								.playlist
-									h1.category-headline.fixie
+								.playlist3
+									h1.category-headline
+										a.playlist3-show(href='#') some other random show 8/7
+									span.helper-text 
+										p with 
+										p.hosts a few random people
 							.item
-								.playlist
+								.playlist4
 									h1.category-headline.fixie
+										a.playlist4-show(href='#') another random show 8/7
+									span.helper-text 
+										p with 
+										p.hosts more randos
 						a.left.carousel-control(href='#playlist-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
 						a.right.carousel-control(href='#playlist-carousel' role='button' data-slide='next')
@@ -57,15 +75,13 @@ block content
 				section
 					div#pinned
 						h1.fixie.category-headline
-						p
-							span.helper-text by 
+						p.helper-text by 
 							span.fixie
 			.col-md-12.col-lg-6
 				section
 					div#pinned
 						h1.fixie.category-headline
-						p
-							span.helper-text by 
+						p.helper-text by 
 							span.fixie
 		include schedule
 

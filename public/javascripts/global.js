@@ -15,7 +15,7 @@ $(document).ready(function() {
     $('.main-content').each(function(i) {
         var w = $(this).width();
         $(this).css({
-            'min-height': w + 'px'
+            'height': w + 'px'
         });
     });
 

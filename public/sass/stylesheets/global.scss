@@ -12,6 +12,16 @@ thead {
   background-color: #ffffff !important;
 }
 
+
+a {
+  text-decoration: none !important;
+  color: $black;
+}
+
+a:hover {
+  color: $black;
+  border-bottom: 3px solid $black;
+}
 input[type="checkbox"] {
   appearance: none;
   background-color: #fafafa;
@@ -50,24 +60,6 @@ input[type="checkbox"]:checked:after {
   left: 16px;
   right: 0;
   transition: border .25s, left .15s .25s, right .25s .175s;
-}
-
-.pace .pace-progress {
-  background: #29d;
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  left: 0;
-  height: 2px;
-
-  -webkit-transition: width 1s;
-  -moz-transition: width 1s;
-  -o-transition: width 1s;
-  transition: width 1s;
-}
-
-.pace-inactive {
-  display: none;
 }
 
 .playlist-content {

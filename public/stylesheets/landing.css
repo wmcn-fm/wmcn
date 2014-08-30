@@ -11,10 +11,36 @@
 .logo-main table:hover {
   cursor: crosshair; }
 
-.playlist {
-  width: 1000px;
-  height: 1000px;
-  background-color: black; }
+.playlist1 {
+  background-color: #bdbdbd;
+  width: 800px;
+  height: 800px;
+  overflow: hidden;
+  text-align: center; }
+
+.playlist2 {
+  background-color: #ff8900;
+  width: 800px;
+  height: 800px;
+  overflow: hidden;
+  text-align: center; }
+
+.playlist3 {
+  background-color: #086fa1;
+  width: 800px;
+  height: 800px;
+  overflow: hidden;
+  text-align: center; }
+
+.playlist4 {
+  background-color: #a31010;
+  width: 800px;
+  height: 800px;
+  overflow: hidden;
+  text-align: center; }
+
+.playlist1-show, .playlist2-show, .playlist3-show, .playlist4-show {
+  text-transform: uppercase; }
 
 h1.category-title {
   text-transform: uppercase;
@@ -22,33 +48,29 @@ h1.category-title {
   text-align: center; }
 
 h1.category-headline {
-  text-align: center; }
-
-.main-content {
-  width: 100%;
-  height: 500px; }
+  text-align: center;
+  padding-top: 15%; }
 
 .carousel {
-  height: 100% !important; }
+  height: 100% !important;
+  max-height: 500px;
+  overflow: hidden;
+  border: 3px solid #282828; }
 
-.item > img {
-  height: 100%;
-  max-height: 100%;
-  max-width: 100%;
-  z-index: 50; }
+.item img, .item div {
+  width: auto;
+  height: 500px;
+  max-height: 500px; }
 
-.item > div {
-  width: 100%;
-  height: 100%; }
+section {
+  padding-top: 2%; }
 
 #pinned {
   width: 100%;
-  height: 100%;
+  height: 300px;
   text-align: center;
   background-color: white;
   border: 3px solid #282828; }
-  #pinned .helper-text {
-    font-family: 'Slabo 13px', serif !important; }
 
-.slider-size {
-  height: 400px; }
+.helper-text {
+  font-family: 'Slabo 13px', serif !important; }
