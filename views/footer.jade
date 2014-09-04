@@ -1,15 +1,43 @@
 .row
 		.footer
-			- var i=0;
-			while i < 4
-				.col-md-3.footer-coll
-					h4.fixie
-					ul
-						li.fixie
-						li.fixie
-						li.fixie
-						li.fixie
-				- i++
-			.col-md-12
-				.cr-wrapper
-					p.copyright (C) 2014 WMCN | 1600 Grand Ave Saint Paul MN 55104 | 612.696.6666
+			.footer-wrapper
+				//- .footer-outer
+				//- 	.footer-ontop
+						//- .col-xs-6.col-md-3.footer1
+						//- 	h4.fixie
+						//- 	ul
+						//- 		li.fixie
+						//- 		li.fixie
+						//- 		li.fixie
+						//- .col-xs-6.col-md-3.footer2
+						//- 	h4.fixie
+						//- 	ul
+						//- 		li.fixie
+						//- 		li.fixie
+						//- 		li.fixie 
+						//- .col-xs-6.col-md-3.footer3
+						//- 	h4.fixie
+						//- 	ul
+						//- 		li.fixie
+						//- 		li.fixie
+						//- 		li.fixie
+						//- .col-xs-6.col-md-3.footer4
+						//- 	h4.fixie
+						//- 	ul
+						//- 		li.fixie
+						//- 		li.fixie
+						//- 		li.fixie 
+				div#footer-carousel.carousel.slide(data-ride='carousel')
+					.carousel-inner
+						.item.active
+							.footer1
+						.item
+							.footer2
+						.item
+							.footer3
+						.item
+							.footer4
+
+				//- .col-md-12
+				//- 	.cr-wrapper
+				//- 		p.copyright (C) 2014 WMCN | 1600 Grand Ave Saint Paul MN 55104 | 612.696.6666

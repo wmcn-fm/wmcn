@@ -1,9 +1,22 @@
+$grey : #bdbdbd;
+$yellow : #ff8900;
+$blue : #086fa1;
+$red : #a31010;
+$black: #282828;
+
+$font-main : futura !important;
+$font-helper : 'Slabo 13px', serif !important;
+
 .footer {
   width: 100%;
   height: 200px;
-  background-color: #CCCCCC;
+  background-color: $black;
   text-align: center;
   float: both;
+  color: white;
+  li {
+    text-align: center;
+  }
 }
 
 .footer-col {
@@ -22,4 +35,46 @@ ul {
 
 .copyright {
   font-size: 0.6em;
+}
+
+.footer1 {
+  background-color: $grey;
+  width: 1000px;
+  height: 200px;
+}
+
+.footer2 {
+  background-color: $yellow;
+  width: 1000px;
+  height: 200px;
+}
+
+.footer3 {
+  background-color: $blue;
+  width: 1000px;
+  height: 200px;
+}
+
+.footer4 {
+  background-color: $red;
+  width: 1000px;
+  height: 200px;
+}
+
+.footer-wrapper {
+  max-height: 200px;
+  height: 200px;
+}
+
+.footer-outer {
+  position: relative;
+}
+
+.footer-ontop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right:0;
+  pointer-events:none;
 }

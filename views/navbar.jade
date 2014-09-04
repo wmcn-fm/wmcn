@@ -1,38 +1,38 @@
-nav.navbar.navbar-default.center(role='navigation')
+nav#nav.navbar.navbar-default.center(role='navigation')
 	.navbar-header
 		button.navbar-toggle(type='button' data-toggle='collapse' data-target='#nav-main')
 			span.sr-only Toggle navigation
 			span.icon-bar
 			span.icon-bar
 			span.icon-bar
-		.navbar-brand
-			a(href='/')
-				img.icon(src='/images/favicon.png')
+		a.navbar-brand(href='/')
+			img.icon(src='/images/favicon.png')
 			//- .currentShow-container
-				ul.nav.navbar-nav
-					li
-						span now playing: 
-						span.currentShow= currentShow
+				//- ul.nav.navbar-nav
+				//- 	li
+				//- 		span now playing: 
+				//- 		span.currentShow= currentShow
 	div#nav-main.collapse.navbar-collapse
 		ul.nav.navbar-nav
 			li.currentShow
 				- var urlStem = '/shows/' + currentShow
 				a(href=urlStem)
-					span.glyphicon.glyphicon-volume-up 
-					span  currentShow 
-					span.glyphicon.glyphicon-music  
+					button.btn.navbar-btn
+						span.glyphicon.glyphicon-volume-up 
+						span  foood 
+						span.glyphicon.glyphicon-music
 			li
 				a(href = '/archive')
-					button.btn.btn-default.navbar-btn archive
+					button.btn.navbar-btn archive
 			li
 				a(href = '#schedule')
-					button.btn.btn-default.navbar-btn schedule
+					button.btn.navbar-btn schedule
 			li
 				a(href = '/reviews')
-					button.btn.btn-default.navbar-btn reviews
+					button.btn.navbar-btn reviews
 			li
 				a(href = '/news')
-					button.btn.btn-default.navbar-btn news
-			li
+					button.btn.navbar-btn news
+			li.navbar-right
 				a(href = '/info')
-					button.btn.btn-default.navbar-btn info
+					button.btn.navbar-btn info

@@ -6,6 +6,12 @@ $(document).ready(function() {
     //     $(this).css('background-color', color);
     // });
 
+    $('#nav').affix({
+        offset: {
+            top: $('.logo-main').height()
+        }
+    });
+
     $('#schedule').popover();
     $('.popover-dismiss').popover({
       trigger: 'focus'

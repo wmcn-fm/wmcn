@@ -20,7 +20,19 @@ a {
 
 a:hover {
   color: $black;
-  border-bottom: 3px solid $black;
+  // border-bottom: 3px solid $black;
+  text-decoration: underline !important;
+}
+
+button {
+  background-color: transparent;
+  border: 2px solid white !important;
+  color: white;
+}
+
+button:hover {
+  color: $black;
+  background-color: white;
 }
 input[type="checkbox"] {
   appearance: none;
@@ -62,8 +74,12 @@ input[type="checkbox"]:checked:after {
   transition: border .25s, left .15s .25s, right .25s .175s;
 }
 
-.playlist-content {
-  text-align: left;
+.post-content {
+  // border: 2px solid $black;
+}
+
+.post-main {
+  border: 2px solid $black;
 }
 
 .page-header {
@@ -101,5 +117,60 @@ input[type="checkbox"]:checked:after {
 
 h1, h2, h3, h4, h5, h6, input  {
   font-family: $font-main;
+  text-align: center;
 }
+
+p {
+  font-family: $font-helper;
+  text-align: center;
+}
+
+.category-title {
+  text-transform: uppercase;
+  font-family: futura;
+  text-align: center;
+
+}
+
+.category-headline {
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 15%;
+}
+
+.post-details {
+  h4 {}
+}
+
+.thumbnail {
+  border: none;
+  li {
+    text-align: center;
+  }
+}
+
+.review-overlay {
+  margin-top: 25% !important;
+  margin: auto;
+  background:rgba(255,255,255,0.3);
+  max-width: 90%;
+  height: 300px !important;
+  max-height: 300px !important;
+  // visibility: hidden;
+}
+
+// .review-overlay:hover {
+//   visibility: visible;
+// }
+
+a.review-title {
+  visibility: hidden;
+}
+
+a.review-title:hover {
+  visibility: visible;
+}
+// .post-section {
+//   border-right: 2px solid $black;
+// }
 

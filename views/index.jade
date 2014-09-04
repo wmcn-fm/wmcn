@@ -7,11 +7,6 @@ block content
 				section
 					h1.category-title latest shows:
 					div#playlist-carousel.carousel.slide(data-ride='carousel')
-						ol.carousel-indicators
-							li(data-target='playlist-carousel' data-slide-to='0').active
-							li(data-target='playlist-carousel' data-slide-to='1')
-							li(data-target='playlist-carousel' data-slide-to='2')
-							li(data-target='playlist-carousel' data-slide-to='3')
 						.carousel-inner
 							.item.active
 								.playlist1
@@ -49,19 +44,23 @@ block content
 				section
 					h1.category-title new reviews:
 					div#review-carousel.carousel.slide(data-ride='carousel')
-						ol.carousel-indicators
-							li(data-target='review-carousel' data-slide-to='0').active
-							li(data-target='review-carousel' data-slide-to='1')
 						.carousel-inner
 							.item.active
 								.slider-size(style="background: url(http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg) center center; background-size: cover;")
 								.carousel-caption
-									h1.category-headline.fixie
+									.review-overlay
+										a.review-title(href='#')
+											h1.category-headline shabazz palaces
+											h1.category-headline these rooyales
+
 								//- img(src='http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg')
 							.item
 								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
 								.carousel-caption
-									h1.category-headline.fixie
+									.review-overlay
+										a.review-title(href='#')
+											h1.category-headline spoon
+											h1.category-headline they want my soul
 								//- img(src='http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg')
 						a.left.carousel-control(href='#review-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
@@ -71,18 +70,20 @@ block content
 			.col-xs-12
 				h1.category-title top posts:
 		.row
-			.col-md-12.col-lg-6
+			.col-sm-6
 				section
 					div#pinned
-						h1.fixie.category-headline
+						a(href='#')
+							h1.fixie.category-headline
 						p.helper-text by 
 							span.fixie
-			.col-md-12.col-lg-6
+			.col-sm-6
 				section
 					div#pinned
-						h1.fixie.category-headline
+						a(href='#')
+							h1.fixie.category-headline
 						p.helper-text by 
 							span.fixie
-		include schedule
+			include schedule
 
 		//- include footer
