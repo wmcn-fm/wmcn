@@ -48,9 +48,6 @@ a {
   padding-top: 0px !important;
   padding-bottom: 0px !important; }
 
-li {
-  float: left; }
-
 #nav.affix {
   position: fixed;
   top: 0;
