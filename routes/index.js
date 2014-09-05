@@ -34,13 +34,18 @@ router.get('/', function(req, res) {
 		reviewColl.find().sort({$natural: -1}).limit(4).toArray(function (err, rvws) {
 			if (err) {res.render('error')} else {
 				reviews = rvws;
-				console.log(reviews);
 			}
-			res.render('index', { 
-				title: 'WMCN: Macalester College Radio',
-				playlists: playlists,
-				reviews: reviews,
-				blogs: blogs
+			blogColl.find().sort({natural: -1}).limit(2).toArray(function (err, blgs) {
+				if (err) {res.render('error')} else {
+					blogs = blgs;
+					console.log(blogs);
+				}
+				res.render('index', { 
+					title: 'WMCN: Macalester College Radio',
+					playlists: playlists,
+					reviews: reviews,
+					blogs: blogs
+				});
 			});
 		});
 	});

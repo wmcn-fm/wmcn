@@ -12,7 +12,8 @@ block content
 								.playlist1
 									.category-container
 										h1.category-headline
-											a.playlist1-show(href='#')= playlists[0].showName + ' '
+											- var hrf = playlists[0].perma
+											a.playlist1-show(href= hrf)= playlists[0].showName + ' '
 												- var date0 = playlists[0].date.month + '/' + playlists[0].date.date
 												span= date0
 										p.helper-text with 
@@ -21,7 +22,8 @@ block content
 								.playlist2
 									.category-container
 										h1.category-headline
-											a.playlist2-show(href='#')= playlists[1].showName + ' '
+											- var hrf = playlists[1].perma
+											a.playlist2-show(href= hrf)= playlists[1].showName + ' '
 												- var date1 = playlists[1].date.month + '/' + playlists[1].date.date
 												span= date1
 										p.helper-text with 
@@ -30,7 +32,8 @@ block content
 								.playlist3
 									.category-container
 										h1.category-headline
-											a.playlist3-show(href='#')= playlists[2].showName + ' '
+											- var hrf = playlists[2].perma
+											a.playlist3-show(href= hrf)= playlists[2].showName + ' '
 												- var date2 = playlists[2].date.month + '/' + playlists[2].date.date
 												span= date2
 										p.helper-text with 
@@ -38,8 +41,9 @@ block content
 							.item
 								.playlist4
 									.category-container
-										h1.category-headline.fixie
-											a.playlist4-show(href='#')= playlists[3].showName + ' '
+										h1.category-headline
+											- var hrf = playlists[3].perma
+											a.playlist4-show(href= hrf)= playlists[3].showName + ' '
 												- var date3 = playlists[3].date.month + '/' + playlists[3].date.date
 												span= date3
 										p.helper-text with 
@@ -54,35 +58,43 @@ block content
 					div#review-carousel.carousel.slide(data-ride='carousel' data-interval='4000')
 						.carousel-inner
 							.item.active
-								.slider-size(style="background: url(http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg) center center; background-size: cover;")
+								- var imgUrl = "background: url(" + reviews[0].imgUrl + ") center center; background-size: cover;"
+								.slider-size(style= imgUrl)
 								.carousel-caption
 									.review-overlay
-										a.review-title(href='#')
+										- var hrf = reviews[0].perma
+										a.review-title(href= hrf)
 											h1.album-artist.category-headline= reviews[0].artistName
 											- var albumName = "'" + reviews[0].album + "'" 
 											h1.category-headline= albumName
 
 							.item
-								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
+								- var imgUrl = "background: url(" + reviews[0].imgUrl + ") center center; background-size: cover;"
+								.slider-size(style= imgUrl)
 								.carousel-caption
 									.review-overlay
-										a.review-title(href='#')
+										- var hrf = reviews[0].perma
+										a.review-title(href= hrf)
 											h1.album-artist.category-headline= reviews[1].artistName
 											- var albumName = "'" + reviews[1].album + "'" 
 											h1.category-headline= albumName
 							.item
-								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
+								- var imgUrl = "background: url(" + reviews[0].imgUrl + ") center center; background-size: cover;"
+								.slider-size(style= imgUrl)
 								.carousel-caption
 									.review-overlay
-										a.review-title(href='#')
+										- var hrf = reviews[2].perma
+										a.review-title(href= hrf)
 											h1.album-artist.category-headline= reviews[2].artistName
 											- var albumName = "'" + reviews[2].album + "'" 
 											h1.category-headline= albumName
 							.item
-								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
+								- var imgUrl = "background: url(" + reviews[0].imgUrl + ") center center; background-size: cover;"
+								.slider-size(style= imgUrl)
 								.carousel-caption
 									.review-overlay
-										a.review-title(href='#')
+										- var hrf = reviews[3].perma
+										a.review-title(href= hrf)
 											h1.album-artist.category-headline= reviews[3].artistName
 											- var albumName = "'" + reviews[3].album + "'" 
 											h1.category-headline= albumName
@@ -98,18 +110,20 @@ block content
 				section
 					div#pinned
 						.category-container
-							a(href='#')
-								h1.fixie.category-headline
+							- var hrf = blogs[0].perma
+							a(href= hrf)
+								h1.category-headline= blogs[0].title
 							p.helper-text by 
-								span.author.fixie
+								span.author= blogs[0].djName
 			.col-sm-6
 				section
 					div#pinned
 						.category-container
-							a(href='#')
-								h1.fixie.category-headline
+							- var hrf = blogs[1].perma
+							a(href= hrf)
+								h1.category-headline= blogs[1].title
 							p.helper-text by 
-								span.author.fixie
+								span.author= blogs[1].djName
 			//- include schedule
 
 		//- include footer
