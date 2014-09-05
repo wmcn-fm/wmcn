@@ -51,15 +51,25 @@ $(document).ready(function() {
         if ($(this).is(':checked')) {
             availableSlots.push(timeId);
             console.log(availableSlots);
+            $(this).parent().toggleClass('available-slot')
         } else {
             var index = availableSlots.indexOf(timeId);
             console.log(index);
             if (index > -1) {
                 availableSlots.splice(index, 1);
+                $(this).parent().toggleClass('available-slot')
             }
             console.log(availableSlots);
         }
     });
+
+    $('#djAppSubmission').submit(function(eventObj) {
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "availability")
+            .attr('value', availableSlots)
+            .appendTo($(this));
+        return true;
+    })
 
 });
 

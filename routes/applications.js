@@ -39,7 +39,8 @@ router.post('/dj', function(req, res) {
     var gradYear = req.body.gradYear;
     var show = req.body.show;
     var blurb = req.body.blurb;
-    var testArray = [0, 1, 5];
+    // var testArray = [0, 1, 5];
+    var availability = req.body.availability;
 
     // Set our collection
     var collection = db.collection('djapps');
@@ -62,8 +63,8 @@ router.post('/dj', function(req, res) {
             "blurb" : blurb
         },
         "app" : {
-            "djStatus" : djStatus
-            // "availability" : availability
+            // "djStatus" : djStatus,
+            "availability" : availability
         }
     }, function (err, doc) {
         if (err) {
@@ -73,9 +74,11 @@ router.post('/dj', function(req, res) {
         }
         else {
             // If it worked, set the header so the address bar doesn't still say /adduser
-            res.location("../admin/applicants/dj");
-            // And forward to success page
-            res.redirect("../admin/applicants/dj");
+            // res.location("../admin/applicants/dj");
+            // // And forward to success page
+            // res.redirect("../admin/applicants/dj");
+            res.location("../app-success");
+            res.redirect("../app-success");
         }
     });
 });

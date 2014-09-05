@@ -66,6 +66,13 @@ router.get('/archive', function(req, res) {
 });
 
 
+router.get('/app-success', function(req, res) {
+	res.render('app-success', {
+		title: 'thank you for your application!',
+	});
+});
+
+
 //  POST
 // just js buttons?
 /** 

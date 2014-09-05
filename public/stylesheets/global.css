@@ -174,3 +174,6 @@ table.availability-table td {
   border: 2px solid #282828; }
 table.availability-table th {
   border-bottom: 2px solid #282828 !important; }
+
+.available-slot {
+  background-color: #7CF379; }
