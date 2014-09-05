@@ -74,8 +74,16 @@ $(document).ready(function() {
     $('.per-person1, .per-person2, .per-person3, .per-person4').hide();
     $('#1dj').click(function() {
         $('.per-person1').slideToggle();
-        console.log($('[name="numDjs"]').value);
-    })
+    });
+    $('#2dj').click(function() {
+        $('.per-person1, .per-person2').slideToggle();
+    });
+    $('#3dj').click(function() {
+        $('.per-person1, .per-person2, .per-person3').slideToggle();
+    });
+    $('#4dj').click(function() {
+        $('.per-person1, .per-person2, .per-person3, .per-person4').slideToggle();
+    });
 
 });
 
