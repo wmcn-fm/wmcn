@@ -15,7 +15,7 @@ $font-helper : 'Slabo 13px', serif !important;
   float: both;
   color: $black;
   li {
-    text-align: center;
+    // text-align: center;
   }
 }
 
@@ -24,13 +24,15 @@ $font-helper : 'Slabo 13px', serif !important;
   padding: 1%;
 }
 
+.footer ul li {
+  font-family: $font-helper;
+}
+
 
 // .footer-col > li {
 //   font-size: 0.2em;
 // }
-ul {
-  list-style-type: none !important;
-}
+
 
 
 .copyright {

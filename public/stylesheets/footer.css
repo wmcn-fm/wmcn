@@ -4,14 +4,12 @@
   text-align: center;
   float: both;
   color: #282828; }
-  .footer li {
-    text-align: center; }
 
 .footer-col {
   padding: 1%; }
 
-ul {
-  list-style-type: none !important; }
+.footer ul li {
+  font-family: 'Slabo 13px', serif !important; }
 
 .copyright {
   font-size: 0.6em; }
