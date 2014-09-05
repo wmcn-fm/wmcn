@@ -6,46 +6,43 @@ block content
 			h1.category-headline= title
 
 	form(role='form', method='post', action='/apply/dj', id='djAppSubmission')
+			.num-djs
+				.row
+					.col-xs-12
+						h3.app-category how many hosts will your show have?
+						.button-group.dj-number
+							label.btn 1 
+								input(type='radio' name='numDjs' value=1 id='1dj')
+							label.btn 2 
+								input(type='radio' name='numDjs' value=2 id='2dj')
+							label.btn 3 
+								input(type='radio' name='numDjs' value=3 id='3dj')
+							label.btn 4 
+								input(type='radio' name='numDjs' value=4 id='4dj')
+		.per-person1
+			.contact-info
+				.row
+					//- h3.app-category contact details:
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='firstName') first name
+							input#firstName.form-control(type='text', placeholder='John', name='firstName')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='lastName') last name
+							input#lastName.form-control(type='text', placeholder='Smith', name='lastName')
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='email') email address
+							input#email.form-control(type='email', placeholder='myname@macalester.edu', name='email')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='phone') phone number
+							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
 			.row
-				//- .col-xs-12.col-sm-6
-				//- 	.form-group
-				//- 		label(for='djStatus') are you a new or returning dj?
-				//- 		.radio
-				//- 			label new
-				//- 			input#newDj(type='radio', name='djStatus', value='true')
-				//- 		.radio
-				//- 			label returning
-				//- 			input#returningDj(type='radio', name='djStatus', value='false')
-				h3.app-category contact details:
-			.row
-				.col-xs-12.col-sm-6
-					.form-group
-						label(for='firstName') first name
-						input#firstName.form-control(type='text', placeholder='John', name='firstName')
-				.col-xs-12.col-sm-6
-					.form-group
-						label(for='lastName') last name
-						input#lastName.form-control(type='text', placeholder='Smith', name='lastName')
-			.row
-				.col-xs-12.col-sm-6
-					.form-group
-						label(for='email') email address
-						input#email.form-control(type='email', placeholder='myname@macalester.edu', name='email')
-				.col-xs-12.col-sm-6
-					.form-group
-						label(for='phone') phone number
-						input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
-			//- .row
-			//- 	.col-xs-12.col-sm-6
-			//- 			label(for='studentStatus') are you a current student?
-			//- 			.radio
-			//- 				//label yes
-			//- 				input#isStudent.form-control(type='radio', name='studentStatus', value='true')
-			//- 			.radio
-			//- 				//label no
-			//- 				input#isNotStudent.form-control(type='radio', name='studentStatus', value='false')
-			.row
-				h3.app-category school details: 
+				//- h3.app-category school details: 
 			.row
 				.col-xs-12.col-sm-4
 					.form-group
@@ -67,6 +64,142 @@ block content
 							input(type='radio' name='gradYear' id='grad2017' value=2017)
 						label.btn 2018 
 							input(type='radio' name='gradYear' id='grad2018' value=2018)
+		.per-person2
+			.contact-info
+				.row
+					//- h3.app-category contact details:
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='firstName') first name
+							input#firstName.form-control(type='text', placeholder='John', name='firstName')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='lastName') last name
+							input#lastName.form-control(type='text', placeholder='Smith', name='lastName')
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='email') email address
+							input#email.form-control(type='email', placeholder='myname@macalester.edu', name='email')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='phone') phone number
+							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
+			.row
+				//- h3.app-category school details: 
+			.row
+				.col-xs-12.col-sm-4
+					.form-group
+						label(for='macIdNum') macalester id number
+						input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
+				.col-xs-12.col-sm-4
+					.form-group
+						label(for='iclass') 5-digit iclass number
+						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
+						p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
+				.col-xs-12.col-sm-4
+					label graduating class
+					.button-group
+						label.btn 2015 
+							input(type='radio' name='gradYear' id='grad2015' value=2015)
+						label.btn 2016 
+							input(type='radio' name='gradYear' id='grad2016' value=2016)
+						label.btn 2017 
+							input(type='radio' name='gradYear' id='grad2017' value=2017)
+						label.btn 2018 
+							input(type='radio' name='gradYear' id='grad2018' value=2018)
+		.per-person3
+			.contact-info
+				.row
+					//- h3.app-category contact details:
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='firstName') first name
+							input#firstName.form-control(type='text', placeholder='John', name='firstName')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='lastName') last name
+							input#lastName.form-control(type='text', placeholder='Smith', name='lastName')
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='email') email address
+							input#email.form-control(type='email', placeholder='myname@macalester.edu', name='email')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='phone') phone number
+							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
+			.row
+				//- h3.app-category school details: 
+			.row
+				.col-xs-12.col-sm-4
+					.form-group
+						label(for='macIdNum') macalester id number
+						input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
+				.col-xs-12.col-sm-4
+					.form-group
+						label(for='iclass') 5-digit iclass number
+						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
+						p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
+				.col-xs-12.col-sm-4
+					label graduating class
+					.button-group
+						label.btn 2015 
+							input(type='radio' name='gradYear' id='grad2015' value=2015)
+						label.btn 2016 
+							input(type='radio' name='gradYear' id='grad2016' value=2016)
+						label.btn 2017 
+							input(type='radio' name='gradYear' id='grad2017' value=2017)
+						label.btn 2018 
+							input(type='radio' name='gradYear' id='grad2018' value=2018)
+		.per-person4
+			.contact-info
+				.row
+					//- h3.app-category contact details:
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='firstName') first name
+							input#firstName.form-control(type='text', placeholder='John', name='firstName')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='lastName') last name
+							input#lastName.form-control(type='text', placeholder='Smith', name='lastName')
+				.row
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='email') email address
+							input#email.form-control(type='email', placeholder='myname@macalester.edu', name='email')
+					.col-xs-12.col-sm-6
+						.form-group
+							label(for='phone') phone number
+							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
+			.row
+				//- h3.app-category school details: 
+			.row
+				.col-xs-12.col-sm-4
+					.form-group
+						label(for='macIdNum') macalester id number
+						input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
+				.col-xs-12.col-sm-4
+					.form-group
+						label(for='iclass') 5-digit iclass number
+						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
+						p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
+				.col-xs-12.col-sm-4
+					label graduating class
+					.button-group
+						label.btn 2015 
+							input(type='radio' name='gradYear' id='grad2015' value=2015)
+						label.btn 2016 
+							input(type='radio' name='gradYear' id='grad2016' value=2016)
+						label.btn 2017 
+							input(type='radio' name='gradYear' id='grad2017' value=2017)
+						label.btn 2018 
+							input(type='radio' name='gradYear' id='grad2018' value=2018)
+		.per-show
 			.row
 				h3.app-category show details:
 			.row
@@ -107,7 +240,7 @@ block content
 
 
 
-			.row
-				.col-xs-12
-					button.btn.submitBt(type='submit') Submit
+		.row
+			.col-xs-12
+				button.btn.submitBt(type='submit') Submit
 script(src='/javascripts/djapp.js')

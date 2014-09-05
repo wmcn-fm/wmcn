@@ -175,5 +175,9 @@ table.availability-table td {
 table.availability-table th {
   border-bottom: 2px solid #282828 !important; }
 
+.dj-number {
+  padding-left: 2%; }
+
 .available-slot {
   background-color: #7CF379; }
+

@@ -312,7 +312,15 @@ table.availability-table {
   }
 }
 
+.dj-number {
+  padding-left: 2%;
+}
+
 .available-slot {
   background-color: $light-green;
+}
+
+.per-person {
+  // visibility: hidden;
 }
 

@@ -69,6 +69,12 @@ $(document).ready(function() {
             .attr('value', availableSlots)
             .appendTo($(this));
         return true;
+    });
+
+    $('.per-person1, .per-person2, .per-person3, .per-person4').hide();
+    $('#1dj').click(function() {
+        $('.per-person1').slideToggle();
+        console.log($('[name="numDjs"]').value);
     })
 
 });
