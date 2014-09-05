@@ -1,6 +1,9 @@
 thead {
   background-color: #ffffff !important; }
 
+*:focus {
+  outline: none !important; }
+
 a {
   text-decoration: none !important;
   color: #282828; }

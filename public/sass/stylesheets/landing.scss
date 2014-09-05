@@ -8,10 +8,10 @@ $black: #282828;
 $font-main : futura !important;
 $font-helper : 'Slabo 13px', serif !important;
 
+// .logo-main {
+//   height: 100%;
+// }
 .logo-main {
-  height: 100%;
-}
-.logo-main table {
   margin: auto;
   font-family: $font-main;
   max-width: 800px;
@@ -26,7 +26,7 @@ $font-helper : 'Slabo 13px', serif !important;
 }
 
 .logo-main table:hover {
-   cursor: crosshair;
+   // cursor: crosshair;
 }
 
 .logo-main td {

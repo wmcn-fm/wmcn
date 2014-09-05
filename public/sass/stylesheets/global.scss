@@ -13,6 +13,10 @@ thead {
   background-color: #ffffff !important;
 }
 
+*:focus {
+  outline: none !important;
+}
+
 
 a {
   text-decoration: none !important;
@@ -23,6 +27,10 @@ a:hover {
   color: $black;
   // border-bottom: 3px solid $black;
   text-decoration: underline !important;
+}
+
+a:focus {
+  
 }
 
 button {
