@@ -43,6 +43,12 @@ button:hover {
   color: $black;
   background-color: white;
 }
+
+.pressed {
+  color: $black;
+  background-color: white;
+}
+
 input[type="checkbox"] {
   appearance: none;
   background-color: #fafafa;

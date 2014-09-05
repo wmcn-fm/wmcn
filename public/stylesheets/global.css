@@ -21,6 +21,10 @@ button:hover {
   color: #282828;
   background-color: white; }
 
+.pressed {
+  color: #282828;
+  background-color: white; }
+
 input[type="checkbox"] {
   appearance: none;
   background-color: #fafafa;

@@ -14,6 +14,16 @@ $(document).ready(function() {
         }
     });
 
+    $('.streamButton').click(function() {
+        $(this).toggleClass('pressed');
+        if (playPauseCount %2 == 0) {
+            playStream();
+        } else {
+            pauseStream();
+        }
+        playPauseCount++;
+    });
+
     $('#schedule').popover();
     $('.popover-dismiss').popover({
       trigger: 'focus'
@@ -53,10 +63,16 @@ $(document).ready(function() {
 
 });
 
+var playPauseCount = 0;
+
 var availableSlots = [];
 
 function playStream() {
     document.getElementById('streamPlayer').play();
+}
+
+function pauseStream() {
+    document.getElementById('streamPlayer').pause();
 }
 
 function deleteUser(event) {
