@@ -55,17 +55,15 @@ router.post('/dj', function(req, res) {
             "studentStatus" : studentStatus,
             "macIdNum" : macIdNum,
             "iclass" : iclass,
-            "gradYear" : gradYear,
-            bigUrl : randomString(32, alphanumeric) + iterator,
-            confiCode : randomString(6, alphanumeric)
+            "gradYear" : gradYear
         },
         "show": {
             "showTitle" : show,
             "blurb" : blurb
         },
         "app" : {
-            "djStatus" : djStatus,
-            "availability" : testArray
+            "djStatus" : djStatus
+            // "availability" : availability
         }
     }, function (err, doc) {
         if (err) {
@@ -74,8 +72,6 @@ router.post('/dj', function(req, res) {
             res.send("There was a problem adding the information to the database.");
         }
         else {
-            console.log("This is the iterator", iterator);
-            iterator += 1;
             // If it worked, set the header so the address bar doesn't still say /adduser
             res.location("../admin/applicants/dj");
             // And forward to success page
@@ -85,13 +81,3 @@ router.post('/dj', function(req, res) {
 });
 
 module.exports = router;
-
-// random string generator found on stack overflow
-function randomString(length, chars) {
-    var result = '';
-    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
-    return result;
-}
-//var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-var alphanumeric = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var iterator = 0; // iterator makes the bigURL string unique

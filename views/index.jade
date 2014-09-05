@@ -4,72 +4,86 @@ block content
 	.container-fluid
 		.row
 			.col-md-12.col-lg-6
-				section.content-quad
+				section
 					h1.category-title latest shows:
 					div#playlist-carousel.carousel.slide(data-ride='carousel')
-						ol.carousel-indicators
-							li(data-target='playlist-carousel' data-slide-to='0').active
-							li(data-target='playlist-carousel' data-slide-to='1')
 						.carousel-inner
 							.item.active
-								.playlist
-									h1.category-headline.fixie
+								.playlist1
+									h1.category-headline
+										a.playlist1-show(href='#') foood 8/7
+									span.helper-text 
+										p with 
+										p.hosts Will Kent-Daggett, David Clingman, and Miles Margulies
 							.item
-								.playlist
-									h1.category-headline.fixie
+								.playlist2
+									h1.category-headline
+										a.playlist2-show(href='#') datpiff 8/7
+									span.helper-text 
+										p with 
+										p.hosts Will Kent-Daggett and Sam Landsberg
 							.item
-								.playlist
-									h1.category-headline.fixie
+								.playlist3
+									h1.category-headline
+										a.playlist3-show(href='#') some other random show 8/7
+									span.helper-text 
+										p with 
+										p.hosts a few random people
 							.item
-								.playlist
+								.playlist4
 									h1.category-headline.fixie
+										a.playlist4-show(href='#') another random show 8/7
+									span.helper-text 
+										p with 
+										p.hosts more randos
 						a.left.carousel-control(href='#playlist-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
 						a.right.carousel-control(href='#playlist-carousel' role='button' data-slide='next')
 							span.glyphicon.glyphicon-chevron-right
 			.col-md-12.col-lg-6
-				section.content-quad
+				section
 					h1.category-title new reviews:
 					div#review-carousel.carousel.slide(data-ride='carousel')
-						ol.carousel-indicators
-							li(data-target='review-carousel' data-slide-to='0').active
-							li(data-target='review-carousel' data-slide-to='1')
 						.carousel-inner
 							.item.active
-								h1.category-headline.fixie
-								img(src='http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg')
+								.slider-size(style="background: url(http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg) center center; background-size: cover;")
+								.carousel-caption
+									.review-overlay
+										a.review-title(href='#')
+											h1.category-headline shabazz palaces
+											h1.category-headline these rooyales
+
+								//- img(src='http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg')
 							.item
-								img(src='http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg')
+								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
+								.carousel-caption
+									.review-overlay
+										a.review-title(href='#')
+											h1.category-headline spoon
+											h1.category-headline they want my soul
+								//- img(src='http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg')
 						a.left.carousel-control(href='#review-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
 						a.right.carousel-control(href='#review-carousel' role='button' data-slide='next')
 							span.glyphicon.glyphicon-chevron-right
 		.row
-			.col-md-12.col-lg-6
-				section.content-quad
-					div#pinned1
-						h1.fixie.category-headline
-						img(src='holder.js/610x400')
-			.col-md-12.col-lg-6
-				section.content-quad
-					div#pinned2
-						h1.fixie.category-headline
-						img(src='holder.js/610x400')
+			.col-xs-12
+				h1.category-title top posts:
 		.row
-			section.col-xs-12#schedule
-				h1 show schedule: 
-				table.table.table-hover
-					thead
-						- var headers = ['time', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-						- each item, i in headers
-							th= item
-					tbody
-						- for (var i=0; i < 25; i++)
-							tr
-								td= i
-								- for (var j=0; j < 7; j++)
-									td
-										button.btn.btn-default.popover-dismiss(type='button' data-toggle='popover' data-container='body' title='xxx' data-content='yyyy') test
-
+			.col-sm-6
+				section
+					div#pinned
+						a(href='#')
+							h1.fixie.category-headline
+						p.helper-text by 
+							span.fixie
+			.col-sm-6
+				section
+					div#pinned
+						a(href='#')
+							h1.fixie.category-headline
+						p.helper-text by 
+							span.fixie
+			include schedule
 
 		//- include footer
