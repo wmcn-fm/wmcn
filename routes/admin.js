@@ -17,6 +17,8 @@ var appColl = db.collection('djapps');
 var userColl = db.collection('usercollection');
 var showColl = db.collection('shows');
 
+var login = require('./login.js');
+
 var forEachAsync = require('forEachAsync').forEachAsync;
 
 /** 
@@ -25,10 +27,10 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 */
 
 // GET
-router.get('/*', function(req, res, next) {
+router.get('/*', login.isLoggedIn, function(req, res, next) {
 	res.set('private content');
 	next();
-})
+});
 
 
 

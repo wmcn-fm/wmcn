@@ -13,6 +13,8 @@ var reviewColl = db.collection('reviews');
 
 var client = require('../tumblr.js');
 
+var login = require('./login.js');
+
 var forEachAsync = require('forEachAsync').forEachAsync;
 
 
@@ -21,6 +23,11 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 *   ====================================================================
 *   '/dj'
 */
+
+router.get('/*', login.isLoggedIn, function(req, res, next) {
+	res.set('private content');
+	next();
+});
 
 //  GET
 router.get('/', function(req, res) {
