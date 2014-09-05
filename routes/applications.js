@@ -13,7 +13,7 @@ var db = mongo.db(dbUrl, {native_parser:true});
 
 //  GET
 router.get('/dj', function(req, res) {
-  res.render('applications/dj', { title: 'Apply to Be a DJ!'});
+  res.render('applications/dj', { title: 'fall 2014 dj application'});
 });
 
 router.get('/staff', function(req, res) {
