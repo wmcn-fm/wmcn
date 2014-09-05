@@ -41,6 +41,9 @@ router.post('/dj', function(req, res) {
     var blurb = req.body.blurb;
     // var testArray = [0, 1, 5];
     var availability = req.body.availability;
+    var numDjs = req.body.numDjs;
+
+    console.log(numDjs);
 
     // Set our collection
     var collection = db.collection('djapps');

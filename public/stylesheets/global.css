@@ -181,3 +181,7 @@ table.availability-table th {
 .available-slot {
   background-color: #7CF379; }
 
+.album-image {
+  width: 100%;
+  max-width: 100%;
+  padding-top: 2%; }

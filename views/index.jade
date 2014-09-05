@@ -69,17 +69,17 @@ block content
 											h1.category-headline= albumName
 
 							.item
-								- var imgUrl = "background: url(" + reviews[0].imgUrl + ") center center; background-size: cover;"
+								- var imgUrl = "background: url(" + reviews[1].imgUrl + ") center center; background-size: cover;"
 								.slider-size(style= imgUrl)
 								.carousel-caption
 									.review-overlay
-										- var hrf = reviews[0].perma
+										- var hrf = reviews[1].perma
 										a.review-title(href= hrf)
 											h1.album-artist.category-headline= reviews[1].artistName
 											- var albumName = "'" + reviews[1].album + "'" 
 											h1.category-headline= albumName
 							.item
-								- var imgUrl = "background: url(" + reviews[0].imgUrl + ") center center; background-size: cover;"
+								- var imgUrl = "background: url(" + reviews[2].imgUrl + ") center center; background-size: cover;"
 								.slider-size(style= imgUrl)
 								.carousel-caption
 									.review-overlay
@@ -89,7 +89,7 @@ block content
 											- var albumName = "'" + reviews[2].album + "'" 
 											h1.category-headline= albumName
 							.item
-								- var imgUrl = "background: url(" + reviews[0].imgUrl + ") center center; background-size: cover;"
+								- var imgUrl = "background: url(" + reviews[3].imgUrl + ") center center; background-size: cover;"
 								.slider-size(style= imgUrl)
 								.carousel-caption
 									.review-overlay
