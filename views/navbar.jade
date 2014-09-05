@@ -7,20 +7,26 @@ nav#nav.navbar.navbar-default.center(role='navigation')
 			span.icon-bar
 		a.navbar-brand(href='/')
 			img.icon(src='/images/favicon.png')
+			a(href!='javascript:playStream();')
+				button.btn.navbar-btn
+					span.glyphicon.glyphicon-volume-up 
+					span  listen live 
+					//- span.glyphicon.glyphicon-music
+				audio#streamPlayer(controls='controls' src!='http://216.250.175.13:8000/;type=mp3')
 			//- .currentShow-container
 				//- ul.nav.navbar-nav
 				//- 	li
 				//- 		span now playing: 
 				//- 		span.currentShow= currentShow
 	div#nav-main.collapse.navbar-collapse
-		ul.nav.navbar-nav
-			li.currentShow
-				- var urlStem = '/shows/' + currentShow
-				a(href=urlStem)
-					button.btn.navbar-btn
-						span.glyphicon.glyphicon-volume-up 
-						span  foood 
-						span.glyphicon.glyphicon-music
+		ul.nav.nav-justified
+			//- li.currentShow
+			//- 	a(href!='javascript:playStream();')
+			//- 		button.btn.navbar-btn
+			//- 			span.glyphicon.glyphicon-volume-up 
+			//- 			span  foood 
+			//- 			span.glyphicon.glyphicon-music
+			//- 		audio#streamPlayer(controls='controls' src!='http://216.250.175.13:8000/;type=mp3')
 			li
 				a(href = '/archive')
 					button.btn.navbar-btn archive

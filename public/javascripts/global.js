@@ -6,6 +6,8 @@ $(document).ready(function() {
     //     $(this).css('background-color', color);
     // });
 
+    
+
     $('#nav').affix({
         offset: {
             top: $('.logo-main').height()
@@ -52,6 +54,10 @@ $(document).ready(function() {
 });
 
 var availableSlots = [];
+
+function playStream() {
+    document.getElementById('streamPlayer').play();
+}
 
 function deleteUser(event) {
     event.preventDefault();

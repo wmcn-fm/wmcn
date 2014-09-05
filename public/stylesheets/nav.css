@@ -8,9 +8,6 @@ img.icon {
   max-width: 50px;
   max-height: 50px; }
 
-.currentShow {
-  float: left; }
-
 .nav-categories {
   height: 100%;
   width: 80%;
@@ -59,3 +56,6 @@ li {
   top: 0;
   width: 100%;
   z-index: 100; }
+
+#streamPlayer {
+  display: none; }

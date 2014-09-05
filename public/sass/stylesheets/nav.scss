@@ -10,9 +10,9 @@ img.icon {
   max-height: 50px;
 }
 
-.currentShow {
-  float: left;
-}
+// .currentShow {
+//   float: left;
+// }
 
 .nav-categories {
   height: 100%;
@@ -75,4 +75,8 @@ li {
     top: 0;
     width: 100%;
     z-index:100;
+}
+
+#streamPlayer {
+  display: none;
 }
