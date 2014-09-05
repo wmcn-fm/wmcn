@@ -6,10 +6,10 @@ thead {
 
 a {
   text-decoration: none !important;
-  color: #282828; }
+  color: #282828 !important; }
 
 a:hover {
-  color: #282828;
+  color: #282828 !important;
   text-decoration: underline !important; }
 
 button {

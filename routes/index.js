@@ -7,6 +7,7 @@ var dbUrl = require('../dbLogin.js');
 var db = mongo.db(dbUrl, {native_parser:true});
 var playlistColl = db.collection('playlists');
 var reviewColl = db.collection('reviews');
+var blogColl = db.collection('blogs');
 
 var passport = require('passport');
 var login = require('./login.js');
@@ -23,11 +24,27 @@ var userColl = db.collection('usercollection'); // for login testing
 
 //  GET
 router.get('/', function(req, res) {
-  res.render('index', { 
-  	title: 'WMCN: Macalester College Radio',
-  	navCategories: navCats
-
-  });
+	var playlists = [];
+	var reviews = [];
+	var blogs = [];
+	playlistColl.find().sort({$natural: -1}).limit(4).toArray(function (err, pls) {
+		if (err) { res.render('error')} else {
+			playlists = pls;
+		}
+		reviewColl.find().sort({$natural: -1}).limit(4).toArray(function (err, rvws) {
+			if (err) {res.render('error')} else {
+				reviews = rvws;
+				console.log(reviews);
+			}
+			res.render('index', { 
+				title: 'WMCN: Macalester College Radio',
+				playlists: playlists,
+				reviews: reviews,
+				blogs: blogs
+			});
+		});
+	});
+	
 });
 
 /** 

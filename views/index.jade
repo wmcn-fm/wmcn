@@ -12,30 +12,38 @@ block content
 								.playlist1
 									.category-container
 										h1.category-headline
-											a.playlist1-show(href='#') foood 8/7
+											a.playlist1-show(href='#')= playlists[0].showName + ' '
+												- var date0 = playlists[0].date.month + '/' + playlists[0].date.date
+												span= date0
 										p.helper-text with 
-										p.hosts Will Kent-Daggett, David Clingman, &amp; Miles Margulies
+										p.hosts= playlists[0].hostName
 							.item
 								.playlist2
 									.category-container
 										h1.category-headline
-											a.playlist2-show(href='#') datpiff 8/7
+											a.playlist2-show(href='#')= playlists[1].showName + ' '
+												- var date1 = playlists[1].date.month + '/' + playlists[1].date.date
+												span= date1
 										p.helper-text with 
-										p.hosts Will Kent-Daggett &amp; Sam Landsberg
+										p.hosts= playlists[1].hostName
 							.item
 								.playlist3
 									.category-container
 										h1.category-headline
-											a.playlist3-show(href='#') some other random show 8/7
+											a.playlist3-show(href='#')= playlists[2].showName + ' '
+												- var date2 = playlists[2].date.month + '/' + playlists[2].date.date
+												span= date2
 										p.helper-text with 
-										p.hosts a few random people
+										p.hosts= playlists[2].hostName
 							.item
 								.playlist4
 									.category-container
 										h1.category-headline.fixie
-											a.playlist4-show(href='#') another random show 8/7
+											a.playlist4-show(href='#')= playlists[3].showName + ' '
+												- var date3 = playlists[3].date.month + '/' + playlists[3].date.date
+												span= date3
 										p.helper-text with 
-										p.hosts more randos
+										p.hosts= playlists[3].hostName
 						a.left.carousel-control(href='#playlist-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
 						a.right.carousel-control(href='#playlist-carousel' role='button' data-slide='next')
@@ -50,18 +58,34 @@ block content
 								.carousel-caption
 									.review-overlay
 										a.review-title(href='#')
-											h1.album-artist.category-headline shabazz palaces
-											h1.category-headline "these rooyales"
+											h1.album-artist.category-headline= reviews[0].artistName
+											- var albumName = "'" + reviews[0].album + "'" 
+											h1.category-headline= albumName
 
-								//- img(src='http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg')
 							.item
 								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
 								.carousel-caption
 									.review-overlay
 										a.review-title(href='#')
-											h1.album-artist.category-headline spoon
-											h1.category-headline "they want my soul"
-								//- img(src='http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg')
+											h1.album-artist.category-headline= reviews[1].artistName
+											- var albumName = "'" + reviews[1].album + "'" 
+											h1.category-headline= albumName
+							.item
+								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
+								.carousel-caption
+									.review-overlay
+										a.review-title(href='#')
+											h1.album-artist.category-headline= reviews[2].artistName
+											- var albumName = "'" + reviews[2].album + "'" 
+											h1.category-headline= albumName
+							.item
+								.slider-size(style="background: url(http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg) center center; background-size: cover;")
+								.carousel-caption
+									.review-overlay
+										a.review-title(href='#')
+											h1.album-artist.category-headline= reviews[3].artistName
+											- var albumName = "'" + reviews[3].album + "'" 
+											h1.category-headline= albumName
 						a.left.carousel-control(href='#review-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
 						a.right.carousel-control(href='#review-carousel' role='button' data-slide='next')

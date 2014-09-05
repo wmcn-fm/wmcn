@@ -20,11 +20,11 @@ thead {
 
 a {
   text-decoration: none !important;
-  color: $black;
+  color: $black !important;
 }
 
 a:hover {
-  color: $black;
+  color: $black !important;
   // border-bottom: 3px solid $black;
   text-decoration: underline !important;
 }
