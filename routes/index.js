@@ -73,6 +73,12 @@ router.get('/archive', function(req, res) {
 *   '/playlist'
 */
 
+router.get('/playlist', function(req, res) {
+	playlistColl.find().limit(10).toArray(function (err, result) {
+		console.log(result);
+	});
+});
+
 router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
 	playlistColl.find({showName: req.params.showName, perma: req.url}).toArray(function (err, result) {
 		if (err) { res.render('error') } else {
@@ -124,6 +130,17 @@ router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
 *   '/review'
 */
 
+router.get('/reviews', function(req, res) {
+	reviewColl.find().limit(10).toArray(function (err, result) {
+		if (err) {res.render('error')} else {
+			console.log(result);
+			res.render('page-layout', {
+				last10: result[0]
+			});
+		}
+	});
+});
+
 router.get('/review/:artistName/:year/:month/:date', function(req, res) {
 	reviewColl.find({perma: req.url}).toArray(function (err, result) {
 		if (err) { res.render('error') } else {
@@ -133,6 +150,7 @@ router.get('/review/:artistName/:year/:month/:date', function(req, res) {
 			var dj = rv.djName;
 			var perma = rv.perma;
 			var fullDate = rv.date;
+			var imgUrl = rv.imgUrl;
 			var content = rv.content;
 			var alertInfo;
 
@@ -164,7 +182,8 @@ router.get('/review/:artistName/:year/:month/:date', function(req, res) {
 					date: fullDate,
 					content: content,
 					alertInfo: alertInfo,
-					currentShow: currentShow
+					currentShow: currentShow,
+					imgUrl: imgUrl
 				});
 			}
 		}

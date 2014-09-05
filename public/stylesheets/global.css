@@ -69,6 +69,8 @@ ul, li {
 
 .post-main {
   border: 2px solid #282828; }
+  .post-main img {
+    padding-top: 2%; }
 
 .page-header {
   text-align: center; }
