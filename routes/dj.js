@@ -287,30 +287,21 @@ router.get('/review', function(req, res) {
 		if (err) {djName = ' :( ' } else {
 			djName = dj.firstName + ' ' + dj.lastName;
 		}
-
-		showColl.findById(testShow, function (err, show) {
-
-			if (err) {showTitle: ':('} else {
-				console.log(show);
-				showTitle = show.showTitle;
-			}
-			res.render('dj/review', 
-		    	{
-		    		title: "write a review",
-		    		djName: djName,
-		    		date: date,
-		    		show: showTitle
-	    	});
-		});
+		res.render('dj/review', 
+	    	{
+	    		title: "write a review",
+	    		djName: djName,
+	    		date: date,
+    	});
 	});
 });
 
 router.post('/review', function(req, res) {
 	var djId = req.body.dj_id;
 	var djName = 'will kent-daggett';
-	var artistName = req.body.artistName;
+	var artistName = req.body.artistName.replace(/\s/g, "-");
 	var album = req.body.albumName;
-	var content = req.body.content;
+	var content = '<p>' + req.body.content + '</p>';
 	var d = new Date();
 	var	year = d.getFullYear();
 	var	month = d.getMonth();
@@ -318,10 +309,23 @@ router.post('/review', function(req, res) {
 	var	hour = d.getHours();
 	var	min = d.getMinutes();
 	var	day = d.getDay();
-	var	perma = 'review/' + artistName + '/' + year + '/' + month + '/' + date + '/' + hour + '/';
+	var	perma = '/review/' + artistName + '/' + year + '/' + month + '/' + date + '/';
+
+	var artistId;
+
 	artistColl.find({name: artistName}).toArray(function (err, result) {
 		console.log(result);
-		var artistId = result[0]._id;
+		if (result.length == 0) {
+			console.log('nothin');
+			artistColl.insert({
+				name: artistName
+			}, function (err, newArtist) {
+				artistId = newArtist[0]._id;
+			});
+		} else {
+			artistId = result[0]._id;
+		}
+
 		reviewColl.insert({
 			'artistId': artistId,
 			'artistName' : artistName,

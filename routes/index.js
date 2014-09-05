@@ -124,16 +124,69 @@ router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
 *   '/review'
 */
 
-router.get('/review/:artist/:year/:month/:date/:hour', function(req, res) {
+router.get('/review/:artistName/:year/:month/:date', function(req, res) {
 	reviewColl.find({perma: req.url}).toArray(function (err, result) {
 		if (err) { res.render('error') } else {
 			console.log(result);
-			var review = result[0];
-			var title = review.artistName + ': ' + review.albumName;
-			var dj = review.djName;
-			var perma = review.perma;
-			var fullDate = review.date;
-			var content = review.content;
+			var rv = result[0];
+			var title = rv.artistName + ': ' + "'" + rv.album + "'";
+			var dj = rv.djName;
+			var perma = rv.perma;
+			var fullDate = rv.date;
+			var content = rv.content;
+			var alertInfo;
+
+			if (req.flash('tumblrURL').length) {
+				alertInfo = req.flash('tumblrURL');
+				console.log('if!!');
+				var currentShow = 'foood';				
+				renderWithInfo(currentShow);
+			} else {
+				console.log('else!! - no info');
+				alertInfo = req.flash('tumblrURL');
+				// res.render('playlist-layout', {
+				// 	title: title,
+				// 	dj: dj,
+				// 	perma: perma,
+				// 	date: fullDate,
+				// 	content: content
+				// });
+				var currentShow = 'foood';
+				renderWithInfo(currentShow);
+			}
+
+			function renderWithInfo(currentShow) {
+				console.log('renderWithInfo!!!!');
+				res.render('playlist-layout', {
+					title: title,
+					dj: dj,
+					perma: perma,
+					date: fullDate,
+					content: content,
+					alertInfo: alertInfo,
+					currentShow: currentShow
+				});
+			}
+		}
+	});
+});
+
+/** 
+*   ====================================================================
+*   '/blog'
+*/
+
+router.get('/blog/:year/:month/:date/:hour', function(req, res) {
+	console.log(req.url);
+	blogColl.find({perma: req.url}).toArray(function (err, result) {
+		if (err) { res.render('error') } else {
+			console.log(result);
+			var blg = result[0];
+			var title = blg.title;
+			var dj = blg.djName;
+			var perma = blg.perma;
+			var fullDate = blg.date;
+			var content = blg.content;
 			var alertInfo;
 
 			if (req.flash('tumblrURL').length) {
