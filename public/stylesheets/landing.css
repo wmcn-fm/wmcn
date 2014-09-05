@@ -73,7 +73,8 @@
   z-index: 50; }
 
 section {
-  padding-top: 1%; }
+  padding-top: 1%;
+  padding-bottom: 1%; }
 
 #pinned {
   width: 100%;
@@ -85,11 +86,3 @@ section {
 .helper-text {
   font-family: 'Slabo 13px', serif !important;
   font-size: 80%; }
-
-.hosts, .author {
-  font-family: futura !important;
-  text-transform: uppercase; }
-
-.author {
-  font-family: futura !important;
-  text-transform: uppercase; }

@@ -75,6 +75,10 @@ input[type="checkbox"]:checked:after {
   transition: border .25s, left .15s .25s, right .25s .175s;
 }
 
+ul, li {
+  text-align: center;
+}
+
 .post-content {
   // border: 2px solid $black;
 }
@@ -179,4 +183,14 @@ a.review-title:hover {
 // .post-section {
 //   border-right: 2px solid $black;
 // }
+
+.hosts, .author {
+  font-family: $font-main;
+  text-transform: uppercase;
+}
+
+.author, .link-futura  {
+  font-family: $font-main;
+  text-transform: uppercase;
+}
 

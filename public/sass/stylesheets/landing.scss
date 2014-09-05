@@ -99,6 +99,7 @@ $font-helper : 'Slabo 13px', serif !important;
 
 section {
   padding-top: 1%;
+  padding-bottom: 1%;
 }
 #pinned {
   width: 100%;
@@ -115,12 +116,3 @@ section {
   font-size: 80%;
 }
 
-.hosts, .author {
-  font-family: $font-main;
-  text-transform: uppercase;
-}
-
-.author {
-  font-family: $font-main;
-  text-transform: uppercase;
-}
