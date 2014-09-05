@@ -65,6 +65,10 @@ $font-helper : 'Slabo 13px', serif !important;
   text-transform: uppercase;
 }
 
+.album-artist {
+  padding-top: 20%;
+}
+
 
 
 
@@ -76,10 +80,12 @@ $font-helper : 'Slabo 13px', serif !important;
 }
 
 .carousel-caption {
-  color: $black;
+  // color: $black;
+  display: none;
 }
 
 .item {
+  width: 100%;
   img, div {
     width: auto;
     height: 500px;
@@ -87,12 +93,16 @@ $font-helper : 'Slabo 13px', serif !important;
   } 
 }
 
+.item, .item * {
+  z-index: 50;
+}
+
 section {
   padding-top: 1%;
 }
 #pinned {
   width: 100%;
-  height: 300px;
+  height: 500px;
   text-align: center;
   background-color: white;
   border: 3px solid $black;
@@ -102,4 +112,15 @@ section {
 
 .helper-text {
   font-family: $font-helper;
+  font-size: 80%;
+}
+
+.hosts, .author {
+  font-family: $font-main;
+  text-transform: uppercase;
+}
+
+.author {
+  font-family: $font-main;
+  text-transform: uppercase;
 }

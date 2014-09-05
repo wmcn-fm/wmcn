@@ -6,35 +6,35 @@ block content
 			.col-md-12.col-lg-6
 				section
 					h1.category-title latest shows:
-					div#playlist-carousel.carousel.slide(data-ride='carousel')
+					div#playlist-carousel.carousel.slide(data-ride='carousel' data-interval='3000')
 						.carousel-inner
 							.item.active
 								.playlist1
-									h1.category-headline
-										a.playlist1-show(href='#') foood 8/7
-									span.helper-text 
-										p with 
-										p.hosts Will Kent-Daggett, David Clingman, and Miles Margulies
+									.category-container
+										h1.category-headline
+											a.playlist1-show(href='#') foood 8/7
+										p.helper-text with 
+										p.hosts Will Kent-Daggett, David Clingman, &amp; Miles Margulies
 							.item
 								.playlist2
-									h1.category-headline
-										a.playlist2-show(href='#') datpiff 8/7
-									span.helper-text 
-										p with 
-										p.hosts Will Kent-Daggett and Sam Landsberg
+									.category-container
+										h1.category-headline
+											a.playlist2-show(href='#') datpiff 8/7
+										p.helper-text with 
+										p.hosts Will Kent-Daggett &amp; Sam Landsberg
 							.item
 								.playlist3
-									h1.category-headline
-										a.playlist3-show(href='#') some other random show 8/7
-									span.helper-text 
-										p with 
+									.category-container
+										h1.category-headline
+											a.playlist3-show(href='#') some other random show 8/7
+										p.helper-text with 
 										p.hosts a few random people
 							.item
 								.playlist4
-									h1.category-headline.fixie
-										a.playlist4-show(href='#') another random show 8/7
-									span.helper-text 
-										p with 
+									.category-container
+										h1.category-headline.fixie
+											a.playlist4-show(href='#') another random show 8/7
+										p.helper-text with 
 										p.hosts more randos
 						a.left.carousel-control(href='#playlist-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
@@ -43,15 +43,15 @@ block content
 			.col-md-12.col-lg-6
 				section
 					h1.category-title new reviews:
-					div#review-carousel.carousel.slide(data-ride='carousel')
+					div#review-carousel.carousel.slide(data-ride='carousel' data-interval='4000')
 						.carousel-inner
 							.item.active
 								.slider-size(style="background: url(http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg) center center; background-size: cover;")
 								.carousel-caption
 									.review-overlay
 										a.review-title(href='#')
-											h1.category-headline shabazz palaces
-											h1.category-headline these rooyales
+											h1.album-artist.category-headline shabazz palaces
+											h1.category-headline "these rooyales"
 
 								//- img(src='http://cdn2.pitchfork.com/albums/20857/homepage_large.cc761557.jpg')
 							.item
@@ -59,8 +59,8 @@ block content
 								.carousel-caption
 									.review-overlay
 										a.review-title(href='#')
-											h1.category-headline spoon
-											h1.category-headline they want my soul
+											h1.album-artist.category-headline spoon
+											h1.category-headline "they want my soul"
 								//- img(src='http://assets.rollingstone.com/assets/images/album_review/they-want-my-soul-20140805/8a851f3a-1406733773.jpg')
 						a.left.carousel-control(href='#review-carousel' role='button' data-slide='prev')
 							span.glyphicon.glyphicon-chevron-left
@@ -73,17 +73,19 @@ block content
 			.col-sm-6
 				section
 					div#pinned
-						a(href='#')
-							h1.fixie.category-headline
-						p.helper-text by 
-							span.fixie
+						.category-container
+							a(href='#')
+								h1.fixie.category-headline
+							p.helper-text by 
+								span.author.fixie
 			.col-sm-6
 				section
 					div#pinned
-						a(href='#')
-							h1.fixie.category-headline
-						p.helper-text by 
-							span.fixie
+						.category-container
+							a(href='#')
+								h1.fixie.category-headline
+							p.helper-text by 
+								span.author.fixie
 			include schedule
 
 		//- include footer

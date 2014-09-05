@@ -4,6 +4,7 @@ $yellow : #ff8900;
 $blue : #086fa1;
 $red : #a31010;
 $black: #282828;
+$alt-grey: #ddd;
 
 $font-main : futura !important;
 $font-helper : 'Slabo 13px', serif !important;
@@ -135,7 +136,12 @@ p {
 .category-headline {
   text-transform: uppercase;
   text-align: center;
-  padding-top: 15%;
+  // padding-top: 15%;
+}
+
+.category-container {
+  padding-top: 25%;
+  height: 100%;
 }
 
 .post-details {
@@ -152,7 +158,7 @@ p {
 .review-overlay {
   margin-top: 25% !important;
   margin: auto;
-  background:rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.5);
   max-width: 90%;
   height: 300px !important;
   max-height: 300px !important;
@@ -164,7 +170,7 @@ p {
 // }
 
 a.review-title {
-  visibility: hidden;
+  // visibility: hidden;
 }
 
 a.review-title:hover {

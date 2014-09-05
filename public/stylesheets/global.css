@@ -100,8 +100,11 @@ p {
 
 .category-headline {
   text-transform: uppercase;
-  text-align: center;
-  padding-top: 15%; }
+  text-align: center; }
+
+.category-container {
+  padding-top: 25%;
+  height: 100%; }
 
 .thumbnail {
   border: none; }
@@ -111,13 +114,10 @@ p {
 .review-overlay {
   margin-top: 25% !important;
   margin: auto;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.5);
   max-width: 90%;
   height: 300px !important;
   max-height: 300px !important; }
-
-a.review-title {
-  visibility: hidden; }
 
 a.review-title:hover {
   visibility: visible; }
