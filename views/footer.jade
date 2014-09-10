@@ -32,7 +32,7 @@
 				li Saint Paul, Minnesota 55105
 				li Office Phone: 
 					a(href='tel:6516966082') 651-696-6082
-				li Live Reuest Line: 
+				li Live Request Line: 
 					a(href='tel:6516966312') 651-696-6312
 				li 
 					a(href= 'mailto:wmcn@macalester.edu') wmcn@macalester.edu
@@ -53,7 +53,21 @@
 				a(href='https://github.com/wmcn-fm') Github, 
 			span
 				a(href='http://216.250.175.13:8000/listen.pls') Downloadable streaming link
+
+		//- if user.isLoggedIn
+		//- 	p Signed in as 
+		//- 		span= user.firstName + user.lastName
+		//- 		a(href='javascript:logout()') (Sign out)
+		//- else
+		//- 	p
+		//- 		a(href='javascript:promptLogin()') Site login
+
 		
 
-	//- .col-md-12.cr-wrapper
-	//- 	p.copyright (C) 2014 WMCN | 1600 Grand Ave Saint Paul MN 55104 | 612.696.6666
+	.col-md-4.col-md-offset-4.cr-wrapper
+		p.copyright 
+			span.glyphicon.glyphicon-copyright-mark 
+			span  2014 WMCN | 1600 Grand Ave Saint Paul MN 55104 | 612.696.6082
+	.col-md-4
+		p 
+			a(href='#loginModal' data-toggle="modal") Login

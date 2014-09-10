@@ -3,6 +3,7 @@ exports.isLoggedIn = function isLoggedIn(req, res, next) {
 console.log("here is the user: ", req.user)
 	// if user is authenticated in the session, carry on 
 	if (req.isAuthenticated()) {
+		console.log(req.user);
 		return next();
 	}
 
