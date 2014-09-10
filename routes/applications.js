@@ -13,7 +13,7 @@ var db = mongo.db(dbUrl, {native_parser:true});
 
 //  GET
 router.get('/dj', function(req, res) {
-  res.render('applications/dj', { title: 'fall 2014 dj application'});
+  res.render('applications/dj', { title: 'Fall 2014 DJ Application'});
 });
 
 router.get('/staff', function(req, res) {
@@ -42,6 +42,7 @@ router.post('/dj', function(req, res) {
     // var testArray = [0, 1, 5];
     var availability = req.body.availability;
     var numDjs = req.body.numDjs;
+    var timePref = req.body.timePref;
 
     console.log(numDjs);
 
@@ -67,7 +68,8 @@ router.post('/dj', function(req, res) {
         },
         "app" : {
             // "djStatus" : djStatus,
-            "availability" : availability
+            "availability" : availability,
+            "timePref" : timePref
         }
     }, function (err, doc) {
         if (err) {

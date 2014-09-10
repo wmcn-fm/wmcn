@@ -179,7 +179,7 @@ table.availability-table th {
   padding-left: 2%; }
 
 .available-slot {
-  background-color: #7CF379; }
+  background-color: #7CF379 !important; }
 
 .album-image {
   width: 100%;

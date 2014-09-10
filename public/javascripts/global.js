@@ -5,7 +5,13 @@ $(document).ready(function() {
     //     var color = colors[i];
     //     $(this).css('background-color', color);
     // });
-
+    (function() {
+        var link = document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = '/images/favicon.png';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }());
     
 
     $('#nav').affix({
@@ -71,7 +77,7 @@ $(document).ready(function() {
         return true;
     });
 
-    $('.per-person1, .per-person2, .per-person3, .per-person4').hide();
+    $('.per-person1, .per-person2, .per-person3, .per-person4, .mac-affiliation1, .mac-affiliation2, .mac-affiliation3, .mac-affiliation4').hide();
     $('#1dj').click(function() {
         $('.per-person1').slideToggle();
     });
@@ -83,6 +89,22 @@ $(document).ready(function() {
     });
     $('#4dj').click(function() {
         $('.per-person1, .per-person2, .per-person3, .per-person4').slideToggle();
+    });
+
+    $('.mac-affil1').click(function() {
+        $('.mac-affiliation1').slideToggle();
+    });
+
+    $('.mac-affil2').click(function() {
+        $('.mac-affiliation2').slideToggle();
+    });
+
+    $('.mac-affil3').click(function() {
+        $('.mac-affiliation3').slideToggle();
+    });
+
+    $('.mac-affil4').click(function() {
+        $('.mac-affiliation4').slideToggle();
     });
 
 });

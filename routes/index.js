@@ -87,7 +87,7 @@ router.get('/playlist', function(req, res) {
 });
 
 router.get('/playlist/:showName/:year/:month/:date/:hour', function(req, res) {
-	playlistColl.find({showName: req.params.showName, perma: req.url}).toArray(function (err, result) {
+	playlistColl.find({perma: req.url}).toArray(function (err, result) {
 		if (err) { res.render('error') } else {
 			var pl = result[0];
 			var title = pl.showName + ' ' + pl.date.month + '/' + pl.date.date;

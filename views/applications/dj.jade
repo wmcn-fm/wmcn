@@ -19,6 +19,7 @@ block content
 							input(type='radio' name='numDjs' value=3 id='3dj')
 						label.btn 4 
 							input(type='radio' name='numDjs' value=4 id='4dj')
+		hr
 		.per-person1
 			.contact-info
 				.row
@@ -42,28 +43,40 @@ block content
 							label(for='phone') phone number
 							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
 			.row
-				//- h3.app-category school details: 
+				.col-xs-12
+					h4.app-category are you a current or former student, staff, or faculty member?
+					.button-group.mac-affil1
+						label.btn.mac-yes1 yes 
+							input(type='radio' name='studentStatus' value=1 id='mac-yes')
+						label.btn no 
+							input(type='radio' name='studentStatus' value=2 id='mac-no')
 			.row
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='macIdNum') macalester id number
-						input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='iclass') 5-digit iclass number
-						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
-						p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
-				.col-xs-12.col-sm-4
-					label graduating class
-					.button-group
-						label.btn 2015 
-							input(type='radio' name='gradYear' id='grad2015' value=2015)
-						label.btn 2016 
-							input(type='radio' name='gradYear' id='grad2016' value=2016)
-						label.btn 2017 
-							input(type='radio' name='gradYear' id='grad2017' value=2017)
-						label.btn 2018 
-							input(type='radio' name='gradYear' id='grad2018' value=2018)
+			.mac-affiliation1
+				.row
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='macIdNum') macalester id number
+							input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='iclass') 5-digit iclass number
+							input#iclass.form-control(type='number', name='iclass', placeholder=12345)
+							p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
+					.col-xs-12.col-sm-4
+						label graduating class
+						.button-group
+							label.btn 2015 
+								input(type='radio' name='gradYear' value=2015)
+							label.btn 2016 
+								input(type='radio' name='gradYear' value=2016)
+							label.btn 2017 
+								input(type='radio' name='gradYear' value=2017)
+							label.btn 2018 
+								input(type='radio' name='gradYear' value=2018)
+							label.btn Alum 
+								input(type='radio' name='gradYear' value=9999)
+
+			hr
 		.per-person2
 			.contact-info
 				.row
@@ -87,28 +100,40 @@ block content
 							label(for='phone') phone number
 							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
 			.row
-				//- h3.app-category school details: 
+				.col-xs-12
+					h4.app-category are you a current or former student, staff, or faculty member?
+					.button-group.mac-affil2
+						label.btn yes 
+							input(type='radio' name='studentStatus' value=1 id='mac-yes2')
+						label.btn no 
+							input(type='radio' name='studentStatus' value=2 id='mac-no')
 			.row
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='macIdNum') macalester id number
-						input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='iclass') 5-digit iclass number
-						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
-						p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
-				.col-xs-12.col-sm-4
-					label graduating class
-					.button-group
-						label.btn 2015 
-							input(type='radio' name='gradYear' id='grad2015' value=2015)
-						label.btn 2016 
-							input(type='radio' name='gradYear' id='grad2016' value=2016)
-						label.btn 2017 
-							input(type='radio' name='gradYear' id='grad2017' value=2017)
-						label.btn 2018 
-							input(type='radio' name='gradYear' id='grad2018' value=2018)
+			.mac-affiliation2
+				.row
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='macIdNum') macalester id number
+							input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='iclass') 5-digit iclass number
+							input#iclass.form-control(type='number', name='iclass', placeholder=12345)
+							p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
+					.col-xs-12.col-sm-4
+						label graduating class
+						.button-group
+							label.btn 2015 
+								input(type='radio' name='gradYear' value=2015)
+							label.btn 2016 
+								input(type='radio' name='gradYear' value=2016)
+							label.btn 2017 
+								input(type='radio' name='gradYear' value=2017)
+							label.btn 2018 
+								input(type='radio' name='gradYear' value=2018)
+							label.btn Alum 
+								input(type='radio' name='gradYear' value=9999)
+
+			hr
 		.per-person3
 			.contact-info
 				.row
@@ -132,28 +157,40 @@ block content
 							label(for='phone') phone number
 							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
 			.row
-				//- h3.app-category school details: 
+				.col-xs-12
+					h4.app-category are you a current or former student, staff, or faculty member?
+					.button-group.mac-affil3
+						label.btn yes 
+							input(type='radio' name='studentStatus' value=1 id='mac-yes3')
+						label.btn no 
+							input(type='radio' name='studentStatus' value=2 id='mac-no')
 			.row
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='macIdNum') macalester id number
-						input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='iclass') 5-digit iclass number
-						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
-						p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
-				.col-xs-12.col-sm-4
-					label graduating class
-					.button-group
-						label.btn 2015 
-							input(type='radio' name='gradYear' id='grad2015' value=2015)
-						label.btn 2016 
-							input(type='radio' name='gradYear' id='grad2016' value=2016)
-						label.btn 2017 
-							input(type='radio' name='gradYear' id='grad2017' value=2017)
-						label.btn 2018 
-							input(type='radio' name='gradYear' id='grad2018' value=2018)
+			.mac-affiliation3
+				.row
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='macIdNum') macalester id number
+							input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='iclass') 5-digit iclass number
+							input#iclass.form-control(type='number', name='iclass', placeholder=12345)
+							p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
+					.col-xs-12.col-sm-4
+						label graduating class
+						.button-group
+							label.btn 2015 
+								input(type='radio' name='gradYear' value=2015)
+							label.btn 2016 
+								input(type='radio' name='gradYear' value=2016)
+							label.btn 2017 
+								input(type='radio' name='gradYear' value=2017)
+							label.btn 2018 
+								input(type='radio' name='gradYear' value=2018)
+							label.btn Alum 
+								input(type='radio' name='gradYear' value=9999)
+
+			hr
 		.per-person4
 			.contact-info
 				.row
@@ -177,43 +214,64 @@ block content
 							label(for='phone') phone number
 							input#phone.form-control(type='tel', placeholder=1234567890, name='phone')
 			.row
-				//- h3.app-category school details: 
+				.col-xs-12
+					h4.app-category are you a current or former student, staff, or faculty member?
+					.button-group.mac-affil4
+						label.btn yes 
+							input(type='radio' name='studentStatus' value=1 id='mac-yes4')
+						label.btn no 
+							input(type='radio' name='studentStatus' value=2 id='mac-no')
 			.row
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='macIdNum') macalester id number
-						input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
-				.col-xs-12.col-sm-4
-					.form-group
-						label(for='iclass') 5-digit iclass number
-						input#iclass.form-control(type='number', name='iclass', placeholder=12345)
-						p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
-				.col-xs-12.col-sm-4
-					label graduating class
-					.button-group
-						label.btn 2015 
-							input(type='radio' name='gradYear' id='grad2015' value=2015)
-						label.btn 2016 
-							input(type='radio' name='gradYear' id='grad2016' value=2016)
-						label.btn 2017 
-							input(type='radio' name='gradYear' id='grad2017' value=2017)
-						label.btn 2018 
-							input(type='radio' name='gradYear' id='grad2018' value=2018)
+			.mac-affiliation4
+				.row
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='macIdNum') macalester id number
+							input#idNum.form-control(type='number', name='macIdNum', placeholder=123456789)
+					.col-xs-12.col-sm-4
+						.form-group
+							label(for='iclass') 5-digit iclass number
+							input#iclass.form-control(type='number', name='iclass', placeholder=12345)
+							p.help-block The five-digit number preceded by an asterisk on the back of your Macalester ID.
+					.col-xs-12.col-sm-4
+						label graduating class
+						.button-group
+							label.btn 2015 
+								input(type='radio' name='gradYear' value=2015)
+							label.btn 2016 
+								input(type='radio' name='gradYear' value=2016)
+							label.btn 2017 
+								input(type='radio' name='gradYear' value=2017)
+							label.btn 2018 
+								input(type='radio' name='gradYear' value=2018)
+							label.btn Alum 
+								input(type='radio' name='gradYear' value=9999)
+
 		.per-show
+			.row
 			.row
 				h3.app-category show details:
 			.row
-				.col-xs-12.col-sm-6
+				.col-xs-12.col-sm-4
 					.form-group
 						label(for='show title') show title
 						input#title.form-control(type='text', placeholder='My Show', name='show')
 				
 
-				.col-xs-12.col-sm-6
+				.col-xs-12.col-sm-4
 					.form-group
 						label(for='blurb') program guide blurb
 						textarea.form-control(rows='2', name='blurb')
 						p.help-block A short 2-3 sentence show description for the program guide.
+				.col-xs-12.col-sm-4
+						label would you like a one or two hour show?
+						.button-group
+							label.btn one 
+								input(type='radio' name='timePref' id='grad2015' value=1)
+							label.btn two 
+								input(type='radio' name='timePref' id='grad2017' value=2)
+							label.btn either 
+								input(type='radio' name='timePref' id='grad2017' value=3)
 			.row
 				h3.app-category availability:
 				p.help-block Mark every hour during which you - and your co-hosts if applicable - are available to have a show. The more available you are, the more likely you are to get a show.
