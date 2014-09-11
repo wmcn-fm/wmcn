@@ -7,7 +7,13 @@
 					span.sr-only Close
 				h4.modal-title Login
 			.modal-body
-				p One fine body…
+				form(role='form', method='post', action='/login', id='loginModalForm')
+					.form-group
+						label(for='emailAddress') email address
+						input.form-control(type='email', name='emailAddress')
+					.form-group
+						label(for='password') password
+						input.form-control(type='password', name='password')
 			.modal-footer
-				button.btn.btn-default(type='button', data-dismiss='modal') Close
-				button.btn.btn-primary(type='button') Login
+				button.btn.bt(type='button', data-dismiss='modal') Close
+				button.btn.bt#loginSubmit(type='button') Log in

@@ -23,7 +23,7 @@ var userColl = db.collection('usercollection'); // for login testing
 */
 
 //  GET
-router.get('/', login.isLoggedIn, function(req, res) {
+router.get('/', function(req, res) {
 	console.log(login.isLoggedIn);
 	var playlists = [];
 	var reviews = [];

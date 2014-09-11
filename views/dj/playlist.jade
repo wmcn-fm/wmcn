@@ -1,35 +1,36 @@
 extends ./layout-dj
 
 block content
-	h1= title
-	p Welcome to #{title}
-
 	.container-fluid
-			.row
-				.menu-action.host.col-md-4
-					h4 #{djName}
-				.menu-action.show.col-md-4
-					h4 #{show}
-				.menu-action.date.col-md-4
-					h4 #{date}
-			.row
-				form(role='form', method='post', action='/dj/playlist', id='makePlaylist')
-					.form-group
-							input.form-control(type='hidden', name='dj_id', value='53cd88a833e824df184b4557')
-							input.form-control(type='hidden', name='show_id', value='53cd88a833e824df184b4558')
-					- var songCount = 1
-					while songCount < 11
-						.row
-							.saPair
-								.col-md-1
-									h4.number=songCount
-								.col-md-4
-									.form-group
-										label(for='artistInput') artist
-										input#artistInput.form-control(type='text', placeholder='outkast', name='artistInput')
-								.col-md-4
-									.form-group
-										label(for='songInput') song
-										input#songInput.form-control(type='text', placeholder='hey ya', name='songInput')
-						- songCount++
-					button.btn.btn-primary.submit(type='submit') Submit
+		.row
+			.host.col-xs-12.col-sm-4
+				h4 #{djName}
+			.show.col-xs-12.col-sm-4
+				h4 #{show}
+			.date.col-xs-12.col-sm-4
+				h4 #{date}
+		.row
+			.col-xs-12
+				button.btn.bt.center-block import playlist file
+		.row
+			form(role='form', method='post', action='/dj/playlist', id='makePlaylist')
+				.form-group
+						input.form-control(type='hidden', name='dj_id', value='53cd88a833e824df184b4557')
+						input.form-control(type='hidden', name='show_id', value='53cd88a833e824df184b4558')
+				- var songCount = 1
+				while songCount < 11
+					.row
+						.saPair
+							.col-xs-12.col-sm-1.col-sm-offset-1
+								h4.number=songCount
+							.col-xs-6.col-sm-4
+								.form-group
+									label(for='artistInput') artist
+									input#artistInput.form-control(type='text', placeholder='outkast', name='artistInput')
+							.col-xs-6.col-sm-4
+								.form-group
+									label(for='songInput') song
+									input#songInput.form-control(type='text', placeholder='hey ya', name='songInput')
+					- songCount++
+				.col-xs-12
+					button.btn.submit.submitBt(type='submit') Submit

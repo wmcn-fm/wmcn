@@ -1,25 +1,21 @@
 extends layout-dj
 
 block content
-	h1= title
-	p Welcome to #{title}
-
 	.container-fluid
 		.row
-			.dj-action.col-md-6
-				a(href='/dj/playlist')
-					h2.menu-action playlist
-
-			.dj-action.col-md-6
-				a(href='/dj/blog')
-					h2.menu-action blog
+			.col-xs-12
+				h1.category-headline select an action: 
 		.row
-			.dj-action.col-md-6
+			.col-xs-12.col-sm-3.col-sm-offset-3
+				a(href='/dj/playlist')
+					h2.category-headline.menu-action playlist
+			.col-xs-12.col-sm-3
+				a(href='/dj/blog')
+					h2.category-headline.menu-action blog
+		.row
+			.col-xs-12.col-sm-3.col-sm-offset-3
 				a(href='/dj/review')
-					h2.menu-action review
-
-			.dj-action.col-md-6
+					h2.category-headline.menu-action review
+			.col-xs-12.col-sm-3
 				a(href='/dj/user')
-					h2.menu-action user
-
-
+					h2.category-headline.menu-action user

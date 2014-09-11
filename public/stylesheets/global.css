@@ -15,7 +15,16 @@ a:hover {
 button {
   background-color: transparent;
   border: 2px solid white !important;
-  color: white; }
+  color: white;
+  font-family: futura !important;
+  text-transform: uppercase; }
+
+button.bt {
+  background-color: transparent;
+  border: 2px solid #282828 !important;
+  color: #282828;
+  font-family: futura !important;
+  text-transform: uppercase; }
 
 button.submitBt {
   background-color: transparent;
@@ -28,7 +37,7 @@ button.submitBt {
   padding-left: 2%;
   padding-right: 2%; }
 
-button.submitBt:hover {
+button.submitBt:hover, button.bt:hover {
   color: white;
   background-color: #282828; }
 
@@ -48,7 +57,7 @@ textarea {
   border: 2px solid #282828 !important;
   font-family: futura !important; }
 
-input[type='text'], input[type='checkbox'], input[type='number'], input[type='tel'], input[type='email'] {
+input[type='text'], input[type='checkbox'], input[type='number'], input[type='tel'], input[type='email'], input[type='password'] {
   border: 2px solid #282828;
   font-family: futura !important;
   color: #282828; }
@@ -68,7 +77,7 @@ input[type=radio]:checked, input[type='checkbox']:checked {
   background-color: #282828; }
 
 input[type='text']:focus, textarea, input[type='number']:focus, input[type='tel']:focus, input[type='email']:focus {
-  outline: none;
+  outline: none !important;
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important; }
@@ -185,3 +194,14 @@ table.availability-table th {
   width: 100%;
   max-width: 100%;
   padding-top: 2%; }
+
+.modal-title {
+  text-transform: uppercase; }
+
+.modal-content {
+  border: 2px solid #282828 !important; }
+
+.menu-action {
+  border: 3px solid #282828;
+  height: 100px;
+  padding-top: 25px; }

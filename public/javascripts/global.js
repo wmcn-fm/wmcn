@@ -1,10 +1,5 @@
 $(document).ready(function() {
 
-    // $('.playlist').each(function (i) {
-    //     var colors = ['#bdbdbd', '#ff8900', '#086fa1', '#a31010'];
-    //     var color = colors[i];
-    //     $(this).css('background-color', color);
-    // });
     (function() {
         var link = document.createElement('link');
         link.type = 'image/x-icon';
@@ -13,6 +8,13 @@ $(document).ready(function() {
         document.getElementsByTagName('head')[0].appendChild(link);
     }());
     
+    $('#loginSubmit').click(function(e){
+		e.preventDefault();
+		$.post('/login',
+		function(data, status, xhr) {
+			console.log(data, status, xhr);
+		});
+    });
 
     $('#nav').affix({
         offset: {
@@ -42,10 +44,6 @@ $(document).ready(function() {
             'height': w + 'px'
         });
     });
-
-    // if ($('table'.length)) {
-    //     $('table').floatThead();
-    // }
 
     $('.timeslotSelector').each(function (i) {
         $(this).attr('id', i);
@@ -106,7 +104,6 @@ $(document).ready(function() {
     $('.mac-affil4').click(function() {
         $('.mac-affiliation4').slideToggle();
     });
-
 });
 
 var playPauseCount = 0;
