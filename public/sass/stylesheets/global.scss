@@ -275,6 +275,11 @@ table.availability-table {
   }
 }
 
+td.availability {
+  max-width: 100px;
+  overflow: scroll;
+}
+
 .dj-number {
   padding-left: 2%;
 }

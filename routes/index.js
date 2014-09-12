@@ -24,7 +24,6 @@ var userColl = db.collection('usercollection'); // for login testing
 
 //  GET
 router.get('/', function(req, res) {
-	console.log(login.isLoggedIn);
 	var playlists = [];
 	var reviews = [];
 	var blogs = [];
@@ -39,13 +38,12 @@ router.get('/', function(req, res) {
 			blogColl.find().sort({natural: -1}).limit(2).toArray(function (err, blgs) {
 				if (err) {res.render('error')} else {
 					blogs = blgs;
-					console.log(blogs);
 				}
 				res.render('index', { 
 					title: 'WMCN: Macalester College Radio',
 					playlists: playlists,
 					reviews: reviews,
-					blogs: blogs
+					blogs: blogs,
 				});
 			});
 		});
@@ -264,7 +262,7 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', passport.authenticate('local-login',
-	{ successRedirect : '/profile',
+	{ successRedirect : '/',
 		failureRedirect : '/login',
 		failureFlash : true })
 );

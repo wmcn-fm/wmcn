@@ -32,7 +32,11 @@ router.get('/*', login.isLoggedIn, function(req, res, next) {
 	next();
 });
 
-
+router.get('test-schedule', function(req, res) {
+    res.render('admin/dummy-schedule', {
+        title: 'test schedule'
+    });
+});
 
 /** 
 *   '/admin/applicants'
@@ -65,7 +69,7 @@ router.post('/applicants/dj', function(req, res) {
         // find the application document (doc)
         appColl.findById(user, function (err, doc) {
             if (err) {console.log(err + ' error');} else {
-
+                console.log(doc);
                 var appId = doc._id;
                 var newShowTitle = doc.show.showTitle;
                 var newShowBlurb = doc.show.blurb;
@@ -73,12 +77,13 @@ router.post('/applicants/dj', function(req, res) {
                 var pass = randomString(10, alphanumeric);
                 // PUT NODEMAILER STUFF HERE AND SEND TO ADDRESS doc.user.email
                 var mailOptions = {
-                    from: 'WMCN <foo@blurdybloop.com>', // sender address
-                    to: 'jyang4@macalester.edu, wkentdag@macalester.edu', // list of receivers
+                    from: 'WMCN <wmcn@macalester.edu>', // sender address
+                    to: doc.email, // list of receivers
                     subject: 'You have been approved!', // Subject line
                     // text: 'Hello world ✔', // plaintext body
                     html: '<b>This is a WMCN test email</b>' +
-                          '<p> This is your temporary password: ' + pass + '</p>'
+                          '<p> This is your temporary password: ' + pass + '</p>' +
+                          '<p> your name is: ' + doc.firstName +'</p>'
                 }
 
                 // send mail with defined transport object

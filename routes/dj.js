@@ -31,7 +31,10 @@ router.get('/*', login.isLoggedIn, function(req, res, next) {
 
 //  GET
 router.get('/', function(req, res) {
-    res.render('dj/main', {title: "dj home" })
+    res.render('dj/main', {
+    	title: "dj home",
+    	user: req.user
+	});
 });
 
 
@@ -67,8 +70,9 @@ router.get('/playlist', function(req, res) {
 	// var user = req.body.userId;	//	once login is setup
 	var testUser = '53cd88a833e824df184b4557';
 	var testShow = '53cd88a833e824df184b4558';
+	var user = req.user;
 
-	userColl.findById(testUser, function (err, dj) {
+	userColl.findById(user._id, function (err, dj) {
 		var djName;
 		var date = new Date();
 		var showTitle;
@@ -77,7 +81,7 @@ router.get('/playlist', function(req, res) {
 			djName = dj.firstName + ' ' + dj.lastName;
 		}
 
-		showColl.findById(testShow, function (err, show) {
+		showColl.findById(dj.showId, function (err, show) {
 
 			if (err) {showTitle: ':('} else {
 				console.log(show);
@@ -88,7 +92,9 @@ router.get('/playlist', function(req, res) {
 		    		title: "make a playlist",
 		    		djName: djName,
 		    		date: date,
-		    		show: showTitle
+		    		show: showTitle,
+		    		djId: user._id,
+		    		showId: user.showId
 	    	});
 		});
 	});

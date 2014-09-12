@@ -184,6 +184,10 @@ table.availability-table td {
 table.availability-table th {
   border-bottom: 2px solid #282828 !important; }
 
+td.availability {
+  max-width: 100px;
+  overflow: scroll; }
+
 .dj-number {
   padding-left: 2%; }
 

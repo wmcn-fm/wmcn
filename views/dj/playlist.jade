@@ -15,8 +15,8 @@ block content
 		.row
 			form(role='form', method='post', action='/dj/playlist', id='makePlaylist')
 				.form-group
-						input.form-control(type='hidden', name='dj_id', value='53cd88a833e824df184b4557')
-						input.form-control(type='hidden', name='show_id', value='53cd88a833e824df184b4558')
+						input.form-control(type='hidden', name='dj_id', value= djId)
+						input.form-control(type='hidden', name='show_id', value= showId)
 				- var songCount = 1
 				while songCount < 11
 					.row
