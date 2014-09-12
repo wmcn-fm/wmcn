@@ -63,13 +63,16 @@ router.get('/applicants/dj', function(req, res) {
 
 router.post('/applicants/dj', function(req, res) {
     var approved = req.body.data;
+    console.log(approved);
 
     forEachAsync(approved, function (next, user, index, array) {
-
+        console.log('user: ' + user);
         // find the application document (doc)
         appColl.findById(user, function (err, doc) {
             if (err) {console.log(err + ' error');} else {
+                console.log('printing doc: ===============');
                 console.log(doc);
+                console.log(doc.user.email + ',,,,,,,, ' + doc.user.firstName);
                 var appId = doc._id;
                 var newShowTitle = doc.show.showTitle;
                 var newShowBlurb = doc.show.blurb;
@@ -78,12 +81,13 @@ router.post('/applicants/dj', function(req, res) {
                 // PUT NODEMAILER STUFF HERE AND SEND TO ADDRESS doc.user.email
                 var mailOptions = {
                     from: 'WMCN <wmcn@macalester.edu>', // sender address
-                    to: doc.email, // list of receivers
+                    to: doc.user.email, // list of receivers
                     subject: 'You have been approved!', // Subject line
                     // text: 'Hello world ✔', // plaintext body
                     html: '<b>This is a WMCN test email</b>' +
+                          '<p> Your login email is: ' + doc.user.email + '</p>' +
                           '<p> This is your temporary password: ' + pass + '</p>' +
-                          '<p> your name is: ' + doc.firstName +'</p>'
+                          '<p> your name is: ' + doc.user.firstName +'</p>'
                 }
 
                 // send mail with defined transport object
