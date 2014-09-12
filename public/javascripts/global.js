@@ -8,13 +8,14 @@ $(document).ready(function() {
         document.getElementsByTagName('head')[0].appendChild(link);
     }());
     
-    $('#loginSubmit').click(function(e){
-		e.preventDefault();
-		$.post('/login',
-		function(data, status, xhr) {
-			console.log(data, status, xhr);
-		});
-    });
+  //   $('#loginSubmit').click(function(e){
+  //       alert(JSON.stringify($(this)));
+		// e.preventDefault();
+		// $('#loginSubmit').post('/login',
+		// function(data, status, xhr) {
+		// 	console.log(data);
+		// });
+  //   });
 
     $('#nav').affix({
         offset: {
@@ -47,6 +48,10 @@ $(document).ready(function() {
 
     $('.timeslotSelector').each(function (i) {
         $(this).attr('id', i);
+    });
+
+    $('.timeslotSelectorx').each(function (i) {
+        $(this).text(i);
     });
 
     $('.timeslotSelector').click(function() {
