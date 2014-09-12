@@ -27,10 +27,10 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 */
 
 // GET
-router.get('/*', login.isLoggedIn, function(req, res, next) {
-	res.set('private content');
-	next();
-});
+// router.get('/*', login.isLoggedIn, function(req, res, next) {
+// 	res.set('private content');
+// 	next();
+// });
 
 router.get('test-schedule', function(req, res) {
     res.render('admin/dummy-schedule', {
@@ -71,33 +71,71 @@ router.post('/applicants/dj', function(req, res) {
         appColl.findById(user, function (err, doc) {
             if (err) {console.log(err + ' error');} else {
                 console.log('printing doc: ===============');
-                console.log(doc);
+                // console.log(doc);
                 console.log(doc.user.email + ',,,,,,,, ' + doc.user.firstName);
+                for (var i=0; i<doc.user.email.length; i++) {
+                    console.log(i + ': ' + doc.user.email[i]);
+                }
+
+                var numDjs = -1;
+                //  separate DJ info from app
+                for (var i=0; i<doc.user.email.length; i++) {
+                    //  weed out null entries
+                    if (doc.user.email[i] != '') {
+                        numDjs += 1;
+
+                        var pass = randomString(10, alphanumeric);
+
+                        var mailOptions = {
+                            from: 'WMCN <wmcn@macalester.edu>', // sender address
+                            to: doc.user.email[i], // list of receivers
+                            subject: 'You have been approved!', // Subject line
+                            // text: 'Hello world ✔', // plaintext body
+                            html: '<b>This is a WMCN test email</b>' +
+                                  '<p> Your login email is: ' + doc.user.email[i] + '</p>' +
+                                  '<p> This is your temporary password: ' + pass + '</p>' +
+                                  '<p> your name is: ' + doc.user.firstName[i] +'</p>'
+                        }
+
+                        // send mail with defined transport object
+                        transporter.sendMail(mailOptions, function (error, info){
+                            if(error){
+                                console.log(error);
+                            }else{
+                                console.log('Message sent: ' + info.response);
+                            }
+                        });
+                    }
+                }   // end NEW FOR LOOP
+                // console.log(numDjs);
+
+
+
                 var appId = doc._id;
                 var newShowTitle = doc.show.showTitle;
                 var newShowBlurb = doc.show.blurb;
 
-                var pass = randomString(10, alphanumeric);
-                // PUT NODEMAILER STUFF HERE AND SEND TO ADDRESS doc.user.email
-                var mailOptions = {
-                    from: 'WMCN <wmcn@macalester.edu>', // sender address
-                    to: doc.user.email, // list of receivers
-                    subject: 'You have been approved!', // Subject line
-                    // text: 'Hello world ✔', // plaintext body
-                    html: '<b>This is a WMCN test email</b>' +
-                          '<p> Your login email is: ' + doc.user.email + '</p>' +
-                          '<p> This is your temporary password: ' + pass + '</p>' +
-                          '<p> your name is: ' + doc.user.firstName +'</p>'
-                }
+                // var pass = randomString(10, alphanumeric);
+                // // PUT NODEMAILER STUFF HERE AND SEND TO ADDRESS doc.user.email
+                // var mailOptions = {
+                //     from: 'WMCN <wmcn@macalester.edu>', // sender address
+                //     to: doc.user.email, // list of receivers
+                //     subject: 'You have been approved!', // Subject line
+                //     // text: 'Hello world ✔', // plaintext body
+                //     html: '<b>This is a WMCN test email</b>' +
+                //           '<p> Your login email is: ' + doc.user.email + '</p>' +
+                //           '<p> This is your temporary password: ' + pass + '</p>' +
+                //           '<p> your name is: ' + doc.user.firstName +'</p>'
+                // }
 
-                // send mail with defined transport object
-                transporter.sendMail(mailOptions, function (error, info){
-                    if(error){
-                        console.log(error);
-                    }else{
-                        console.log('Message sent: ' + info.response);
-                    }
-                });
+                // // send mail with defined transport object
+                // transporter.sendMail(mailOptions, function (error, info){
+                //     if(error){
+                //         console.log(error);
+                //     }else{
+                //         console.log('Message sent: ' + info.response);
+                //     }
+                // });
 
                 //  create a new dj doc with app credentials (newUser)
                 bcrypt.hash(pass, null, null, function (err, hash) {
@@ -110,7 +148,8 @@ router.post('/applicants/dj', function(req, res) {
                         "macIdNum" : doc.user.macIdNum,
                         "iclass" : doc.user.iclass,
                         "gradYear" : doc.user.gradYear,
-                        hash : hash
+                        // hash : hash
+                        hash: null
                     }, function (err, newUser) {
                         if (err) {console.log(err + ' userColl insert err')} else {
                             var newUserId = newUser[0]._id;
