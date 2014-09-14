@@ -112,9 +112,17 @@ router.post('/applicants/dj', function(req, res) {
                             }, function (err, newUser) {
                                 if (err) {res.send('error');} else {
                                     console.log('new user id: ' + newUser[0]._id);
-                                }
-                            });
-                        });
+                                    showColl.update({
+                                        "showTitle" : app.show.showTitle,
+                                        "blurb" : app.show.blurb,
+                                        "timeslot" : 9999
+                                    }, {$push: {hostId: newUser[0]._id} },
+                                    {upsert: true}, function (err, shw) {
+                                        console.log(shw);
+                                    }); //  end showColl.update
+                                }   //  end if/else error
+                            }); //  end userColl.insert cb
+                        }); //  end bcrypt.hash
                     }
                     next1();
                 }).then( function () {
