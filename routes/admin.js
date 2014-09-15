@@ -86,7 +86,7 @@ router.post('/applicants/dj', function(req, res) {
                                     "blurb" : app.show.blurb,
                                     "timeslot" : 9999
                                 }, {$addToSet: {hostId: result[0]._id} }, {upsert: true}, function (err, shw) {
-                                    console.log('added old Dj: ' + result[0].email + ' to show ');
+                                    console.log('added old Dj: ' + result[0].email + ' to show ' + shw);
                                     next1();
                                 });
                             } else {
@@ -95,13 +95,22 @@ router.post('/applicants/dj', function(req, res) {
                                 var mailOptions = {
                                     from: 'WMCN noreply <wmcn@macalester.edu>', // sender address
                                     to: usr, // list of receivers
-                                    subject: 'WMCN Login info', // Subject line
+                                    subject: 'WMCN Website Login info', // Subject line
                                     // text: 'Hello world ✔', // plaintext body
                                     html: '<b>This is a WMCN test email</b>' +
-                                          '<p> Your login email is: ' + usr + '</p>' +
-                                          '<p> This is your temporary password: ' + pass + '</p>' +
-                                          '<p> your name is: ' + app.user.firstName[ix] +'</p>' + 
-                                          '<p> your show is: ' + app.show.showTitle + '</p>'
+                                          '<p> Hi ' + app.user.firstName[ix] +',</p>' +  
+                                          '<p>Welcome to WMCN! Here is your login info for the website (wmcn.fm/login): </p>' +                                            
+                                          '<p> Login email: ' + usr + '</p>' +
+                                          '<p> Password: ' + pass + '</p>' +
+                                          '<p> You will be able to change your password in the near future.' +
+                                          'However, the site is being built on the fly so it could take a couple of weeks. Until then, remember this temporary password. Thanks for your patience. </p>' +
+                                          '<p> Your show is: ' + app.show.showTitle + '</p>' +
+                                          '<p> Remember to create a playlist each time you broadcast a show (even non-music based shows must do this). ' + 
+                                          'After signing in, you can create a playlist at wmcn.fm/dj/playlist.</p>' +
+                                          '<p> If you have any technical problems with the site - logging in, creating a playlist, etc - <b> do not </b> reply to this email. ' +
+                                          'Instead, send a new message to wmcn@macalester.edu with "Website tech problems" in the subject line.</p>' +
+                                          '<p> Thanks and happy DJing! Love,</p>' +
+                                          '<p>WMCN</p>'
                                 }
 
                                 transporter.sendMail(mailOptions, function (error, info){
@@ -121,7 +130,7 @@ router.post('/applicants/dj', function(req, res) {
                                         "phone" : app.user.phone[ix],
                                         "macIdNum" : app.user.macIdNum[ix],
                                         "iclass" : app.user.iclass[ix],
-                                        "gradYear" : app.user.gradYear[ix],
+                                        // "gradYear" : app.user.gradYear[ix],
                                         "hash" : hash
                                     }, function (err, newUser) {
                                         if (err) {res.send('error');} else {
