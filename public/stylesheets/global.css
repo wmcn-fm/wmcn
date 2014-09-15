@@ -209,3 +209,6 @@ td.availability {
   border: 3px solid #282828;
   height: 100px;
   padding-top: 25px; }
+
+.dropdown {
+  text-align: center; }
