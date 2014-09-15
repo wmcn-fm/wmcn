@@ -210,8 +210,8 @@ router.post('/playlist', function (req, res) {
 	}
 
 	function postToTumblr(client, showTitle, djName, date, content, urlPath) {
-		var host = 'localhost:3000';
-		// var host = 'wmcn.fm';
+		// var host = 'localhost:3000';
+		var host = 'wmcn.fm';
 		var wmcnLink = "<p><a href='" + host + urlPath + "'>" + "View this post on the WMCN website!" + "</a></p>";
 		var body = '<p>With ' + djName + '</p>' + content + wmcnLink;
 
@@ -221,11 +221,11 @@ router.post('/playlist', function (req, res) {
 			tags: 'playlist'
 		}
 
-		client.text('wmcn-dev', options, function (err, post_id) {
+		client.text('wmcn', options, function (err, post_id) {
 			if (err) {
 				url = 'wmcn.fm'
 			} else {
-				url = 'wmcn-dev.tumblr.com/post/' + post_id.id;
+				url = 'wmcn.tumblr.com/post/' + post_id.id;
 			}
 			console.log('url: ' + url);
 			return url;

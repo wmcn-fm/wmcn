@@ -27,10 +27,10 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 */
 
 // GET
-// router.get('/*', login.isLoggedIn, function(req, res, next) {
-// 	res.set('private content');
-// 	next();
-// });
+router.get('/*', login.isLoggedIn, function(req, res, next) {
+	res.set('private content');
+	next();
+});
 
 router.get('test-schedule', function(req, res) {
     res.render('admin/dummy-schedule', {
