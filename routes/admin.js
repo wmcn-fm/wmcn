@@ -80,6 +80,8 @@ router.post('/applicants/dj', function(req, res) {
                             if (result.length != 0) {
                                 console.log(usr + ' user exists!! ::::');
                                 console.log(result[0]);
+                                var djId = result[0]._id;
+                                console.log('new dj id: ' + djId);
 
                                 showColl.update({
                                     "showTitle" : app.show.showTitle,
@@ -87,6 +89,15 @@ router.post('/applicants/dj', function(req, res) {
                                     "timeslot" : 9999
                                 }, {$addToSet: {hostId: result[0]._id} }, {upsert: true}, function (err, shw) {
                                     console.log('added old Dj: ' + result[0].email + ' to show ' + shw);
+                                    showColl.find({showTitle: app.show.showTitle}).toArray(function (err, newShow) {
+                                        console.log('new show title: ' + newShow[0].showTitle + ' _id: ' + newShow[0]._id);
+                                        var newShowId = newShow[0]._id;
+                                        userColl.update({_id:djId}, {$addToSet: {
+                                            shows: newShowId
+                                        }}, function (err, newUser) {
+                                            console.log('user updated w/showId: ' +  newUser);
+                                        });
+                                    });
                                     next1();
                                 });
                             } else {
@@ -141,7 +152,16 @@ router.post('/applicants/dj', function(req, res) {
                                                 "timeslot" : 9999
                                             }, {$addToSet: {hostId: newUser[0]._id} },
                                             {upsert: true}, function (err, shw) {
-                                                console.log(shw);
+                                                // console.log(shw);
+                                                showColl.find({showTitle: app.show.showTitle}).toArray(function (err, newShow) {
+                                                    console.log('new show title: ' + newShow[0].showTitle + ' _id: ' + newShow[0]._id);
+                                                    var newShowId = newShow[0]._id;
+                                                    userColl.update({_id:newUser[0]._id}, {$addToSet: {
+                                                        shows: newShowId
+                                                    }}, function (err, newestUser) {
+                                                        console.log('user updated w/showId: ' + newestUser);
+                                                    });
+                                                });
                                                 next1();
                                             }); //  end showColl.update
                                         }   //  end if/else error
