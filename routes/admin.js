@@ -85,8 +85,9 @@ router.post('/applicants/dj', function(req, res) {
                                     "showTitle" : app.show.showTitle,
                                     "blurb" : app.show.blurb,
                                     "timeslot" : 9999
-                                }, {$push: {hostId: result[0]._id} }, {upsert: true}, function (err, shw) {
+                                }, {$addToSet: {hostId: result[0]._id} }, {upsert: true}, function (err, shw) {
                                     console.log('added old Dj: ' + result[0].email + ' to show ');
+                                    next1();
                                 });
                             } else {
                                 var pass = randomString(10, alphanumeric);
@@ -110,7 +111,7 @@ router.post('/applicants/dj', function(req, res) {
                                         console.log('Message sent: ' + info.response);
                                     }
                                 });
-                                
+
                                 bcrypt.hash(pass, null, null, function (err, hash) {
                                     userColl.insert({
                                         "access" : 1,
@@ -129,19 +130,19 @@ router.post('/applicants/dj', function(req, res) {
                                                 "showTitle" : app.show.showTitle,
                                                 "blurb" : app.show.blurb,
                                                 "timeslot" : 9999
-                                            }, {$push: {hostId: newUser[0]._id} },
+                                            }, {$addToSet: {hostId: newUser[0]._id} },
                                             {upsert: true}, function (err, shw) {
                                                 console.log(shw);
+                                                next1();
                                             }); //  end showColl.update
                                         }   //  end if/else error
                                     }); //  end userColl.insert cb
                                 }); //  end bcrypt.hash   
                             }
-                        });
-
-                        
-                    }
-                    next1();
+                        });    
+                    } else {
+                        next1();
+                    }   //  end if non-null
                 }).then( function () {
                     next();
                     console.log('async 2 done!');
