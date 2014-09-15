@@ -72,9 +72,24 @@ router.post('/applicants/dj', function(req, res) {
                 console.log(app.user.email + ': email');
 
                 forEachAsync(app.user.email, function (next1, usr, ix, arr) {
+                    var newUser = true;
+                    var user2Append;
                     if (usr != '') {
+                        userColl.find({email: usr}).toArray(function (err, result) {
+                            if (err) {res.send('error');} else {
+                                console.log('result: ' + result);
+                                if (result.length != 0) {
+                                    console.log('length!');
+                                    newUser = false;
+                                    user2Append = result[0]._id;
+                                    console.log(newUser);
+                                }
+                            }
+                        });
                         console.log(usr, ix);   
                         console.log(app.user.firstName[ix]);
+                        console.log('newUser : ' + newUser);
+                        console.log('2append: ' + user2Append);
 
                         var pass = randomString(10, alphanumeric);
                         console.log(pass);
