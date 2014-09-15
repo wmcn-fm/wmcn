@@ -73,30 +73,41 @@ router.get('/playlist', function(req, res) {
 	var user = req.user;
 
 	userColl.findById(user._id, function (err, dj) {
+	// userColl.findById(testUser, function (err, dj) {
 		var djName;
 		var date = new Date();
 		var showTitle;
 
-		if (err) {djName = ' :( ' } else {
+		var showTitles = [];
+		var showIds = dj.shows;
+
+		if (err) {djName = ' :(' } else {
 			djName = dj.firstName + ' ' + dj.lastName;
 		}
 
-		showColl.findById(dj.showId, function (err, show) {
+		forEachAsync(showIds, function (next, show_id, index, array) {
+			showColl.findById(show_id, function (err, show) {
+				if (err) {res.send('error');} else {
+					showTitles.push(show.showTitle);
+				}
+				next();
+			});
+		}).then( function() {
+			console.log(showTitles);
+			console.log(showIds);
 
-			if (err) {showTitle: ':('} else {
-				console.log(show);
-				showTitle = show.showTitle;
-			}
-			res.render('dj/playlist', 
-		    	{
-		    		title: "make a playlist",
-		    		djName: djName,
-		    		date: date,
-		    		show: showTitle,
-		    		djId: user._id,
-		    		showId: user.showId
-	    	});
+			res.render('dj/playlist', {
+				title: "Create A Playlist",
+				djName: djName,
+				date: date,
+				showIds: showIds,
+				showTitles: showTitles
+			});
 		});
+
+		
+
+		
 	});
 });
 
@@ -235,7 +246,7 @@ router.post('/playlist', function (req, res) {
 	function archivePlaylist(showId, djId, bodyContent) {
 		var d = new Date();
 		var	year = d.getFullYear();
-		var	month = d.getMonth();
+		var	month = d.getMonth() + 1;
 		var	date = d.getDate();
 		var	hour = d.getHours();
 		var	min = d.getMinutes();
@@ -249,10 +260,10 @@ router.post('/playlist', function (req, res) {
 				djName = dj.firstName + ' ' + dj.lastName;
 			}
 			showColl.findById(showId, function (err, show) {
-				if (err) {showTitle: ':('} else {
+				if (err) {showTitle: 'undefined'} else {
 					showName = show.showTitle;
 				}
-				var perma = '/playlist/' + showName + '/' + year + '/' + month + '/' + date + '/' + hour + '/';
+				// var perma = '/playlist/' + showName + '/' + year + '/' + month + '/' + date + '/' + hour + '/';
 				 
 				playistColl.insert({
 					"showId": showId,

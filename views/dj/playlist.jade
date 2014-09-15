@@ -2,16 +2,20 @@ extends ./layout-dj
 
 block content
 	.container-fluid
+		//- .row
+		//- 	.host.col-xs-12.col-sm-4
+		//- 		h4 #{djName}
+		//- 	.show.col-xs-12.col-sm-4
+		//- 		h4 #{show}
+		//- 	.date.col-xs-12.col-sm-4
+		//- 		h4 #{date}
 		.row
-			.host.col-xs-12.col-sm-4
-				h4 #{djName}
-			.show.col-xs-12.col-sm-4
-				h4 #{show}
-			.date.col-xs-12.col-sm-4
-				h4 #{date}
-		.row
-			.col-xs-12
-				button.btn.bt.center-block import playlist file
+			.col-xs-12.col-sm-4
+				h4 #{showTitles}
+				h4 #{showIds}
+		//- .row
+		//- 	.col-xs-12
+		//- 		button.btn.bt.center-block import playlist file
 		.row
 			form(role='form', method='post', action='/dj/playlist', id='makePlaylist')
 				.form-group
