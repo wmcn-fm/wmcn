@@ -8,7 +8,7 @@ var db = mongo.db(dbUrl, {native_parser:true});
 var artistColl = db.collection('artists');
 var userColl = db.collection('usercollection');
 var showColl = db.collection('shows');
-var playistColl = db.collection('playlists');
+var playlistColl = db.collection('playlists');
 var reviewColl = db.collection('reviews');
 
 var client = require('../tumblr.js');
@@ -68,22 +68,16 @@ router.get('/user', function(req, res) {
 router.get('/playlist', function(req, res) {
 
 	// var user = req.body.userId;	//	once login is setup
-	var testUser = '53cd88a833e824df184b4557';
-	var testShow = '53cd88a833e824df184b4558';
+	// var testUser = '53cd88a833e824df184b4557';
+	// var testShow = '53cd88a833e824df184b4558';
+
 	var user = req.user;
 
 	userColl.findById(user._id, function (err, dj) {
 	// userColl.findById(testUser, function (err, dj) {
-		var djName;
-		var date = new Date();
-		var showTitle;
-
 		var showTitles = [];
 		var showIds = dj.shows;
 
-		if (err) {djName = ' :(' } else {
-			djName = dj.firstName + ' ' + dj.lastName;
-		}
 
 		forEachAsync(showIds, function (next, show_id, index, array) {
 			showColl.findById(show_id, function (err, show) {
@@ -98,29 +92,22 @@ router.get('/playlist', function(req, res) {
 
 			res.render('dj/playlist', {
 				title: "Create A Playlist",
-				djName: djName,
-				date: date,
 				showIds: showIds,
 				showTitles: showTitles
 			});
-		});
-
-		
-
-		
+		});	
 	});
 });
 
 //	POST
 router.post('/playlist', function (req, res) {
 
-	var djId = req.body.dj_id;
 	var showId = req.body.show_id;
 	var artists = req.body.artistInput;
 	var songs = req.body.songInput;
 
 	addToArists(artists, songs);
-	archivePlaylist(showId, djId, pairArrays(artists, songs, 'p'));
+	archivePlaylist(showId, pairArrays(artists, songs, 'p'));
 
 	function addToArists(artists, songs) {
 		var artistIds = [];
@@ -214,8 +201,10 @@ router.post('/playlist', function (req, res) {
 		var close = '</' + htmlElem + '>';
 		var content = '';
 		for (var i=0; i<arr1.length; i++) {
-			var line = open + arr1[i] + ': ' + arr2[i] + close;
-			content += line;
+			if (arr1[i] != '') {
+				var line = open + arr1[i] + ': ' + arr2[i] + close;
+				content += line;
+			}
 		}
 		return content;
 	}
@@ -243,31 +232,38 @@ router.post('/playlist', function (req, res) {
 		});	
 	}
 
-	function archivePlaylist(showId, djId, bodyContent) {
+	function archivePlaylist(showId, bodyContent) {
 		var d = new Date();
 		var	year = d.getFullYear();
-		var	month = d.getMonth() + 1;
+		var	month = d.getMonth() + 1;	//	to make 1-12 rather than 0-11
 		var	date = d.getDate();
 		var	hour = d.getHours();
 		var	min = d.getMinutes();
 		var	day = d.getDay();
-		var	perma = 'playlist/' + year + '/' + month + '/' + date + '/' + hour + '/'; 
+		var	perma = '/playlist/' + year + '/' + month + '/' + date + '/' + hour + '/' + min + '/'; 
 		var	showName;
-		var	djName;
+		var	djName = '';
 
-		userColl.findById(djId, function (err, dj) {
-			if (err) {djName = ' :( ' } else {
-				djName = dj.firstName + ' ' + dj.lastName;
+			
+		showColl.findById(showId, function (err, show) {
+			if (err) {showTitle: 'undefined'} else {
+				showName = show.showTitle;
 			}
-			showColl.findById(showId, function (err, show) {
-				if (err) {showTitle: 'undefined'} else {
-					showName = show.showTitle;
-				}
-				// var perma = '/playlist/' + showName + '/' + year + '/' + month + '/' + date + '/' + hour + '/';
-				 
-				playistColl.insert({
+			
+			console.log(show.hostId, show.hostId.length);
+
+			forEachAsync(show.hostId, function (next, host_id, index, array) {
+				userColl.findById(host_id, function (err, result) {
+					djName += result.firstName + ' ' + result.lastName;
+					if (show.hostId.length != 0 && index != show.hostId.length - 1) {
+						djName += ', ';
+					}
+					next();
+				});
+			}).then( function () {
+				playlistColl.insert({
 					"showId": showId,
-					"hostId" : djId,
+					"hostId" : show.hostId,
 					"showName" : showName,
 					"hostName" : djName,
 					"date" : {
@@ -290,10 +286,10 @@ router.post('/playlist', function (req, res) {
 					req.flash('tumblrURL' , tUrl);
 					res.redirect(perma);
 
-				});	
-			});
-		});
-	}
+				});	//	end plalist.insert	
+			});	//	end forEach.then
+		});	//	end showColl.find
+	}	//	end function declaration
 
 });
 
