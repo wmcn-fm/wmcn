@@ -113,7 +113,7 @@ router.post('/applicants/dj', function(req, res) {
                                           '<p>Welcome to WMCN! Here is your login info for the website (wmcn.fm/login): </p>' +                                            
                                           '<p> Login email: ' + usr + '</p>' +
                                           '<p> Password: ' + pass + '</p>' +
-                                          '<p> You will be able to change your password in the near future.' +
+                                          '<p> You will be able to change your password in the near future. ' +
                                           'However, the site is being built on the fly so it could take a couple of weeks. Until then, remember this temporary password. Thanks for your patience. </p>' +
                                           '<p> Your show is: ' + app.show.showTitle + '</p>' +
                                           '<p> Remember to create a playlist each time you broadcast a show (even non-music based shows must do this). ' + 
