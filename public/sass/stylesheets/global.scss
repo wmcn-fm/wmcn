@@ -316,3 +316,18 @@ td.availability {
   // margin: auto;
   text-align: center;
 }
+
+.dropdown-menu {
+  font-family: $font-main;
+  text-transform: uppercase;
+  width: 100%;
+
+}
+
+a.selectShow:hover {
+  cursor: pointer;
+}
+
+.locked {
+  disabled: disabled;
+}

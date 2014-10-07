@@ -23,6 +23,14 @@ $(document).ready(function() {
         }
     });
 
+    $('.selectShow').click(function() {
+        console.log($(this).text());
+        $('#showSelectDropdown').text($(this).text());
+        $('.locked').prop('disabled', false).text('Submit');
+    });
+
+    $('.locked').prop('disabled', true).text('select your show from the dropdown menu!');
+
     $('.streamButton').click(function() {
         $(this).toggleClass('pressed');
         if (playPauseCount %2 == 0) {

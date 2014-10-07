@@ -21,7 +21,7 @@ block content
 						each title in showTitles
 							li(role='presentation')
 								- var oncliq = "document.makePlaylist.show_id.value='" + showIds[i] + "';return false;";
-								a(role='menuitem' tabindex='-1' onclick= oncliq)= title
+								a.selectShow(role='menuitem' tabindex='-1' onclick= oncliq)= title
 							- i++
 
 		//- .row
@@ -32,7 +32,7 @@ block content
 				.form-group
 						input.form-control(type='hidden', name='show_id', value= 'test')
 				- var songCount = 1
-				while songCount < 11
+				while songCount < 21
 					.row
 						.saPair
 							.col-xs-12.col-sm-1.col-sm-offset-1
@@ -40,11 +40,15 @@ block content
 							.col-xs-6.col-sm-4
 								.form-group
 									label(for='artistInput') artist
-									input#artistInput.form-control(type='text', placeholder='Outkast', name='artistInput')
+									input#artistInput.form-control.locked(type='text', placeholder='Outkast', name='artistInput')
 							.col-xs-6.col-sm-4
 								.form-group
 									label(for='songInput') song
-									input#songInput.form-control(type='text', placeholder='Ms. Jackson', name='songInput')
+									input#songInput.form-control.locked(type='text', placeholder='Ms. Jackson', name='songInput')
 					- songCount++
 				.col-xs-12
-					button.btn.submit.submitBt(type='submit') Submit
+					button.btn.submit.submitBt.locked(type='submit') Submit
+
+
+
+

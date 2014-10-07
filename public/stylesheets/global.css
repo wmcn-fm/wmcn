@@ -212,3 +212,14 @@ td.availability {
 
 .dropdown {
   text-align: center; }
+
+.dropdown-menu {
+  font-family: futura !important;
+  text-transform: uppercase;
+  width: 100%; }
+
+a.selectShow:hover {
+  cursor: pointer; }
+
+.locked {
+  disabled: disabled; }
