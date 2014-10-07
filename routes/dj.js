@@ -246,7 +246,7 @@ router.post('/playlist', function (req, res) {
 
 			
 		showColl.findById(showId, function (err, show) {
-			if (err) {showTitle: 'undefined'} else {
+			if (err) {showTitle = 'undefined'} else {
 				showName = show.showTitle;
 			}
 			

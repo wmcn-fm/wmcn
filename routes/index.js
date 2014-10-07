@@ -262,7 +262,7 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', passport.authenticate('local-login',
-	{ successRedirect : '/',
+	{ successRedirect : '/dj',
 		failureRedirect : '/login',
 		failureFlash : true })
 );

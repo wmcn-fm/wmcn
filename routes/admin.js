@@ -27,10 +27,10 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 */
 
 // GET
-router.get('/*', login.isLoggedIn, function(req, res, next) {
-	res.set('private content');
-	next();
-});
+// router.get('/*', login.isLoggedIn, function(req, res, next) {
+// 	res.set('private content');
+// 	next();
+// });
 
 router.get('test-schedule', function(req, res) {
     res.render('admin/dummy-schedule', {
@@ -106,9 +106,9 @@ router.post('/applicants/dj', function(req, res) {
                                 var mailOptions = {
                                     from: 'WMCN noreply <wmcn@macalester.edu>', // sender address
                                     to: usr, // list of receivers
-                                    subject: 'WMCN Website Login info', // Subject line
+                                    subject: 'WMCN.fm Login info', // Subject line
                                     // text: 'Hello world ✔', // plaintext body
-                                    html: '<b>This is a WMCN test email</b>' +
+                                    html: //'<b>This is a WMCN test email</b>' +
                                           '<p> Hi ' + app.user.firstName[ix] +',</p>' +  
                                           '<p>Welcome to WMCN! Here is your login info for the website (wmcn.fm/login): </p>' +                                            
                                           '<p> Login email: ' + usr + '</p>' +
