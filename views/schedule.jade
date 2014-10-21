@@ -1,15 +1,19 @@
-.row
-	section.col-xs-12#schedule
-		h1.category-title show schedule: 
-		table.table.table-hover
-			thead
-				- var headers = ['time', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-				- each item, i in headers
-					th= item
-			tbody
-				- for (var i=0; i < 25; i++)
-					tr
-						td= i
-						- for (var j=0; j < 7; j++)
-							td
-								button.btn.btn-default.popover-dismiss(type='button' data-toggle='popover' data-container='body' title='xxx' data-content='yyyy') test
+extends layout
+block content
+	.row
+		section.col-xs-12#schedule
+			h1.category-title show schedule: 
+			table.table.table-hover
+				thead
+					- var headers = ['time', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+					- each item, i in headers
+						th= item
+				tbody
+					- var counter = 0
+					- for (var i=0; i < 25; i++)
+						tr
+							td= i
+							- for (var j=0; j < 7; j++)
+								td
+									button.btn.btn-default.popover-dismiss(type='button' data-timeslot=counter data-toggle='popover' data-container='body' title='xxx' data-content='yyyy')= counter
+								- counter++
