@@ -79,7 +79,7 @@ router.get('/app-success', function(req, res) {
 */
 router.get('/schedule', function(req, res) {
 	console.log('----------------------------------\n----------------------------------\n----------------------------------')
-	var shows = [];
+	// var shows = [];
 	// pull all shows with timeslots w/in weekly range
 	showColl.find({timeslot: {$gte: 0, $lt: 169}}).sort({timeslot:1}).toArray(function (err, rawShows) {
 		if (err) {console.log(err);} else {
@@ -95,7 +95,6 @@ router.get('/schedule', function(req, res) {
 				forEachAsync(rawShows[index].hostId, function (next1, user, j, array) {
 					console.log(j, user);
 
-					// 
 					userColl.findById(user, function (err, host) {
 
 						if (err) {console.log(err);} else {
@@ -103,8 +102,8 @@ router.get('/schedule', function(req, res) {
 							// console.log(hostName);
 							hostNames.push(hostName);
 							// console.log('hostNames: ', hostNames);
-							next1();
 						}
+						next1();
 					});
 					// next1();
 				}).then( function() {	//	end inner async loop through hosts
@@ -116,9 +115,14 @@ router.get('/schedule', function(req, res) {
 						'blurb' : rawShows[index].blurb,
 						'hosts' : hostNames
 					}
+
+					// var x = JSON.parse(show);
+					// x[hosts].push(hostNames);
+					// show = JSON.stringify(x);
+
 					console.log(show);
 					shows.push(show);
-					console.log(shows);
+					// console.log(shows);
 					hostNames.length = 0;
 					
 					next();
@@ -126,7 +130,8 @@ router.get('/schedule', function(req, res) {
 			}).then( function() {	//	end outer async loop through shows
 				console.log('async complete!');
 				console.log('shows: ---------------------------------');
-				console.log(JSON.stringify(shows));
+				console.log(shows, '\n');
+				// console.log(JSON.stringify(shows));
 				res.render('schedule', {
 					title: 'Fall 2014 Show Schedule',
 					shows: shows
