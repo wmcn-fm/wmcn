@@ -295,22 +295,23 @@ router.post('/playlist', function (req, res) {
 
 router.get('/review', function(req, res) {
 
-	// var user = req.body.userId;	//	once login is setup
-	var testUser = '53cd88a833e824df184b4557';
-	var testShow = '53cd88a833e824df184b4558';
+	var user = req.user._id;	//	once login is setup
+	// var testUser = '53cd88a833e824df184b4557';
+	// var testShow = '53cd88a833e824df184b4558';
+	// console.log(user);
 
-	userColl.findById(testUser, function (err, dj) {
+	userColl.findById(user, function (err, dj) {
 		var djName;
 		var date = new Date();
 		var showTitle;
-
-		if (err) {djName = ' :( ' } else {
-			djName = dj.firstName + ' ' + dj.lastName;
-		}
+		console.log(dj);
+		// if (err) {djName = 'undefined' } else {
+		// 	djName = dj.firstName + ' ' + dj.lastName;
+		// }
 		res.render('dj/review', 
 	    	{
 	    		title: "write a review",
-	    		djName: djName,
+	    		dj: dj,
 	    		date: date,
     	});
 	});
