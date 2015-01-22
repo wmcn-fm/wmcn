@@ -70,6 +70,7 @@ router.post('/applicants/dj', function(req, res) {
             if (err) {res.send('error');} else {
                 console.log(app.user.email + ': email');
 
+                //  loop over each user email w/in application
                 forEachAsync(app.user.email, function (next1, usr, ix, arr) {
                     if (usr != '') {
                         console.log(usr, ix);   
@@ -83,6 +84,7 @@ router.post('/applicants/dj', function(req, res) {
                                 var djId = result[0]._id;
                                 console.log('new dj id: ' + djId);
 
+                                //  link show doc to new user...
                                 showColl.update({
                                     "showTitle" : app.show.showTitle,
                                     "blurb" : app.show.blurb,
@@ -92,6 +94,7 @@ router.post('/applicants/dj', function(req, res) {
                                     showColl.find({showTitle: app.show.showTitle}).toArray(function (err, newShow) {
                                         console.log('new show title: ' + newShow[0].showTitle + ' _id: ' + newShow[0]._id);
                                         var newShowId = newShow[0]._id;
+                                        //  ...and vice versa
                                         userColl.update({_id:djId}, {$addToSet: {
                                             shows: newShowId
                                         }}, function (err, newUser) {

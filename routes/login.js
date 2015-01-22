@@ -11,6 +11,16 @@ console.log("here is the user: ", req.user)
 	res.redirect('/login');
 }
 
+//	checks login without restricting access
+//	for use with public app to check for returning DJs
+exports.checkLogin = function checkLogin(req, res, next) {
+	console.log('here is the user: ', req.user);
+	if (req.isAuthenticated()) {
+		console.log(req.user);
+	}
+	return next();
+}
+
 // custom middleware for providing accesslevel restrictions to certain pages
 exports.accessClearance = function accessClearance (accessLevel) {
 	return function (req, res, next) {
