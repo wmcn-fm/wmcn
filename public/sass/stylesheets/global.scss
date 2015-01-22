@@ -193,8 +193,13 @@ p {
 
 .app-category {
   text-transform: uppercase;
-  text-align: left;
+  text-align: center;
   padding-left: 2%;
+  padding-right: 2%;
+}
+
+.button-group.single-line {
+  text-align: center;
 }
 
 .category-container {
@@ -281,7 +286,9 @@ td.availability {
 }
 
 .dj-number {
+  // text-align: center;
   padding-left: 2%;
+  padding-right: 2%;
 }
 
 .available-slot {
