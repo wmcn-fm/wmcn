@@ -5,6 +5,11 @@ var login = require('./login.js');
 var dbUrl = require('../dbLogin.js');
 var db = mongo.db(dbUrl, {native_parser:true});
 var showColl = db.collection('shows');
+var userColl = db.collection('usercollection');
+
+
+var forEachAsync = require('forEachAsync').forEachAsync;
+
 
 
 /** 
@@ -19,27 +24,60 @@ var showColl = db.collection('shows');
 // });
 
 router.get('/dj', login.checkLogin, function(req, res) {
-	var user = [];
+	var u = [];
+	u.info = req.user;
 	if (req.user) {
-		console.log('user!', req.user);
-		user.info = req.user;
+		//	find all shows the user hosts
 		showColl.find({'hostId': req.user._id}).toArray(function (err, shows) {
 			if (err) {console.log(err);} else {
-				console.log(shows);
-				user.shows = shows;
-				res.render('applications/dj-spring', { 
-					title: 'Spring 2015 DJ Application',
-					user: user
-				});
-			}   // end error check
-		});
+				//	add show info
+				u.shows = shows;
+				console.log(u);
+				//	get info for possible cohosts
+				console.log(u.shows.hostId)
+				if (u.shows.hostId.length > 0) {
+					console.log('im inside the if!', u.shows.hostId.length);
+					forEachAsync(u.shows.hostId, function (next, djId, index, array) {
+						userColl.findById(djId, function (err, dj) {
+							u.cohosts.append(dj);
+							next();
+						});
+					}).then( function() {
+						console.log('=======\n', u, '====\n');
+						res.render('applications/dj-spring', { 
+							title: 'Spring 2015 DJ Application',
+							user: u
+						});
+					});	//	end then		
+				} else {	//	otherwise move straight to render
+					res.render('applications/dj-spring', {
+						title: 'Spring 2015 DJ Application',
+						user: u
+					});
+				}
+			}	//	end if err
+		});	//	end showColl.find
+
+
+		// console.log('user!', req.user);
+		// u.info = req.user;
+		// showColl.find({'hostId': req.user._id}).toArray(function (err, shows) {
+		// 	if (err) {console.log(err);} else {
+		// 		console.log(shows);
+		// 		u.shows = shows;
+		// 		res.render('applications/dj-spring', { 
+		// 			title: 'Spring 2015 DJ Application',
+		// 			user: u
+		// 		});
+		// 	}   // end error check
+		// });
 	} else {
 		console.log('no user!');
 		res.render('applications/dj-spring', {
 			title: 'Spring 2015 DJ Application'
 		});
 	}
-	console.log('user obj\n', user, '\n');
+	console.log('user obj\n', u, '\n');
   
 });
 

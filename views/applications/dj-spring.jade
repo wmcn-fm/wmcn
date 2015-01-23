@@ -13,23 +13,16 @@ block content
 						p.help-block Welcome back, 
 							span #{user.info.firstName}. 
 						h3.app-category Are you applying for a new show?
-						p.help-block If you are re-applying for an old show - same name, same DJs - select it from the dropdown below. The form will autofill with your info, which you are free to edit.
-						.col-xs-6
-							#returning-showType.button-group.single-line
+						p.help-block If you are re-applying for an old show - same name, same DJs - select it from the dropdown below. The form will autofill with your info, which you are free to edit. Otherwise select "new show".
+						.col-xs-12
+							.button-group.single-line
 								label.btn New show 
-									input(type='radio' name='returningNew' value=0)
-						.col-xs-6
-							#returning-showType.button-group.single-line
-								.dropdown
-									button#showSelectDropdown.bt.btn.dropdown-toggle(type='button' data-toggle='dropdown') Select a show to reapply: 
-										span.caret
-									ul.dropdown-menu(role='menu' aria-labelledby='showSelectDropdown')
-									- var i=0;
-									each show in user.shows
-										li(role='presentation')
-											- var oncliq = "document.makePlaylist.show_id.value='" + show._id + "';return false;";
-											a.selectShow(role='menuitem' tabindex='-1' onclick= oncliq)= show.showTitle
-										- i++
+									input(type='radio' name='selectShow' value=0)
+								- var i=1;
+								each show in user.shows
+									label.btn= show.showTitle + ' '
+										input(type='radio' name='selectShow' value=i)
+									- i++
 					else
 						p.help-block If you already have a WMCN.fm account, please
 							a(href='/login')  log in
