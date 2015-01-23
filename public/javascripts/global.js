@@ -117,6 +117,13 @@ $(document).ready(function() {
     $('.mac-affil4').click(function() {
         $('.mac-affiliation4').slideToggle();
     });
+
+    $('input[name="selectShow"]').click(function() {
+        alert($(this).val());
+        var index = $(this).val() - 1;
+        alert(index);
+        alert(user.shows);
+    });
 });
 
 var playPauseCount = 0;
@@ -129,6 +136,10 @@ function playStream() {
 
 function pauseStream() {
     document.getElementById('streamPlayer').pause();
+}
+
+function poplateApp(showIndex) {
+
 }
 
 function deleteUser(event) {

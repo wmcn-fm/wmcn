@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    block scripts
     link(rel='stylesheet', href='/javascripts/bower_components/bootstrap/dist/css/bootstrap.min.css')
     //- link(rel='stylesheet', href='javascripts/bower_components/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/global.css')
@@ -11,8 +12,7 @@ html
     //- link(rel='stylesheet', href='/stylesheets/post.css')
     link(rel='stylesheet', href='/stylesheets/footer.css')
     link(href='http://fonts.googleapis.com/css?family=Slabo+13px&subset=latin,latin-ext' rel='stylesheet' type='text/css')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-        
+    meta(name='viewport', content='width=device-width, initial-scale=1')        
   body
     include login_modal
     include header

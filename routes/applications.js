@@ -31,16 +31,15 @@ router.get('/dj', login.checkLogin, function(req, res) {
 		//	find all shows the user hosts
 		showColl.find({'hostId': req.user._id}).toArray(function (err, shows) {
 			if (err) {console.log(err);} else {
-				//	add show info
 				u.shows = shows;
 
+				//	grab user info for each host from each show, append to u
 				forEachAsync(u.shows, function (next, show, index, array) {
 					u.cohosts.push([]);
 					forEachAsync(show.hostId, function (next1, djId, i, a) {
 						userColl.findById(djId, function (err, dj) {
 							// console.log('the dj object to be inserted into cohosts[', index, ']:\n', dj);
 							u.cohosts[index].push(dj);
-							// u.shows[index].push(dj);
 							next1();
 						});
 					}).then( function() {
@@ -48,8 +47,7 @@ router.get('/dj', login.checkLogin, function(req, res) {
 					});
 
 				}).then( function() {
-					// console.log('=======\n', u, JSON.stringify(u), '\n====');
-					// console.log('cohosts', u.cohosts);
+					console.log('u:\n', u); 
 					res.render('applications/dj-spring', { 
 						title: 'Spring 2015 DJ Application',
 						user: u
@@ -58,27 +56,12 @@ router.get('/dj', login.checkLogin, function(req, res) {
 			}	//	end if err
 		});	//	end showColl.find
 
-
-		// console.log('user!', req.user);
-		// u.info = req.user;
-		// showColl.find({'hostId': req.user._id}).toArray(function (err, shows) {
-		// 	if (err) {console.log(err);} else {
-		// 		console.log(shows);
-		// 		u.shows = shows;
-		// 		res.render('applications/dj-spring', { 
-		// 			title: 'Spring 2015 DJ Application',
-		// 			user: u
-		// 		});
-		// 	}   // end error check
-		// });
 	} else {
 		console.log('no user!');
 		res.render('applications/dj-spring', {
 			title: 'Spring 2015 DJ Application'
 		});
-	}
-	console.log('user obj\n', u, '\n');
-  
+	} 
 });
 
 router.get('/staff', function(req, res) {

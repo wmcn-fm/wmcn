@@ -1,4 +1,7 @@
 extends ../layout
+block scripts
+	script(type='text/javascript').
+		var user =!{JSON.stringify(user)};
 
 block content
 	.container-fluid
@@ -11,7 +14,9 @@ block content
 				.col-xs-12
 					if user
 						p.help-block Welcome back, 
-							span #{user.info.firstName}. 
+							span #{user.info.firstName}.
+						// - var userString = !{JSON.stringify(user)};
+						//- input#userInfo(type='hidden' value= userString)
 						h3.app-category Are you applying for a new show?
 						p.help-block If you are re-applying for an old show - same name, same DJs - select it from the dropdown below. The form will autofill with your info, which you are free to edit. Otherwise select "new show".
 						.col-xs-12
@@ -323,4 +328,3 @@ block content
 		.row
 			.col-xs-12
 				button.btn.submitBt(type='submit') Submit
-script(src='/javascripts/djapp.js')
