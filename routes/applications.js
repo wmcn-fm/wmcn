@@ -25,6 +25,7 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 
 router.get('/dj', login.checkLogin, function(req, res) {
 	var u = [];
+	u.cohosts = [];
 	u.info = req.user;
 	if (req.user) {
 		//	find all shows the user hosts
@@ -32,29 +33,28 @@ router.get('/dj', login.checkLogin, function(req, res) {
 			if (err) {console.log(err);} else {
 				//	add show info
 				u.shows = shows;
-				console.log(u);
-				//	get info for possible cohosts
-				console.log(u.shows.hostId)
-				if (u.shows.hostId.length > 0) {
-					console.log('im inside the if!', u.shows.hostId.length);
-					forEachAsync(u.shows.hostId, function (next, djId, index, array) {
+
+				forEachAsync(u.shows, function (next, show, index, array) {
+					u.cohosts.push([]);
+					forEachAsync(show.hostId, function (next1, djId, i, a) {
 						userColl.findById(djId, function (err, dj) {
-							u.cohosts.append(dj);
-							next();
+							// console.log('the dj object to be inserted into cohosts[', index, ']:\n', dj);
+							u.cohosts[index].push(dj);
+							// u.shows[index].push(dj);
+							next1();
 						});
 					}).then( function() {
-						console.log('=======\n', u, '====\n');
-						res.render('applications/dj-spring', { 
-							title: 'Spring 2015 DJ Application',
-							user: u
-						});
-					});	//	end then		
-				} else {	//	otherwise move straight to render
-					res.render('applications/dj-spring', {
+						next();
+					});
+
+				}).then( function() {
+					// console.log('=======\n', u, JSON.stringify(u), '\n====');
+					// console.log('cohosts', u.cohosts);
+					res.render('applications/dj-spring', { 
 						title: 'Spring 2015 DJ Application',
 						user: u
 					});
-				}
+				});	//	end then		
 			}	//	end if err
 		});	//	end showColl.find
 
