@@ -87,6 +87,8 @@ router.post('/dj', function(req, res) {
 	var gradYear = req.body.gradYear;
 	var show = req.body.show;
 	var blurb = req.body.blurb;
+	var description = req.body.description;
+
 	// var testArray = [0, 1, 5];
 	var availability = req.body.availability;
 	var numDjs = req.body.numDjs;
@@ -117,7 +119,8 @@ router.post('/dj', function(req, res) {
 		"app" : {
 			// "djStatus" : djStatus,
 			"availability" : availability,
-			"timePref" : timePref
+			"timePref" : timePref,
+			"description" : description
 		}
 	}, function (err, doc) {
 		if (err) {

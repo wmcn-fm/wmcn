@@ -15,8 +15,6 @@ block content
 					if user
 						p.help-block Welcome back, 
 							span #{user.info.firstName}.
-						// - var userString = !{JSON.stringify(user)};
-						//- input#userInfo(type='hidden' value= userString)
 						h3.app-category Are you applying for a new show?
 						p.help-block If you are re-applying for an old show - same name, same DJs - select it from the dropdown below. The form will autofill with your info, which you are free to edit. Otherwise select "new show".
 						.col-xs-12
@@ -26,7 +24,7 @@ block content
 								- var i=1;
 								each show in user.shows
 									label.btn= show.showTitle + ' '
-										input(type='radio' name='selectShow' value=i)
+										input(type='radio' name='selectShow' value=show._id)
 									- i++
 					else
 						p.help-block If you already have a WMCN.fm account, please
@@ -289,7 +287,7 @@ block content
 					.form-group
 						label(for='blurb') program guide blurb
 						textarea.form-control(rows='2', name='blurb')
-						p.help-block A short 2-3 sentence show description for the program guide.
+						p.help-block A short 2-3 sentence show description for the public program guide.
 				.col-xs-12.col-sm-4
 						label would you like a one or two hour show?
 						.button-group
@@ -299,6 +297,12 @@ block content
 								input(type='radio' name='timePref' id='grad2017' value=2)
 							label.btn either 
 								input(type='radio' name='timePref' id='grad2017' value=3)
+			.row
+				.col-xs-12.col-sm-6.col-sm-offset-3
+					.form-group
+						label(for='description') show description
+						textarea.form-control(rows='2' name='description')
+						p.help-block Informally describe your show in a few sentences. This is for WMCN staff only, so include any notes or questions you have for us here.
 			.row
 				h3.app-category availability:
 				p.help-block Mark every hour during which you - and your co-hosts if applicable - are available to have a show. The more available you are, the more likely you are to get a show.

@@ -118,12 +118,12 @@ $(document).ready(function() {
         $('.mac-affiliation4').slideToggle();
     });
 
-    $('input[name="selectShow"]').click(function() {
-        alert($(this).val());
-        var index = $(this).val() - 1;
-        alert(index);
-        alert(user.shows);
-    });
+    // $('input[name="selectShow"]').click(function() {
+    //     alert($(this).val());
+    //     var index = $(this).val() - 1;
+    //     alert(index);
+    //     alert(user.shows);
+    // });
 });
 
 var playPauseCount = 0;
