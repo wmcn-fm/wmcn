@@ -88,7 +88,7 @@ $(document).ready(function() {
         return true;
     });
 
-    $('.per-person1, .per-person2, .per-person3, .per-person4, .mac-affiliation1, .mac-affiliation2, .mac-affiliation3, .mac-affiliation4').hide();
+    $('.per-person1, .per-person2, .per-person3, .per-person4').hide();
     $('#1dj').click(function() {
         $('.per-person1').slideToggle();
     });

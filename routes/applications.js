@@ -93,6 +93,7 @@ router.post('/dj', function(req, res) {
 	var availability = req.body.availability;
 	var numDjs = req.body.numDjs;
 	var timePref = req.body.timePref;
+	var showId = req.body.selectShow;
 
 	console.log(numDjs);
 
@@ -120,7 +121,8 @@ router.post('/dj', function(req, res) {
 			// "djStatus" : djStatus,
 			"availability" : availability,
 			"timePref" : timePref,
-			"description" : description
+			"description" : description,
+			"showId" : showId
 		}
 	}, function (err, doc) {
 		if (err) {
