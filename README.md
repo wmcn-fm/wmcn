@@ -1,6 +1,27 @@
-# [wmcn](http://wmcn.tumblr.com)
+# [wmcn](http://wmcn.fm)
 
-    cd wmcn
+###	to-do:
+
+-	schedule
+	-	AJAX calls for show info beyond title to speed up?
+-	administration
+	-	add timeslot selector to approval page
+	-	display potential shows on schedule page
+-	content management
+	-	finish review.post() route
+	-	XML playlist input
+	-	artist/song typeahead
+	-	add review/news sections
+	-	inline links for shows/DJs
+-	developer
+	-	abstract routes into api format
+	-	clean up /create deploy methods
+	-	change user PW
+	-	artist graphs
+-	new features
+	-	upcoming shows
+
+<!--     cd wmcn
     bower install
     npm install
     npm start
@@ -65,5 +86,5 @@
 | ...  | -site config    	   |	                     |		
 |      | - staff apps 		   |						 |
 |	   | - code cleanup 	   | 						 |
-
+ -->
 	
