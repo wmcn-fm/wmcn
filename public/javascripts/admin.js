@@ -33,7 +33,10 @@ $(document).ready(function() {
 	$('.approveApp').on('click', function() {
 		if ($(this).is(':checked')) {
 			var userId = $(this).parent().siblings('.userId').text();
-			successApps.push(userId);
+			var timeslot = $(this).parent().siblings('#timeslot').children().val();
+			var show = [userId, timeslot];
+			console.log(show);
+			successApps.push(show);
 		};
 	});
 
@@ -44,6 +47,7 @@ $(document).ready(function() {
 	$('.app-updateButton').click(function(e) {
 		e.preventDefault();
 		console.log('clikced!!');
+		console.log('successApps', successApps);
 		$.post('http://localhost:3000/admin/applicants/dj', {data : successApps}, function (response) {
 			window.location.href = response;
 		});

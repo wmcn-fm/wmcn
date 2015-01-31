@@ -20,6 +20,7 @@ block content
 					th grad year
 					th show
 					th blurb
+					th timeslot
 					th approve
 			tbody
 				each application, i in applicants
@@ -31,5 +32,7 @@ block content
 						td.availability= application.user.gradYear
 						td.availability= application.show.showTitle
 						td.availability= application.show.blurb
+						td.availability#timeslot
+							input
 						td.appApproval.triggerUpdate
 							input.approveApp(type='checkbox')

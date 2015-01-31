@@ -65,7 +65,12 @@ router.post('/applicants/dj', function(req, res) {
     console.log(approved);
 
     //  loop over each application
-    forEachAsync(approved, function (next, application, index, array) {
+    forEachAsync(approved, function (next, appArray, index, array) {
+        // console.log('array:', appArray);
+        application = appArray[0];
+        timeslot = appArray[1];
+        // console.log('application', application, 'timeslot', timeslot);
+
         appColl.findById(application, function (err, app) {
             if (err) {res.send('error');} else {
                 console.log(app.user.email + ': email');
@@ -88,11 +93,11 @@ router.post('/applicants/dj', function(req, res) {
                                 showColl.update({
                                     "showTitle" : app.show.showTitle,
                                     "blurb" : app.show.blurb,
-                                    "timeslot" : 9999
+                                    "timeslot" : timeslot
                                 }, {$addToSet: {hostId: result[0]._id} }, {upsert: true}, function (err, shw) {
                                     console.log('added old Dj: ' + result[0].email + ' to show ' + shw);
                                     showColl.find({showTitle: app.show.showTitle}).toArray(function (err, newShow) {
-                                        console.log('new show title: ' + newShow[0].showTitle + ' _id: ' + newShow[0]._id);
+                                        console.log('new show title: ' + newShow[0].showTitle + ' _id: ' + newShow[0]._id + 'timeslot: ' + newShow[0].timeslot);
                                         var newShowId = newShow[0]._id;
                                         //  ...and vice versa
                                         userColl.update({_id:djId}, {$addToSet: {
