@@ -67,8 +67,8 @@ router.post('/applicants/dj', function(req, res) {
     //  loop over each application
     forEachAsync(approved, function (next, appArray, index, array) {
         // console.log('array:', appArray);
-        application = appArray[0];
-        timeslot = appArray[1];
+        var application = appArray[0];
+        var timeslot = parseInt(appArray[1]);
         // console.log('application', application, 'timeslot', timeslot);
 
         appColl.findById(application, function (err, app) {
@@ -89,25 +89,49 @@ router.post('/applicants/dj', function(req, res) {
                                 var djId = result[0]._id;
                                 console.log('new dj id: ' + djId);
 
-                                //  link show doc to new user...
-                                showColl.update({
-                                    "showTitle" : app.show.showTitle,
-                                    "blurb" : app.show.blurb,
-                                    "timeslot" : timeslot
-                                }, {$addToSet: {hostId: result[0]._id} }, {upsert: true}, function (err, shw) {
-                                    console.log('added old Dj: ' + result[0].email + ' to show ' + shw);
-                                    showColl.find({showTitle: app.show.showTitle}).toArray(function (err, newShow) {
-                                        console.log('new show title: ' + newShow[0].showTitle + ' _id: ' + newShow[0]._id + 'timeslot: ' + newShow[0].timeslot);
-                                        var newShowId = newShow[0]._id;
-                                        //  ...and vice versa
-                                        userColl.update({_id:djId}, {$addToSet: {
-                                            shows: newShowId
-                                        }}, function (err, newUser) {
-                                            console.log('user updated w/showId: ' +  newUser);
-                                        });
-                                    });
-                                    next1();
-                                });
+                                showColl.find({showTitle: app.show.showTitle}).toArray( function (err, show) {
+                                    if (err) {console.log(err);} else {
+
+                                        //  if show already exists, only update timeslot
+                                        if (show.length != 0) {
+                                            console.log(show, 'show already exists!');
+                                            showColl.update({showTitle: app.show.showTitle}, {$set: {timeslot: timeslot}}, function (err, updatedShow) {
+                                                if (err) {console.log(err);} else {
+                                                    console.log(updatedShow, 'updatedshow');
+                                                    console.log('user updated w/showId: ' +  updatedShow._id, 'w timeslot:', updatedShow.timeslot);
+                                                    next1();  
+                                                }
+                                                
+                                            });
+        
+                                        //  if the user exists but show does not,
+                                        //  add a new doc for the show and add 1-1 link to the user
+                                        } else {
+                                            //  link show doc to new user...
+                                            showColl.update({
+                                                "showTitle" : app.show.showTitle,
+                                                "blurb" : app.show.blurb,
+                                                "timeslot" : timeslot
+                                            }, {$addToSet: {hostId: result[0]._id} }, {upsert: true}, function (err, shw) {
+                                                console.log('added old Dj: ' + result[0].email + ' to show ' + shw);
+                                                showColl.find({showTitle: app.show.showTitle}).toArray(function (err, newShow) {
+                                                    console.log('new show title: ' + newShow[0].showTitle + ' _id: ' + newShow[0]._id + 'timeslot: ' + newShow[0].timeslot);
+                                                    var newShowId = newShow[0]._id;
+                                                    //  ...and vice versa
+                                                    userColl.update({_id:djId}, {$addToSet: {
+                                                        shows: newShowId
+                                                    }}, function (err, newUser) {
+                                                        console.log('user updated w/showId: ' +  newUser);
+                                                    });
+                                                });
+                                                next1();
+                                            }); //  end showColl.update
+
+                                        }   //  end else show exists
+                                    }   //  end err if/else
+                                }); //  end showColl.find
+
+                                
                             } else {
                                 var pass = randomString(10, alphanumeric);
                                 console.log(pass);
@@ -127,7 +151,7 @@ router.post('/applicants/dj', function(req, res) {
                                           '<p> Remember to create a playlist each time you broadcast a show (even non-music based shows must do this). ' + 
                                           'After signing in, you can create a playlist at wmcn.fm/dj/playlist.</p>' +
                                           '<p> If you have any technical problems with the site - logging in, creating a playlist, etc - <b> do not </b> reply to this email. ' +
-                                          'Instead, send a new message to wmcn@macalester.edu with "Website tech problems" in the subject line.</p>' +
+                                          'Instead, send a new message to wkentdag@macalester.edu with "WMCN website issue" in the subject line.</p>' +
                                           '<p> Thanks and happy DJing! Love,</p>' +
                                           '<p>WMCN</p>'
                                 }
@@ -157,7 +181,7 @@ router.post('/applicants/dj', function(req, res) {
                                             showColl.update({
                                                 "showTitle" : app.show.showTitle,
                                                 "blurb" : app.show.blurb,
-                                                "timeslot" : 9999
+                                                "timeslot" : timeslot
                                             }, {$addToSet: {hostId: newUser[0]._id} },
                                             {upsert: true}, function (err, shw) {
                                                 // console.log(shw);
