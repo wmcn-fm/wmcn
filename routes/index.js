@@ -19,6 +19,8 @@ var navCats = ['archive', 'schedule', 'reviews', 'news', 'info'];
 
 var userColl = db.collection('usercollection'); // for login testing
 
+var fs = require('fs');
+
 /** 
 *   ====================================================================
 *   '/'
@@ -78,67 +80,72 @@ router.get('/app-success', function(req, res) {
 *   '/schedule'
 */
 router.get('/schedule', function(req, res) {
-	console.log('----------------------------------\n----------------------------------\n----------------------------------')
-	// var shows = [];
-	// pull all shows with timeslots w/in weekly range
-	showColl.find({timeslot: {$gte: 0, $lt: 169}}).sort({timeslot:1}).toArray(function (err, rawShows) {
-		if (err) {console.log(err);} else {
+	// console.log('----------------------------------\n----------------------------------\n----------------------------------')
+	// // var shows = [];
+	// // pull all shows with timeslots w/in weekly range
+	// showColl.find({timeslot: {$gte: 0, $lt: 169}}).sort({timeslot:1}).toArray(function (err, rawShows) {
+	// 	if (err) {console.log(err);} else {
 
-			var shows = [];
-			var hostNames = [];
+	// 		var shows = [];
+	// 		var hostNames = [];
 
-			// loop over each show
-			forEachAsync(rawShows, function (next, dj, index, array) {
-				// console.log(index, dj);
+	// 		// loop over each show
+	// 		forEachAsync(rawShows, function (next, dj, index, array) {
+	// 			// console.log(index, dj);
 
-				// iterate over hostId section in order to extract names for multiple DJs
-				forEachAsync(rawShows[index].hostId, function (next1, user, j, array) {
-					console.log(j, user);
+	// 			// iterate over hostId section in order to extract names for multiple DJs
+	// 			forEachAsync(rawShows[index].hostId, function (next1, user, j, array) {
+	// 				console.log(j, user);
 
-					userColl.findById(user, function (err, host) {
+	// 				userColl.findById(user, function (err, host) {
 
-						if (err) {console.log(err);} else {
-							var hostName = host.firstName + ' ' + host.lastName;
-							// console.log(hostName);
-							hostNames.push(hostName);
-							// console.log('hostNames: ', hostNames);
-						}
-						next1();
-					});
-					// next1();
-				}).then( function() {	//	end inner async loop through hosts
-					console.log('hostnames:\n');
-					console.log(hostNames);
-					var show = {
-						'showTitle' : rawShows[index].showTitle,
-						'timeslot' : rawShows[index].timeslot,
-						'blurb' : rawShows[index].blurb,
-						'hosts' : hostNames
-					}
+	// 					if (err) {console.log(err);} else {
+	// 						var hostName = host.firstName + ' ' + host.lastName;
+	// 						// console.log(hostName);
+	// 						hostNames.push(hostName);
+	// 						// console.log('hostNames: ', hostNames);
+	// 					}
+	// 					next1();
+	// 				});
+	// 				// next1();
+	// 			}).then( function() {	//	end inner async loop through hosts
+	// 				console.log('hostnames:\n');
+	// 				console.log(hostNames);
+	// 				var show = {
+	// 					'showTitle' : rawShows[index].showTitle,
+	// 					'timeslot' : rawShows[index].timeslot,
+	// 					'blurb' : rawShows[index].blurb,
+	// 					'hosts' : hostNames
+	// 				}
 
-					// var x = JSON.parse(show);
-					// x[hosts].push(hostNames);
-					// show = JSON.stringify(x);
+	// 				// var x = JSON.parse(show);
+	// 				// x[hosts].push(hostNames);
+	// 				// show = JSON.stringify(x);
 
-					console.log(show);
-					shows.push(show);
-					// console.log(shows);
-					hostNames.length = 0;
+	// 				console.log(show);
+	// 				shows.push(show);
+	// 				// console.log(shows);
+	// 				hostNames.length = 0;
 					
-					next();
-				});
-			}).then( function() {	//	end outer async loop through shows
-				console.log('async complete!');
-				console.log('shows: ---------------------------------');
-				console.log(shows, '\n');
-				// console.log(JSON.stringify(shows));
-				res.render('schedule', {
-					title: 'Fall 2014 Show Schedule',
-					shows: shows
-				});
-			});
-		}
-	}); //	end showColl.find
+	// 				next();
+	// 			});
+	// 		}).then( function() {	//	end outer async loop through shows
+	// 			console.log('async complete!');
+	// 			console.log('shows: ---------------------------------');
+	// 			console.log(shows, '\n');
+	// 			// console.log(JSON.stringify(shows));
+	// 			res.render('schedule', {
+	// 				title: 'Fall 2014 Show Schedule',
+	// 				shows: shows
+	// 			});
+	// 		});
+	// 	}
+	// }); //	end showColl.find
+	var tempFile="public/files/wmcnschedspring15.pdf";
+	fs.readFile(tempFile, function (err,data){
+		res.contentType("application/pdf");
+		res.send(data);
+	});
 });
 //  GET
 
