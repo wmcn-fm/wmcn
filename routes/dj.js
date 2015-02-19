@@ -16,6 +16,7 @@ var client = require('../tumblr.js');
 var login = require('./login.js');
 
 var forEachAsync = require('forEachAsync').forEachAsync;
+var bcrypt = require('bcrypt-nodejs');
 
 
 
@@ -55,7 +56,41 @@ router.get('/login', function(req, res) {
 
 //  GET
 router.get('/user', function(req, res) {
-    res.render('dj/user', {title: "edit user" })
+    // res.render('dj/user', {title: "edit user" })
+    res.location('Reset your password');
+    res.redirect('/dj/reset-pw');
+});
+
+router.get('/reset-pw', function(req, res) {
+	res.render('dj/pwr-temp', {title: "Reset your password"});
+});
+
+router.post('/reset-pw', function(req, res) {
+	var user = req.user;
+	var newPw = req.body.newPw1;
+	bcrypt.hash(newPw, null, null, function (err, hash) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('success!', hash);
+
+			userColl.update({_id:user._id},
+				{ $set: {hash: hash} }, 
+				function (err, updatedUser) {
+					if (err) {
+						console.log(err);
+					} else {
+						console.log('user updated successfully!\n');
+						// console.log(updatedUser[0]);
+						res.location('/dj');
+						res.redirect('/dj');
+					}
+				}
+			);
+			
+		}
+		
+	});
 });
 
 

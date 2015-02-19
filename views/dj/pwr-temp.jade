@@ -1,0 +1,17 @@
+extends ./layout-dj
+
+block content
+	.container-fluid
+		.col-xs-12.col-sm-offset-3.col-sm-6
+			.row
+				form(role='form', method='post', action='/dj/reset-pw', id='newPw' name='newPw')
+					.form-group
+						label(for='newPw1') enter your new password
+						input#newPw1.form-control(type='password', name='newPw1')
+					.form-group
+						label(for='newPw2') confirm your new password
+						input#newPw2.form-control(type='password', name='newPw2')
+						p.help-block 
+					button.btn.submit.submitBt(type='submit' disabled) Update
+block extra-scripts
+	script(src='/javascripts/reset-pw-validate.js')
