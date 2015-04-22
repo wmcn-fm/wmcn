@@ -1,0 +1,47 @@
+@import 'reset';
+
+body {
+	background-color: $tan;
+}
+
+h1 {
+	font-family: $font-header;
+	text-transform: uppercase;
+	color: $black;
+}
+
+p {
+	font-family: $font-main;
+	color: $black;
+}
+
+a {
+	font-family: $font-header;
+	color: $black;
+}
+
+a:hover {
+  background-color: transparent !important;
+  color: initial;
+  border-bottom: $border-width solid $black;
+}
+
+.black {
+	@include color($black);
+}
+
+.yellow {
+	@include color($yellow);
+}
+
+.blue {
+	@include color($blue);
+}
+
+.red {
+	@include color($red);
+}
+
+
+@import 'header';
+@import 'navbar';

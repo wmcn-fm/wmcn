@@ -1,0 +1,21 @@
+@import 'reset';
+nav {
+	@include border-default($black, $border-width);
+
+	background-color: transparent;
+
+  text-align: center;
+
+  ul {
+    width: 1000px;
+    margin: auto;
+  }
+
+  li {
+    width: 25%;
+  }
+
+  a {
+    @include border-default($red, 1px);
+  }
+}
