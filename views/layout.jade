@@ -2,17 +2,15 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/main.css')
-    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/build/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/build/css/style.min.css')
     link(href='http://fonts.googleapis.com/css?family=Slabo+13px&subset=latin,latin-ext' rel='stylesheet' type='text/css')
     meta(name='viewport', content='width=device-width, initial-scale=1')        
   body
-    include login
-    include header
-    include navbar
-
+    include components/_login
+    include components/_header
+    include components/_navbar
     block content
-    include footer
-    script(src='/bower_components/jquery/dist/jquery.min.js')
-    script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    include components/_footer
+    script(src='/build/bower_components/jquery/dist/jquery.min.js')
+    script(src='/build/bower_components/bootstrap/dist/js/bootstrap.min.js')
