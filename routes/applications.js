@@ -23,46 +23,68 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 //   res.render('applications/dj', { title: 'Fall 2014 DJ Application'});
 // });
 
-router.get('/dj', login.checkLogin, function(req, res) {
-	var u = [];
-	u.cohosts = [];
-	u.info = req.user;
-	if (req.user) {
-		//	find all shows the user hosts
-		showColl.find({'hostId': req.user._id}).toArray(function (err, shows) {
-			if (err) {console.log(err);} else {
-				u.shows = shows;
-
-				//	grab user info for each host from each show, append to u
-				forEachAsync(u.shows, function (next, show, index, array) {
-					u.cohosts.push([]);
-					forEachAsync(show.hostId, function (next1, djId, i, a) {
-						userColl.findById(djId, function (err, dj) {
-							// console.log('the dj object to be inserted into cohosts[', index, ']:\n', dj);
-							u.cohosts[index].push(dj);
-							next1();
-						});
-					}).then( function() {
-						next();
-					});
-
-				}).then( function() {
-					console.log('u:\n', u); 
-					res.render('applications/dj-spring', { 
-						title: 'Spring 2015 DJ Application',
-						user: u
-					});
-				});	//	end then		
-			}	//	end if err
-		});	//	end showColl.find
-
-	} else {
-		console.log('no user!');
-		res.render('applications/dj-spring', {
-			title: 'Spring 2015 DJ Application'
-		});
-	} 
+router.get('/', function(req, res) {
+	// res.render('applications/dj-spring', {
+	// 	title: 'Spring 2015 DJ Application'
+	// });
+	res.redirect('https://docs.google.com/forms/d/1JVKldgwvnHWMwk4KtN9bUoUOhKUnGiuAwdrXpDQwD3I/viewform?c=0&w=1');
 });
+
+router.get('/dj', login.checkLogin, function(req, res) {
+	// var u = [];
+	// u.cohosts = [];
+	// u.info = req.user;
+	// if (req.user) {
+	// 	//	find all shows the user hosts
+	// 	showColl.find({'hostId': req.user._id}).toArray(function (err, shows) {
+	// 		if (err) {console.log(err);} else {
+	// 			u.shows = shows;
+
+	// 			//	grab user info for each host from each show, append to u
+	// 			forEachAsync(u.shows, function (next, show, index, array) {
+	// 				u.cohosts.push([]);
+	// 				forEachAsync(show.hostId, function (next1, djId, i, a) {
+	// 					userColl.findById(djId, function (err, dj) {
+	// 						// console.log('the dj object to be inserted into cohosts[', index, ']:\n', dj);
+	// 						u.cohosts[index].push(dj);
+	// 						next1();
+	// 					});
+	// 				}).then( function() {
+	// 					next();
+	// 				});
+
+	// 			}).then( function() {
+	// 				console.log('u:\n', u); 
+	// 				res.render('applications/dj-spring', { 
+	// 					title: 'Spring 2015 DJ Application',
+	// 					user: u
+	// 				});
+	// 			});	//	end then		
+	// 		}	//	end if err
+	// 	});	//	end showColl.find
+
+	// } else {
+	// 	console.log('no user!');
+	// 	res.render('applications/dj-spring', {
+	// 		title: 'Spring 2015 DJ Application'
+	// 	});
+	// } 
+	res.redirect('https://docs.google.com/forms/d/1JVKldgwvnHWMwk4KtN9bUoUOhKUnGiuAwdrXpDQwD3I/viewform?c=0&w=1');
+});
+
+router.get('/mydata', function(req, res) {
+	var obj = { dog: "snoop" }
+	res.json(obj)
+})
+
+// client:
+
+
+
+
+	// res.setHeader('content-type': 'json')
+	// res.write(JSON.stringify(obj))
+	// res.end()
 
 router.get('/staff', function(req, res) {
   res.render('applications/staff', { title: 'Apply for a WMCN Staff Position' })

@@ -1,4 +1,10 @@
-// $(document).ready(function() {
+$(document).ready(function() {
+	$('input[name="selectShow"]').click(function() {
+		alert('hey!');
+	});
+	// function populateApp(showIndex) {
+
+	// }
 // 	var availableSlots = [];
 
 // 	$('.timeslotSelector').click(function() {
@@ -11,4 +17,4 @@
 // 			$(this).parent().toggleClass('available-slot')
 // 		}
 // 	});
-// });
+});

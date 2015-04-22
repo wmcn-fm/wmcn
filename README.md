@@ -17,7 +17,7 @@
 	-	abstract routes into api format
 	-	clean up /create deploy methods
 	-	change user PW
-	-	artist graphs
+	-	artist graphsinde
 -	new features
 	-	upcoming shows
 
