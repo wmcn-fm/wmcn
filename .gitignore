@@ -1,8 +1,4 @@
 node_modules
-data
-modulus.js
-dbLogin.js
-tumblr.js
+public/bower_components
 *.log
-nodemailerConfig.js
-public/javascripts/bower_components
+config/*.js

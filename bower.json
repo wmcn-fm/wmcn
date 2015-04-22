@@ -1,30 +1,22 @@
 {
-  "name": "wmcn",
-  "version": "0.0.0",
-  "homepage": "https://github.com/wmcn-fm/wmcn",
+  "name": "wmcn.fm",
+  "version": "2.0",
+  "homepage": "https://github.com/wmcn-fm/wmcn.fm",
   "authors": [
     "Will Kent-Daggett <willkentdaggett@gmail.com>"
   ],
+  "description": "WMCN.fm webapp",
   "main": "app.js",
-  "keywords": [
-    "wmcn"
-  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "public/javascripts",
+    "public/bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "*",
-    "Faker.js": "https://github.com/FotoVerite/Faker.js.git#~0.6.1",
-    "wysihtml5": "~0.3.0"
-  },
-  "devDependencies": {
-    "fixie": "https://github.com/ryhan/fixie.git",
-    "holderjs": "~2.3.2"
+    "bootstrap": "~3.3.4"
   }
 }

@@ -1,33 +1,24 @@
 {
-  "name": "wmcn",
+  "name": "wmcn.fm",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
+    "express": "~4.2.0",
     "jade": "~1.3.0",
-    "mongodb": "*",
-    "mongoskin": "*",
-    "node-sass": "*",
-    "forEachAsync": "*",
-    "passport" : "0.2.0",
-    "passport-local" : "*",
-    "bcrypt-nodejs" : "latest",
-    "connect-flash" : "*",
-    "express-session" : "*",
-    "tumblr.js": "*",
-    "nodemailer": "1.0.4",
-    "nodemailer-wellknown" : "0.1.2",
-    "forever" : "*"
+    "morgan": "~1.0.0",
+    "pg": "^4.3.0",
+    "static-favicon": "~1.0.0",
+    "superagent": "^1.2.0"
   },
-  
   "devDependencies": {
-    "nodemon" : "*"
+    "gulp": "^3.8.11",
+    "gulp-sass": "^1.3.3",
+    "nodemon": "^1.3.7"
   }
 }

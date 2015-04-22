@@ -1,0 +1,27 @@
+body {
+  background-color: #dbe0d9; }
+
+h1 {
+  font-family: futura;
+  text-transform: uppercase;
+  color: #18191b; }
+
+p {
+  font-family: 'Slabo 13px', serif;
+  color: #18191b; }
+
+.black {
+  color: #18191b; }
+
+.red {
+  color: #fc5245; }
+
+.yellow {
+  color: #e9e730; }
+
+.blue {
+  color: #7babf3; }
+
+nav {
+  border: 3px solid #18191b;
+  background-color: transparent; }

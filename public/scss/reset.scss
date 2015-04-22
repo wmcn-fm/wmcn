@@ -1,0 +1,12 @@
+$black: #18191b;
+$red: #fc5245;
+$yellow: #e9e730;
+$blue: #7babf3;
+$tan: #dbe0d9;
+
+$font-header: futura;
+$font-main: 'Slabo 13px', serif;
+
+@mixin border-default($color, $width) {
+	border: $width solid $color;
+}

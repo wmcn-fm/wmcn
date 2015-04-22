@@ -1,0 +1,8 @@
+{
+	"api": {
+		"url": {
+			"production": "http://api.wmcn.fm",
+			"development": "localhost:3000"
+		}
+	}
+}

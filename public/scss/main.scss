@@ -1,0 +1,34 @@
+@import 'reset';
+
+body {
+	background-color: $tan;
+}
+
+h1 {
+	font-family: $font-header;
+	text-transform: uppercase;
+	color: $black;
+}
+
+p {
+	font-family: $font-main;
+	color: $black;
+}
+
+.black {
+	color: $black;
+}
+
+.red {
+	color: $red;
+}
+
+.yellow {
+	color: $yellow;
+}
+
+.blue {
+	color: $blue;
+}
+
+@import 'navbar';

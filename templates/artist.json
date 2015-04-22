@@ -1,9 +1,0 @@
-{
-	"_id" : ObjectID,
-	"name" : String,
-	"songs" : [
-		{
-			"name" : String
-		}
-	]
-}
