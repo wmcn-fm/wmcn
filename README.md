@@ -19,7 +19,7 @@ $ gulp sass
 > Instructions coming soon on how to deploy the app in sync with the API...running on fake data for now
 
 ```shell
-$ DEBUG=wmcn.fm npm start
+$ DEBUG=wmcn.fm NODE_ENV=development npm start
 ```
 
 View the site at localhost:3000

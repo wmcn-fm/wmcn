@@ -1,8 +1,36 @@
 {
+  "app": {
+    "stem": "http://",
+    "url": {
+      "dev": "localhost",
+      "production": "wmcn.fm"
+    },
+    "port": {
+      "dev": 3000,
+      "production": 80
+    }
+  },
 	"api": {
+    "v": 0,
+    "stem": "http://",
 		"url": {
-			"production": "http://api.wmcn.fm",
-			"development": "localhost:3000"
-		}
+      "dev": "localhost",
+			"production": "api.wmcn.fm"
+		},
+    "port": {
+      "dev": 3001,
+      "production": 80
+    },
+    "db": {
+      "stem": "postgres://",
+      "host": {
+        "dev": "localhost",
+        "production": "c23.capital.3.mongolayer.com:10023,capital.2.mongolayer.com:10023/"
+      },
+      "name": {
+        "dev": "wmcn_test",
+        "production": "wmcn_production"
+      }
+    }
 	}
 }
