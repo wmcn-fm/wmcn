@@ -6,12 +6,12 @@ block content
       .row
         .col-xs-12.col-md-6
           section
-            h2 Playlists
+            h2.section-header Playlists
             each p in playlists
               - var p_url = '/archive/playlists/' + p.id;
               a(href= p_url)
                 if p.title
                   h3= p.title
-                h3 Show #{p.show_id}, Playlist ID #{p.id}, 
-                h6= p.created
+                h3 Show #{p.show_id}, Playlist ID #{p.id}
+                h6.dateFromNow= p.created
 

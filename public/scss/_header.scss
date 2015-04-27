@@ -1,19 +1,21 @@
-@import 'reset';
+@import 'variables';
 
 #header {
-    table {
-        // @include border-default($red, 1px);
-        width: 1000px;
-        margin: auto;
-    }
+  table {
+      // @include border-default($red, 1px);
+      width: 1000px;
+      margin: auto;
+  }
 
-    td {
-        // @include border-default($red, 1px);
-        width: 250px;
-    }
+  td {
+      // @include border-default($red, 1px);
+      width: 250px;
+      h1 {
+          font-size: $font-header-size;
+          text-align: center;
+          @include elem_spacing();
+      }
+  }
 
-    h1 {
-        font-size: $font-header-size;
-        text-align: center;
-    }
+  
 }

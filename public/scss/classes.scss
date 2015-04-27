@@ -1,0 +1,41 @@
+@import 'variables';
+
+.black {
+	@include color($black);
+}
+
+.black:hover {
+	@include invert($black);
+}
+
+.yellow {
+	@include color($yellow);
+}
+
+.yellow:hover {
+	@include invert($yellow)
+}
+
+.blue {
+	@include color($blue);
+}
+
+.blue:hover {
+	@include invert($blue)
+}
+
+.red {
+	@include color($red);
+}
+
+.red:hover {
+	@include invert($red)
+}
+
+.section-header {
+  @include invert($red);
+  @include elem_spacing();
+}
+.section-header:hover {
+  @include color($red);
+}

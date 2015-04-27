@@ -12,6 +12,7 @@ $tan: #dbe0d9;
 
 @mixin color($color) {
   color: $color;
+  background-color: transparent !important;
 }
 
 @mixin invert($color) {
@@ -39,8 +40,8 @@ $font-main: 'Slabo 13px', serif;
 **/
 
 @mixin border-default($color, $style, $width) {
-	border-top: $width $style $color;
-  border-bottom: $width $style $color;
+	border-top: $width $style $color !important;
+  border-bottom: $width $style $color !important;
 }
 $border-width: 3px;
 
@@ -53,13 +54,32 @@ $border-width: 3px;
 $default-padding: 1%;
 $default-margin: 1%;
 
-@mixin spacing() {
+@mixin div_spacing() {
   padding: $default-padding;
   margin: $default-margin;
 }
 
+@mixin elem_spacing() {
+  margin: 0px;
+  padding: 5%;
+}
 
 
+/**
+  *
+  * animation
+  *
+**/
+
+@mixin transition($speed) {
+  transition: background $speed linear;
+  -webkit-transition: background $speed linear;
+  -moz-transition: background $speed linear;
+  -o-transition: background $speed linear;
+  transition: background $speed linear;
+}
+
+$transition-time-default: 400ms;
 
 
 

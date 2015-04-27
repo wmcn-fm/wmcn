@@ -1,4 +1,4 @@
-@import 'reset';
+@import 'variables';
 nav {
 	@include border-default($black, solid, $border-width);
 
