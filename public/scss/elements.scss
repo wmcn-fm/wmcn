@@ -32,6 +32,10 @@ section {
 	border: $black solid $border-width;
 }
 
+article {
+	@extend section;
+}
+
 
 
 @import 'header';

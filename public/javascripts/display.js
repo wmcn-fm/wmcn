@@ -10,6 +10,11 @@ $(document).ready(function() {
     var hours = moment($(this).text()).fromNow();
     $(this).text(hours);
   }); 
+
+  $('.date').each(function(i) {
+    var date = moment($(this).text()).format("dddd, MMMM Do YYYY, hA");
+    $(this).text(date);
+  });
 });
 
 

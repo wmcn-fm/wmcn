@@ -6,7 +6,7 @@ var api = require('../models/utils');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  api.get('/playlists/', function(err, result, statusCode) {
+  api.get('/playlists?limit=4/', function(err, result, statusCode) {
     if (err) console.log('error:\n', err);
 
     console.log('result\t', result);

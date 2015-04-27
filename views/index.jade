@@ -1,10 +1,10 @@
 extends _layout
 
 block content
-  .container-fluid
+  #main.container-fluid
     if (playlists)
       .row
-        .col-xs-12.col-md-6
+        .col-xs-12.col-sm-6.col-md-6
           section
             h2.section-header Playlists
             each p in playlists
@@ -14,7 +14,7 @@ block content
                   h3= p.title
                 h3 Show #{p.show_id}, Playlist ID #{p.id}
                 h6.dateFromNow= p.created
-        .col-xs-12.col-md-6
+        .col-xs-12.col-sm-6.col-md-4.col-md-offset-2
           section
             h2.section-header Playlists
             each p in playlists
@@ -24,4 +24,28 @@ block content
                   h3= p.title
                 h3 Show #{p.show_id}, Playlist ID #{p.id}
                 h6.dateFromNow= p.created
+      .row
+        .col-xs-12.col-md-6.col-md-offset-3
+          section
+            h2.section-header Playlists
+            each p in playlists
+              - var p_url = '/archive/playlists/' + p.id;
+              a(href= p_url)
+                if p.title
+                  h3= p.title
+                h3 Show #{p.show_id}, Playlist ID #{p.id}
+                h6.dateFromNow= p.created
+      .row
+        .col-xs-12.col-sm-5.col-sm-offset-1
+          section
+            h2.section-header Playlists
+            each p in playlists
+              - var p_url = '/archive/playlists/' + p.id;
+              a(href= p_url)
+                if p.title
+                  h3= p.title
+                h3 Show #{p.show_id}, Playlist ID #{p.id}
+                h6.dateFromNow= p.created
+      hr
+      hr
 

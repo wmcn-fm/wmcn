@@ -1,0 +1,7 @@
+extends _layout
+
+block content
+  article.col-xs-12.col-md-8.col-md-offset-2
+    h2.section-header Show #{result.show_id}, Playlist #{result.id}
+    h4.date= result.created
+    p= result.content
