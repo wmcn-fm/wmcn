@@ -4,17 +4,26 @@
   *
 **/
 
-$black: #18191b;
-$red: #fc5245;
-$yellow: #e9e730;
-$blue: #7babf3;
+$black: #2a2529;
+$red: #c13f3f;  //fc5245
+$yellow: #eac666;
+$blue: #6286ba;
 $tan: #dbe0d9;
 
 @mixin color($color) {
   color: $color;
 }
 
-//  fonts & typefaces
+@mixin invert($color) {
+  color: $tan;
+  background-color: $color !important;
+}
+
+/**
+  *
+  * fonts & typeface
+  *
+**/
 
 //	credit: http://intavant.com/blog/2012/futura-web-font-alternatives/
 $font-header: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
@@ -23,9 +32,34 @@ $font-header-secondary-size: 500%;
 
 $font-main: 'Slabo 13px', serif;
 
-//  borders
+/**
+  *
+  * borders
+  *
+**/
 
-@mixin border-default($color, $width) {
-	border: $width solid $color;
+@mixin border-default($color, $style, $width) {
+	border-top: $width $style $color;
+  border-bottom: $width $style $color;
 }
 $border-width: 3px;
+
+/**
+  *
+  * spacing
+  *
+**/
+
+$default-padding: 1%;
+$default-margin: 1%;
+
+@mixin spacing() {
+  padding: $default-padding;
+  margin: $default-margin;
+}
+
+
+
+
+
+

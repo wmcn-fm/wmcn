@@ -4,7 +4,7 @@ body {
 	background-color: $tan;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
 	font-family: $font-header;
 	text-transform: uppercase;
 	color: $black;
@@ -19,27 +19,47 @@ a {
 	font-family: $font-header;
 	color: $black;
 }
-
 a:hover {
-  background-color: transparent !important;
-  color: initial;
-  border-bottom: $border-width solid $black;
+  // background-color: transparent !important;
+  // color: initial;
+  // border-bottom: $border-width solid $black;
+}
+
+section {
+	@include spacing();
+	border: $black solid $border-width;
 }
 
 .black {
 	@include color($black);
 }
 
+.black:hover {
+	@include invert($black)
+}
+
 .yellow {
 	@include color($yellow);
+}
+
+.yellow:hover {
+	@include invert($yellow)
 }
 
 .blue {
 	@include color($blue);
 }
 
+.blue:hover {
+	@include invert($blue)
+}
+
 .red {
 	@include color($red);
+}
+
+.red:hover {
+	@include invert($red)
 }
 
 

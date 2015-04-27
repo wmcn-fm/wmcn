@@ -1,10 +1,11 @@
 @import 'reset';
 nav {
-	@include border-default($black, $border-width);
+	@include border-default($black, solid, $border-width);
 
 	background-color: transparent;
 
   text-align: center;
+  text-transform: uppercase;
 
   ul {
     width: 1000px;
@@ -16,6 +17,6 @@ nav {
   }
 
   a {
-    @include border-default($red, 1px);
+    // @include border-default($red, 1px);
   }
 }
