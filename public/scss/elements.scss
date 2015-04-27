@@ -26,6 +26,8 @@ a:hover {
 }
 
 section {
+	z-index: 99;
+	background-color: $tan;
 	@include div_spacing();
 	border: $black solid $border-width;
 }

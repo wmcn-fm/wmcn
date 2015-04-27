@@ -2,13 +2,21 @@
 nav {
 	@include border-default($black, solid, $border-width);
 
-	background-color: transparent;
+	background-color: $tan;
+  z-index: 99;
+
+  
 
   text-align: center;
   text-transform: uppercase;
 
   ul {
-    width: 1000px;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 1000px;
+    width: 80%;
     margin: auto;
   }
 
@@ -16,7 +24,4 @@ nav {
     width: 25%;
   }
 
-  a {
-    // @include border-default($red, 1px);
-  }
 }

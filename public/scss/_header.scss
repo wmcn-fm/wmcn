@@ -1,11 +1,15 @@
 @import 'variables';
 
-#header {
-  table {
-      // @include border-default($red, 1px);
-      width: 1000px;
-      margin: auto;
-  }
+table#header {
+  // @include border-default($red, 1px);
+  position: fixed;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  min-width: 1000px;
+  width: 80%;
+  margin: auto;
 
   td {
       // @include border-default($red, 1px);
@@ -18,4 +22,8 @@
   }
 
   
+}
+
+#clear {
+  background-color: transparent;
 }
