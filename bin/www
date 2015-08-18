@@ -2,24 +2,8 @@
 var debug = require('debug')('wmcn.fm');
 var app = require('../app');
 
-var settings = require('../config/config.json');
-var node_env = process.env.NODE_ENV;
-var port;
+app.set('port', process.env.PORT || 3000);
 
-//  debugging only:
-// var confjs = require('../config/config');
-// var env_variables = confjs();
-
-if (node_env !== 'production') {
-  port = settings.app.port.dev;
-} else {
-  port = settings.app.port.production;
-}
-
-app.set('port', port);
 var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port + ' in ' + node_env + ' mode');
-  // console.log('Environment variables:\n', env_variables);
+  debug('Express server listening on port ' + server.address().port);
 });
-
-

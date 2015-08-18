@@ -1,51 +1,15 @@
 extends _layout
 
 block content
-  #main.container-fluid
-    if (playlists)
-      .row
-        .col-xs-12.col-sm-6.col-md-6
-          section
-            h2.section-header Playlists
-            each p in playlists
-              - var p_url = '/archive/playlists/' + p.id;
-              a(href= p_url)
-                if p.title
-                  h3= p.title
-                h3 Show #{p.show_id}, Playlist ID #{p.id}
-                h6.dateFromNow= p.created
-        .col-xs-12.col-sm-6.col-md-4.col-md-offset-2
-          section
-            h2.section-header Playlists
-            each p in playlists
-              - var p_url = '/archive/playlists/' + p.id;
-              a(href= p_url)
-                if p.title
-                  h3= p.title
-                h3 Show #{p.show_id}, Playlist ID #{p.id}
-                h6.dateFromNow= p.created
-      .row
-        .col-xs-12.col-md-6.col-md-offset-3
-          section
-            h2.section-header Playlists
-            each p in playlists
-              - var p_url = '/archive/playlists/' + p.id;
-              a(href= p_url)
-                if p.title
-                  h3= p.title
-                h3 Show #{p.show_id}, Playlist ID #{p.id}
-                h6.dateFromNow= p.created
-      .row
-        .col-xs-12.col-sm-5.col-sm-offset-1
-          section
-            h2.section-header Playlists
-            each p in playlists
-              - var p_url = '/archive/playlists/' + p.id;
-              a(href= p_url)
-                if p.title
-                  h3= p.title
-                h3 Show #{p.show_id}, Playlist ID #{p.id}
-                h6.dateFromNow= p.created
-      hr
-      hr
-
+  .container-fluid    
+    #recent_playlists.col-xs-12.col-sm-6
+      h2.section-header recent playlists:
+      each p in recent_playlists
+        .playlist
+        - var href = '/archive/playlists/' + p.playlist.id;
+          a(href=href)
+            h3 #{p.show.title}, # #{p.playlist.id}
+          //- p= p.content
+      
+    .col-xs-12.col-sm-6
+      h2.section-header upcoming shows:

@@ -1,23 +1,30 @@
 {
   "name": "wmcn.fm",
-  "version": "2.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/wmcn-fm/wmcn.fm",
   "authors": [
     "Will Kent-Daggett <willkentdaggett@gmail.com>"
   ],
-  "description": "WMCN.fm webapp",
+  "description": "wmcn.fm webapp",
   "main": "app.js",
+  "keywords": [
+    "wmcn",
+    "wmcn.fm"
+  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "public/bower_components",
+    "public/build/bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.4",
-    "moment": "~2.10.2"
+    "bootstrap": "~3.3.5",
+    "moment": "~2.10.6"
+  },
+  "devDependencies": {
+    "fixie": "~1.0.1"
   }
 }

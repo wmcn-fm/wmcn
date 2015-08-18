@@ -1,23 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-var Playlists = require('../models/Playlists');
-var api = require('../models/utils');
+var Playlist = require('../models/Playlist');
+var handleError = require('../lib/handleError');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  api.get('/playlists?limit=4/', function(err, result, statusCode) {
-    if (err) console.log('error:\n', err);
+  var playlists;
+  Playlist.getPlaylists({limit: 4}, function(err, body) {
+    if (err) return handleError(err, res);
 
-    console.log('result\t', result);
-
-    res.render('index', { 
-      title: 'WMCN 91.7fm | Macalester College Radio',
-      playlists: result.playlists,
-    });
-
+    playlists = body.playlists;
+    console.log(JSON.stringify(playlists));
+    res.render('index', { title: 'wmcn', recent_playlists: playlists });
   });
-  
 });
 
 module.exports = router;

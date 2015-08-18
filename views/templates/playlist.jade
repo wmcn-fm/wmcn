@@ -1,0 +1,24 @@
+extends ../_layout
+block content
+  .container-fluid
+    #playlist.col-xs-12.col-sm-8.col-sm-offset-2
+      .row
+        .col-xs-12.col-sm-6
+          - var showHref = '/archive/shows/' + playlist.show_id
+          a(href=showHref)
+            h1= show.title
+        .col-xs-12.col-sm-6
+          h3.date= playlist.created
+      //- if hosts
+      //- 
+      //-   .hosts
+      //-     p
+      //-       span with
+      //-       - var listOfHosts = "";
+      //-       each h in hosts
+      //-         - listOfHosts += h + ', ';
+      //-       span= listOfHosts
+      //- else
+      //-   p no hosts
+          
+      article= playlist.content
