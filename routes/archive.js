@@ -11,15 +11,24 @@ archive.get('/', function(req, res) {
 
 archive.get('/playlists/:id', function(req, res) {
   var id = req.params.id;
-  Playlist.getPlaylist(id, function(err, result) {
-    // console.log(err, result);
+  Playlist.getPlaylist(id, function(err, thePlaylist) {
+    // console.log(err, thePlaylist);
     if (err) handleError(err, res);
-    res.render('templates/playlist', {
-      playlist: result.playlist,
-      show: result.show,
-      hosts: result.hosts
-    });
-  });
+
+
+    Playlist.getPlaylists({show_id: thePlaylist.playlist.show_id, limit: 4}, function(err, otherPls) {
+      console.log(JSON.stringify(otherPls) );
+      res.render('templates/playlist', {
+        playlist: thePlaylist.playlist,
+        show: thePlaylist.show,
+        hosts: thePlaylist.hosts,
+        related: otherPls
+      });
+    })  //  getPlaylists
+
+
+
+  }); //  getPlaylist
 });
 
 module.exports = archive;

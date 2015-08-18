@@ -1,0 +1,10 @@
+@import 'variables';
+
+#related {
+  * {
+    // text-align: left;
+  }
+}
+.related {
+  @extend section;
+}

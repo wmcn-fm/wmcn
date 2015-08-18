@@ -30,6 +30,7 @@ section {
 	background-color: $tan;
 	@include div_spacing();
 	border: $black solid $border-width;
+	font-family: $font-main;
 }
 
 article {
@@ -40,3 +41,4 @@ article {
 
 @import 'header';
 @import 'navbar';
+@import 'playlist';

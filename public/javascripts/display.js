@@ -11,6 +11,11 @@ $(document).ready(function() {
     $(this).text(hours);
   });
 
+  $('.date-shorthand').each(function(i) {
+    var date = moment($(this).text()).format("M/D/YY");
+    $(this).text(date);
+  })
+
   $('.date').each(function(i) {
     var date = moment($(this).text()).format("MMMM D, YYYY // hA");
     $(this).text(date);

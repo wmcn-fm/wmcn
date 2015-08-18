@@ -17,35 +17,42 @@ Playlist.getAllPlaylists = function(cb) {
   });
 }
 
+// @param options: JSON object which may contain the following fields:
+//    show_id: int, a show's ID number; if present will only return
+//            plyalists from this show
+//    limit: int, # of playlists max
 Playlist.getPlaylists = function(options, cb) {
   var payload = {};
   payload.playlists = [];
   var query = '/playlists';
 
-  for (var p in options) {
-    if (options.hasOwnProperty(p)) {
-      query += "?" + p + '=' + options[p];
-    }
+  if (options.hasOwnProperty('show_id')) {
+    query = '/shows/' + options['show_id'] + '/playlists';
+  }
+  if (options.hasOwnProperty('limit')) {
+    query += "?limit" + '=' + options['limit'];
   }
 
   api.get(query, function(err, body) {
     if (err)return cb(err);
     if (body.playlists) {
-
-      forEachAsync(body.playlists, function(next, p, i, arr) {
-        Playlist.getPlaylist(p.id, function(err, pl) {
-          if (err) return cb(err);
-          payload['playlists'].push(pl);
-          next();
+      if (!options['show_id']) {
+        forEachAsync(body.playlists, function(next, p, i, arr) {
+          Playlist.getPlaylist(p.id, function(err, pl) {
+            if (err) return cb(err);
+            payload['playlists'].push(pl);
+            next();
+          });
+        }).then(function () {
+          console.log('the payload:\n');
+          console.log(payload);
+          cb(null, payload);
         });
-      }).then(function () {
-        console.log('the payload:\n');
-        console.log(payload);
-        cb(null, payload);
-      });
-
-    } else if (res.body.error) {
-      cb(res.body.error);
+      } else {
+        cb(null, body.playlists);
+      }
+    } else if (body.error) {
+      cb(body.error);
     } else {
       cb(null, null);
     }

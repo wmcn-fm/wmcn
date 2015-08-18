@@ -9,16 +9,26 @@ block content
             h1= show.title
         .col-xs-12.col-sm-6
           h3.date= playlist.created
-      //- if hosts
-      //- 
-      //-   .hosts
-      //-     p
-      //-       span with
-      //-       - var listOfHosts = "";
-      //-       each h in hosts
-      //-         - listOfHosts += h + ', ';
-      //-       span= listOfHosts
-      //- else
-      //-   p no hosts
+      .row
+        if hosts
+          .hosts
+            p
+              span with
+              - var listOfHosts = "";
+              each h in hosts
+                - listOfHosts += h + ', ';
+              span= listOfHosts
+        else
+          p no hosts
           
       article= playlist.content
+    #related.col-xs-12.col-sm-8.col-sm-offset-2
+      .row
+        if related
+          h4 Other playlists from #{show.title}
+          each obj in related
+            .related.col-xs-6.col-sm-3
+              - var href = '/archive/playlists/' + obj.id;
+              a(href=href)
+                h5.date-shorthand= obj.created
+          
