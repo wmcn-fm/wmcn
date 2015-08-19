@@ -11,6 +11,9 @@ block content
         .col-xs-12.col-sm-6.col-sm-offset-3
           h4 First aired 
             span.dateFromNow= vars.show.created
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          p= vars.show.blurb
       if vars.hosts
         .row
           .col-xs-12.col-sm-8.col-sm-offset-2
@@ -27,6 +30,14 @@ block content
                     else
                       span , 
       if vars.playlists
-        p= vars.playlists
+        #related.col-xs-12.col-sm-8.col-sm-offset-2
+          .row
+            h4 Recent Playlists
+              each pl in vars.playlists
+                - var plHref = '/archive/playlists/' + pl.id
+                a(href=plHref)
+                  .playlist
+                    h5 ##{pl.id}
+                    p.dateFromNow= pl.created
 
           
