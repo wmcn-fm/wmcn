@@ -47,6 +47,13 @@ table {
 
 	td {
 		text-align: center;
+		.title {
+			text-transform: uppercase;
+		}
+		.automator {
+			text-transform: lowercase;
+			font-style: italic;
+		}
 	}
 
 	td.hour {
