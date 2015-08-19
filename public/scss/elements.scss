@@ -37,6 +37,23 @@ article {
 	@extend section;
 }
 
+table {
+	@extend section;
+	th {
+		text-transform: uppercase;
+		font-family: $font-header;
+		text-align: center;
+	}
+
+	td {
+		text-align: center;
+	}
+
+	td.hour {
+		font-family: $font-header;
+	}
+}
+
 
 
 @import 'header';

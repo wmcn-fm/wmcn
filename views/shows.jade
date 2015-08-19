@@ -2,4 +2,37 @@ extends _layout
 
 block content
   .container-fluid
-    p hello from shows
+    table.table.table-hover
+      thead
+        tr
+          th Hour
+          th Sunday
+          th Monday
+          th Tuesday
+          th Wednesday
+          th Thursday
+          th Friday
+          th Saturday
+      tbody
+        - var i = 0
+        - var hour = 0
+        - var slot = 0
+        while i <= 24
+          tr
+            - var j = 0
+            while j <= 7
+              if j === 0
+                td.hour= hour++
+              else
+                if schedule[slot] && schedule[slot].show.title
+                  td(data-timeslot=slot data-showId=schedule[slot].show.id)
+                    - var href = '/shows/' + schedule[slot].show.id
+                    a(href=href)
+                      span= schedule[slot].show.title
+                else
+                  td(data-timeslot= slot) Automated Content
+                - slot++
+              - j++
+            - i++
+            
+            

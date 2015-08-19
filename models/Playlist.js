@@ -1,6 +1,5 @@
 var forEachAsync = require('forEachAsync').forEachAsync;
 var api = require('../lib/utils');
-var handleError = require('../lib/handleError');
 var Playlist = {};
 
 Playlist.getAllPlaylists = function(cb) {
