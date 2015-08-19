@@ -1,0 +1,32 @@
+extends ../_layout
+block content
+  .container-fluid
+    #show.col-xs-12.col-sm-8.col-sm-offset-2
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+           - var showHref = '/shows/' + vars.show.id
+           a(href=showHref)
+            h1= vars.show.title
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          h4 First aired 
+            span.dateFromNow= vars.show.created
+      if vars.hosts
+        .row
+          .col-xs-12.col-sm-8.col-sm-offset-2
+            p with 
+              each host, index in vars.hosts
+                - var userHref = '/staff/' + host.id
+                if index === vars.hosts.length - 1
+                  span and 
+                a(href=userHref)
+                  span #{host.first_name} #{host.last_name}
+                  if index !== vars.hosts.length - 1 
+                    if vars.hosts.length == 2
+                      span  
+                    else
+                      span , 
+      if vars.playlists
+        p= vars.playlists
+
+          

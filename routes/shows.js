@@ -15,4 +15,13 @@ shows.get('/', function(req, res) {
   });
 });
 
+shows.get('/:id', function(req, res) {
+  Show.getShow(req.params.id, {}, function(err, result) {
+    if (err) return handleError(err, res);
+
+    var showTitle = result.show.title;
+    res.render('templates/show', {title: showTitle, vars: result});
+  }); //  getShow
+});
+
 module.exports = shows;

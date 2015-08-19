@@ -4,7 +4,7 @@ block content
     #playlist.col-xs-12.col-sm-8.col-sm-offset-2
       .row
         .col-xs-12.col-sm-6
-          - var showHref = '/archive/shows/' + playlist.show_id
+          - var showHref = '/shows/' + playlist.show_id
           a(href=showHref)
             h1= show.title
         .col-xs-12.col-sm-6
@@ -22,9 +22,9 @@ block content
           p no hosts
           
       article= playlist.content
-    #related.col-xs-12.col-sm-8.col-sm-offset-2
-      .row
-        if related
+    if related
+      #related.col-xs-12.col-sm-8.col-sm-offset-2
+        .row
           h4 Other playlists from #{show.title}
           each obj in related
             .related.col-xs-6.col-sm-3

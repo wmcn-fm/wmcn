@@ -51,7 +51,7 @@ Playlist.getPlaylists = function(options, cb) {
         cb(null, body.playlists);
       }
     } else if (body.error) {
-      cb(body.error);
+      cb(body.error, body);
     } else {
       cb(null, null);
     }
