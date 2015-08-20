@@ -2,20 +2,6 @@ var forEachAsync = require('forEachAsync').forEachAsync;
 var api = require('../lib/utils');
 var Playlist = {};
 
-Playlist.getAllPlaylists = function(cb) {
-  console.log('hello getAllPlaylists');
-  utils.get('/playlists/', function(err, result, statusCode) {
-    console.log('hello api.get');
-    if (err) {
-      cb(err);
-    } else if (!err && result && statusCode === 200) {
-      cb(null, result.playlists);
-    } else {
-      cb(null, null);
-    }
-  });
-}
-
 // @param options: JSON object which may contain the following fields:
 //    show_id: int, a show's ID number; if present will only return
 //            plyalists from this show

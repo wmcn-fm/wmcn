@@ -1,0 +1,20 @@
+extends ../_layout
+block content
+  .container-fluid
+    .row
+      #user.col-xs-12
+        h1= title
+    .row
+      .col-xs-6
+        p= vars.user.email
+      if vars.user.grad_year > 0
+        .col-xs-6
+          p Macalester #{vars.user.grad_year}
+    if vars.shows
+      .row
+        .col-xs-12
+          each show in vars.shows
+            - var showHref = '/shows/' + show.id
+            a(href=showHref)
+              p= show.title
+    
