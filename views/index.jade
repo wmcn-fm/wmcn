@@ -12,3 +12,10 @@ block content
       
     .col-xs-12.col-sm-6
       h2.section-header upcoming shows:
+      each s in upcoming
+        .upcomingShow
+          - var href = '/shows/' + s.show.id
+          a(href=href)
+            h3= s.show.title
+            p at 
+              span.timeslot.toDate= s.timeslot

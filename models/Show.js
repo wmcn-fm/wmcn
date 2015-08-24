@@ -60,5 +60,14 @@ Show.getCurrent = function(options, cb) {
   });
 }
 
+Show.getUpcoming = function(numShows, cb) {
+  var payload = {};
+  api.get('/schedule/next?next=' + numShows, function(err, body) {
+    if (err) return cb(err);
+    if (body.shows) payload['shows'] = body.shows;
+    cb(null, payload);
+  })
+}
+
 
 module.exports = Show;
