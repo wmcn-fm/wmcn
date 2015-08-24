@@ -4,12 +4,11 @@ block content
   .container-fluid    
     #recent_playlists.col-xs-12.col-sm-6
       h2.section-header recent playlists:
-      each p in recent_playlists
+      each p in playlists
         .playlist
         - var href = '/archive/playlists/' + p.playlist.id;
           a(href=href)
             h3 #{p.show.title}, # #{p.playlist.id}
-          //- p= p.content
       
     .col-xs-12.col-sm-6
       h2.section-header upcoming shows:

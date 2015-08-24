@@ -10,3 +10,17 @@ nav#player.navbar.navbar-fixed-bottom
         span.glyphicon.glyphicon-play
 
     .collapse.navbar-collapse#secondary-nav
+      ul.nav.navbar-nav
+        if nowPlaying
+          li.nowPlaying
+            - var showRef = '/shows/' + nowPlaying.show.id
+            a(href=showRef)
+              span= nowPlaying.show.title
+          if nowPlaying.hosts
+            each h in nowPlaying.hosts
+              - var userRef = '/staff/' + h.id
+              a(href=userRef)
+                p #{h.first_name} #{h.last_name}
+
+
+          

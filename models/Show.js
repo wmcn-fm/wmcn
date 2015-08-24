@@ -32,10 +32,32 @@ Show.getShow = function(id, options, cb) {
   }); //  api.get show id
 }
 
+Show.getHosts = function(payload, show_id, cb) {
+  if (!payload) payload = {};
+  payload['hosts'] = [];
+  api.get('/shows/' + show_id + '/hosts', function(e, body) {
+    if (e) return cb(e);
+    if (body.hosts) {
+      payload['hosts'] = body.hosts;
+    }
+    return cb(null, payload);
+  });
+}
 
 
-Show.getCurrent = function() {
 
+Show.getCurrent = function(options, cb) {
+  var payload = {};
+  api.get('/schedule/now', function(err, body) {
+    if (err) return cb(err);
+    if (body.show) payload['show'] = body.show;
+
+    if (options.hasOwnProperty('hosts') && body.show) {
+      return Show.getHosts(payload, body.show.id, cb);
+    } else {
+      cb(null, payload);
+    }
+  });
 }
 
 

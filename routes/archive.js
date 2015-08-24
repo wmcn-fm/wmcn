@@ -11,23 +11,21 @@ archive.get('/', function(req, res) {
 
 archive.get('/playlists/:id', function(req, res) {
   var id = req.params.id;
+  var nowPlaying;
   Playlist.getPlaylist(id, function(err, thePlaylist) {
-    // console.log(err, thePlaylist);
     if (err) handleError(err, res);
 
-
     Playlist.getPlaylists({show_id: thePlaylist.playlist.show_id, limit: 4}, function(err, otherPls) {
-      console.log(JSON.stringify(otherPls) );
+      if (req.body.nowPlaying) nowPlaying = req.body.nowPlaying;
+
       res.render('templates/playlist', {
         playlist: thePlaylist.playlist,
         show: thePlaylist.show,
         hosts: thePlaylist.hosts,
-        related: otherPls
+        related: otherPls,
+        nowPlaying: nowPlaying
       });
-    })  //  getPlaylists
-
-
-
+    });  //  getPlaylists
   }); //  getPlaylist
 });
 

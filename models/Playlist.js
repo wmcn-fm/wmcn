@@ -29,8 +29,6 @@ Playlist.getPlaylists = function(options, cb) {
             next();
           });
         }).then(function () {
-          console.log('the payload:\n');
-          console.log(payload);
           cb(null, payload);
         });
       } else {
