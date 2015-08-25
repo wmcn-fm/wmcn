@@ -43,6 +43,8 @@ function timeslotToDate(timeslot) {
 
   if (hour > 12) {
     hour = (hour - 12) + 'pm';
+  } else if (hour === 0) {
+    hour = '12am';
   } else {
     hour += 'am';
   }

@@ -18,11 +18,11 @@ Playlist.getPlaylists = function(options, cb) {
     query += "?limit" + '=' + options['limit'];
   }
 
-  api.get(query, function(err, body) {
+  api.get(query, null, function(err, res) {
     if (err)return cb(err);
-    if (body.playlists) {
+    if (res.body.playlists) {
       if (!options['show_id']) {
-        forEachAsync(body.playlists, function(next, p, i, arr) {
+        forEachAsync(res.body.playlists, function(next, p, i, arr) {
           Playlist.getPlaylist(p.id, function(err, pl) {
             if (err) return cb(err);
             payload['playlists'].push(pl);
@@ -32,10 +32,10 @@ Playlist.getPlaylists = function(options, cb) {
           cb(null, payload);
         });
       } else {
-        cb(null, body.playlists);
+        cb(null, res.body.playlists);
       }
-    } else if (body.error) {
-      cb(body.error, body);
+    } else if (res.body.error) {
+      cb(res.body.error, res.body);
     } else {
       cb(null, null);
     }
@@ -47,21 +47,21 @@ Playlist.getPlaylist = function(id, cb) {
   var show;
   var hosts;
   var payload = {};
-  api.get('/playlists/' + id, function(err, body) {
+  api.get('/playlists/' + id, null, function(err, res) {
     if (err) return cb(err);
 
-    payload['playlist'] = body.playlist;
-    var show_id = body.playlist.show_id;
+    payload['playlist'] = res.body.playlist;
+    var show_id = res.body.playlist.show_id;
 
-    api.get('/shows/' + show_id, function(err, body) {
+    api.get('/shows/' + show_id, null,  function(err, res) {
       if (err) return cb(err);
 
-      payload['show'] = body.show;
+      payload['show'] = res.body.show;
 
-      api.get('/shows/' + show_id + '/hosts', function(err, body) {
+      api.get('/shows/' + show_id + '/hosts', null, function(err, res) {
         if (err) return cb(err);
 
-        if (body.hosts) payload['hosts'] = body.hosts;
+        if (res.body.hosts) payload['hosts'] = res.body.hosts;
         cb(null, payload);
       }); //  api get hosts
     }); //   api get show_id

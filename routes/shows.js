@@ -9,7 +9,7 @@ shows.get('/', function(req, res) {
   var nowPlaying;
   Show.getSchedule(function(err, result) {
     if (err) return handleError(err, res);
-    schedule = result.schedule;
+    schedule = result.body.schedule;
     if (req.body.nowPlaying) nowPlaying = req.body.nowPlaying;
 
     res.render('shows', { title: 'Show schedule', schedule: schedule, nowPlaying: nowPlaying });

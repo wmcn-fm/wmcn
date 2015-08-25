@@ -5,27 +5,27 @@ var Show = {};
 
 
 Show.getSchedule = function(cb) {
-  api.get('/schedule/', function(err, body) {
+  api.get('/schedule/', null, function(err, res) {
     if (err) return cb(err);
 
-    if (body.schedule) {
-      cb(null, body);
+    if (res.body.schedule) {
+      cb(null, res);
     }
   });
 }
 
 Show.getShow = function(id, options, cb) {
   var payload = {};
-  api.get('/shows/' + id, function(err, body) {
+  api.get('/shows/' + id, null, function(err, res) {
     if (err) return cb(err);
-    if (body.error) return cb(body.error);
-    if (body['show']) payload['show'] = body['show'];
+    if (res.body.error) return cb(res.body.error);
+    if (res.body['show']) payload['show'] = res.body['show'];
 
     Playlist.getPlaylists({show_id: id, limit: 4}, function(e, pl) {
       if (!pl.error && pl.length > 0) payload['playlists'] = pl;
 
-      api.get('/shows/' + id + '/hosts', function(err, body) {
-        if (body['hosts']) payload['hosts'] = body['hosts'];
+      api.get('/shows/' + id + '/hosts', null, function(err, res) {
+        if (res.body['hosts']) payload['hosts'] = res.body['hosts'];
         cb(null, payload);
       }); //  getHosts
     }); //  getPlaylists
@@ -35,10 +35,10 @@ Show.getShow = function(id, options, cb) {
 Show.getHosts = function(payload, show_id, cb) {
   if (!payload) payload = {};
   payload['hosts'] = [];
-  api.get('/shows/' + show_id + '/hosts', function(e, body) {
+  api.get('/shows/' + show_id + '/hosts', null, function(e, res) {
     if (e) return cb(e);
-    if (body.hosts) {
-      payload['hosts'] = body.hosts;
+    if (res.body.hosts) {
+      payload['hosts'] = res.body.hosts;
     }
     return cb(null, payload);
   });
@@ -48,12 +48,12 @@ Show.getHosts = function(payload, show_id, cb) {
 
 Show.getCurrent = function(options, cb) {
   var payload = {};
-  api.get('/schedule/now', function(err, body) {
+  api.get('/schedule/now', null, function(err, res) {
     if (err) return cb(err);
-    if (body.show) payload['show'] = body.show;
+    if (res.body.show) payload['show'] = res.body.show;
 
-    if (options.hasOwnProperty('hosts') && body.show) {
-      return Show.getHosts(payload, body.show.id, cb);
+    if (options.hasOwnProperty('hosts') && res.body.show) {
+      return Show.getHosts(payload, res.body.show.id, cb);
     } else {
       cb(null, payload);
     }
@@ -62,9 +62,9 @@ Show.getCurrent = function(options, cb) {
 
 Show.getUpcoming = function(numShows, cb) {
   var payload = {};
-  api.get('/schedule/next?next=' + numShows, function(err, body) {
+  api.get('/schedule/next?next=' + numShows, null, function(err, res) {
     if (err) return cb(err);
-    if (body.shows) payload['shows'] = body.shows;
+    if (res.body.shows) payload['shows'] = res.body.shows;
     cb(null, payload);
   })
 }
