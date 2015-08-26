@@ -19,3 +19,7 @@ block content
             h3= s.show.title
             p at 
               span.timeslot.toDate= s.timeslot
+if token
+  block scripts
+    script(type='text/javascript').
+      var token =!{JSON.stringify(token)};

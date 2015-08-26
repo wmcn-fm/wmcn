@@ -1,7 +1,6 @@
 var express = require('express');
 var login = express.Router();
 var bcrypt = require('bcrypt-nodejs');
-
 var Staff = require('../models/Staff');
 var Auth = require('../models/Auth');
 var handleError = require('../lib/handleError');
@@ -10,6 +9,7 @@ login.route('/')
   .get(function(req, res) {
     res.render('login', {title: 'Login'});
   })  //  end get
+  
   .post(function(req, res) {
     if (!(req.body.user && req.body.password)) {
       return handleError(new Error('Missing login parameters'), res);
@@ -29,7 +29,6 @@ login.route('/')
             res.redirect('/?token=' + resp.body.token);
           })
         }); //  end bcrypt compare
-
       }); //  end getOneByEmail
     }
   })  //  end post
