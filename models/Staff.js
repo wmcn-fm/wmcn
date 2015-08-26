@@ -61,6 +61,14 @@ Staff.getOne = function(id, opts, token, cb) {
   })
 }
 
+Staff.getOneByEmail = function(email, cb) {
+  api.get('/users?email=' + email, null, function(err, res) {
+    if (err) return cb(err);
+
+    cb(null, res);
+  })
+}
+
 Staff.getShows = function(user, cb) {
   var payload = {};
   payload.user = user;

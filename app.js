@@ -13,6 +13,7 @@ var staff = require('./routes/staff');
 var shows = require('./routes/shows');
 var apply = require('./routes/apply');
 var archive = require('./routes/archive');
+var login = require('./routes/login');
 
 
 var app = express();
@@ -36,6 +37,7 @@ app.use('/staff', staff);
 app.use('/shows', shows);
 app.use('/apply', apply);
 app.use('/archive', archive);
+app.use('/login', login);
 
 
 

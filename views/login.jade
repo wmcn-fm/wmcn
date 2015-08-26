@@ -1,0 +1,14 @@
+extends _layout
+
+block content
+  .container-fluid 
+    .col-xs-12.col-sm-6.col-sm-offset-3
+      h1= title
+      form(action='/login' method='post')
+        .form-group
+          label(for='user') Email
+          input#user.form-control(name='user' type='email' placeholder='suckmyballs@wmcn.fm')
+        .form-group
+          label(for='password') Password
+          input#password.form-control(name='password' type='password' placeholder='jfranksux')
+        button.btn.btn-default(type='submit') Log in
