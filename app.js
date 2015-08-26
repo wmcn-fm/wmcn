@@ -14,6 +14,7 @@ var shows = require('./routes/shows');
 var apply = require('./routes/apply');
 var archive = require('./routes/archive');
 var login = require('./routes/login');
+var admin = require('./routes/admin');
 
 
 var app = express();
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(middleware.checkForToken());
 app.use(middleware.getCurrentShow());
 
 app.use('/', root);
@@ -38,6 +40,7 @@ app.use('/shows', shows);
 app.use('/apply', apply);
 app.use('/archive', archive);
 app.use('/login', login);
+app.use('/admin', admin);
 
 
 
