@@ -1,12 +1,9 @@
-$(document).ready(function() {
-  if (localStorage) {
-    if (tokenToStore) {
-      storeToken(tokenToStore);
-    }
-  }
-});
-
 function storeToken(token) {
-  localStorage.setItem('wmcn_token', token);
-  console.log(localStorage);
+  if (localStorage) {
+    localStorage.setItem('wmcn_token', token);
+    console.log(localStorage);
+  } else {
+    alert('Local storage is not supported on this browser');
+  }
+
 }

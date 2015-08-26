@@ -9,4 +9,12 @@ Auth.getToken = function(user, cb) {
   });
 }
 
+Auth.verifyToken = function(token, cb) {
+  if (!token) return cb(new Error('missing token'));
+  api.get('/authenticate/verify?token=' + token, null, function(err, result) {
+    if (err) return cb(err);
+    cb(null, result);
+  })
+}
+
 module.exports = Auth;

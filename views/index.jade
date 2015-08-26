@@ -19,7 +19,12 @@ block content
             h3= s.show.title
             p at 
               span.timeslot.toDate= s.timeslot
-if token
-  block scripts
+block scripts
+  if token
     script(type='text/javascript').
       var tokenToStore =!{JSON.stringify(token)};
+      console.log(tokenToStore);
+      storeToken(tokenToStore);
+  else
+    script(type='text/javascript').
+      console.log('no token!');
