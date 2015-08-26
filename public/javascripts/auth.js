@@ -1,3 +1,12 @@
 $(document).ready(function() {
-  console.log('heres that token!!\t%s', token);
+  if (localStorage) {
+    if (tokenToStore) {
+      storeToken(tokenToStore);
+    }
+  }
 });
+
+function storeToken(token) {
+  localStorage.setItem('wmcn_token', token);
+  console.log(localStorage);
+}

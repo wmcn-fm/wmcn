@@ -49,6 +49,5 @@ function timeslotToDate(timeslot) {
     hour += 'am';
   }
 
-
   return {day: days[day], hour: hour};
 }
