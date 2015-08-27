@@ -39,3 +39,12 @@
 .section-header:hover {
   @include color($red);
 }
+
+#main {
+	padding-top: 70px;
+	padding-bottom: 200px;
+}
+
+#login {
+	text-align: right;
+}

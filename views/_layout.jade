@@ -10,8 +10,9 @@ html
   body
     //- include components/_header
     include components/_navbar
-    include components/_login
-    block content
+    #main
+      include components/_login
+      block content
     include components/_player
     //- include components/_footer
     script(src='/build/bower_components/jquery/dist/jquery.min.js')
