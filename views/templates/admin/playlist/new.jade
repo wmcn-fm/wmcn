@@ -1,4 +1,30 @@
 extends ../../../_layout
 block content
   .container-fluid
-    p hi
+    .row
+      .col-xs-12
+        if messages
+          p!= messages()
+        h1= title
+    form(action='/admin/playlist' method='post')
+      h3 Select a show:
+      each show, index in shows
+        .radio
+          label
+            - var checked = index === 0;
+            input(type='radio' name='show_id' value= show.id checked=checked)
+            span= show.title
+      - var i = 1;
+      while i <= 20
+        .row
+          .col-xs-1.col-sm-1.col-sm-offset-1
+            h4= i++
+          .col-xs-5.col-sm-4
+            .form-group
+              label(for='artist') Artist
+              input.form-control(name='artist' placeholder='Outkast')
+          .col-xs-5.col-sm-4
+            .form-group
+              label(for='song') Song
+              input.form-control(name='song' placeholder='Ms. Jackson')
+      button.btn.btn-default(type='submit') Post

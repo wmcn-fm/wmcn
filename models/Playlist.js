@@ -42,6 +42,15 @@ Playlist.getPlaylists = function(options, cb) {
   });
 }
 
+Playlist.post = function(show_id, content, user, token, cb) {
+  var url = '/playlists?token=' + token;
+  var playlist = {show_id: show_id, content: content};
+  api.post(url, {playlist: playlist}, function(err, result) {
+    if (err) return cb(err.response.error);
+    cb(null, result);
+  }); // api.post
+}
+
 Playlist.getPlaylist = function(id, cb) {
   var playlist;
   var show;
