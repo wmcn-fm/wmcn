@@ -1,0 +1,16 @@
+.container-fluid
+  .row
+    .col-xs-12
+      if current_user
+        - var href = '/staff/' + current_user.id
+        p
+          span Signed in as 
+          a(href=href)
+             span= current_user.email
+          span  | 
+            a(href='/login/logout')
+              span Logout
+      else
+        a(href='/login')
+          p Sign in
+            
