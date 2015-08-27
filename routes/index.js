@@ -14,7 +14,6 @@ router.get('/', function(req, res) {
     if (upcoming.shows) variables['upcoming'] = upcoming.shows;
     Playlist.getPlaylists({limit: 4}, function(err, body) {
       if (body.playlists) variables['playlists'] = body.playlists;
-      if (req.body.nowPlaying) variables['nowPlaying'] = req.body.nowPlaying;
       res.render('index', variables);
     }); //  end getPlaylists
   }); //  end getUpcoming
