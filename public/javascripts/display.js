@@ -1,10 +1,5 @@
 $(document).ready(function() {
 
-  alignNav();
-  $(window).resize(function() {
-    alignNav();
-  });
-
   //  convert ISO 8601 to "from now"
   $('.dateFromNow').each(function(i) {
     var hours = moment($(this).text()).fromNow();
@@ -29,13 +24,6 @@ $(document).ready(function() {
   });
 });
 
-
-function alignNav() {
-  var height = $( window ).height() - ($('#main-nav').height() + 7);
-  $('#header, #clear').css({"height": height});
-}
-
-
 function timeslotToDate(timeslot) {
   var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   var day = timeslot % 7;
@@ -45,6 +33,8 @@ function timeslotToDate(timeslot) {
     hour = (hour - 12) + 'pm';
   } else if (hour === 0) {
     hour = '12am';
+  } else if (hour == 12) {
+    hour = '12pm';
   } else {
     hour += 'am';
   }

@@ -61,6 +61,27 @@ table {
 	}
 }
 
+label {
+	font-family: $font-header;
+	text-transform: uppercase;
+}
+
+input, textarea {
+	font-family: $font-main;
+	outline: none;
+	border-bottom: 3px solid $black !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.form-control {
+	border: none;
+	border-radius: 0;
+	background-color: $tan;
+}
+
+
 
 
 @import 'header';

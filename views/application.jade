@@ -1,0 +1,121 @@
+extends _layout
+
+block content
+  .container-fluid
+    .row
+      .col-xs-12
+        h1.section-header= title
+        p!= messages('components/flash', locals)
+        if instructions
+          p= instructions
+        else
+          p hlasdh;fdsklh some instructions can go here
+    form(action='/apply' method='post')
+      .row
+        #userInfo.col-xs-12.col-sm-6
+          h2.section-header User Info
+          .form-group
+            label(for='num_users') Number of hosts
+            .radio
+              - var i = 1;
+              while i <= 4
+                .col-xs-3
+                  label
+                    input(type='radio' name='num_users' value=i)
+                    span= i++
+          .userInfo
+            .col-xs-12
+              h4 User 
+                span#userNumber 1
+            .col-xs-6
+              .form-group
+                label(for='first_name') First name
+                input.form-control(name='first_name' type='text')
+            .col-xs-6
+              .form-group
+                label(for='last_name') Last name
+                input.form-control(name='last_name' type='text')
+            .col-xs-6
+              .form-group
+                label(for='phone') Phone number
+                input.form-control(name='phone' type='tel')
+            .col-xs-6
+              .form-group
+                label(for='grad_year') Macalester Class of
+                input.form-control(name='grad_year' type='number')
+            .col-xs-6.col-xs-offset-3
+              .form-group
+                label(for='email') Email
+                input.form-control(name='email' type='email')
+                a(href='verifythatIamAUniqueEmailAddress!') 
+                  .input-group-addon Verify
+                  
+            .col-xs-6
+              .form-group
+                label(for='mac_id') Macalester ID number
+                input.form-control(name='mac_id' type='number')
+            .col-xs-6
+              .form-group
+                label(for='iclass') Macalester iclass number
+                input.form-control(name='iclass' type='number')
+        .col-xs-12.col-sm-6
+          h2.section-header Show Info
+          .col-xs-6
+            .form-group
+              label(for='title') Title
+              input.form-control(name='title' type='text')
+          .col-xs-6
+            .form-group
+              label(for='blurb') Program guide blurb
+              textarea.form-control(name='blurb' rows='5')
+        .col-xs-12
+          h2.section-header Application Info
+          .col-xs-6
+            .form-group
+              label(for='time_pref') Time preference
+              .radio
+                - var i = 1;
+                while i <= 6
+                  .col-xs-2
+                    label
+                      input(type='radio' name='time_pref' value=i)
+                      span= i++
+          .col-xs-6
+            .form-group
+              label(for='description') Description
+              textarea.form-control(name='description' rows='5')
+          .col-xs-12
+            h4 Availability
+            table.table.table-hover
+              thead
+                tr
+                  th Hour
+                  th Sunday
+                  th Monday
+                  th Tuesday
+                  th Wednesday
+                  th Thursday
+                  th Friday
+                  th Saturday    
+              tbody
+                - var i = 0
+                - var hour = 0
+                - var slot = 0
+                while i < 24
+                  tr
+                    - var j = 0
+                    while j <= 7
+                      if j === 0
+                        td.hour= hour++
+                      else
+                        td(data-timeslot= slot)      
+                          .checkbox
+                            label
+                              input(type='checkbox' name='availability' value=slot)
+                              span= slot
+                        - slot++
+                      - j++
+                    - i++            
+      .row
+        .col-xs-12
+          button.btn.btn-default(type='submit') post

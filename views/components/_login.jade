@@ -4,7 +4,6 @@
       if current_user
         - var href = '/staff/' + current_user.id
         p
-          span Signed in as 
           a(href=href)
              span= current_user.email
           span  | 

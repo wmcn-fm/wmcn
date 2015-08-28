@@ -1,0 +1,21 @@
+extends _layout
+
+block content
+  .container-fluid
+    .row
+      .col-xs-12
+        h1.section-header=title
+        p!= messages('components/flash', locals)
+        //- each key in result.new_app
+          //- p= key
+        p Show Title: #{result.new_app.title}
+        p Show Blurb: #{result.new_app.blurb}
+        .users
+          h4 Users
+            - var numUsers = result.new_app.email.length
+            p= numUsers
+            - var count = 1;
+            while count <= numUsers
+              h5 User #{count}
+              p #{result.new_app.first_name}
+              - count++
