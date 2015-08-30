@@ -1,0 +1,71 @@
+extends ../../_layout
+block content
+  .container-fluid
+    .row
+      .col-xs-12
+        h1= title
+        p!= messages('components/flash', locals)
+    table.table.table-hover
+      thead
+        tr
+          th id  
+          th Title
+          th Blurb
+          th DJs
+          th Grad Year
+          th Description
+          th Availability
+          th Time Preference
+          th Submitted
+          th Action
+      tbody
+        each app in apps
+          tr
+            td= app.id
+            td= app.title
+            td= app.blurb
+            if app.first_name.length === 1
+              td #{app.first_name} #{app.last_name}
+            else
+              td
+                - var numUsers = app.first_name.length
+                - var i = 0
+                while i < numUsers
+                  p #{app.first_name[i]} #{app.last_name[i++]}
+            td
+              each entry in app.grad_year
+                p= entry  
+            td= app.description
+            td
+              +slots(app.availability)
+              +availButton('test')
+              
+            td= app.time_pref
+            td.dateFromNow= app.created
+            td
+              - var appId = app.id
+              +approve(appId)
+              
+            
+mixin slot(ts)
+  a(href='selectMe')
+    p.timeslot.toDate= ts
+    
+mixin slots(slots) 
+  each slot in slots
+    +slot(slot)
+    
+mixin availButton(slots)
+  button.btn.btn-default(type='button' data-html=true data-trigger='focus' data-toggle='popover' data-content=slots)
+  
+mixin approve(app_id)
+  .form-group
+    input.form-control(placeholder='Timeslot, e.g. 85')
+    .input-group-addon
+      button Approve!
+      
+  button.btn.btn-danger 
+    span Deny
+    
+
+          

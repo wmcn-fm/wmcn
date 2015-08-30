@@ -22,6 +22,10 @@ $(document).ready(function() {
     var humanReadable = parsed.day + ', ' + parsed.hour;
     $(this).text(humanReadable);
   });
+
+  $(function () {
+    $('[data-toggle="popover"]').popover();
+  });
 });
 
 function timeslotToDate(timeslot) {

@@ -11,4 +11,13 @@ App.post = function(app, cb) {
   });
 }
 
+App.viewAll = function(user, token, cb) {
+  api.get('/applications?token=' + token, null, function(err, result) {
+    if (err) return cb(err);
+    var res = result.text;
+    var json = JSON.parse(res);
+    return cb(null, json);
+  })
+}
+
 module.exports = App;

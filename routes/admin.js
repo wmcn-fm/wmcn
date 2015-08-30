@@ -5,6 +5,7 @@ var mw = require('../lib/middleware');
 var gen_playlist = require('../lib/gen_playlist');
 var Playlist = require('../models/Playlist');
 var Staff = require('../models/Staff');
+var App = require('../models/Application');
 
 admin.route('/')
   .get(mw.staffOnly(1), function(req, res) {
@@ -37,6 +38,20 @@ admin.route('/playlist')
     }); //  Playlist.post
 
   })  //  end .post
+
+admin.route('/applications')
+  .get(function(req, res) {
+    var user = req.session.user;
+    var token = req.session.token;
+    App.viewAll(user, token, function(err, result) {
+      if (err) {
+        req.flash('error', err);
+        return res.redirect('back');
+      }
+      console.log(result);
+      res.render('templates/admin/applications', {title: 'view aps', apps: result.applications});
+    })
+  })
 
 
 

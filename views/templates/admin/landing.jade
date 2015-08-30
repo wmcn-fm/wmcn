@@ -10,4 +10,9 @@ block content
         #level1.col-xs-12.col-sm-6.col-sm-offset-3
           a(href='admin/playlist')
             p Make a playlist
+    if current_user.access >= 2
+      .row
+        #level2.col-xs-12.col-sm-6.col-sm-offset-3
+          a(href='admin/applications')
+            p View pending applications
       
