@@ -40,7 +40,7 @@ admin.route('/playlist')
   })  //  end .post
 
 admin.route('/applications')
-  .get(function(req, res) {
+  .get(mw.staffOnly(2), function(req, res) {
     var user = req.session.user;
     var token = req.session.token;
     App.viewAll(user, token, function(err, result) {
@@ -48,8 +48,20 @@ admin.route('/applications')
         req.flash('error', err);
         return res.redirect('back');
       }
-      console.log(result);
       res.render('templates/admin/applications', {title: 'view aps', apps: result.applications});
+    })
+  })
+
+admin.route('/applications/:id')
+  .post(function(req, res) {
+    var token = req.session.token;
+    var app_id = parseInt(req.params.id);
+    var timeslot = parseInt(req.body.selectedTimeslot);
+    App.approve(app_id, timeslot, token, function(err, result) {
+      console.log('result from router:\n');
+      console.log(err, result);
+      if (err) return res.json(500, {error: err.detail});
+      res.json(200, {result: result});
     })
   })
 

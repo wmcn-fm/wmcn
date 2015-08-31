@@ -20,4 +20,23 @@ App.viewAll = function(user, token, cb) {
   })
 }
 
+App.approve = function(app_id, timeslot, token, cb) {
+  var url = '/applications/' + app_id + '/approve?token=' + token;
+  api.post(url, {timeslot: timeslot}, function(err, result) {
+    if (err) {
+      if (err.response.text) {
+        var json = JSON.parse(err.response.text);
+        return cb(json.error);
+      } else {
+        return cb(err);
+      }
+    }
+    var res = result.text;
+    var json = JSON.parse(res);
+    console.log('\n\nhers the json:\n');
+    console.log(json);
+    return cb(null, json);
+  });
+}
+
 module.exports = App;

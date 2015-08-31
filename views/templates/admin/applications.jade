@@ -4,11 +4,14 @@ block content
     .row
       .col-xs-12
         h1= title
-        p!= messages('components/flash', locals)
+    .row
+      .col-xs-12
+        h4
+          span.numApps #{apps.length} 
+          span  pending applications
     table.table.table-hover
       thead
         tr
-          th id  
           th Title
           th Blurb
           th DJs
@@ -17,11 +20,11 @@ block content
           th Availability
           th Time Preference
           th Submitted
-          th Action
+          if current_user.access >= 3
+            th Action
       tbody
         each app in apps
-          tr
-            td= app.id
+          tr(data-appid= app.id)
             td= app.title
             td= app.blurb
             if app.first_name.length === 1
@@ -36,36 +39,42 @@ block content
               each entry in app.grad_year
                 p= entry  
             td= app.description
-            td
+            td(data-appid = app.id)
               +slots(app.availability)
-              +availButton('test')
               
             td= app.time_pref
             td.dateFromNow= app.created
-            td
-              - var appId = app.id
-              +approve(appId)
+            if current_user.access >= 3
+              td
+                - var appId = app.id
+                +approve(appId)
               
             
 mixin slot(ts)
-  a(href='selectMe')
+  a.pickTimeslot(href='' data-ts= ts)
     p.timeslot.toDate= ts
     
 mixin slots(slots) 
   each slot in slots
     +slot(slot)
     
-mixin availButton(slots)
-  button.btn.btn-default(type='button' data-html=true data-trigger='focus' data-toggle='popover' data-content=slots)
+//- mixin availButton(slots)
+//-   button.btn.btn-default(type='button' data-html=true data-trigger='focus' data-toggle='popover' data-content=slots)
   
 mixin approve(app_id)
-  .form-group
-    input.form-control(placeholder='Timeslot, e.g. 85')
-    .input-group-addon
-      button Approve!
-      
-  button.btn.btn-danger 
-    span Deny
+  - var url = 'applications/' + app_id
+  form.approveApp(action=url method='post' data-appid= app_id)
+    .input-group
+      //- .input-group-addon
+      //-   span Timeslot
+      input.form-control(type='number' placeholder='0' name='selectedTimeslot' data-appId= app_id)
+      .input-group-addon
+        button.approveApp.btn.btn-success(data-appid=app_id type='submit' data-loading-text='Approving...' disabled=true) Approve!
+  form(action=url method='post')
+    button.btn.btn-danger 
+      span Deny
     
+block scripts
+    script(src='/build/js/bundle.min.js') 
 
           

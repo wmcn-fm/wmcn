@@ -5,6 +5,7 @@ var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
+var browserify = require('gulp-browserify')
 
 var paths = {
   dev: {
@@ -17,7 +18,7 @@ var paths = {
     css: 'public/build/css',
     images: 'public/build/images'
   }
-  
+
 }
 
 var handleError = function(err) { console.log(err); if (this.emit) { this.emit('end'); }};
@@ -35,21 +36,31 @@ gulp.task('sass', function () {
       .pipe(minifyCss())
       .pipe(rename({extname: '.min.css'}))
       .pipe(gulp.dest(paths.build.css));
-  }); 
+  });
 });
 
-gulp.task('js', function () {
-  del([paths.build.js], function(err) {
-    if (err) handleError;
-    gulp.src(paths.dev.scripts)
+gulp.task('js', ['browserify'], function () {
+  del([paths.build.js, '!public/build/js/bundle.min.js'], function(err) {
+    if (err) handleError(err);
+    gulp.src([paths.dev.scripts, '!public/javascripts/has_require.js'])
       .pipe(concat('scripts.js'))
       .pipe(uglify())
       .pipe(rename({extname: '.min.js'}))
       .pipe(gulp.dest(paths.build.js));
-
   });
-  
 });
+
+gulp.task('browserify', function() {
+  del('public/build/js/bundle.min.js', function(err) {
+    if (err) handleError(err);
+    gulp.src('public/javascripts/has_require.js')
+      .pipe(browserify())
+      .pipe(uglify() )
+      .pipe(rename('bundle.min.js'))
+      .pipe(gulp.dest(paths.build.js));
+  })
+
+})
 
 gulp.task('watch', function() {
   gulp.watch(paths.dev.scripts, ['js']);
