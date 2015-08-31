@@ -53,7 +53,7 @@ admin.route('/applications')
   })
 
 admin.route('/applications/:id')
-  .post(function(req, res) {
+  .post(mw.staffOnly(3), function(req, res) {
     var token = req.session.token;
     var app_id = parseInt(req.params.id);
     var timeslot = parseInt(req.body.selectedTimeslot);
@@ -64,6 +64,15 @@ admin.route('/applications/:id')
       res.json(200, {result: result});
     })
   })
+  .delete(mw.staffOnly(3), function(req, res) {
+    var token = req.session.token;
+    var app_id = parseInt(req.params.id);
+    App.delete(app_id, token, function(err, result) {
+      if (err) return res.json(500, {error: err});
+      res.json(200, result);
+    })
+  })
+
 
 
 

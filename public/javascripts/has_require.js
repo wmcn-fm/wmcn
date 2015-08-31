@@ -1,5 +1,6 @@
 var superagent = require('superagent');
 $(document).ready(function() {
+  //  while viewing applications, select timeslot fills input value
   $('a.pickTimeslot').click(function(e) {
     e.preventDefault();
     var ts = $(this).data('ts');
@@ -8,6 +9,7 @@ $(document).ready(function() {
     thisInput.val(ts).change();
   });
 
+  //  validate app approval
   $('form.approveApp').submit(function(e) {
     e.preventDefault();
     var app_id = $(this).data('appid');
@@ -34,6 +36,31 @@ $(document).ready(function() {
         });
       }
     }); //  end superagent.post
+  });
+
+  //  validate app deletion
+  $('form.deleteApp').submit(function(e) {
+    e.preventDefault();
+    var delButton = $(this).find('button.deleteApp');
+    delButton.button('loading');
+    var app_id = delButton.data('appid');
+    superagent.del('/admin/applications/' + app_id).end(function(error, res) {
+      console.log(error, res);
+      var resJson = JSON.parse(res.text);
+      if (resJson['error']) {
+        delButton.button('reset').text('Error');
+        $( makeAlert(resJson['error'].response.text, 'danger') ).insertBefore($('#main'));
+      } else {
+        delButton.button('reset').text('Deleted');
+        $( makeAlert(resJson['result'], 'success')).insertBefore($('#main'));
+        $('tr[data-appid="'+app_id+'"]').fadeOut('normal',function() {
+          $(this).remove();
+          var numAppsSelector = $('span.numApps');
+          var numApps = parseInt(numAppsSelector.text() );
+          numAppsSelector.text(numApps - 1);
+        });
+      }
+    });
   })
 })
 

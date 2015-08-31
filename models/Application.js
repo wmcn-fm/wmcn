@@ -39,4 +39,14 @@ App.approve = function(app_id, timeslot, token, cb) {
   });
 }
 
+App.delete = function(app_id, token, cb) {
+  var url = '/applications/' + app_id + '?token=' + token;
+  api.del(url, null, function(err, result) {
+    if (err) return cb(err);
+    var res = result.text;
+    var json = JSON.parse(res);
+    return cb(null, json);
+  })
+}
+
 module.exports = App;
