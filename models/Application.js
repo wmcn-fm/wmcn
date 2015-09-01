@@ -24,7 +24,7 @@ App.approve = function(app_id, timeslot, token, cb) {
   var url = '/applications/' + app_id + '/approve?token=' + token;
   api.post(url, {timeslot: timeslot}, function(err, result) {
     if (err) {
-      if (err.response.text) {
+      if (err.response.hasOwnProperty('text')) {
         var json = JSON.parse(err.response.text);
         return cb(json.error);
       } else {

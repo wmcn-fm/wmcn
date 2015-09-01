@@ -20,14 +20,14 @@ $(document).ready(function() {
       var resJson = JSON.parse(res.text);
       if (resJson['error']) {
         submitButton.button('reset').text('Error').prop('disabled', true);
-        $( makeAlert(resJson['error'], 'danger') ).insertBefore($('#main'))
+        $( makeAlert(resJson['error'], 'danger') ).insertBefore($('#login'))
       } else {
         submitButton.button('reset').text('Scheduled at slot' + resJson.result.result.timeslot).removeClass('btn-danger').addClass('btn-success');
         var parsed = timeslotToDate(timeslot);
         var humanReadable = parsed.day + ', ' + parsed.hour;
         var message = resJson.result.result.show.title + ' successfully scheduled for \
                       <span class="timeslot toDate">' + humanReadable + '</span>';
-        $(makeAlert(message, 'success')).insertBefore($('#main'));
+        $(makeAlert(message, 'success')).insertBefore($('#login'));
         $('tr[data-appid="'+app_id+'"]').fadeOut('normal',function() {
           $(this).remove();
           var numAppsSelector = $('span.numApps');
@@ -48,10 +48,10 @@ $(document).ready(function() {
       var resJson = JSON.parse(res.text);
       if (resJson['error']) {
         delButton.button('reset').text('Error');
-        $( makeAlert(resJson['error'].response.text, 'danger') ).insertBefore($('#main'));
+        $( makeAlert(resJson['error'].response.text, 'danger') ).insertBefore($('#login'));
       } else {
         delButton.button('reset').text('Deleted');
-        $( makeAlert(resJson['result'], 'success')).insertBefore($('#main'));
+        $( makeAlert(resJson['result'], 'success')).insertBefore($('#login'));
         $('tr[data-appid="'+app_id+'"]').fadeOut('normal',function() {
           $(this).remove();
           var numAppsSelector = $('span.numApps');
