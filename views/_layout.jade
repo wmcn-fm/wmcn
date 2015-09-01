@@ -11,6 +11,8 @@ html
     //- include components/_header
     include components/_navbar
     #main
+      if messages
+        include components/_flash
       include components/_login
       block content
     include components/_player

@@ -22,13 +22,13 @@ admin.route('/playlist')
   })
   .post(mw.staffOnly(1), function(req, res) {
     if (!req.body.show_id || !req.body.artist || !req.body.song || req.body.artist[0] === '' || req.body.song[0] === ''){
-      req.flash('error', 'Must submit at least one artist and song');
+      req.flash('danger', 'Must submit at least one artist and song');
       return res.status(401).redirect('/admin/playlist');
     }
     var content = gen_playlist(req.body.artist, req.body.song, 'p');
     Playlist.post(req.body.show_id, content, req.session.user, req.session.token, function(err, result) {
       if (err) {
-        req.flash('error', err.status + ': ' + err.text);
+        req.flash('danger', err.status + ': ' + err.text);
         return res.status(400).redirect('/admin/playlist');
       } else {
         var new_playlist = result.body.new_playlist;
@@ -45,7 +45,7 @@ admin.route('/applications')
     var token = req.session.token;
     App.viewAll(user, token, function(err, result) {
       if (err) {
-        req.flash('error', err);
+        req.flash('danger', err);
         return res.redirect('back');
       }
       res.render('templates/admin/applications', {title: 'view aps', apps: result.applications});

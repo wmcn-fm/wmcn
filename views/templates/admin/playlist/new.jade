@@ -3,8 +3,6 @@ block content
   .container-fluid
     .row
       .col-xs-12
-        if messages
-          p!= messages()
         h1= title
     form(action='/admin/playlist' method='post')
       h3 Select a show:

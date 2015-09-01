@@ -45,7 +45,6 @@ $(document).ready(function() {
     delButton.button('loading');
     var app_id = delButton.data('appid');
     superagent.del('/admin/applications/' + app_id).end(function(error, res) {
-      console.log(error, res);
       var resJson = JSON.parse(res.text);
       if (resJson['error']) {
         delButton.button('reset').text('Error');

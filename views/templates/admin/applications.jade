@@ -70,9 +70,8 @@ mixin approve(app_id)
       input.form-control(type='number' placeholder='0' name='selectedTimeslot' data-appId= app_id)
       .input-group-addon
         button.approveApp.btn.btn-success(data-appid=app_id type='submit' data-loading-text='Approving...' disabled=true) Approve!
-  form(action=url method='post')
-    button.btn.btn-danger 
-      span Deny
+  form.deleteApp(action=url method='post')
+    button.deleteApp.btn.btn-danger(type='submit' data-appid= app_id data-loading-text='Deleting...') Deny
     
 block scripts
     script(src='/build/js/bundle.min.js') 
