@@ -7,8 +7,6 @@ block content
         h1.section-header= title
         if instructions
           p= instructions
-        else
-          p hlasdh;fdsklh some instructions can go here
     form(action='/apply' method='post')
       .row
         #userInfo.col-xs-12.col-sm-6
@@ -46,8 +44,8 @@ block content
               .form-group
                 label(for='email') Email
                 input.form-control(name='email' type='email')
-                a(href='verifythatIamAUniqueEmailAddress!') 
-                  .input-group-addon Verify
+                //- a(href='verifythatIamAUniqueEmailAddress!') 
+                //-   .input-group-addon Verify
                   
             .col-xs-6
               .form-group

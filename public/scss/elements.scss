@@ -12,9 +12,14 @@ h1, h2, h3, h4, h5, h6 {
 	text-align:center;
 }
 
+* {
+	font-family: $font-main;
+}
+
 p {
 	font-family: $font-main;
 	color: $black;
+	text-align: center;
 }
 
 a {
@@ -22,7 +27,9 @@ a {
 	color: $black;
 }
 a:hover {
-	@include invert($red);
+	border-bottom: 1px;
+	color: $black;
+	background-color: inherit !important;
 }
 
 section {
@@ -38,17 +45,22 @@ article {
 }
 
 table {
+	margin-left: auto;
+	margin-right: auto;
 	@extend section;
 	th {
 		text-transform: uppercase;
 		font-family: $font-header;
 		text-align: center;
+		@include invert($black);
 	}
 
 	td {
 		text-align: center;
+
 		.title {
 			text-transform: uppercase;
+			word-wrap: break-word;
 		}
 		.automator {
 			text-transform: lowercase;
@@ -58,6 +70,14 @@ table {
 
 	td.hour {
 		font-family: $font-header;
+		width: 20px;
+		@include invert($black);
+	}
+}
+
+tr.scheduleRow {
+	td:not(.hour) {
+		max-width: 50px;
 	}
 }
 
@@ -79,6 +99,11 @@ input, textarea {
 	border: none;
 	border-radius: 0;
 	background-color: $tan;
+}
+
+button {
+	font-family: $font-header;
+	text-transform: uppercase;
 }
 
 

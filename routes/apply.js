@@ -39,11 +39,18 @@ apply.route('/')
 
     App.post(application, function(err, result) {
       if (err) {
-        req.flash('error', err);
+        var json = JSON.parse(err);
+        if (json.hasOwnProperty('error')) {
+          req.flash('danger', json.error);
+        } else {
+          req.flash('danger', err);
+        }
         return res.redirect('back');
       } else {
-        req.flash('success', "We've received your application. Below you will find\
-                  the information you submitted. If you have any issues with it please email ___");
+        req.flash('success', "We've received your application. If you haven't heard \
+                  from us in a week or two, contact the Program Director listed on the \
+                  Staff page. If you have any problems with the application contact the\
+                  Web Director");
         res.redirect('/');
       }
     });

@@ -16,6 +16,7 @@ block content
             h2 Staff
             #tier.col-xs-12.col-sm-6
               if staff.management
+                br
                 h4 Management
                 each user in staff.management
                   - var userHref = '/staff/' + user.id
@@ -23,6 +24,7 @@ block content
                     p #{user.first_name} #{user.last_name}
                 
               if staff.web
+                br
                 h4 Web
                 each user in staff.web
                   - var userHref = '/staff/' + user.id

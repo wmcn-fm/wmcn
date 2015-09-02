@@ -2,6 +2,7 @@ extends _layout
 
 block content
   .container-fluid
+    h2.section-header= title
     table.table.table-hover
       thead
         tr
@@ -18,7 +19,7 @@ block content
         - var hour = 0
         - var slot = 0
         while i < 24
-          tr
+          tr.scheduleRow
             - var j = 0
             while j <= 7
               if j === 0

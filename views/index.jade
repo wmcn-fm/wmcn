@@ -3,7 +3,7 @@ extends _layout
 block content
   .container-fluid
     #recent_playlists.col-xs-12.col-sm-6
-      h2.section-header recent playlists:
+      h2.section-header Recent Playlists:
       if playlists
         each p in playlists
           .playlist
@@ -17,7 +17,7 @@ block content
           - i++
       
     .col-xs-12.col-sm-6
-      h2.section-header upcoming shows:
+      h2.section-header Upcoming Shows:
       if upcoming
         each s in upcoming
           .upcomingShow

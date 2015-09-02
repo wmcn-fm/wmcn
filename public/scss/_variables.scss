@@ -31,7 +31,8 @@ $font-header: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyG
 $font-header-size: 1600%;
 $font-header-secondary-size: 500%;
 
-$font-main: 'Slabo 13px', serif;
+$font-main: $font-header;
+// $font-main: 'Slabo 13px', serif;
 
 /**
   *
@@ -80,6 +81,3 @@ $default-margin: 1%;
 }
 
 $transition-time-default: 400ms;
-
-
-

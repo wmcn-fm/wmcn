@@ -1,5 +1,6 @@
 @import 'variables';
 
+//	style
 .black {
 	@include color($black);
 }
@@ -33,12 +34,15 @@
 }
 
 .section-header {
-  @include invert($red);
-  @include elem_spacing();
+  @include invert($black);
+	@include div_spacing();
+	border: $black solid $border-width;
+	font-family: $font-header;
 }
 .section-header:hover {
-  @include color($red);
 }
+
+//	layout etc
 
 #main {
 	padding-top: 70px;
@@ -47,4 +51,7 @@
 
 #login {
 	text-align: right;
+	p {
+		text-align: right;
+	}
 }

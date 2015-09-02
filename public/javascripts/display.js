@@ -30,9 +30,12 @@ $(document).ready(function() {
       var date = new Date();
       var timeElapsed = '';
       var hoursElapsed = date.getHours() - start.getHours();
+      if (hoursElapsed && hoursElapsed < 10) hoursElapsed = "0" + String(hoursElapsed);
       if (hoursElapsed) timeElapsed += hoursElapsed + ':';
       var minsElapsed = date.getMinutes() - start.getMinutes();
+      if (minsElapsed < 10) minsElapsed = "0" + String(minsElapsed);
       var secondsElapsed = date.getSeconds() - start.getSeconds();
+      if (secondsElapsed < 10) secondsElapsed = "0" + String(secondsElapsed);
       timeElapsed += minsElapsed + ':' + secondsElapsed;
       $this.text(timeElapsed);
     }, 1000);
@@ -46,11 +49,13 @@ $(document).ready(function() {
       var date = new Date();
       var timeUntil = '';
       var hoursUntil = start.getHours() - date.getHours() - 1;
+      if (hoursUntil && hoursUntil < 10) hoursUntil = "0" + String(hoursUntil);
       if (hoursUntil) timeUntil += hoursUntil + ':';
       var minsUntil = 60 - date.getMinutes();
+      if (minsUntil < 10) minsUntil = "0" + String(minsUntil);
       var secondsTil = 60 - date.getSeconds();
+      if (secondsTil < 10) secondsTil = "0" + String(secondsTil);
       timeUntil += minsUntil + ':' + secondsTil;
-      console.log(date, start);
       $this.text(timeUntil);
     }, 1000);
   })
