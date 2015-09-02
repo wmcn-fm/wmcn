@@ -10,8 +10,7 @@ staff.get('/', function(req, res) {
   var staff;
 
   Staff.getAll({sortByAccess: true}, token, function(err, staff) {
-    if (err) return handleError(err, res);
-
+    if (!staff || err) return res.status(404).render('error', {message: 'Not Found', error: {status: 404}});
     res.render('staff', { title: 'Staff list', staff: staff});
   });
 });

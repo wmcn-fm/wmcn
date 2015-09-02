@@ -4,11 +4,44 @@ block content
   .container-fluid
     .row
       #staff
-        each tier, index in staff
-          #tier.col-xs-12.col-sm-6.col-md-3
-            h2= index
-            each user in tier
-              - var userHref = '/staff/' + user.id
-              a(href=userHref)
-                p #{user.first_name} #{user.last_name}
+        if staff
+          if staff.dj
+            #tier.col-xs-12.col-sm-6
+              h2 DJs
+              each user in staff.dj
+                - var userHref = '/staff/' + user.id
+                a(href=userHref)
+                  p #{user.first_name} #{user.last_name}
+          if staff.staff
+            h2 Staff
+            #tier.col-xs-12.col-sm-6
+              if staff.management
+                h4 Management
+                each user in staff.management
+                  - var userHref = '/staff/' + user.id
+                  a(href=userHref)
+                    p #{user.first_name} #{user.last_name}
+                
+              if staff.web
+                h4 Web
+                each user in staff.web
+                  - var userHref = '/staff/' + user.id
+                  a(href=userHref)
+                    p #{user.first_name} #{user.last_name}
+            
+              h4 Other Staff
+              each user in staff.staff
+                - var userHref = '/staff/' + user.id
+                a(href=userHref)
+                  p #{user.first_name} #{user.last_name}
+                
+        
+          //- 
+          //- each tier, index in staff
+          //-   #tier.col-xs-12.col-sm-6.col-md-3
+          //-     h2= index
+          //-     each user in tier
+          //-       - var userHref = '/staff/' + user.id
+          //-       a(href=userHref)
+          //-         p #{user.first_name} #{user.last_name}
         
