@@ -9,7 +9,8 @@ block content
           .playlist
           - var href = '/archive/playlists/' + p.playlist.id;
             a(href=href)
-              h3 #{p.show.title}, # #{p.playlist.id}
+              h3 #{p.show.title}, ##{p.playlist.id}
+              p.dateFromNow= p.playlist.created
       else
         - var i = 0;
         while i < 4

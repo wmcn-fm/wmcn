@@ -46,6 +46,13 @@ $font-main: $font-header;
 }
 $border-width: 3px;
 
+@mixin removeBootstrapDefaults() {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+
 /**
   *
   * spacing

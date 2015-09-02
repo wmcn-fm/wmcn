@@ -90,9 +90,7 @@ input, textarea {
 	font-family: $font-main;
 	outline: none;
 	border-bottom: 3px solid $black !important;
-	-webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
-	box-shadow: none !important;
+	@include removeBootstrapDefaults();
 }
 
 .form-control {
@@ -101,9 +99,23 @@ input, textarea {
 	background-color: $tan;
 }
 
-button {
+button:not(.close) {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 	font-family: $font-header;
 	text-transform: uppercase;
+	@include removeBootstrapDefaults();
+	border: $border-width solid $black !important;
+	border-radius: 0 !important;
+}
+
+button.btn-default {
+	background-color: $tan;
+}
+
+button.btn-default:hover {
+	@include invert($black);
 }
 
 
