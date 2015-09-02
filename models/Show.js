@@ -22,7 +22,7 @@ Show.getShow = function(id, options, cb) {
     if (res.body['show']) payload['show'] = res.body['show'];
 
     Playlist.getPlaylists({show_id: id, limit: 4}, function(e, pl) {
-      if (!pl.error && pl.length > 0) payload['playlists'] = pl;
+      if (pl && !pl.error && pl.length > 0) payload['playlists'] = pl;
 
       api.get('/shows/' + id + '/hosts', null, function(err, res) {
         if (res.body['hosts']) payload['hosts'] = res.body['hosts'];

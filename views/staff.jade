@@ -15,7 +15,8 @@ block content
           if staff.staff
             h2 Staff
             #tier.col-xs-12.col-sm-6
-              if staff.management
+            
+              if staff.management && staff.management.length
                 br
                 h4 Management
                 each user in staff.management
@@ -23,7 +24,7 @@ block content
                   a(href=userHref)
                     p #{user.first_name} #{user.last_name}
                 
-              if staff.web
+              if staff.web && staff.web.length
                 br
                 h4 Web
                 each user in staff.web
@@ -31,19 +32,9 @@ block content
                   a(href=userHref)
                     p #{user.first_name} #{user.last_name}
             
-              h4 Other Staff
-              each user in staff.staff
-                - var userHref = '/staff/' + user.id
-                a(href=userHref)
-                  p #{user.first_name} #{user.last_name}
-                
-        
-          //- 
-          //- each tier, index in staff
-          //-   #tier.col-xs-12.col-sm-6.col-md-3
-          //-     h2= index
-          //-     each user in tier
-          //-       - var userHref = '/staff/' + user.id
-          //-       a(href=userHref)
-          //-         p #{user.first_name} #{user.last_name}
-        
+              if staff.staff.length
+                h4 Other Staff
+                each user in staff.staff
+                  - var userHref = '/staff/' + user.id
+                  a(href=userHref)
+                    p #{user.first_name} #{user.last_name}
