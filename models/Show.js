@@ -51,6 +51,7 @@ Show.getCurrent = function(options, cb) {
   api.get('/schedule/now', null, function(err, res) {
     if (err) return cb(err);
     if (res.body.show) payload['show'] = res.body.show;
+    if (res.body.timeslot) payload['timeslot'] = res.body.timeslot;
 
     if (options.hasOwnProperty('hosts') && res.body.show) {
       return Show.getHosts(payload, res.body.show.id, cb);
