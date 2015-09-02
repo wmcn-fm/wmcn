@@ -36,6 +36,23 @@ $(document).ready(function() {
       timeElapsed += minsElapsed + ':' + secondsElapsed;
       $this.text(timeElapsed);
     }, 1000);
+  });
+
+  $('.timeslot.timeUntil').each(function(i) {
+    var timeslot = $(this).text();
+    var start = sinceTimeslot(timeslot);
+    var $this = $(this);
+    setInterval(function () {
+      var date = new Date();
+      var timeUntil = '';
+      var hoursUntil = start.getHours() - date.getHours() - 1;
+      if (hoursUntil) timeUntil += hoursUntil + ':';
+      var minsUntil = 60 - date.getMinutes();
+      var secondsTil = 60 - date.getSeconds();
+      timeUntil += minsUntil + ':' + secondsTil;
+      console.log(date, start);
+      $this.text(timeUntil);
+    }, 1000);
   })
 
   $(function () {
