@@ -8,8 +8,8 @@ Show.getSchedule = function(cb) {
   api.get('/schedule/', null, function(err, res) {
     if (err) return cb(err);
 
-    if (res.body.schedule) {
-      cb(null, res);
+    if (res.body.hasOwnProperty('schedule')) {
+      cb(null, res.body.schedule);
     }
   });
 }

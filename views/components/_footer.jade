@@ -13,30 +13,34 @@ nav#footer.navbar.navbar-fixed-bottom
       ul.nav.navbar-nav
         li.nowPlaying
           h6 Now Playing:
-          if nowPlaying.show.id
+          if nowPlaying
             - var showRef = '/shows/' + nowPlaying.show.id
             a(href=showRef)
               span=nowPlaying.show.title
           else
             span Automator
         li.currentShowTime
-          if nowPlaying.timeslot
+          if nowPlaying
             span.timeslot.timeSince= nowPlaying.timeslot
-            span +
+          else
+            span -- : --
+          span +
           
-        if next[0]
-          li.nextUpTime
-            span -
+        li.nextUpTime
+          span -
+          if next
             span.timeslot.timeUntil= next[0].timeslot
-          li.nextUp
-            h6 Next Up:
+          else 
+            span -- : --
+        li.nextUp
+          h6 Next Up:
+          if next
             - var nextHref = '/shows/' + next[0].show.id
             a(href=nextHref)
               span= next[0].show.title
-            
-        else
-          li
-            p ---
+          else
+            span Automator
+
             
             
           

@@ -4,18 +4,33 @@ block content
   .container-fluid
     #recent_playlists.col-xs-12.col-sm-6
       h2.section-header recent playlists:
-      each p in playlists
-        .playlist
-        - var href = '/archive/playlists/' + p.playlist.id;
-          a(href=href)
-            h3 #{p.show.title}, # #{p.playlist.id}
+      if playlists
+        each p in playlists
+          .playlist
+          - var href = '/archive/playlists/' + p.playlist.id;
+            a(href=href)
+              h3 #{p.show.title}, # #{p.playlist.id}
+      else
+        - var i = 0;
+        while i < 4
+          h3 -- --
+          - i++
       
     .col-xs-12.col-sm-6
       h2.section-header upcoming shows:
-      each s in upcoming
-        .upcomingShow
-          - var href = '/shows/' + s.show.id
-          a(href=href)
-            h3= s.show.title
-            p at 
-              span.timeslot.toDate= s.timeslot
+      if upcoming
+        each s in upcoming
+          .upcomingShow
+            - var href = '/shows/' + s.show.id
+            a(href=href)
+              h3= s.show.title
+              p at 
+                span.timeslot.toDate= s.timeslot
+      else
+        - var j = 0;
+        while j < 4
+          .upcomingShow
+            h3 -- --
+            p at  
+              span -- -- 
+              - j++

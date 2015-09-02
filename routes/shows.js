@@ -6,25 +6,19 @@ var handleError = require('../lib/handleError');
 
 shows.get('/', function(req, res) {
   var schedule;
-  var nowPlaying;
   Show.getSchedule(function(err, result) {
-    if (err) return handleError(err, res);
-    schedule = result.body.schedule;
-    if (req.body.nowPlaying) nowPlaying = req.body.nowPlaying;
-
-    res.render('shows', { title: 'Show schedule', schedule: schedule, nowPlaying: nowPlaying });
+    res.render('shows', { title: 'Show schedule', schedule: result});
 
   });
 });
 
 shows.get('/:id', function(req, res) {
-  var nowPlaying;
   Show.getShow(req.params.id, {}, function(err, result) {
-    if (err) return handleError(err, res);
-    var showTitle = result.show.title;
-    if (req.body.nowPlaying) nowPlaying = req.body.nowPlaying;
-
-    res.render('templates/show', {title: showTitle, vars: result, nowPlaying: nowPlaying});
+    console.log(err, result);
+    if (!result) {
+      res.status(404).render('error', {message: 'Not Found', error: {status: 404}});
+    }
+    res.render('templates/show', result);
   }); //  getShow
 });
 

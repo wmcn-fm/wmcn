@@ -24,7 +24,7 @@ block content
               if j === 0
                 td.hour= hour++
               else
-                if schedule[slot] && schedule[slot].show.title
+                if schedule && schedule[slot] && schedule[slot].show.title
                   td(data-timeslot=slot data-showId=schedule[slot].show.id)
                     - var href = '/shows/' + schedule[slot].show.id
                     a(href=href)
