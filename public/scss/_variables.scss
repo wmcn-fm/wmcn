@@ -63,8 +63,10 @@ $default-padding: 1%;
 $default-margin: 1%;
 
 @mixin div_spacing() {
-  padding: $default-padding;
-  margin: $default-margin;
+  padding-top: $default-padding;
+  padding-bottom: $default-padding;
+  margin-top: $default-margin;
+  margin-bottom: $default-margin;
 }
 
 @mixin elem_spacing() {

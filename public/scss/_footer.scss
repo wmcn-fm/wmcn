@@ -1,0 +1,37 @@
+@import 'variables';
+
+
+#footer {
+  * {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .action, .currentShow, .ticker, .nextUp {
+    height: 100%;
+    padding-top: 12px;
+  }
+}
+
+.action.left {
+  text-align: left;
+}
+.action.right {
+  text-align: right;
+}
+.currentShow *, .currentShowTime * {
+  text-align: left !important;
+}
+
+.nextUp *, .nextUpTime * {
+  text-align: right !important;
+}
+
+.ticker {
+  font-size: 150%;
+}
+
+.icon {
+  height: 50px;
+  weight: 50px;
+}

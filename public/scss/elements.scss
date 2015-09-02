@@ -31,6 +31,11 @@ a:hover {
 	color: $black;
 	background-color: inherit !important;
 }
+a:focus {
+	border-bottom: 1px;
+	color: $black;
+	background-color: inherit !important;
+}
 
 section {
 	z-index: 99;
@@ -118,9 +123,14 @@ button.btn-default:hover {
 	@include invert($black);
 }
 
+span {
+	word-wrap: break-word;
+}
+
 
 
 
 @import 'header';
 @import 'navbar';
 @import 'playlist';
+@import 'footer';
