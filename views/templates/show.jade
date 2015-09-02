@@ -1,43 +1,42 @@
 extends ../_layout
 block content
   .container-fluid
-    #show.col-xs-12.col-sm-8.col-sm-offset-2
-      .row
-        .col-xs-12.col-sm-6.col-sm-offset-3
-           - var showHref = '/shows/' + show.id
-           a(href=showHref)
-            h1= show.title
-      .row
-        .col-xs-12.col-sm-6.col-sm-offset-3
-          h4 First aired 
-            span.dateFromNow= show.created
-      .row
-        .col-xs-12.col-sm-6.col-sm-offset-3
-          p= show.blurb
-      if hosts
-        .row
-          .col-xs-12.col-sm-8.col-sm-offset-2
-            p with 
-              each host, index in hosts
-                - var userHref = '/staff/' + host.id
-                if index === hosts.length - 1
-                  span and 
-                a(href=userHref)
-                  span #{host.first_name} #{host.last_name}
-                  if index !== hosts.length - 1 
-                    if hosts.length == 2
-                      span  
-                    else
-                      span , 
-      if playlists
-        #related.col-xs-12.col-sm-8.col-sm-offset-2
-          .row
-            h4 Recent Playlists
-              each pl in playlists
-                - var plHref = '/archive/playlists/' + pl.id
-                a(href=plHref)
-                  .playlist
-                    h5 ##{pl.id}
-                    p.dateFromNow= pl.created
+    .row
+      .left-pane.col-xs-12.col-sm-6
+        //  show title
+        - var showHref = '/shows/' + show.id
+        a(href=showHref)
+         h1.section-header= show.title
+   .row
+     .left-pane.col-xs-12.col-sm-6
+        //  first aired
+        h4 First aired 
+          span.dateFromNow= show.created
+        //  blurb
+        p= show.blurb
+        if hosts
+          p with 
+            each host, index in hosts
+              - var userHref = '/staff/' + host.id
+              if index === hosts.length - 1
+                span and 
+              a(href=userHref)
+                span #{host.first_name} #{host.last_name}
+                if index !== hosts.length - 1 
+                  if hosts.length == 2
+                    span  
+                  else
+                    span , 
+      #related.right-pane.col-xs-12.col-sm-6
+        if playlists
+          h4 Recent Playlists
+          each pl in playlists
+            .row
+              .col-md-10.col-lg-6
+                .relatedContent
+                  - var plHref = '/archive/playlists/' + pl.id
+                  a(href=plHref)
+                      h4 ##{pl.id}
+                      p.dateFromNow= pl.created
 
           
