@@ -12,7 +12,8 @@ login.route('/')
 
   .post(function(req, res) {
     if (!(req.body.user && req.body.password)) {
-      return handleError(new Error('Missing login parameters'), res);
+      req.flash('danger', 'Must submit an email and password');
+      return res.redirect('back');
     } else {
       var user = req.body.user;
       var rawPw = req.body.password;
@@ -25,9 +26,8 @@ login.route('/')
 
         bcrypt.compare(rawPw, storedHash, function(err, match) {
           if (!match) {
-            req.flash('error', 'Incorrect password');
-            console.log(req.flash('error'));
-            return handleError(new Error('Incorrect password'), res);
+            req.flash('danger', 'Incorrect password');
+            return res.redirect('back');
           }
           Auth.getToken(userDoc, function(err, resp) {
             if (err) return handleError(err, res);

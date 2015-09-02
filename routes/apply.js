@@ -44,7 +44,7 @@ apply.route('/')
       } else {
         req.flash('success', "We've received your application. Below you will find\
                   the information you submitted. If you have any issues with it please email ___");
-        res.render('app_success', {result: result, title: 'Thanks for the application!'});
+        res.redirect('/');
       }
     });
   });
