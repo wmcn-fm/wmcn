@@ -67,7 +67,7 @@ mixin approve(app_id)
     .input-group
       //- .input-group-addon
       //-   span Timeslot
-      input.form-control(type='number' placeholder='0' name='selectedTimeslot' data-appId= app_id)
+      input.form-control(placeholder='0' name='selectedTimeslot' data-appId= app_id)
       .input-group-addon
         button.approveApp.btn.btn-success(data-appid=app_id type='submit' data-loading-text='Approving...' disabled=true) Approve!
   form.deleteApp(action=url method='post')

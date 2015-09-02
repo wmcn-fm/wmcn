@@ -19,8 +19,7 @@ $(document).ready(function() {
   $('.timeslot.toDate').each(function(i) {
     var timeslot = $(this).text();
     var parsed = timeslotToDate(timeslot);
-    var humanReadable = parsed.day + ', ' + parsed.hour;
-    $(this).text(humanReadable);
+    $(this).text(parsed);
   });
 
   $(function () {
@@ -42,6 +41,5 @@ function timeslotToDate(timeslot) {
   } else {
     hour += 'am';
   }
-
-  return {day: days[day], hour: hour};
+  return days[day] + ', ' + hour;
 }

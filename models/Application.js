@@ -13,7 +13,14 @@ App.post = function(app, cb) {
 
 App.viewAll = function(user, token, cb) {
   api.get('/applications?token=' + token, null, function(err, result) {
-    if (err) return cb(err);
+    if (err) {
+      if (err.response.hasOwnProperty('text')) {
+        var json = JSON.parse(err.response.text);
+        return cb(json.error);
+      } else {
+        return cb(err);
+      }
+    }
     var res = result.text;
     var json = JSON.parse(res);
     return cb(null, json);
@@ -33,8 +40,6 @@ App.approve = function(app_id, timeslot, token, cb) {
     }
     var res = result.text;
     var json = JSON.parse(res);
-    console.log('\n\nhers the json:\n');
-    console.log(json);
     return cb(null, json);
   });
 }

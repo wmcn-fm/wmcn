@@ -6,7 +6,7 @@ $(document).ready(function() {
     var ts = $(this).data('ts');
     var app_id = $(this).parent().data('appid');
     var thisInput = $('input[data-appid="'+app_id+'"]');
-    thisInput.val(ts).change();
+    thisInput.val(thisInput.val() + ','+ ts + ',').change();
   });
 
   //  validate app approval
@@ -15,25 +15,46 @@ $(document).ready(function() {
     var app_id = $(this).data('appid');
     var submitButton = $(this).find('button.approveApp[data-appid="'+app_id+'"]');
     submitButton.button('loading');
-    var timeslot = parseInt( $(this).find('input[name="selectedTimeslot"][data-appId="'+app_id+'"]').val() );
+    var timeslot = $(this).find('input[name="selectedTimeslot"][data-appId="'+app_id+'"]').val();
     superagent.post('/admin/applications/' + app_id).send({selectedTimeslot: timeslot}).end(function(error, res) {
-      var resJson = JSON.parse(res.text);
-      if (resJson['error']) {
+      if (error) {
+        console.log(error);
         submitButton.button('reset').text('Error').prop('disabled', true);
-        $( makeAlert(resJson['error'], 'danger') ).insertBefore($('#login'))
+        error = JSON.stringify(error);
+        $( makeAlert(error, 'danger') ).insertBefore($('#login'))
       } else {
-        submitButton.button('reset').text('Scheduled at slot' + resJson.result.result.timeslot).removeClass('btn-danger').addClass('btn-success');
-        var parsed = timeslotToDate(timeslot);
-        var humanReadable = parsed.day + ', ' + parsed.hour;
-        var message = resJson.result.result.show.title + ' successfully scheduled for \
-                      <span class="timeslot toDate">' + humanReadable + '</span>';
-        $(makeAlert(message, 'success')).insertBefore($('#login'));
-        $('tr[data-appid="'+app_id+'"]').fadeOut('normal',function() {
-          $(this).remove();
-          var numAppsSelector = $('span.numApps');
-          var numApps = parseInt(numAppsSelector.text() );
-          numAppsSelector.text(numApps - 1);
-        });
+        var resJson = JSON.parse(res.text);
+        if (resJson['error']) {
+          submitButton.button('reset').text('Error').prop('disabled', true);
+          $( makeAlert(resJson['error'], 'danger') ).insertBefore($('#login'))
+        } else {
+          var parsed = timeslotToDate(timeslot);
+          var humanReadable = [];
+
+          var messages = [];
+          for (var s in resJson.result.result.timeslot) {
+            var row = resJson.result.result.timeslot[s];
+            console.log(row);
+            if (row.hasOwnProperty('error')) {
+              console.log('errored row');
+              var message = resJson.result.result.show.title + ' not scheduled for '
+                            + timeslotToDate(row.error.failing_slot) +
+                            ': ' + row.error.detail;
+              $(makeAlert(message, 'danger')).insertBefore($('#login'));
+            } else {
+              var message = resJson.result.result.show.title + ' successfully scheduled for '
+                            + timeslotToDate(row.timeslot);
+              $(makeAlert(message, 'success')).insertBefore($('#login'));
+            }
+          }
+
+          $('tr[data-appid="'+app_id+'"]').fadeOut('slow',function() {
+            $(this).remove();
+            var numAppsSelector = $('span.numApps');
+            var numApps = parseInt(numAppsSelector.text() );
+            numAppsSelector.text(numApps - 1);
+          });
+        }
       }
     }); //  end superagent.post
   });

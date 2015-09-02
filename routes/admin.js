@@ -52,14 +52,39 @@ admin.route('/applications')
     })
   })
 
+admin.route('/applications/clear')
+  .get(mw.staffOnly(3), function(req, res) {
+    var token = req.session.token;
+    App.deleteAll(token, function(err, result) {
+      console.log(err, result);
+      if (err) {
+        req.flash('danger', err);
+        return res.redirect('back');
+      } else {
+        req.flash('success', result);
+        res.redirect('/admin/applications');
+      }
+    });
+  })
+
+//  JSON routes are ONLY called via ajax/client-side superagent
 admin.route('/applications/:id')
   .post(mw.staffOnly(3), function(req, res) {
     var token = req.session.token;
     var app_id = parseInt(req.params.id);
-    var timeslot = parseInt(req.body.selectedTimeslot);
-    App.approve(app_id, timeslot, token, function(err, result) {
-      console.log('result from router:\n');
-      console.log(err, result);
+    var slots = req.body.selectedTimeslot.split(',');
+    var parsedTimeslots = [];
+    for (var i in slots) {
+      if (slots[i]) {
+        var inted = parseInt(slots[i]);
+        if (typeof inted !== NaN && inted >= 0 && inted <= 167 && parsedTimeslots.indexOf(inted) === -1) {
+          parsedTimeslots.push(inted );
+        }
+      }
+    }
+    App.approve(app_id, parsedTimeslots, token, function(err, result) {
+      console.log(err);
+      console.log(JSON.stringify(result));
       if (err) return res.json(500, {error: err.detail});
       res.json(200, {result: result});
     })
@@ -72,7 +97,6 @@ admin.route('/applications/:id')
       res.json(200, result);
     })
   })
-
 
 
 
