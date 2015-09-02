@@ -1,34 +1,43 @@
 extends ../_layout
 block content
   .container-fluid
-    #playlist.col-xs-12.col-sm-8.col-sm-offset-2
-      .row
-        .col-xs-12.col-sm-6
+    .row
+      .left-pane.col-xs-12.col-sm-6
+          //   show title
           - var showHref = '/shows/' + playlist.show_id
           a(href=showHref)
-            h1= show.title
-        .col-xs-12.col-sm-6
-          h3.date= playlist.created
-      .row
+            h1.section-header= show.title
+    .row
+      .left-pane.col-xs-12.col-sm-6
+        //  created
+        h3.date= playlist.created
         if hosts
-          .hosts
-            p
-              span with
-              - var listOfHosts = "";
-              each h in hosts
-                - listOfHosts += h + ', ';
-              span= listOfHosts
+          p with 
+            each host, index in hosts
+              - var userHref = '/staff/' + host.id
+              if index === hosts.length - 1
+                span and 
+              a(href=userHref)
+                span #{host.first_name} #{host.last_name}
+                if index !== hosts.length - 1 
+                  if hosts.length == 2
+                    span  
+                  else
+                    span , 
+        - var char = playlist.content.charAt(0);
+        if char === '<'
+          article!= playlist.content
         else
-          p no hosts
-          
-      article= playlist.content
-    if related
-      #related.col-xs-12.col-sm-8.col-sm-offset-2
-        .row
+          article= playlist.content
+        
+      #related.right-pane.col-xs-12.col-sm-6
+        if related
           h4 Other playlists from #{show.title}
           each obj in related
-            .related.col-xs-6.col-sm-3
-              - var href = '/archive/playlists/' + obj.id;
-              a(href=href)
-                h5.date-shorthand= obj.created
-          
+            .row
+              .col-md-10.col-lg-6
+                .relatedContent
+                  - var href = '/archive/playlists/' + obj.id;
+                  a(href=href)
+                    h5.date-shorthand= obj.created
+            

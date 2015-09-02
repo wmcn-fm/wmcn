@@ -47,6 +47,7 @@ section {
 
 article {
 	@extend section;
+	@include elem_spacing();
 }
 
 table {
