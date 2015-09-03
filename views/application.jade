@@ -1,10 +1,11 @@
 extends _layout
-
+block head
+  title #{title} | #{sticky_title}
 block content
   .container-fluid
     .row
       .col-xs-12
-        h1.section-header= title
+        h1.section-header #{title}
         if instructions
           p= instructions
     form(action='/apply' method='post')

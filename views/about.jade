@@ -1,5 +1,36 @@
 extends _layout
+block head
+  title #{title} | #{sticky_title}
 
 block content
   .container-fluid
-    p hello from about
+    .row
+      .col-xs-12.col-sm-6
+        h1 Mission
+        p= static.mission
+      .col-xs-12.col-sm-6
+        h1 history
+        p= static.history
+    .row
+      .col-xs-12.col-sm-6
+        h1 Management
+        each title in Object.keys(static.staff)
+          h5 #{title}
+          - var ref = '/staff/' + static.staff[title].id
+          a(href=ref)
+            p= static.staff[title].name
+      .col-xs-12.col-sm-6
+        h1 Info
+        - var isBroadcast;
+        if !static.currently_broadcasting
+          - isBroadcast = ' not ';
+        else
+          - isBroadcast = '';
+        p WMCN is currently #{isBroadcast} broadcasting during the #{static.current_period} period. 
+          span We will be back on air on #{static.next_starts} for the #{next_period} semester. 
+          span To submit an application, please visit the 
+            a(href='/apply') APPLICATION
+            span  page. 
+        
+        
+      

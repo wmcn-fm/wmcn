@@ -54,4 +54,12 @@ App.delete = function(app_id, token, cb) {
   })
 }
 
+App.deleteAll = function(token, cb) {
+  var url = '/applications?token=' + token;
+  api.del(url, null, function(err, result) {
+    if (err) return cb(err);
+    cb(null, result.body);
+  })
+}
+
 module.exports = App;

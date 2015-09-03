@@ -1,4 +1,6 @@
 extends ../_layout
+block head
+  title #{show.title} | #{sticky_title}
 block content
   .container-fluid
     .row
@@ -18,7 +20,7 @@ block content
             p with 
               each host, index in hosts
                 - var userHref = '/staff/' + host.id
-                if index === hosts.length - 1
+                if index === hosts.length - 1 && hosts.length > 1
                   span and 
                 a(href=userHref)
                   span #{host.first_name} #{host.last_name}

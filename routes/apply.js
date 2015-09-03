@@ -1,11 +1,12 @@
 var express = require('express');
 var apply = express.Router();
 var App = require('../models/Application');
+var static_text = require('../config/parse');
 
 /* GET home page. */
 apply.route('/')
   .get(function(req, res) {
-    res.render('application', { title: 'xxx dj application' });
+    res.render('application', { title: static_text.next_period + ' DJ Application' });
   })
   .post(function(req, res) {
     var application = {};

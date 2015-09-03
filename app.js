@@ -35,6 +35,7 @@ app.use(session({secret: process.env.SESSION_SECRET}));
 app.use(middleware.renderFlash());
 app.use(middleware.getCurrentShow());
 app.use(middleware.setCurrentUser());
+app.use(middleware.getStickyTitle());
 app.use(require('connect-flash')());
 
 app.use('/', root);

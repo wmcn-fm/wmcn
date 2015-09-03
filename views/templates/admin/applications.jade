@@ -9,6 +9,9 @@ block content
         h4
           span.numApps #{apps.length} 
           span  pending applications
+          if current_user.access >= 3
+            form.clearApps(action='/admin/applications/clear')
+              button.clearApps.btn.btn-danger(type='submit') Clear
     table.table.table-hover
       thead
         tr

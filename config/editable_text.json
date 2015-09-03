@@ -1,0 +1,23 @@
+{
+  "mission": "WMCN is a free-format radio station broadcasting at 91.7 FM in St. Paul, Minnesota and streaming online.  Twenty-four hours a day, 365 days a year, WMCN brings its listeners the best music, ideas, and news, on a local scale relevant to the Mac-Groveland community, as well as a global scale in line with Macalester College’s emphasis on global citizenship. Our lineup is comprised entirely of non-professional student DJs and community members uninfluenced by genre restrictions and advertiser demands, who are free to broadcast their ideas and favorite music with an enthusiasm and intensity unrivaled by Clear Channel’s monotonous robots. Playlists and topics of discussion are left entirely up to our DJs, meaning no two shows sound the same.",
+  "history": "The history of Macalester College radio—originally called WBOM—starts long before the FM years. Following a hiatus from 1955 to 1961, KMAC went on air at 550 AM, broadcasting from a vacant classroom in the campus center and playing mainly folk and jazz. KMAC was carried into Macalester dormitories through wiring in the walls. This continued through the sixties and into the seventies, with the station building up a collection of records, equipment, and notoriety. In 1978, WMCN received FCC approval to build an FM studio with money obtained from Macalester's Community Council and other campus organizations that were sympathetic to the cause—the Macalester administration provided no funds. WMCN 91.7 FM, went on the air on October 6, 1979 at 10 PM with a 'Switch Hitter's Ball' featuring three bands (Hypstrz, Mutuals, Jinx) broadcasting from the union in celebration. Initially broadcasting 24 hours a day with around 60 DJs, WMCN focused on 'progressive rock, new wave, jazz and country-rock music.' Though the station’s core genres continue to evolve, WMCN still holds true to these free-format roots. ",
+  "staff": {
+    "General Manager": {
+      "name": "Jacob Frank",
+      "id": 1
+    },
+    "Program Director": {
+      "name": "Matthew Later",
+      "id": 2
+    },
+    "Communication Manager": {
+      "name": "Alex Edelmann",
+      "id": 3
+    }
+  },
+  "current_period": "Summer 2015",
+  "currently_broadcasting": true,
+  "next_period": "Fall 2015",
+  "next_starts": "10/1/15",
+  "sticky_title": "WMCN.fm: Macalester College Radio"
+}
