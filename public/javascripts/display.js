@@ -30,7 +30,7 @@ $(document).ready(function() {
       var date = new Date();
       var timeElapsed = '';
       var hoursElapsed = date.getHours() - start.getHours();
-      if (hoursElapsed && hoursElapsed < 10) hoursElapsed = "0" + String(hoursElapsed);
+      if (hoursElapsed && hoursElapsed < 10 && hoursElapsed > 1) hoursElapsed = "0" + String(hoursElapsed);
       if (hoursElapsed) timeElapsed += hoursElapsed + ':';
       var minsElapsed = date.getMinutes() - start.getMinutes();
       if (minsElapsed < 10) minsElapsed = "0" + String(minsElapsed);

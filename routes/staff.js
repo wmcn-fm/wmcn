@@ -20,7 +20,7 @@ staff.get('/:id', function(req, res) {
   var nowPlaying;
 
   Staff.getOne(req.params.id, {shows: true}, token, function(err, result) {
-    if (err) return handleError(err, res);
+    if (err) return res.render('error', {error: err});
     var name = result.user.first_name + ' ' + result.user.last_name;
 
     res.render('templates/user', {title: name, vars: result});

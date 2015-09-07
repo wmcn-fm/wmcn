@@ -60,10 +60,12 @@
 	text-align: right;
 	word-wrap: break-word;
 }
-
 .right-pane * {
 	text-align: left;
 	word-wrap: break-word;
+}
+
+.left-pane, .right-pane {
 }
 
 .relatedContent {

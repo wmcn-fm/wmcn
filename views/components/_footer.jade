@@ -14,14 +14,14 @@ nav#footer.navbar.navbar-fixed-bottom
             a(href=showRef)
               p=nowPlaying.show.title
           else
-            span Automator
+            p Automator
         .ticker.currentShowTime.col-md-4.hidden-xs.hidden-sm
           p
             if nowPlaying
               span.timeslot.timeSince= nowPlaying.timeslot
+              span +
             else
-              span -- : --
-            span +
+              span - - : - - 
       .col-xs-2
         a(href='/')
           img.icon(src='/images/favicon.ico')
@@ -29,11 +29,11 @@ nav#footer.navbar.navbar-fixed-bottom
       .col-sm-5.hidden-xs
         .ticker.nextUpTime.col-md-4.hidden-xs.hidden-sm
           p
-            span -
             if next
+              span -
               span.timeslot.timeUntil= next[0].timeslot
             else 
-              span -- : --
+              span - - : - -
         .nextUp.col-sm-10.col-md-6
           h6.hidden-xs Next Up:
           if next
@@ -41,7 +41,7 @@ nav#footer.navbar.navbar-fixed-bottom
             a(href=nextHref)
               p= next[0].show.title
           else
-            span Automator
+            p Automator
         .col-sm-2
           .action.right
             a(href='/')
