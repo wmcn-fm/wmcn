@@ -28,49 +28,54 @@ block content
             .col-xs-6
               .form-group
                 label(for='first_name') First name
-                input.form-control(name='first_name' type='text')
+                input.form-control(name='first_name' type='text' placeholder='Mac')
             .col-xs-6
               .form-group
                 label(for='last_name') Last name
-                input.form-control(name='last_name' type='text')
+                input.form-control(name='last_name' type='text' placeholder='Alester')
             .col-xs-6
               .form-group
                 label(for='phone') Phone number
-                input.form-control(name='phone' type='tel')
+                input.form-control(name='phone' type='tel' placeholder='1234567890')
             .col-xs-6
               .form-group
                 label(for='grad_year') Macalester Class of
-                input.form-control(name='grad_year' type='number')
+                input.form-control(name='grad_year' type='number' placeholder='2018' aria-describedby="gradHelper")
+                span#gradHelper.help-block Enter -1 if you have never attended Macalester
             .col-xs-6.col-xs-offset-3
               .form-group
                 label(for='email') Email
-                input.form-control(name='email' type='email')
+                input.form-control(name='email' type='email' placeholder='wmcn@macalester.edu')
                 //- a(href='verifythatIamAUniqueEmailAddress!') 
                 //-   .input-group-addon Verify
                   
             .col-xs-6
               .form-group
                 label(for='mac_id') Macalester ID number
-                input.form-control(name='mac_id' type='number')
+                input.form-control(name='mac_id' type='number' placeholder='000111222' aria-describedby='idHelper')
+                span#idHelper.help-block Enter -1 if you have never attended Macalester
             .col-xs-6
               .form-group
                 label(for='iclass') Macalester iclass number
-                input.form-control(name='iclass' type='number')
+                input.form-control(name='iclass' type='number' placeholder='12345' aria-describedby='iclassHelper')
+                span#iclassHelper.help-block The 5-digit number preceded by an asterisk on the back of your Macalester ID. Enter -1 if you have never attended Macalester
+
         .col-xs-12.col-sm-6
           h2.section-header Show Info
           .col-xs-6
             .form-group
               label(for='title') Title
-              input.form-control(name='title' type='text')
+              input.form-control(name='title' type='text' placeholder='Friday Night Bangers')
           .col-xs-6
             .form-group
               label(for='blurb') Program guide blurb
-              textarea.form-control(name='blurb' rows='5')
+              textarea.form-control(name='blurb' rows='5' placeholder='Tune in for the best songs to pump up to' aria-describedby='blurbHelper')
+              span#blurbHelper.help-block A short, 3-4 sentence description of your show
         .col-xs-12
           h2.section-header Application Info
           .col-xs-6
             .form-group
-              label(for='time_pref') Time preference
+              label(for='time_pref' aria-describedby='timeHelper') Time preference
               .radio
                 - var i = 1;
                 while i <= 6
@@ -78,12 +83,19 @@ block content
                     label
                       input(type='radio' name='time_pref' value=i)
                       span= i++
+              span#timeHelper.help-block How many hours per week you'd like to be on air
+
           .col-xs-6
             .form-group
-              label(for='description') Description
-              textarea.form-control(name='description' rows='5')
+              label(for='description') Notes to WMCN Staff
+              textarea.form-control(name='description' rows='5' placeholder="My show is about Friday nights so I'd like a Friday night slot please!")
+              span#descHelper.help-block This will only be seen by WMCN staff. Include any additional description or notes
+
           .col-xs-12
             h4 Availability
+            p Check every hourly slot that you are available to host a show. The broader your availability, the more likely you are to get scheduled for a show. 
+              span You must select at least two slots.
+            p Also, bear in mind that this schedule is in MILITARY time - so Monday at hour "1" means Monday at 1am, whereas hour "13" means 1pm.
             table.table.table-hover
               thead
                 tr
@@ -110,7 +122,7 @@ block content
                           .checkbox
                             label
                               input(type='checkbox' name='availability' value=slot)
-                              span= slot
+                              span.timeslot.toDate= slot
                         - slot++
                       - j++
                     - i++            

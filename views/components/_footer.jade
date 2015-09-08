@@ -1,7 +1,7 @@
 nav#footer.navbar.navbar-fixed-bottom
   .container-fluid
     .row
-      .col-xs-10.col-sm-5
+      .col-xs-10.col-sm-4
         .col-xs-2
           .action.left
             a#toggleStream(href='#')
@@ -22,11 +22,13 @@ nav#footer.navbar.navbar-fixed-bottom
               span +
             else
               span - - : - - 
-      .col-xs-2
+      .col-xs-2.col-sm-4
         a(href='/')
-          img.icon(src='/images/favicon.ico')
+          img.long-icon.hidden-xs.hidden-sm(src='/images/wmcn.png')
+          img.icon(src='/images/favicon.png')
+          img.long-icon.hidden-xs.hidden-sm(src='/images/917.png')
             
-      .col-sm-5.hidden-xs
+      .col-sm-4.hidden-xs
         .ticker.nextUpTime.col-md-4.hidden-xs.hidden-sm
           p
             if next
@@ -44,7 +46,7 @@ nav#footer.navbar.navbar-fixed-bottom
             p Automator
         .col-sm-2
           .action.right
-            a(href='/')
+            a(href='#')
               span.glyphicon.glyphicon-share-alt
 
     

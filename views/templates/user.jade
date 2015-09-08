@@ -4,19 +4,49 @@ block head
 block content
   .container-fluid
     .row
-      #user.col-xs-12
-        h1= title
+      .left-pane.col-xs-12.col-sm-6
+        - var userRef = '/staff/' + vars.user.id
+        a(href=userRef)
+          h1.section-header= title
     .row
-      .col-xs-6
+      .left-pane.col-xs-12.col-sm-6
         p= vars.user.email
-      if vars.user.grad_year > 0
-        .col-xs-6
-          p Macalester #{vars.user.grad_year}
-    if vars.shows
-      .row
-        .col-xs-12
+        if vars.user.grad_year > 0
+          p Macalester Class of #{vars.user.grad_year}
+      #related.right-pane.col-xs-12.col-sm-6
+        if vars.shows
+          h4 Hosted Shows
           each show in vars.shows
-            - var showHref = '/shows/' + show.id
-            a(href=showHref)
-              p= show.title
+            .row
+              .col-md-10.col-lg-6
+                .relatedContent
+                  - var showHref = '/shows/' + show.id
+                  a(href=showHref)
+                    p= show.title
+                    p First Aired 
+                      span.date-shorthand= show.created
+                  
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    //- 
+    //-   #user.col-xs-12
+    //-     h1= title
+    //- .row
+    //-   .col-xs-6
+      //-   p= vars.user.email
+      //- if vars.user.grad_year > 0
+      //-   .col-xs-6
+      //-     p Macalester #{vars.user.grad_year}
+    //- if vars.shows
+    //-   .row
+    //-     .col-xs-12
+    //-       each show in vars.shows
+
     
