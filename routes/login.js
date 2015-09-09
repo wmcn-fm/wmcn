@@ -20,7 +20,10 @@ login.route('/')
       var sess = req.session;
 
       Staff.getOneByEmail(user, function(err, resp) {
-        if (err) return handleError(err, res);
+        if (err) {
+          req.flash('danger', err.message);
+          return res.redirect('back');
+        }
         var userDoc = resp.body.user;
         var storedHash = userDoc.hash;
 
@@ -30,7 +33,10 @@ login.route('/')
             return res.redirect('back');
           }
           Auth.getToken(userDoc, function(err, resp) {
-            if (err) return handleError(err, res);
+            if (err) {
+              req.flash('danger', err.message);
+              return res.redirect('back');
+            }
             sess.token = resp.body.token;
             sess.user = userDoc;
             sess.cookie.maxAge = 604800000; // 7 days
