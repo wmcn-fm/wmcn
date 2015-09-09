@@ -38,6 +38,10 @@ apply.route('/')
       application.availability[item] = parseInt(application.availability[item]);
     }
 
+    for (var item in application.grad_year) {
+      application.grad_year[item] = parseInt(application.grad_year[item]);
+    }
+
     App.post(application, function(err, result) {
       if (err) {
         var json = JSON.parse(err);
