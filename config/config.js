@@ -18,7 +18,7 @@ function configure(node_env) {
     db = db_stem + process.env.USER + ":" + process.env.PW + "@" + settings.api.db.host.dev + ':' + settings.api.port.dev + '/' + settings.api.db.name.dev;
     root_url = settings.app.stem + settings.app.url.dev + ":" + settings.app.port.dev
   } else {
-    api_root_url = settings.api.stem + settings.api.url.production + '/v' + api_version + '/';
+    api_root_url = settings.api.stem + settings.api.url.production;
     db = db_stem + process.env.USER + ":" + process.env.PW + "@" + settings.api.db.host.production + '/' + settings.api.db.name.production;
     root_url = settings.app.stem + settings.app.url.production;
   }
@@ -26,7 +26,7 @@ function configure(node_env) {
   env.api_root_url = api_root_url;
   env.db = db;
   env.root_url = root_url;
-
+  console.log(env);
   return env;
 }
 
@@ -43,4 +43,3 @@ module.exports = function(){
       return configure('development');
   }
 };
-
