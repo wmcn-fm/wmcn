@@ -14,4 +14,10 @@ block content
         #level2.col-xs-12.col-sm-6.col-sm-offset-3
           a(href='admin/applications')
             p View pending applications
+    if current_user.access >= 3
+      .row
+        #level3.col-xs-12.col-sm-6.col-sm-offset-3
+          a(href='admin/schedule')
+            p Edit show schedule
+          
       

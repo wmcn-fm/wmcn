@@ -81,8 +81,46 @@ $(document).ready(function() {
         });
       }
     });
-  })
-})
+  });
+
+  $('form.clearSlot').submit(function(e) {
+    e.preventDefault();
+    var delButton = $(this).find('button.clearSlot');
+    delButton.button('loading');
+    var slot_id = delButton.data('slot');
+    superagent.post('/admin/schedule/' + slot_id).end(function(err, res) {
+      console.log(err, res);
+      if (err) {
+        console.log(err);
+        var errMsg;
+        if (err.hasOwnProperty('response') && err.response.hasOwnProperty('text')) {
+          errMsg = err.response.text;
+        } else {
+          errMsg = err;
+        }
+        delButton.button('reset').text('Error');
+        $(makeAlert(errMsg, 'danger')).insertBefore($('#login'));
+      } else {
+        console.log(res);
+        var successMsg;
+        if (res.hasOwnProperty('text')) {
+          var text = JSON.parse(res.text);
+          if (text.hasOwnProperty('result') && text.result === 'cleared slot ' + slot_id) {
+            successMsg = text.result;
+          } else {
+            successMsg = text;
+          }
+        }
+        delButton.button('reset').text('Cleared');
+        $(makeAlert(successMsg, 'success')).insertBefore($('#login'));
+        $('.filledSlot[data-slot="'+slot_id+'"]').fadeOut('normal', function() {
+          $(this).remove();
+        })
+      }
+      console.log('after if else!');
+    }); //  end superagent post
+  });
+});
 
 
 function makeAlert(message, type) {

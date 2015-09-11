@@ -1,0 +1,52 @@
+extends ../../_layout
+block head
+  title #{title} | #{sticky_title}
+block content
+  .container-fluid
+    .row
+      .col-xs-12
+        h2.section-header= title
+    .row
+      .col-xs-12
+        table.table.table-hover
+          thead
+            tr
+              th Hour
+              th Sunday
+              th Monday
+              th Tuesday
+              th Wednesday
+              th Thursday
+              th Friday
+              th Saturday
+          tbody
+            - var i = 0
+            - var hour = 0
+            - var slot = 0
+            while i < 24
+              tr.scheduleRow
+                - var j = 0
+                while j <= 7
+                  if j === 0
+                    td.hour= hour++
+                  else
+                    if schedule && schedule[slot] && schedule[slot].show.title
+                      td(data-timeslot=slot data-showId=schedule[slot].show.id)
+                        - var href = '/shows/' + schedule[slot].show.id
+                        .filledSlot(data-slot= slot)
+                          a(href=href)
+                            span.title= schedule[slot].show.title
+                          - var clearUrl = '/admin/schedule/' + slot;
+                          form.clearSlot(action=clearUrl method='post' data-slot=slot)
+                            button.clearSlot.btn.btn-danger(type='submit' data-slot=slot data-loading-text='Removing show...') Clear slot
+                          //- a(href=clearUrl)
+                          //-   p= slot
+                    else
+                      td(data-timeslot= slot) 
+                        span.automator
+                    - slot++
+                  - j++
+                - i++
+
+block scripts
+    script(src='/build/js/bundle.min.js') 

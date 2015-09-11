@@ -6,6 +6,8 @@ var gen_playlist = require('../lib/gen_playlist');
 var Playlist = require('../models/Playlist');
 var Staff = require('../models/Staff');
 var App = require('../models/Application');
+var Show = require('../models/Show');
+var Schedule = require('../models/Schedule');
 
 admin.route('/')
   .get(mw.staffOnly(1), function(req, res) {
@@ -83,6 +85,7 @@ admin.route('/applications/:id')
       }
     }
     App.approve(app_id, parsedTimeslots, token, function(err, result) {
+      console.log('error from App.approve callback:\n\n');
       console.log(err);
       console.log(JSON.stringify(result));
       if (err) return res.json(500, {error: err.detail});
@@ -98,6 +101,30 @@ admin.route('/applications/:id')
     })
   })
 
+admin.route('/schedule')
+  .get(mw.staffOnly(2), function(req, res) {
+    Show.getSchedule(function(err, result) {
+      if (err) req.flash('danger', err);
+      res.render('templates/admin/edit_schedule', {title: 'Edit schedule', schedule: result});
+    });
+  })
+
+admin.route('/schedule/:slot_id')
+  .post(mw.staffOnly(3), function(req, res) {
+    if (!req.params.slot_id)  {
+      req.flash('danger', 'Must include a timeslot');
+      return res.redirect('back');
+    }
+
+    var token = req.session.token;
+    Schedule.clearSlot(req.params.slot_id, token, function(err, result) {
+      if (err) {
+        return res.json(500, {error: err});
+      } else {
+        res.json(200, result);
+      }
+    });
+  });
 
 
 module.exports = admin;
