@@ -12,18 +12,36 @@ apply.route('/')
     var application = {};
     var numUsers = parseInt(req.body.num_users);
 
-    application.first_name = [req.body.first_name];
-    application.last_name = [req.body.last_name];
-    application.phone = [req.body.phone];
-    application.grad_year = [req.body.grad_year];
-    application.email = [req.body.email];
-    application.mac_id = [req.body.mac_id];
-    application.iclass = [req.body.iclass];
+    console.log(req.body);
+    var userFields = ['first_name', 'last_name', 'phone', 'grad_year', 'email', 'mac_id', 'iclass'];
+
+    if (numUsers > 1) {
+      for (var f in userFields ) {
+        var field = userFields[f];
+        application[field] = req.body[field];
+        console.log(field, req.body[field]);
+        console.log(application);
+        // for (var val in application[field]) {
+        //   console.log(val, req.body[field][val], application[field][val]);
+        //   if (field == 'mac_id' | field == 'iclass' | field == 'time_pref' | field == 'grad_year' | field == 'availability') {
+        //     application[field][val] = parseInt(application[field][val]);
+        //   }
+        // }
+      }
+    } else if (numUsers === 1) {
+      for (var f in userFields) {
+        var field = userFields[f];
+        application[field] = [req.body[field]];
+      }
+    }
+
     application.title = req.body.title;
     application.blurb = req.body.blurb;
     application.time_pref= req.body.time_pref;
     application.description = req.body.description;
     application.availability = req.body.availability;
+
+    console.log(application);
 
     for (var item in application.mac_id) {
       application.mac_id[item] = parseInt(application.mac_id[item]);
@@ -41,6 +59,9 @@ apply.route('/')
     for (var item in application.grad_year) {
       application.grad_year[item] = parseInt(application.grad_year[item]);
     }
+
+    console.log('final app:\n');
+    console.log(application);
 
     App.post(application, function(err, result) {
       if (err) {
