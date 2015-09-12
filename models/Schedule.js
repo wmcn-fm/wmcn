@@ -11,6 +11,22 @@ Schedule.clearSlot = function(slot_id, token, cb) {
   })
 }
 
+Schedule.slot = function(slot_id, show_id, token, cb) {
+  var url = '/schedule?token=' + token;
+  var params = {
+    show: {
+      timeslot: slot_id,
+      show_id: show_id
+    }
+  }
+  api.post(url, params, function(err, result) {
+    if (err) return cb(err);
+    var res = result.text;
+    var json = JSON.parse(res);
+    return cb(null, json);
+  });
+}
+
 
 
 module.exports = Schedule;

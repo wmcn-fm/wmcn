@@ -38,15 +38,25 @@ block content
                             span.title= schedule[slot].show.title
                           - var clearUrl = '/admin/schedule/' + slot;
                           form.clearSlot(action=clearUrl method='post' data-slot=slot)
-                            button.clearSlot.btn.btn-danger(type='submit' data-slot=slot data-loading-text='Removing show...') Clear slot
+                            button.clearSlot.btn.btn-danger(type='submit' data-slot=slot data-loading-text='Removing show...') Clear
                           //- a(href=clearUrl)
                           //-   p= slot
                     else
                       td(data-timeslot= slot) 
-                        span.automator
+                        +showSelect(shows, slot)
                     - slot++
                   - j++
                 - i++
 
 block scripts
     script(src='/build/js/bundle.min.js') 
+    
+    
+mixin showSelect(shows, slot)
+  .dropdown
+    button.btn.btn-default.dropdown-toggle(id=slot type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true') + 
+      span.caret
+    ul.dropdown-menu(aria-labelledby=slot)
+      each show in shows
+        li
+          a.scheduleShowAtSlot(data-show= show.id data-slot= slot href='#') #{show.title}

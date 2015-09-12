@@ -105,9 +105,26 @@ admin.route('/schedule')
   .get(mw.staffOnly(2), function(req, res) {
     Show.getSchedule(function(err, result) {
       if (err) req.flash('danger', err);
-      res.render('templates/admin/edit_schedule', {title: 'Edit schedule', schedule: result});
+
+      Show.getAll(function(err2, result2) {
+        if (err2) req.flash('danger', err2);
+        res.render('templates/admin/edit_schedule', {title: 'Edit schedule', schedule: result, shows: result2.shows});
+      });
     });
   })
+
+admin.route('/schedule/add/:slot_id')
+  .post(mw.staffOnly(3), function(req, res) {
+    if (!req.params.slot_id || !req.query.show_id) {
+      req.flash('danger', 'Must select a slot and show');
+      return res.redirect('back');
+    }
+    console.log(req.params.slot_id, req.query.show_id);
+    Schedule.slot(req.params.slot_id, req.query.show_id, req.session.token, function(err, result) {
+      console.log(err, result);
+      res.json(200, {error: err, result: result});
+    });
+  });
 
 admin.route('/schedule/:slot_id')
   .post(mw.staffOnly(3), function(req, res) {

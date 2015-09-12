@@ -120,7 +120,19 @@ $(document).ready(function() {
       console.log('after if else!');
     }); //  end superagent post
   });
-});
+
+  $('a.scheduleShowAtSlot').click(function() {
+    var show_id = $(this).data('show');
+    var slot_id = $(this).data('slot');
+    console.log(show_id, slot_id);
+    superagent.post('/admin/schedule/add/' + slot_id + '?show_id=' + show_id).end(function(err, res) {
+      console.log(err, res);
+    });
+
+  });
+
+
+}); //  doc ready
 
 
 function makeAlert(message, type) {

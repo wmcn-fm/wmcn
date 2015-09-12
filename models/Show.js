@@ -70,5 +70,14 @@ Show.getUpcoming = function(numShows, cb) {
   })
 }
 
+Show.getAll = function(cb) {
+  api.get('/shows', null, function(err, result) {
+    if (err) return cb(err);
+    var text = result.text;
+    var json = JSON.parse(text);
+    return cb(null, json);
+  })
+}
+
 
 module.exports = Show;
